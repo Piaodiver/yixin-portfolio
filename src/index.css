@@ -1,3 +1,6 @@
+@import './styles/fonts.css';
+@import './styles/tokens.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -9,38 +12,66 @@
     -moz-osx-font-smoothing: grayscale;
   }
 
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after {
+      animation-duration: 1ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 1ms !important;
+    }
+  }
+
   body {
-    font-family: 'Inter', system-ui, sans-serif;
-    background-color: #FAFAF7;
-    color: #1C1C1E;
     margin: 0;
+    /* explicit, so a dark host theme never shows through */
+    background-color: var(--paper);
+    color: var(--ink-900);
+    font-family: Inter, system-ui, sans-serif;
+    font-size: 16px;
+    line-height: 1.65;
   }
 
-  #root {
-    width: 100%;
-    margin: 0;
-    text-align: left;
+  h1, h2, h3, h4 {
+    font-family: Fraunces, Georgia, serif;
+    font-variation-settings: 'SOFT' 28, 'WONK' 1;
+    letter-spacing: -0.015em;
+    text-wrap: balance;
   }
 
-  h1, h2, h3 {
-    font-family: 'Playfair Display', Georgia, serif;
+  ::selection { background: var(--wash-ochre); color: var(--paper); }
+
+  :focus-visible {
+    outline: 2px solid var(--wash-sage);
+    outline-offset: 3px;
+    border-radius: 2px;
   }
+
+  #root { width: 100%; text-align: left; }
 }
 
 @layer utilities {
-  .section-label {
-    @apply text-xs font-body font-medium tracking-widest uppercase text-forest-600 mb-4;
+  /* the mono "instrument" register — section numbers, coords, status */
+  .u-label {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
   }
+  .u-nums { font-variant-numeric: tabular-nums; }
 
-  .section-heading {
-    @apply font-display text-3xl md:text-4xl font-medium text-gray-900 leading-tight;
+  /* skip link */
+  .u-skip {
+    position: absolute;
+    left: -9999px;
   }
-
-  .body-text {
-    @apply font-body text-base md:text-lg text-gray-600 leading-relaxed;
-  }
-
-  .card-base {
-    @apply bg-white rounded-2xl p-6 md:p-8 border border-warm-200 shadow-sm;
+  .u-skip:focus {
+    left: 1rem;
+    top: 1rem;
+    z-index: 100;
+    padding: 0.6rem 1rem;
+    background: var(--ink-900);
+    color: var(--paper);
+    border-radius: 3px;
   }
 }

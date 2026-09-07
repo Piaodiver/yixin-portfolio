@@ -4,33 +4,41 @@ export default {
   theme: {
     extend: {
       colors: {
-        ivory: '#FAFAF7',
-        forest: {
-          50:  '#EEF4EF',
-          100: '#D8E8DB',
-          200: '#B5D1BB',
-          500: '#4A7C59',
-          600: '#3B6347',
-          700: '#2E5339',
-          800: '#1F3826',
-          900: '#132219',
+        paper: {
+          DEFAULT: 'var(--paper)',
+          sunk:    'var(--paper-sunk)',
+          raise:   'var(--paper-raise)',
         },
-        gold: {
-          300: '#E0C080',
-          400: '#D4A853',
-          500: '#B8935A',
-          600: '#9E7A45',
+        ink: {
+          900: 'var(--ink-900)',
+          700: 'var(--ink-700)',
+          500: 'var(--ink-500)',
+          400: 'var(--ink-400)',
+          300: 'var(--ink-300)',
+          100: 'var(--ink-100)',
+          50:  'var(--ink-050)',
         },
-        warm: {
-          50:  '#FAFAF7',
-          100: '#F5F4EF',
-          200: '#EDEAE0',
-          300: '#D9D5C8',
+        wash: {
+          indigo: 'var(--wash-indigo)',
+          sage:   'var(--wash-sage)',
+          ochre:  'var(--wash-ochre)',
+          'sage-ink':  'var(--sage-ink)',
+          'ochre-ink': 'var(--ochre-ink)',
         },
       },
       fontFamily: {
-        display: ['"Playfair Display"', 'Georgia', 'serif'],
+        display: ['Fraunces', 'Georgia', 'serif'],
         body:    ['Inter', 'system-ui', 'sans-serif'],
+        mono:    ['"JetBrains Mono"', 'ui-monospace', 'SFMono-Regular', 'Menlo', 'monospace'],
+      },
+      letterSpacing: {
+        label: '0.14em',
+      },
+      maxWidth: {
+        prose: '68ch',
+      },
+      transitionTimingFunction: {
+        ink: 'cubic-bezier(0.22, 0.61, 0.36, 1)',
       },
     },
   },

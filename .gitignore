@@ -22,3 +22,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# build output — published by the Actions workflow, not committed
+dist/

@@ -1,29 +1,27 @@
+import { HashRouter, Routes, Route } from 'react-router-dom';
+import PaperGround from './components/ink/PaperGround';
 import Nav from './components/Nav';
-import Hero from './components/Hero';
-import About from './components/About';
-import Beliefs from './components/Beliefs';
-import CaseStudies from './components/CaseStudies';
-import Expertise from './components/Expertise';
-import Timeline from './components/Timeline';
-import BeyondWork from './components/BeyondWork';
-import Contact from './components/Contact';
 import Footer from './components/Footer';
+import ScrollManager from './components/ScrollManager';
+import Home from './routes/Home';
+import WorkDetail from './routes/WorkDetail';
+import NotFound from './routes/NotFound';
 
 export default function App() {
   return (
-    <div className="min-h-screen bg-ivory font-body">
+    <HashRouter>
+      <ScrollManager />
+      <PaperGround />
+      <a href="#main" className="u-skip u-label">Skip to content</a>
       <Nav />
-      <main>
-        <Hero />
-        <About />
-        <Beliefs />
-        <CaseStudies />
-        <Expertise />
-        <Timeline />
-        <BeyondWork />
-        <Contact />
+      <main id="main">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/work/:slug" element={<WorkDetail />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
       </main>
       <Footer />
-    </div>
+    </HashRouter>
   );
 }

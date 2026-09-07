@@ -1,101 +1,73 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 
-const links = [
-  { label: 'About',    href: '#about' },
-  { label: 'Thinking', href: '#beliefs' },
-  { label: 'Work',     href: '#work' },
-  { label: 'Journey',  href: '#journey' },
-  { label: 'Beyond',   href: '#beyond' },
+const LINKS = [
+  { label: 'Enterprise', id: 'enterprise' },
+  { label: '0→1',        id: 'ventures' },
+  { label: 'Built',      id: 'built' },
+  { label: 'Journey',    id: 'journey' },
+  { label: 'Beliefs',    id: 'beliefs' },
 ];
 
 export default function Nav() {
-  const [scrolled, setScrolled] = useState(false);
-  const [open, setOpen]         = useState(false);
+  const { pathname } = useLocation();
+  const [solid, setSolid] = useState(false);
+  const onHome = pathname === '/';
+  const href = (id) => (onHome ? `#${id}` : `/#/#${id}`);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 40);
-    window.addEventListener('scroll', onScroll);
+    const onScroll = () => setSolid(window.scrollY > 24);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled
-          ? 'bg-white/95 backdrop-blur-sm border-b border-warm-200 shadow-sm'
-          : 'bg-transparent'
+      className={`sticky top-0 z-40 transition-colors duration-300 ${
+        solid ? 'border-b border-ink-50 bg-paper/85 backdrop-blur-sm' : 'border-b border-transparent'
       }`}
     >
-      <nav className="max-w-6xl mx-auto px-6 md:px-10 flex items-center justify-between h-16 md:h-18">
-        {/* Wordmark */}
-        <a
-          href="#top"
-          className="font-display text-lg font-medium text-gray-900 tracking-tight hover:text-forest-700 transition-colors"
-        >
+      <nav className="mx-auto flex max-w-[68rem] items-center justify-between gap-6 px-5 py-3.5 sm:px-8">
+        <Link to="/" className="shrink-0 font-display text-[1.05rem] font-semibold tracking-tight text-ink-900">
           Yixin Liu
-        </a>
+        </Link>
 
-        {/* Desktop links */}
-        <ul className="hidden md:flex items-center gap-8">
-          {links.map((l) => (
-            <li key={l.label}>
-              <a
-                href={l.href}
-                className="font-body text-sm font-medium text-gray-500 hover:text-forest-700 transition-colors"
-              >
+        <ul className="hidden items-center gap-7 md:flex">
+          {LINKS.map((l) => (
+            <li key={l.id}>
+              <a href={href(l.id)} className="u-label text-ink-500 transition-colors hover:text-wash-ochre-ink">
                 {l.label}
               </a>
             </li>
           ))}
         </ul>
 
-        {/* Desktop CTA */}
         <a
-          href="#contact"
-          className="hidden md:inline-flex items-center gap-2 text-sm font-medium font-body text-forest-700 border border-forest-700 px-4 py-1.5 rounded-full hover:bg-forest-700 hover:text-white transition-all duration-200"
+          href={href('contact')}
+          className="u-label shrink-0 rounded-[2px] border border-ink-300 px-3 py-1.5 text-ink-700 transition-colors hover:border-wash-ochre hover:text-wash-ochre-ink"
         >
-          Get in Touch
+          Get in touch
         </a>
-
-        {/* Mobile hamburger */}
-        <button
-          onClick={() => setOpen(!open)}
-          className="md:hidden flex flex-col justify-center items-center w-8 h-8 gap-1.5"
-          aria-label="Toggle menu"
-        >
-          <span className={`block w-5 h-0.5 bg-gray-700 transition-all duration-200 ${open ? 'rotate-45 translate-y-2' : ''}`} />
-          <span className={`block w-5 h-0.5 bg-gray-700 transition-all duration-200 ${open ? 'opacity-0' : ''}`} />
-          <span className={`block w-5 h-0.5 bg-gray-700 transition-all duration-200 ${open ? '-rotate-45 -translate-y-2' : ''}`} />
-        </button>
       </nav>
 
-      {/* Mobile drawer */}
-      {open && (
-        <div className="md:hidden bg-white border-b border-warm-200 px-6 pb-6">
-          <ul className="flex flex-col gap-4 pt-4">
-            {links.map((l) => (
-              <li key={l.label}>
-                <a
-                  href={l.href}
-                  onClick={() => setOpen(false)}
-                  className="font-body text-base font-medium text-gray-700 hover:text-forest-700 transition-colors block"
-                >
-                  {l.label}
-                </a>
-              </li>
-            ))}
-            <li>
-              <a
-                href="#contact"
-                onClick={() => setOpen(false)}
-                className="inline-flex items-center text-sm font-medium font-body text-forest-700 border border-forest-700 px-4 py-2 rounded-full hover:bg-forest-700 hover:text-white transition-all duration-200 mt-2"
-              >
-                Get in Touch
-              </a>
-            </li>
-          </ul>
-        </div>
-      )}
+      {/*
+        Below md the links would otherwise disappear entirely, leaving a
+        10,000px scroll with no way to jump. A scrolling rail beats a
+        hamburger here: no JS, no overlay, and the section names stay visible.
+      */}
+      <ul
+        className={`flex snap-x gap-5 overflow-x-auto px-5 pb-2.5 md:hidden ${solid ? '' : 'pt-0.5'}`}
+        style={{ scrollbarWidth: 'none' }}
+      >
+        {LINKS.map((l) => (
+          <li key={l.id} className="shrink-0 snap-start">
+            <a href={href(l.id)} className="u-label text-ink-400 transition-colors active:text-wash-ochre-ink">
+              {l.label}
+            </a>
+          </li>
+        ))}
+      </ul>
     </header>
   );
 }

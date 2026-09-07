@@ -60,7 +60,7 @@ export const built = [
       },
     ],
     links: [
-      { label: 'Repo', href: 'https://github.com/Piaodiver/llm-tco-calculator', pending: true },
+      { label: 'Repo', href: 'https://github.com/Piaodiver/llm-tco-calculator' },
       { label: 'Live app', href: '', pending: true },
     ],
     note: 'Pricing retrieved from claude.com/pricing on 2026-09-07 and recorded with that date in the source.',

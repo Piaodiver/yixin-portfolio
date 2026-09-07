@@ -32,15 +32,10 @@ export default function BeyondWork() {
       <div className="max-w-6xl mx-auto px-6 md:px-10">
         {/* Header */}
         <div className="mb-14">
-          <p className="section-label">Beyond Work</p>
-          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
-            <h2 className="section-heading max-w-lg">
-              The person, not just the practitioner
-            </h2>
-            <p className="font-body text-sm text-gray-500 max-w-xs">
-              {beyondWork.intro}
-            </p>
-          </div>
+          <h2 className="section-heading mb-3">Beyond Work</h2>
+          <p className="font-body text-base text-gray-500">
+            The person beyond the professional profile.
+          </p>
         </div>
 
         {/* Cards */}

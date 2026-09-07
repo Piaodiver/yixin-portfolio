@@ -8,15 +8,14 @@ export default function About() {
 
           {/* Sticky label column */}
           <div className="md:col-span-4">
-            <div className="md:sticky md:top-28 space-y-6">
-              <p className="section-label">About</p>
-              <h2 className="section-heading">The person behind the work</h2>
-              <div className="w-12 h-0.5 bg-forest-700" />
-              <p className="font-body text-sm text-gray-500 leading-relaxed">
-                Solution architect. AI transformation practitioner. Globally minded professional.
+            <div className="md:sticky md:top-28 space-y-4">
+              <h2 className="section-heading">About</h2>
+              <p className="font-body text-base text-gray-500 leading-relaxed">
+                The person behind the work.
               </p>
+              <div className="w-12 h-0.5 bg-forest-700" />
 
-              {/* Stats */}
+              {/* Stats — 2×2 grid */}
               <div className="grid grid-cols-2 gap-4 pt-4">
                 {about.stats.map((s) => (
                   <div key={s.label} className="space-y-1">
@@ -42,13 +41,6 @@ export default function About() {
                 {p}
               </p>
             ))}
-
-            {/* Highlight quote */}
-            <blockquote className="mt-8 border-l-2 border-forest-700 pl-6 py-2">
-              <p className="font-display text-xl md:text-2xl text-gray-800 italic font-normal leading-relaxed">
-                "She understands AI, but more importantly, she knows how to make AI real inside complex enterprises."
-              </p>
-            </blockquote>
           </div>
         </div>
       </div>

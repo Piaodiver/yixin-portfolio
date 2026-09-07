@@ -1,4 +1,5 @@
 import { hero } from '../data/content';
+import profilePhoto from '../assets/profile.png';
 
 export default function Hero() {
   return (
@@ -8,15 +9,12 @@ export default function Hero() {
 
           {/* Left: text content */}
           <div className="md:col-span-7 space-y-8">
-            {/* Overline */}
-            <p className="section-label">Enterprise AI Transformation Lead</p>
-
             {/* Name */}
             <h1 className="font-display text-5xl md:text-6xl lg:text-7xl font-medium text-gray-900 leading-[1.1] tracking-tight">
               {hero.name}
             </h1>
 
-            {/* Title pill */}
+            {/* Title */}
             <p className="font-body text-base md:text-lg font-medium text-forest-700 bg-forest-50 inline-block px-4 py-1.5 rounded-full border border-forest-100">
               {hero.title}
             </p>
@@ -25,23 +23,6 @@ export default function Hero() {
             <p className="font-display text-xl md:text-2xl text-gray-700 leading-relaxed max-w-xl italic font-normal">
               "{hero.tagline}"
             </p>
-
-            {/* Supporting */}
-            <p className="body-text max-w-2xl">
-              {hero.supporting}
-            </p>
-
-            {/* Focus areas */}
-            <div className="flex flex-wrap gap-2">
-              {hero.focusAreas.map((area) => (
-                <span
-                  key={area}
-                  className="font-body text-xs font-medium text-gray-600 bg-warm-100 border border-warm-300 px-3 py-1 rounded-full"
-                >
-                  {area}
-                </span>
-              ))}
-            </div>
 
             {/* CTAs */}
             <div className="flex flex-wrap gap-4 pt-2">
@@ -74,18 +55,22 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* Right: decorative element */}
+          {/* Right: profile photo */}
           <div className="md:col-span-5 flex justify-center md:justify-end">
             <div className="relative w-64 h-64 md:w-80 md:h-80">
-              {/* Outer ring */}
+              {/* Outer decorative ring */}
               <div className="absolute inset-0 rounded-full border border-forest-200" />
               {/* Mid ring */}
-              <div className="absolute inset-6 rounded-full border border-warm-300" />
-              {/* Core circle */}
-              <div className="absolute inset-12 rounded-full bg-forest-50 border border-forest-100 flex items-center justify-center">
-                <span className="font-display text-4xl font-medium text-forest-700 select-none">YL</span>
+              <div className="absolute inset-3 rounded-full border border-warm-300" />
+              {/* Photo circle */}
+              <div className="absolute inset-6 rounded-full overflow-hidden shadow-md">
+                <img
+                  src={profilePhoto}
+                  alt="Yixin Liu"
+                  className="w-full h-full object-cover object-top scale-110"
+                />
               </div>
-              {/* Floating accent dots */}
+              {/* Accent dots */}
               <div className="absolute top-4 right-8 w-3 h-3 rounded-full bg-gold-400 opacity-70" />
               <div className="absolute bottom-8 left-4 w-2 h-2 rounded-full bg-forest-300 opacity-60" />
               <div className="absolute top-1/2 right-0 w-1.5 h-1.5 rounded-full bg-gold-300 opacity-50" />

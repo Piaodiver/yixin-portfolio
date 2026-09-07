@@ -47,12 +47,11 @@ export default function TimelineSection() {
           {/* Label column */}
           <div className="md:col-span-4">
             <div className="md:sticky md:top-28 space-y-4">
-              <p className="section-label">Career Journey</p>
-              <h2 className="section-heading">Nine years of enterprise transformation</h2>
-              <div className="w-12 h-0.5 bg-forest-700" />
-              <p className="font-body text-sm text-gray-500 leading-relaxed">
-                From Baidu to Salesforce, across Beijing, Singapore, Silicon Valley, Tel Aviv, and beyond.
+              <h2 className="section-heading">Career Journey</h2>
+              <p className="font-body text-base text-gray-500 leading-relaxed">
+                The path that shaped my enterprise technology perspective.
               </p>
+              <div className="w-12 h-0.5 bg-forest-700" />
 
               {/* Education */}
               <div className="pt-8 space-y-5">

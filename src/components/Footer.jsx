@@ -7,7 +7,7 @@ export default function Footer() {
           Yixin Liu
         </p>
         <p className="font-body text-xs text-gray-400">
-          © {year} · Enterprise AI Transformation Lead · Singapore
+          © {year} · Enterprise AI Transformation Lead
         </p>
         <div className="flex items-center gap-5">
           <a
@@ -19,7 +19,7 @@ export default function Footer() {
             LinkedIn
           </a>
           <a
-            href="mailto:liuyixin10@outlook.com"
+            href="mailto:liuyixin10@gmail.com"
             className="font-body text-xs text-gray-400 hover:text-forest-700 transition-colors"
           >
             Email

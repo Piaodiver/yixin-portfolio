@@ -7,9 +7,14 @@ function CaseCard({ study, index }) {
         <span className="font-body text-xs font-medium text-forest-600 bg-forest-50 border border-forest-100 px-3 py-1 rounded-full">
           {study.tag}
         </span>
-        <span className="font-display text-4xl font-medium text-warm-200 select-none">
-          {String(index + 1).padStart(2, '0')}
-        </span>
+        <div className="text-right">
+          <span className="font-display text-4xl font-medium text-warm-200 select-none block">
+            {String(index + 1).padStart(2, '0')}
+          </span>
+          {study.subtitle && (
+            <p className="font-body text-xs text-gray-400 mt-1">{study.subtitle}</p>
+          )}
+        </div>
       </div>
 
       <h3 className="font-display text-xl md:text-2xl font-medium text-gray-900 leading-tight mb-6">
@@ -17,6 +22,12 @@ function CaseCard({ study, index }) {
       </h3>
 
       <div className="space-y-5 text-sm">
+        {study.intro && (
+          <p className="font-body text-sm text-gray-600 leading-relaxed italic border-l-2 border-forest-100 pl-4">
+            {study.intro}
+          </p>
+        )}
+
         <div>
           <p className="font-body font-semibold text-gray-500 uppercase tracking-wider text-xs mb-1.5">Context</p>
           <p className="font-body text-gray-600 leading-relaxed">{study.context}</p>
@@ -35,22 +46,6 @@ function CaseCard({ study, index }) {
           <p className="font-body font-semibold text-gray-500 uppercase tracking-wider text-xs mb-1.5">Impact</p>
           <p className="font-body text-gray-700 font-medium leading-relaxed">{study.impact}</p>
         </div>
-
-        <div className="w-full h-px bg-warm-200" />
-
-        <div>
-          <p className="font-body font-semibold text-gray-500 uppercase tracking-wider text-xs mb-2">Demonstrates</p>
-          <div className="flex flex-wrap gap-2">
-            {study.shows.map((s) => (
-              <span
-                key={s}
-                className="font-body text-xs text-gray-500 bg-warm-100 border border-warm-200 px-2.5 py-1 rounded-md"
-              >
-                {s}
-              </span>
-            ))}
-          </div>
-        </div>
       </div>
     </article>
   );
@@ -62,15 +57,10 @@ export default function CaseStudies() {
       <div className="max-w-6xl mx-auto px-6 md:px-10">
         {/* Header */}
         <div className="mb-14">
-          <p className="section-label">Selected Work</p>
-          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
-            <h2 className="section-heading max-w-xl">
-              Turning ambition into<br className="hidden md:block" /> deployable outcomes
-            </h2>
-            <p className="font-body text-sm text-gray-500 max-w-xs">
-              Representative engagements across enterprise AI, CRM transformation, and solution architecture.
-            </p>
-          </div>
+          <h2 className="section-heading mb-3">Selected Work</h2>
+          <p className="font-body text-base text-gray-500">
+            Proof points from enterprise AI, Data, and CRM transformation.
+          </p>
         </div>
 
         {/* Grid */}

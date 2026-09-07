@@ -4,7 +4,9 @@ export default function Contact() {
   return (
     <section id="contact" className="bg-white py-24 md:py-32">
       <div className="max-w-6xl mx-auto px-6 md:px-10">
-        <div className="grid md:grid-cols-12 gap-12 items-center">
+
+        {/* Top row */}
+        <div className="grid md:grid-cols-12 gap-12 items-start mb-16 md:mb-20">
 
           {/* Left */}
           <div className="md:col-span-7 space-y-6">
@@ -50,7 +52,7 @@ export default function Contact() {
             </div>
           </div>
 
-          {/* Right: decorative card */}
+          {/* Right: Open to card */}
           <div className="md:col-span-5">
             <div className="bg-ivory rounded-2xl border border-warm-200 p-8 space-y-6">
               <p className="font-body text-xs font-medium text-gray-400 uppercase tracking-widest">
@@ -70,12 +72,13 @@ export default function Contact() {
               ))}
               <div className="pt-2 border-t border-warm-200">
                 <p className="font-body text-xs text-gray-400">
-                  Based in Singapore · Open globally
+                  Open to opportunities globally, especially in the U.S.
                 </p>
               </div>
             </div>
           </div>
         </div>
+
       </div>
     </section>
   );

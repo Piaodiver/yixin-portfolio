@@ -1,17 +1,7 @@
 export const hero = {
   name: 'Yixin Liu',
-  title: 'Enterprise AI Transformation Lead',
-  tagline: 'I help enterprises turn AI, data, and CRM technologies into production-ready transformation.',
-  supporting:
-    'With 9 years of experience across Salesforce, SAP, Wiz.AI, and Baidu, I bring a cross-cultural perspective shaped by work and study across China, Singapore, Southeast Asia, Israel, and the United States — helping enterprises align business strategy, technical feasibility, and stakeholder priorities across regions.',
-  focusAreas: [
-    'Enterprise AI Solution Design & Deployment',
-    'Agentic AI',
-    'CRM Transformation',
-    'RAG / LLM Solutions',
-    'Executive Discovery',
-    'Solution Architecture',
-  ],
+  title: 'Enterprise AI Transformation & Solution Architect',
+  tagline: 'Turning AI ambition into production-ready enterprise transformation.',
   cta: [
     { label: 'View My Work', href: '#work', primary: true },
     { label: 'Connect on LinkedIn', href: 'https://www.linkedin.com/in/liuyixin/', primary: false },
@@ -21,18 +11,17 @@ export const hero = {
 
 export const about = {
   paragraphs: [
-    'My name is Yixin — pronounced like "e-scene," like a cool scene you\'d want to be part of.',
-    'I am a Solution Architect with 9 years of experience driving AI, Data, and CRM transformation for enterprise clients across China, Singapore, Southeast Asia, Israel, and the United States.',
-    'My work sits at the intersection of business strategy, technical architecture, and enterprise adoption. I help organizations clarify high-impact use cases, design scalable architectures, align executive and technical stakeholders, and move from pilot ideas to production-ready systems.',
-    'Most recently at Salesforce, I led Agentforce and Data Cloud architecture for APAC clients, helping convert AI interest into production-grade use cases and contributing to over $800K in sales pipeline. Before Salesforce, I worked across voice AI, CRM transformation, and enterprise digitalization at Wiz.AI, SAP, and Baidu.',
-    'What makes my work distinctive is the ability to combine technical judgment with business empathy — understanding people, workflows, and organizational complexity, then translating technology into clear business value, adoption paths, and measurable outcomes.',
-    'My passion for AI and technology is rooted in my love for people and the world we share. I believe technology, at its best, expands human possibility — helping people live better, work better, connect better, and participate more fully in society. I hope to contribute in my own way to building a future that is more intelligent, inclusive, and human-centered.',
+    'My name is Yixin — pronounced like "e-scene," a scene you\'d want to be part of.',
+    'I am an Enterprise AI Transformation & Solution Architect with 9 years of experience across Salesforce, SAP, Wiz.AI, and Baidu. My work sits at the intersection of business strategy, technical architecture, and enterprise adoption.',
+    'I help organizations move from AI ambition to production-ready systems — clarifying high-impact use cases and scalable architectures, aligning stakeholders, and translating technology into measurable business outcomes.',
+    'Across my career, I have contributed to $2M+ in enterprise pipeline, working with Fortune 500 and Global 2000 clients across manufacturing, retail, fintech, media, and public sector — spanning AI, Data, CRM, and digital transformation initiatives across APAC. My perspective has been shaped by work and study across China, the United States, Israel, and Singapore.',
+    'My passion for AI is rooted in a belief that technology, at its best, expands human potential: helping people work better, connect better, and participate more fully in the world.',
   ],
   stats: [
     { value: '9+', label: 'Years of Experience' },
-    { value: '20+', label: 'Enterprise Clients' },
-    { value: '$800K+', label: 'Pipeline Generated' },
-    { value: '5', label: 'Countries Worked' },
+    { value: '$2M+', label: 'Enterprise Pipeline' },
+    { value: 'F500', label: 'Clients from Fortune 500 & Global 2000' },
+    { value: '4', label: 'Countries Worked' },
   ],
 };
 
@@ -74,13 +63,14 @@ export const caseStudies = [
   {
     id: 3,
     tag: 'Wiz.AI · APAC',
-    title: 'Voice AI & LLM Solutions Across APAC',
+    subtitle: 'First LLM customer · Reference case · Singapore',
+    title: "Wiz.AI's First LLM Product Customer",
     context:
-      'Enterprise clients across APAC were evaluating LLM, RAG, NLP, and voice AI solutions for customer engagement and operational automation.',
+      'A leading entertainment group in Singapore was exploring its first enterprise LLM adoption.',
     role:
-      'Architected and pitched AI solutions, supported 40+ enterprise opportunities, led PoC demonstrations, and managed AI delivery from design to release.',
+      'Secured Wiz.AI\'s first LLM product customer and led the end-to-end implementation from solution design to delivery.',
     impact:
-      'Achieved a 15%+ PoC-to-deal conversion rate and reduced delivery iteration cycles by 30%.',
+      'Created a strategic breakthrough reference case for both Wiz.AI and the client.',
     shows: [
       'LLM, RAG, NLP knowledge',
       'AI presales',
@@ -110,31 +100,24 @@ export const caseStudies = [
 export const expertise = [
   {
     icon: '◈',
-    title: 'Enterprise AI Deployment',
+    title: 'Enterprise AI Solution & Transformation',
     description:
-      'I help organizations identify AI use cases, define success metrics, design deployment roadmaps, and move from pilot experimentation to production-grade solutions.',
+      'Turning AI use cases into production-ready workflows, architectures, and adoption paths.',
     keywords: ['Agentic AI', 'LLMs', 'RAG', 'NLP', 'Voice AI', 'Prompt Engineering'],
   },
   {
     icon: '◇',
     title: 'Data & CRM Architecture',
     description:
-      'I design scalable enterprise architectures that connect customer data, workflows, systems, and business outcomes.',
+      'Designing scalable data and CRM foundations that connect customer intelligence, operations, and business outcomes.',
     keywords: ['Salesforce Data Cloud', 'SAP CRM', 'SaaS Architecture', 'Lead-to-Cash', 'Cloud Solutions'],
   },
   {
     icon: '◉',
-    title: 'Executive Discovery & Solution Storytelling',
+    title: 'Executive Alignment & Solution Storytelling',
     description:
-      'I facilitate workshops with executive sponsors and technical teams to uncover business priorities, define solution value, and align stakeholders around a clear transformation path.',
+      'Helping business and technical stakeholders align on value, feasibility, roadmap, and execution.',
     keywords: ['Discovery Workshops', 'Value Framing', 'PoC Demonstrations', 'RFP/RFI', 'Executive Presentations'],
-  },
-  {
-    icon: '◎',
-    title: 'Cross-Regional Stakeholder Leadership',
-    description:
-      'I work across China, Singapore, Southeast Asia, Israel, and the United States, bridging different business cultures, technical expectations, and stakeholder priorities.',
-    keywords: ['Global Enterprise Clients', 'Global Teams', 'Strategic Alignment', 'Commercial Outcomes'],
   },
 ];
 
@@ -146,7 +129,7 @@ export const timeline = [
     location: 'Singapore',
     description:
       'Led Agentforce and Data Cloud architecture for enterprise clients across APAC, helping organizations convert AI interest into production-ready use cases and measurable sales pipeline.',
-    current: true,
+    current: false,
   },
   {
     company: 'Wiz.AI',
@@ -192,20 +175,26 @@ export const education = [
 
 export const beliefs = [
   {
-    title: 'AI systems need orchestration and governance, not just more output.',
-    body: 'The next frontier of AI is not simply generating faster, but generating more reliably. Agent Teams need role separation, verification, feedback loops, and quality gates. AI coding needs standards, architecture, review systems, and long-term maintainability. As the cost of building goes down, the value of senior technical judgment goes up.',
+    title: 'The next frontier of AI is not only smarter models, but better-organized intelligence.',
+    body: "As individual agents become more capable, the question shifts from 'Can the model think?' to 'Can the work be organized, verified, improved, and delivered reliably?'",
+    body2: 'For complex enterprise tasks, Agent Teams matter because they introduce structure: workers create, verifiers challenge, leaders decide, and the system learns from each iteration.',
+    insight: 'The goal is not just speed. The goal is trustworthy execution at scale.',
   },
   {
     title: 'Architecture is a business conversation.',
-    body: 'Good solution design starts with understanding the business problem, the people involved, the systems in place, and the outcome that matters. The best Solution Architects translate business ambiguity into technical clarity, and technical complexity into executive confidence.',
+    body: 'Good solution design starts with understanding the business problem, the people involved, the systems in place, and the outcome that matters.',
+    insight: 'The best Solution Architects translate business ambiguity into technical clarity, and technical complexity into executive confidence.',
   },
   {
     title: 'Transformation requires trust.',
-    body: 'Enterprise technology adoption depends not only on technical feasibility, but also on stakeholder confidence, operational readiness, and clear communication. A solution only creates value when people trust it enough to use it, scale it, and change how work gets done.',
+    body: 'Enterprise technology adoption depends not only on technical feasibility, but also on stakeholder confidence, operational readiness, and clear communication.',
+    insight: 'A solution only creates value when people trust it enough to use it, scale it, and change how work gets done.',
   },
   {
-    title: 'Success is a byproduct of compounding growth.',
-    body: 'People, products, and technologies all need continuous iteration. Success may involve timing and luck, but growth can be practiced. As responsibility expands, capability must expand with it.',
+    title: 'Growth is the operating system behind lasting success.',
+    body: 'Success and growth are not the same thing. Success often contains timing, luck, and external conditions. Growth is what compounds.',
+    body2: 'I believe people, products, and technologies should be continuously improved through feedback, iteration, and humility. The most capable people are not only those who win, but those who keep learning from what works, what fails, and what others do better.',
+    insight: 'With greater responsibility comes greater capability — not because capability appears first, but because responsibility forces people and systems to grow.',
   },
 ];
 
@@ -276,10 +265,11 @@ export const writing = [
 
 export const contact = {
   heading: "Let's Connect",
-  body: 'I am open to opportunities and conversations in enterprise AI transformation, solution architecture, and AI adoption strategy.',
-  subtext: 'For collaboration, speaking, advisory, or career opportunities, feel free to connect.',
+  body: 'I am open to opportunities and conversations in enterprise AI deployment, solution architecture, data transformation, and AI adoption strategy — globally, especially in the United States.',
+  subtext: 'For career opportunities, collaboration, or advisory, feel free to connect.',
+  email: 'liuyixin10@gmail.com',
   links: [
     { label: 'LinkedIn', href: 'https://www.linkedin.com/in/liuyixin/', external: true },
-    { label: 'Email', href: 'mailto:liuyixin10@outlook.com', external: false },
+    { label: 'Email', href: 'mailto:liuyixin10@gmail.com', external: false },
   ],
 };

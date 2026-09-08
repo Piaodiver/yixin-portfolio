@@ -38,14 +38,6 @@ export const enterprise = [
         heading: 'Outcome',
         body: ['Generated over $800K in sales pipeline, reduced average PoC-to-production time by 35%, and helped clients define scalable AI and data roadmaps.'],
       },
-      {
-        heading: 'Architecture',
-        todo: 'Pick ONE of these 20 engagements and draw it: where Data Cloud sat, how identity resolution was handled, what grounded the agent, and where the trust boundary was. Then 3–5 decisions in the form "constraint → options → chose → would revisit if". This is the section an Applied AI Architect interview will spend twenty minutes on.',
-      },
-      {
-        heading: "What I'd do differently",
-        todo: 'One honest thing. The 35% figure implies you found a bottleneck — name what it was and what you would sequence differently now.',
-      },
     ],
   },
   {

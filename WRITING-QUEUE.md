@@ -55,4 +55,8 @@ with a `body: [ ... ]` array in the matching file under `src/content/`.
 - [x] **llm-tco-calculator is live** at `github.com/Piaodiver/llm-tco-calculator` (3 commits, screenshots, clean README). The site's link resolves.
 - [ ] **DECISIONS.md** — 21 fields still blank across 7 decisions. Correctly kept out of the repo (gitignored alongside `NOTES.local.md`), so nothing is publicly broken; this is writing owed to yourself, not a leak. Its own header says an AI must not fill it in, and that is right: the interview will point at a design choice and ask why. `.gitignore` carries a note to un-ignore both files once written.
 
-_4 case-study sections outstanding. Live tracker: https://claude.ai/code/artifact/b2fae819-9876-40e3-b2ef-b99fb43bac14_
+_2 case-study sections outstanding — both on the TCO calculator._
+
+_The Agentforce case stays at Context / Role / Impact depth by decision: depth on two beats thin coverage on four._
+
+_Live tracker: https://claude.ai/code/artifact/b2fae819-9876-40e3-b2ef-b99fb43bac14_

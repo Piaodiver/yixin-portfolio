@@ -41,8 +41,8 @@ with a `body: [ ... ]` array in the matching file under `src/content/`.
 
 `Built · Open source · 2026`  —  `#/work/llm-tco-calculator`
 
-- [ ] **A worked scenario** — Take one real enterprise shape you have actually sold into — SAP, Wiz.AI, or Salesforce — and walk it end to end: volume, token shape, what you would recommend, what the year costs, what you would tell the CFO. Two or three paragraphs. This is the section that proves you have been in the room, and it is the one an AI cannot write for you.
-- [ ] **What I would ask before quoting any of this** — The five or six questions you would actually ask in a scoping call before putting a number on a slide. This is the difference between a calculator and a pre-sales conversation — and it is knowledge you already have.
+- [ ] **A worked scenario** (outline waiting in `NOTES.local.md`) — Take one real enterprise shape you have actually sold into — SAP, Wiz.AI, or Salesforce — and walk it end to end: volume, token shape, what you would recommend, what the year costs, what you would tell the CFO. Two or three paragraphs. This is the section that proves you have been in the room, and it is the one an AI cannot write for you.
+- [ ] **What I would ask before quoting any of this** (outline waiting in `NOTES.local.md`) — The five or six questions you would actually ask in a scoping call before putting a number on a slide. This is the difference between a calculator and a pre-sales conversation — and it is knowledge you already have.
 
 ---
 
@@ -52,7 +52,7 @@ with a `body: [ ... ]` array in the matching file under `src/content/`.
 - [x] The second venture is **withheld at the co-founder's request** and is deliberately absent from both the site and this repo's history. Nothing to do here until that changes.
 - [ ] **Screenshots at 2x.** The MultiVerse captures are 285x620 (1x simulator), so they are soft on a retina screen. Re-export at 2x or 3x.
 - [ ] **resume.pdf** into `public/` if you want a download link in the hero.
-- [ ] **llm-tco-calculator is not a git repo.** It has a LICENSE and a README written for publication but has never been committed or pushed. The site links to a repo that does not exist yet.
-- [ ] **DECISIONS.md** in that repo is a template with empty fields — and its own header says an AI should not fill it in.
+- [x] **llm-tco-calculator is live** at `github.com/Piaodiver/llm-tco-calculator` (3 commits, screenshots, clean README). The site's link resolves.
+- [ ] **DECISIONS.md** — 21 fields still blank across 7 decisions. Correctly kept out of the repo (gitignored alongside `NOTES.local.md`), so nothing is publicly broken; this is writing owed to yourself, not a leak. Its own header says an AI must not fill it in, and that is right: the interview will point at a design choice and ask why. `.gitignore` carries a note to un-ignore both files once written.
 
-_10 case-study sections outstanding._
+_10 case-study sections outstanding. Live tracker: https://claude.ai/code/artifact/b2fae819-9876-40e3-b2ef-b99fb43bac14_

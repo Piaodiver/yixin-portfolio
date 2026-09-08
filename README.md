@@ -136,9 +136,21 @@ preview:
 
 | | |
 |---|---|
-| Performance | 97 |
+| Performance | 95–97 |
 | Accessibility | 100 |
 | Best practices | 100 |
 | SEO | 100 |
 | CLS | 0 |
 | First view | ~231 KB |
+
+---
+
+## Notes
+
+Built with Claude Code. The visual system, the content structure, and the two
+entrance-animation fixes described above came out of that work; the case
+studies, the enterprise history, and the judgment in them are mine.
+
+Sections I have not written yet are tracked in
+[WRITING-QUEUE.md](WRITING-QUEUE.md) and are deliberately absent from the
+build rather than shipped half-finished.

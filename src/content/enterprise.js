@@ -175,23 +175,25 @@ export const enterprise = [
     status: 'delivered',
     kicker: 'SAP global lighthouse customer case',
     title: 'Lead-to-Cash for LGMG, from the bid to go-live',
-    summary: 'A multi-sided commercial network for one of China’s largest construction machinery groups — dealers, end customers, logistics providers and finance transacting on the same orders, across multiple business divisions and international markets.',
+    summary: 'A multi-sided commercial network for a top-ten Chinese construction machinery manufacturer — dealers, end customers, logistics providers and finance transacting on the same orders, across subsidiaries on three continents.',
     metrics: [
       { value: '25%', label: 'Faster order processing (published by SAP)' },
-      { value: '20%', label: 'Shorter shipment approval cycle (published by SAP)' },
+      { value: '20%', label: 'Faster shipment approval cycle (published by SAP)' },
+      { value: '30%', label: 'Faster creditor rights management (published by SAP)' },
     ],
     sections: [
       {
         heading: 'The problem',
         body: [
-          'Selling construction machinery is not one transaction between two parties. A machine reaches its buyer through a dealer, on credit or a lease, shipped by a logistics provider, cleared through customs if it is leaving the country — and then it needs parts for the next decade, bought by a different person for different reasons. LGMG needed all of that on one system while expanding internationally, across business divisions that did not share a process or, in places, an interest.',
+          'Selling heavy machinery is not one transaction between two parties. A machine reaches its buyer through a dealer, on credit or a lease, shipped by a logistics provider, cleared through customs if it is leaving the country — and then it needs parts for the next decade, bought by a different person for different reasons.',
+          'LGMG makes aerial work platforms and mining equipment, and had just crossed ¥10 billion in output for the first time. Subsidiaries in Europe, North America and Japan had gone up fast, and the growth brought its own problem: standards had diverged between countries, and the group could no longer manage its branches consistently. The old commerce system had cumbersome approvals, no real multilingual or multicurrency support, and material master data that was duplicated rather than shared. The brief was to bring all of it back under one set of rules without slowing the expansion down.',
         ],
       },
       {
         heading: 'Architecture',
         body: [
           'The shape of the answer is a network, not a CRM. Four external parties each get their own portal — dealers, end customers, logistics providers, and the logistics operation itself — alongside an internal finance portal. They transact on the same orders and see different faces of them, which makes visibility a first-class design problem rather than a permissions afterthought.',
-          'Four constraints did most of the shaping. Commercial terms vary per deal, so an order carries its contract type — consignment, payment in full, instalments, financial leasing, or a gift agreement — and the downstream accounting follows from it. Machines are bought on credit, so rating, limit, balance and overdue status are checked as the order is taken, not after. Whole machines and parts are separate order streams because they are different purchases by different people: a machine is capital expenditure signed off by a buyer, while parts are recurring aftermarket orders placed by a technician working from an exploded diagram. And export adds its own chain — booking shipping space, then customs progress visible to whoever is waiting on it.',
+          'Four constraints did most of the shaping. Commercial terms vary per deal, so an order carries its contract type — consignment, payment in full, instalments, financial leasing, or a gift agreement — and the downstream accounting follows from it. Machines are bought on credit, so rating, limit, balance and overdue status are checked as the order is taken, not after — the part of the programme SAP later measured at 30% faster creditor rights management. Whole machines and parts are separate order streams because they are different purchases by different people: a machine is capital expenditure signed off by a buyer, while parts are recurring aftermarket orders placed by a technician working from an exploded diagram. And export adds its own chain — booking shipping space, then customs progress visible to whoever is waiting on it.',
           'The sharpest constraint was pricing. The same machine carries different prices by region, and dealers must not see each other’s. That is a requirement on the data model rather than a filter on a report, and it constrains pricing, authorisation and reporting together. Quote approval worked on the same logic in a smaller way: inside an agreed band a quote needed no approval, outside it finance signed.',
         ],
       },
@@ -205,13 +207,14 @@ export const enterprise = [
       {
         heading: 'Outcome',
         body: [
-          'SAP published the programme as a customer story: order processing 25% faster and the shipment approval cycle 20% shorter, on SAP Commerce Cloud with S/4HANA. It became an SAP global lighthouse customer case. Those are SAP’s published figures for the programme, which ran wider and later than the phase I delivered.',
+          'SAP published the programme as a customer story: order processing 25% faster, shipment approval 20% faster, creditor rights management 30% faster, on SAP Commerce Cloud with S/4HANA Cloud Private Edition. Beyond the throughput numbers, the result SAP records is the one the brief actually asked for — a master data hierarchy and unified accounting categories, models and rules across the group.',
+          'It became an SAP global lighthouse customer case. Those are SAP’s figures for the whole programme, which ran wider and later than the phase I delivered.',
         ],
       },
       {
         heading: "What I'd do differently",
         body: [
-          'The hard part was never the technology. It was that the business divisions wanted different things, and sometimes wanted them at each other’s expense. Reaching agreement meant two separate jobs that are easy to confuse: building consensus on the substance, and maintaining the relationships that let the substance be discussed at all. Neither substitutes for the other.',
+          'The hard part was never the technology. The divisions wanted different things and sometimes wanted them at each other’s expense — which, seen properly, was not a personality problem but the thing the programme existed to fix. Standards had diverged because the subsidiaries had grown fast and separately, so every requirements conversation was really a negotiation about whose way of working would become the group’s. Reaching agreement meant two jobs that are easy to confuse: building consensus on the substance, and maintaining the relationships that let the substance be discussed at all. Neither substitutes for the other.',
           'The other constant was expectation. New requirements arrived throughout, so a standing part of the work was holding the scope and re-stating what a successful delivery meant — not once at kickoff, but repeatedly, as the thing everyone was measuring against drifted.',
           'That is worth putting next to my later work at Wiz.AI, where the central regret is that nobody wrote down what "delivered" meant. It was not that I had forgotten the lesson; it was that I no longer had the standing to insist on it. At SAP I came in through the bid, on a structured programme, representing a vendor the customer had chosen deliberately. At a small vendor facing a much larger customer, the person with the least leverage to open that conversation is the one with the most to lose from leaving it open. Knowing the right thing to do and being positioned to do it are different problems, and the second one is structural.',
         ],

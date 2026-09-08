@@ -34,8 +34,8 @@ with a `body: [ ... ]` array in the matching file under `src/content/`.
 
 `Enterprise · SAP · 2019–23`  —  `#/work/sap-lighthouse`
 
-- [ ] **Architecture** — Multi-entity Lead-to-Cash is genuinely hard and this is your longest engagement. Sketch the entity model and the integration boundary, and name the two or three decisions that made or nearly broke it.
-- [ ] **What I'd do differently** — Four years is long enough to have watched a decision age. Which one?
+- [x] **Architecture** — written 2026-09-08. The shape is a multi-sided network, not a CRM; four constraints did the shaping, and regional price confidentiality is a data-model requirement rather than a report filter.
+- [x] **What I'd do differently** — written 2026-09-08. Cross-division consensus is two jobs, not one; and scope discipline is a question of standing, not knowledge — which is what separates this from the Wiz.AI regret.
 
 ## Enterprise LLM deployment TCO calculator
 
@@ -55,4 +55,4 @@ with a `body: [ ... ]` array in the matching file under `src/content/`.
 - [x] **llm-tco-calculator is live** at `github.com/Piaodiver/llm-tco-calculator` (3 commits, screenshots, clean README). The site's link resolves.
 - [ ] **DECISIONS.md** — 21 fields still blank across 7 decisions. Correctly kept out of the repo (gitignored alongside `NOTES.local.md`), so nothing is publicly broken; this is writing owed to yourself, not a leak. Its own header says an AI must not fill it in, and that is right: the interview will point at a design choice and ask why. `.gitignore` carries a note to un-ignore both files once written.
 
-_6 case-study sections outstanding. Live tracker: https://claude.ai/code/artifact/b2fae819-9876-40e3-b2ef-b99fb43bac14_
+_4 case-study sections outstanding. Live tracker: https://claude.ai/code/artifact/b2fae819-9876-40e3-b2ef-b99fb43bac14_

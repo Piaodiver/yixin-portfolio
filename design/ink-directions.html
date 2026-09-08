@@ -1,0 +1,1281 @@
+<title>墨分五色</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Fraunces:opsz,wght@9..144,300..700&family=Inter:wght@300;400;500&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap">
+
+<style>
+/* ══════════════════════════════════════════════════════════════
+   墨分五色 — five design directions for yixin-portfolio
+   The chrome commits to one world on purpose: a dark viewing room,
+   so five specimens with five different grounds all read as framed
+   work rather than as five competing page themes.
+   ══════════════════════════════════════════════════════════════ */
+
+:root{
+  color-scheme: dark;
+  --ch-bg:      #0D100E;
+  --ch-panel:   #141814;
+  --ch-line:    #252B25;
+  --ch-line-hi: #3A423A;
+  --ch-text:    #E6E3D8;
+  --ch-dim:     #878E84;
+  --ch-dimmer:  #5D645B;
+  --ch-jade:    #7FA893;
+  --mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  --sans: Inter, system-ui, -apple-system, sans-serif;
+}
+
+*{ box-sizing: border-box; }
+body{ background: var(--ch-bg); color: var(--ch-text); font-family: var(--sans); }
+::selection{ background: var(--ch-jade); color: #0D100E; }
+a{ color: inherit; }
+:focus-visible{ outline: 2px solid var(--ch-jade); outline-offset: 3px; }
+
+/* ── rail ─────────────────────────────────────────────────── */
+.rail{
+  position: sticky; top: 0; z-index: 90;
+  background: rgba(13,16,14,.94);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--ch-line);
+}
+.rail-in{
+  max-width: 1240px; margin: 0 auto; padding: 0 24px;
+  display: flex; align-items: stretch; gap: 28px;
+  min-height: 58px;
+}
+.brand{
+  display: flex; align-items: center; gap: 10px;
+  font-family: var(--mono); font-size: 11px; letter-spacing: .16em;
+  text-transform: uppercase; color: var(--ch-dimmer); white-space: nowrap;
+}
+.brand b{ color: var(--ch-text); font-weight: 500; letter-spacing: .3em; }
+.tabs{ display: flex; align-items: stretch; gap: 2px; flex: 1; overflow-x: auto; }
+.tab{
+  appearance: none; background: none; border: 0; cursor: pointer;
+  padding: 0 14px; display: flex; flex-direction: column; justify-content: center; gap: 3px;
+  border-bottom: 2px solid transparent; color: var(--ch-dim);
+  transition: color .18s ease, border-color .18s ease;
+  white-space: nowrap;
+}
+.tab-no{ font-family: var(--mono); font-size: 9.5px; letter-spacing: .18em; color: var(--ch-dimmer); transition: color .18s ease; }
+.tab-zh{ font-size: 14px; letter-spacing: .06em; }
+.tab:hover{ color: var(--ch-text); }
+.tab[aria-selected="true"]{ color: var(--ch-text); border-bottom-color: var(--ch-jade); }
+.tab[aria-selected="true"] .tab-no{ color: var(--ch-jade); }
+
+/* ── spec strip ───────────────────────────────────────────── */
+.spec-strip{ border-bottom: 1px solid var(--ch-line); background: var(--ch-panel); }
+.spec-in{
+  max-width: 1240px; margin: 0 auto; padding: 14px 24px;
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px;
+}
+.spec-cell{ display: flex; flex-direction: column; gap: 5px; min-width: 0; }
+.spec-k{
+  font-family: var(--mono); font-size: 9.5px; letter-spacing: .2em;
+  text-transform: uppercase; color: var(--ch-dimmer);
+}
+.spec-v{ font-size: 12.5px; line-height: 1.45; color: var(--ch-dim); }
+.spec-cell:first-child .spec-v{ color: var(--ch-text); }
+
+/* ── stage ────────────────────────────────────────────────── */
+#stage{ position: relative; }
+.spm{ position: relative; overflow: hidden; }
+.spm-canvas{ position: absolute; inset: 0; width: 100%; height: 100%; display: block; pointer-events: none; }
+.wrap{ max-width: 1120px; margin: 0 auto; padding: 0 40px; position: relative; z-index: 2; }
+@media (max-width: 720px){ .wrap{ padding: 0 22px; } }
+
+/* ── annotation band ──────────────────────────────────────── */
+.notes{ background: var(--ch-bg); border-top: 1px solid var(--ch-line); }
+.notes-in{ max-width: 1240px; margin: 0 auto; padding: 30px 24px 44px; }
+.notes-h{
+  font-family: var(--mono); font-size: 10px; letter-spacing: .22em;
+  text-transform: uppercase; color: var(--ch-jade); margin: 0 0 18px;
+}
+.notes-grid{ display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 16px 40px; }
+.note{ display: grid; grid-template-columns: 22px 1fr; gap: 12px; align-items: start; }
+.note-i{ font-family: var(--mono); font-size: 10px; color: var(--ch-dimmer); padding-top: 3px; }
+.note-b{ font-size: 13px; line-height: 1.62; color: var(--ch-dim); margin: 0; }
+.note-b b{ color: var(--ch-text); font-weight: 500; }
+.note-b code{
+  font-family: var(--mono); font-size: 11.5px; color: var(--ch-jade);
+  background: rgba(127,168,147,.09); padding: 1px 5px; border-radius: 3px;
+}
+@media (max-width: 780px){
+  .notes-grid{ grid-template-columns: 1fr; }
+  .spec-in{ grid-template-columns: repeat(2, 1fr); gap: 16px 24px; }
+}
+
+/* ══ shared specimen primitives (overridden per direction) ══ */
+.sp-nav{ display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+.sp-navlinks{ display: flex; gap: 26px; }
+.sp-metrics{ display: grid; grid-template-columns: repeat(4, 1fr); }
+.sp-lanes{ display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; }
+@media (max-width: 860px){
+  .sp-lanes{ grid-template-columns: 1fr; }
+  .sp-metrics{ grid-template-columns: repeat(2, 1fr); }
+  .sp-navlinks{ display: none; }
+}
+.num{ font-variant-numeric: tabular-nums; }
+
+/* ═══════════════════════════════════════════════════════════
+   01 · 墨屏  INK SCREEN — ink as light on a dark ground
+   ═══════════════════════════════════════════════════════════ */
+.v-screen{
+  --bg:#0A0C0B; --panel:#101413; --line:#1F2523; --line-hi:#2E3733;
+  --tx:#EAE7DC; --tx2:#9AA29B; --tx3:#666E68;
+  --jade:#7DB49B; --cyan:#6E9BB8; --ochre:#C4794A;
+  background: var(--bg); color: var(--tx);
+}
+.v-screen .hero{ padding: 74px 0 60px; }
+.v-screen .eyebrow{
+  font-family: var(--mono); font-size: 10px; letter-spacing: .26em;
+  text-transform: uppercase; color: var(--jade);
+  display: flex; align-items: center; gap: 10px;
+}
+.v-screen .eyebrow::before{
+  content:""; width: 6px; height: 6px; border-radius: 50%;
+  background: var(--jade); box-shadow: 0 0 10px 1px rgba(125,180,155,.75);
+  animation: pulse 3.4s ease-in-out infinite;
+}
+@keyframes pulse{ 0%,100%{opacity:.35} 50%{opacity:1} }
+.v-screen .sp-nav{ padding: 20px 0; border-bottom: 1px solid var(--line); }
+.v-screen .sp-navlinks{ font-family: var(--mono); font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: var(--tx3); }
+.v-screen .sp-navlinks span{ transition: color .2s ease; cursor: default; }
+.v-screen .sp-navlinks span:hover{ color: var(--jade); }
+.v-screen .mark{ font-family: var(--mono); font-size: 12px; letter-spacing: .3em; color: var(--tx); }
+.v-screen .hero-grid{ display: grid; grid-template-columns: 1fr 220px; gap: 56px; align-items: center; }
+.v-screen .name{
+  font-family: "Instrument Serif", Georgia, serif; font-weight: 400;
+  font-size: clamp(56px, 8.4vw, 116px); line-height: .92; letter-spacing: -.015em;
+  margin: 22px 0 0; text-wrap: balance;
+}
+.v-screen .name em{ font-style: italic; color: var(--jade); }
+.v-screen .role{
+  font-family: var(--mono); font-size: 11.5px; letter-spacing: .28em;
+  text-transform: uppercase; color: var(--tx2); margin: 20px 0 0;
+}
+.v-screen .tagline{
+  max-width: 54ch; font-size: 16.5px; line-height: 1.72; font-weight: 300;
+  color: var(--tx2); margin: 26px 0 0;
+}
+.v-screen .portrait{
+  position: relative; width: 200px; height: 200px; border-radius: 50%;
+  justify-self: end;
+}
+.v-screen .portrait img{
+  width: 100%; height: 100%; object-fit: cover; border-radius: 50%;
+  filter: grayscale(1) contrast(1.06) brightness(.94);
+  border: 1px solid var(--line-hi);
+}
+.v-screen .portrait::after{
+  content:""; position: absolute; inset: -26px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(125,180,155,.22), transparent 68%);
+  z-index: -1;
+}
+.v-screen .scan{
+  position: absolute; left: 0; right: 0; height: 1px; top: 0;
+  background: linear-gradient(90deg, transparent, rgba(125,180,155,.85), transparent);
+  animation: scan 2.6s cubic-bezier(.4,0,.2,1) .35s 1 both;
+}
+@keyframes scan{ from{ transform: translateY(0); opacity:0 } 12%{opacity:1} to{ transform: translateY(58vh); opacity:0 } }
+.v-screen .sp-metrics{ border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.v-screen .metric{ padding: 26px 0; border-right: 1px solid var(--line); }
+.v-screen .metric:last-child{ border-right: 0; }
+.v-screen .metric-v{
+  font-family: "Instrument Serif", Georgia, serif; font-size: 40px; line-height: 1; color: var(--tx);
+}
+.v-screen .metric-l{
+  font-family: var(--mono); font-size: 9.5px; letter-spacing: .18em; text-transform: uppercase;
+  color: var(--tx3); margin-top: 11px;
+}
+.v-screen .metric-bar{ height: 2px; width: 26px; background: var(--jade); margin-top: 14px; opacity: .5; }
+.v-screen .lanes-sec{ padding: 62px 0 76px; }
+.v-screen .sec-head{ display: flex; align-items: baseline; gap: 16px; margin-bottom: 30px; }
+.v-screen .sec-no{ font-family: var(--mono); font-size: 10px; letter-spacing: .2em; color: var(--jade); }
+.v-screen .sec-t{ font-family: "Instrument Serif", Georgia, serif; font-size: 27px; }
+.v-screen .sp-lanes{ background: var(--line); border: 1px solid var(--line); }
+.v-screen .lane{
+  background: var(--panel); padding: 28px 24px 30px;
+  transition: background .28s ease;
+}
+.v-screen .lane:hover{ background: #141A18; }
+.v-screen .lane-no{ font-family: var(--mono); font-size: 10px; letter-spacing: .2em; color: var(--tx3); }
+.v-screen .lane-t{ font-family: "Instrument Serif", Georgia, serif; font-size: 24px; margin: 14px 0 0; color: var(--tx); }
+.v-screen .lane-c{ font-size: 14px; line-height: 1.62; color: var(--tx2); margin: 12px 0 0; font-weight: 300; }
+.v-screen .lane-e{
+  font-family: var(--mono); font-size: 10.5px; line-height: 1.7; color: var(--tx3);
+  margin: 18px 0 0; padding-top: 14px; border-top: 1px solid var(--line);
+}
+.v-screen .tags{ display: flex; flex-wrap: wrap; gap: 6px; margin-top: 16px; }
+.v-screen .tag{
+  font-family: var(--mono); font-size: 9.5px; letter-spacing: .1em;
+  padding: 4px 8px; border: 1px solid var(--line-hi); border-radius: 2px; color: var(--tx3);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   02 · 落墨  INK DROP — austere paper, one playable fluid
+   ═══════════════════════════════════════════════════════════ */
+.v-drop{
+  --bg:#FAF8F3; --line:#DCD7C9; --tx:#161915; --tx2:#5C6159; --tx3:#8B9086;
+  --ink:#2C3A46;
+  background: var(--bg); color: var(--tx);
+}
+.v-drop .spm-canvas{ mix-blend-mode: multiply; }
+.v-drop .sp-nav{ padding: 26px 0; }
+.v-drop .mark{ font-family: var(--mono); font-size: 11px; letter-spacing: .34em; text-transform: uppercase; }
+.v-drop .sp-navlinks{ font-family: var(--mono); font-size: 10.5px; letter-spacing: .18em; text-transform: uppercase; color: var(--tx3); }
+.v-drop .hero{ padding: 96px 0 88px; }
+.v-drop .name{
+  font-family: "Cormorant Garamond", Georgia, serif; font-weight: 300;
+  font-size: clamp(64px, 11vw, 150px); line-height: .9; letter-spacing: -.02em; margin: 0;
+}
+.v-drop .role{
+  font-family: var(--mono); font-size: 11px; letter-spacing: .34em; text-transform: uppercase;
+  color: var(--tx3); margin: 30px 0 0;
+}
+.v-drop .tagline{
+  font-family: "Cormorant Garamond", Georgia, serif; font-weight: 300;
+  font-size: clamp(21px, 2.5vw, 29px); line-height: 1.5; max-width: 22ch;
+  margin: 40px 0 0; color: var(--tx2); text-wrap: balance;
+}
+.v-drop .hint{
+  font-family: var(--mono); font-size: 10px; letter-spacing: .16em; color: var(--tx3);
+  margin: 52px 0 0; display: flex; align-items: center; gap: 9px;
+}
+.v-drop .hint::before{ content:""; width: 22px; height: 1px; background: var(--tx3); }
+.v-drop .thumb{ width: 60px; height: 60px; border-radius: 50%; object-fit: cover; filter: grayscale(1) contrast(1.04); opacity: .82; }
+.v-drop .sp-metrics{ border-top: 1px solid var(--line); gap: 0; }
+.v-drop .metric{ padding: 24px 0 26px; }
+.v-drop .metric-v{ font-family: "Cormorant Garamond", Georgia, serif; font-weight: 400; font-size: 44px; line-height: 1; }
+.v-drop .metric-l{ font-family: var(--mono); font-size: 9.5px; letter-spacing: .16em; text-transform: uppercase; color: var(--tx3); margin-top: 9px; }
+.v-drop .lanes-sec{ padding: 70px 0 40px; }
+.v-drop .sp-lanes{ gap: 0; border-top: 1px solid var(--line); }
+.v-drop .lane{ padding: 30px 30px 34px 0; border-right: 1px solid var(--line); }
+.v-drop .lane:last-child{ border-right: 0; padding-right: 0; }
+.v-drop .lane-no{ font-family: var(--mono); font-size: 10px; letter-spacing: .2em; color: var(--tx3); }
+.v-drop .lane-t{ font-family: "Cormorant Garamond", Georgia, serif; font-weight: 400; font-size: 30px; margin: 12px 0 0; }
+.v-drop .lane-c{ font-size: 14px; line-height: 1.68; color: var(--tx2); margin: 12px 0 0; font-weight: 300; max-width: 30ch; }
+.v-drop .lane-e{ font-family: var(--mono); font-size: 10px; line-height: 1.75; color: var(--tx3); margin: 16px 0 0; }
+.v-drop .statusline{
+  font-family: var(--mono); font-size: 10px; letter-spacing: .1em; color: var(--tx3);
+  padding: 18px 0 30px; border-top: 1px solid var(--line); display: flex; gap: 22px; flex-wrap: wrap;
+}
+.v-drop .statusline b{ color: var(--tx2); font-weight: 400; }
+
+/* ═══════════════════════════════════════════════════════════
+   03 · 笔锋  BRUSHSTROKE — one stroke written by the scroll
+   ═══════════════════════════════════════════════════════════ */
+.v-brush{
+  --bg:#F6F3EA; --line:#DDD8C8; --tx:#1B1E19; --tx2:#5A6157; --tx3:#8A8F82;
+  --ink:#232A2E; --ochre:#B5673A;
+  background: var(--bg); color: var(--tx);
+}
+.v-brush .spine{ position: absolute; left: 0; top: 0; width: 96px; height: 100%; pointer-events: none; z-index: 1; mix-blend-mode: multiply; }
+.v-brush .wrap{ padding-left: 108px; }
+@media (max-width: 860px){ .v-brush .wrap{ padding-left: 22px; } .v-brush .spine{ display: none; } }
+.v-brush .sp-nav{ padding: 24px 0; }
+.v-brush .mark{ font-family: Fraunces, Georgia, serif; font-size: 17px; font-weight: 500; letter-spacing: .04em; }
+.v-brush .sp-navlinks{ font-family: var(--mono); font-size: 10.5px; letter-spacing: .18em; text-transform: uppercase; color: var(--tx3); }
+.v-brush .hero{ padding: 64px 0 70px; position: relative; }
+.v-brush .hero-canvas{ position: absolute; left: -40px; right: 0; top: 20px; height: 240px; pointer-events: none; mix-blend-mode: multiply; opacity: .9; }
+.v-brush .wipe{
+  clip-path: inset(0 100% 0 0);
+  animation: wipe 1.05s cubic-bezier(.16,.68,.3,1) both;
+}
+@keyframes wipe{ to{ clip-path: inset(0 -2% 0 0); } }
+.v-brush .name{
+  font-family: Fraunces, Georgia, serif; font-weight: 400;
+  font-size: clamp(54px, 8vw, 108px); line-height: .96; letter-spacing: -.022em;
+  margin: 0; position: relative; z-index: 2;
+}
+.v-brush .role{
+  font-family: var(--mono); font-size: 11px; letter-spacing: .3em; text-transform: uppercase;
+  color: var(--ochre); margin: 22px 0 0;
+}
+.v-brush .tagline{ font-size: 17px; line-height: 1.75; max-width: 46ch; color: var(--tx2); margin: 26px 0 0; font-weight: 300; }
+.v-brush .hero-row{ display: flex; align-items: flex-end; justify-content: space-between; gap: 40px; margin-top: 40px; }
+.v-brush .portrait{
+  width: 132px; height: 132px; flex: none; border-radius: 50%; overflow: hidden;
+  -webkit-mask-image: radial-gradient(circle at 50% 48%, #000 62%, transparent 82%);
+          mask-image: radial-gradient(circle at 50% 48%, #000 62%, transparent 82%);
+}
+.v-brush .portrait img{ width: 100%; height: 100%; object-fit: cover; filter: grayscale(1) contrast(1.05); }
+.v-brush .sp-metrics{ border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.v-brush .metric{ padding: 24px 0; }
+.v-brush .metric-v{ font-family: Fraunces, Georgia, serif; font-weight: 500; font-size: 36px; line-height: 1; }
+.v-brush .metric-l{ font-family: var(--mono); font-size: 9.5px; letter-spacing: .16em; text-transform: uppercase; color: var(--tx3); margin-top: 9px; }
+.v-brush .lanes-sec{ padding: 60px 0 70px; }
+.v-brush .sec-head{ display: flex; align-items: baseline; gap: 14px; margin-bottom: 28px; }
+.v-brush .sec-no{ font-family: var(--mono); font-size: 10px; letter-spacing: .2em; color: var(--ochre); }
+.v-brush .sec-t{ font-family: Fraunces, Georgia, serif; font-size: 26px; font-weight: 500; }
+.v-brush .sp-lanes{ gap: 0; }
+.v-brush .lane{ padding: 26px 28px 30px 26px; border-left: 1px solid var(--line); position: relative; }
+.v-brush .lane::before{
+  content:""; position: absolute; left: -4px; top: 30px; width: 7px; height: 7px;
+  border-radius: 50%; background: var(--ochre); opacity: .85;
+}
+.v-brush .lane-no{ font-family: var(--mono); font-size: 10px; letter-spacing: .2em; color: var(--tx3); }
+.v-brush .lane-t{ font-family: Fraunces, Georgia, serif; font-weight: 500; font-size: 22px; margin: 12px 0 0; }
+.v-brush .lane-c{ font-size: 14px; line-height: 1.66; color: var(--tx2); margin: 10px 0 0; font-weight: 300; }
+.v-brush .lane-e{ font-family: var(--mono); font-size: 10px; line-height: 1.7; color: var(--tx3); margin: 16px 0 0; }
+
+/* ═══════════════════════════════════════════════════════════
+   04 · 山水数据  DATA LANDSCAPE — the CV drawn as a survey map
+   ═══════════════════════════════════════════════════════════ */
+.v-land{
+  --bg:#F4F2EB; --line:#D5D1C2; --tx:#191C18; --tx2:#585E55; --tx3:#8A9083;
+  --ridge:#2E3A34; --mark:#A8542B;
+  background: var(--bg); color: var(--tx);
+}
+.v-land .sp-nav{ padding: 20px 0; border-bottom: 1px solid var(--line); }
+.v-land .mark-l{ font-family: var(--mono); font-size: 11px; letter-spacing: .3em; text-transform: uppercase; }
+.v-land .sp-navlinks{ font-family: var(--mono); font-size: 10px; letter-spacing: .18em; text-transform: uppercase; color: var(--tx3); }
+.v-land .map{ position: relative; height: 380px; border-bottom: 1px solid var(--line); overflow: hidden; }
+.v-land .map canvas{ position: absolute; inset: 0; width: 100%; height: 100%; }
+.v-land .map-over{ position: absolute; inset: 0; z-index: 3; pointer-events: none; }
+.v-land .grat{
+  position: absolute; inset: 0;
+  background-image:
+    repeating-linear-gradient(90deg, rgba(46,58,52,.07) 0 1px, transparent 1px 84px),
+    repeating-linear-gradient(0deg, rgba(46,58,52,.07) 0 1px, transparent 1px 84px);
+}
+.v-land .pin{ position: absolute; font-family: var(--mono); font-size: 9.5px; letter-spacing: .12em; color: var(--tx2); }
+.v-land .pin::before{
+  content:""; position: absolute; left: -13px; top: 4px; width: 7px; height: 7px;
+  border: 1px solid var(--mark); border-radius: 50%;
+}
+.v-land .pin::after{
+  content:""; position: absolute; left: -9px; top: 11px; width: 1px; height: 16px; background: var(--mark); opacity: .45;
+}
+.v-land .pin b{ color: var(--mark); font-weight: 500; }
+.v-land .legend{
+  position: absolute; right: 20px; bottom: 18px; text-align: right;
+  font-family: var(--mono); font-size: 9px; letter-spacing: .14em; color: var(--tx3); line-height: 1.9;
+}
+.v-land .hero{ padding: 46px 0 42px; display: grid; grid-template-columns: 1fr 150px; gap: 48px; align-items: end; }
+.v-land .name{
+  font-family: "Instrument Serif", Georgia, serif; font-weight: 400;
+  font-size: clamp(48px, 6.6vw, 88px); line-height: .98; letter-spacing: -.01em; margin: 0;
+}
+.v-land .role{ font-family: var(--mono); font-size: 10.5px; letter-spacing: .28em; text-transform: uppercase; color: var(--mark); margin: 16px 0 0; }
+.v-land .tagline{ font-size: 15.5px; line-height: 1.7; max-width: 50ch; color: var(--tx2); margin: 20px 0 0; font-weight: 300; }
+.v-land .plate{ border: 1px solid var(--line); padding: 7px 7px 0; background: #FBFAF5; }
+.v-land .plate img{ width: 100%; display: block; filter: grayscale(1) contrast(1.05); }
+.v-land .plate-cap{ font-family: var(--mono); font-size: 8.5px; letter-spacing: .1em; color: var(--tx3); padding: 7px 0 8px; line-height: 1.6; }
+.v-land .sp-metrics{ border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.v-land .metric{ padding: 20px 0; border-right: 1px solid var(--line); }
+.v-land .metric:last-child{ border-right: 0; }
+.v-land .metric-k{ font-family: var(--mono); font-size: 9px; letter-spacing: .18em; text-transform: uppercase; color: var(--tx3); }
+.v-land .metric-v{ font-family: var(--mono); font-weight: 500; font-size: 30px; line-height: 1; margin-top: 10px; letter-spacing: -.02em; }
+.v-land .metric-l{ font-size: 11.5px; color: var(--tx2); margin-top: 8px; }
+.v-land .lanes-sec{ padding: 46px 0 66px; }
+.v-land .sec-head{ display: flex; align-items: baseline; gap: 14px; margin-bottom: 24px; }
+.v-land .sec-no{ font-family: var(--mono); font-size: 10px; letter-spacing: .2em; color: var(--mark); }
+.v-land .sec-t{ font-family: "Instrument Serif", Georgia, serif; font-size: 25px; }
+.v-land .sp-lanes{ gap: 0; border: 1px solid var(--line); background: #FBFAF5; }
+.v-land .lane{ padding: 22px 22px 26px; border-right: 1px solid var(--line); }
+.v-land .lane:last-child{ border-right: 0; }
+.v-land .lane-hd{ display: flex; align-items: baseline; gap: 10px; font-family: var(--mono); font-size: 9.5px; letter-spacing: .16em; color: var(--tx3); }
+.v-land .lane-hd b{ color: var(--mark); font-weight: 500; }
+.v-land .lane-t{ font-family: "Instrument Serif", Georgia, serif; font-size: 22px; margin: 12px 0 0; }
+.v-land .lane-c{ font-size: 13.5px; line-height: 1.64; color: var(--tx2); margin: 10px 0 0; font-weight: 300; }
+.v-land .lane-e{ font-family: var(--mono); font-size: 10px; line-height: 1.7; color: var(--tx3); margin: 14px 0 0; padding-top: 12px; border-top: 1px dashed var(--line); }
+@media (max-width: 860px){ .v-land .hero{ grid-template-columns: 1fr; } .v-land .plate{ max-width: 150px; } }
+
+/* ═══════════════════════════════════════════════════════════
+   05 · 宣纸留白  RICE PAPER — today's site, done properly
+   ═══════════════════════════════════════════════════════════ */
+.v-paper{
+  --bg:#F7F4EC; --sunk:#F1EDE2; --line:#DFDACB; --hair:#EAE5D8;
+  --tx:#1B1E19; --tx2:#565C53; --tx3:#878D80;
+  --indigo:#4F6675; --sage:#5E6B50; --ochre:#9E5A2E;
+  background: var(--bg); color: var(--tx);
+}
+.v-paper .spm-canvas{ mix-blend-mode: multiply; }
+.v-paper .sp-nav{ padding: 22px 0; border-bottom: 1px solid var(--hair); }
+.v-paper .mark{ font-family: Fraunces, Georgia, serif; font-size: 16px; font-weight: 500; letter-spacing: .02em; }
+.v-paper .sp-navlinks{ font-family: var(--mono); font-size: 10.5px; letter-spacing: .18em; text-transform: uppercase; color: var(--tx3); }
+.v-paper .hero{ padding: 62px 0 56px; }
+.v-paper .coord{
+  font-family: var(--mono); font-size: 9.5px; letter-spacing: .22em; text-transform: uppercase;
+  color: var(--tx3); display: flex; gap: 16px; align-items: center;
+}
+.v-paper .coord i{ font-style: normal; color: var(--sage); }
+.v-paper .hero-grid{ display: grid; grid-template-columns: 1fr 176px; gap: 56px; align-items: center; margin-top: 26px; }
+.v-paper .name{
+  font-family: Fraunces, Georgia, serif; font-weight: 300;
+  font-size: clamp(52px, 7.6vw, 100px); line-height: .98; letter-spacing: -.024em; margin: 0;
+}
+.v-paper .rule{ height: 1px; background: var(--line); margin: 24px 0; position: relative; }
+.v-paper .rule::after{
+  content:""; position: absolute; left: 0; top: -1px; height: 3px; width: 46px; background: var(--sage);
+  animation: growrule .9s cubic-bezier(.16,.68,.3,1) .2s both;
+}
+@keyframes growrule{ from{ width: 0 } to{ width: 46px } }
+.v-paper .role{ font-family: var(--mono); font-size: 11px; letter-spacing: .28em; text-transform: uppercase; color: var(--tx2); }
+.v-paper .tagline{ font-size: 16.5px; line-height: 1.76; max-width: 52ch; color: var(--tx2); margin: 22px 0 0; font-weight: 300; }
+.v-paper .portrait{ position: relative; width: 168px; height: 168px; justify-self: end; }
+.v-paper .portrait img{ width: 100%; height: 100%; object-fit: cover; border-radius: 50%; filter: grayscale(.15) contrast(1.02); }
+.v-paper .portrait::after{
+  content:""; position: absolute; inset: -14px; border-radius: 50%;
+  border: 1px solid var(--line);
+}
+.v-paper .ticks{ display: flex; gap: 0; margin-top: 40px; }
+.v-paper .tick{ flex: 1; height: 9px; border-left: 1px solid var(--line); }
+.v-paper .tick:nth-child(5n+1){ height: 16px; border-left-color: var(--tx3); }
+.v-paper .sp-metrics{ border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); margin-top: 8px; }
+.v-paper .metric{ padding: 26px 0; border-right: 1px solid var(--hair); }
+.v-paper .metric:last-child{ border-right: 0; }
+.v-paper .metric-v{ font-family: Fraunces, Georgia, serif; font-weight: 400; font-size: 40px; line-height: 1; }
+.v-paper .metric-l{ font-family: var(--mono); font-size: 9.5px; letter-spacing: .16em; text-transform: uppercase; color: var(--tx3); margin-top: 10px; }
+.v-paper .lanes-sec{ padding: 56px 0 72px; }
+.v-paper .sec-head{ display: flex; align-items: baseline; gap: 14px; margin-bottom: 26px; }
+.v-paper .sec-no{ font-family: var(--mono); font-size: 10px; letter-spacing: .2em; color: var(--sage); }
+.v-paper .sec-t{ font-family: Fraunces, Georgia, serif; font-size: 26px; font-weight: 400; }
+.v-paper .sp-lanes{ gap: 0; }
+.v-paper .lane{
+  padding: 26px 26px 30px; border: 1px solid var(--hair); margin-right: -1px;
+  position: relative; overflow: hidden; transition: border-color .3s ease;
+}
+.v-paper .lane::after{
+  content:""; position: absolute; left: 0; right: 0; bottom: 0; height: 0;
+  background: linear-gradient(0deg, rgba(94,107,80,.10), transparent);
+  transition: height .45s cubic-bezier(.22,.61,.36,1);
+}
+.v-paper .lane:hover{ border-color: var(--line); }
+.v-paper .lane:hover::after{ height: 78px; }
+.v-paper .lane-no{ font-family: var(--mono); font-size: 10px; letter-spacing: .2em; color: var(--tx3); }
+.v-paper .lane-t{ font-family: Fraunces, Georgia, serif; font-weight: 400; font-size: 23px; margin: 12px 0 0; }
+.v-paper .lane-c{ font-size: 14px; line-height: 1.68; color: var(--tx2); margin: 10px 0 0; font-weight: 300; }
+.v-paper .lane-e{ font-family: var(--mono); font-size: 10px; line-height: 1.72; color: var(--tx3); margin: 16px 0 0; padding-top: 13px; border-top: 1px solid var(--hair); position: relative; z-index: 1; }
+
+@media (prefers-reduced-motion: reduce){
+  *, *::before, *::after{ animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+}
+</style>
+
+<div class="rail">
+  <div class="rail-in">
+    <div class="brand"><b>墨分五色</b><span>· Yixin Liu Portfolio</span></div>
+    <div class="tabs" role="tablist" id="tabs"></div>
+  </div>
+</div>
+
+<div class="spec-strip">
+  <div class="spec-in" id="spec"></div>
+</div>
+
+<main id="stage"></main>
+
+<div class="notes">
+  <div class="notes-in">
+    <h2 class="notes-h" id="notesH">实现要点</h2>
+    <div class="notes-grid" id="notes"></div>
+  </div>
+</div>
+
+<script>
+/* ══════════════════════════════════════════════════════════════
+   Content — the real copy from src/content/site.js, so the
+   specimens can be judged on the actual page, not on filler.
+   ══════════════════════════════════════════════════════════════ */
+const PORTRAIT = 'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAASABIAAD/4QBMRXhpZgAATU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAABIKADAAQAAAABAAABaAAAAAD/7QA4UGhvdG9zaG9wIDMuMAA4QklNBAQAAAAAAAA4QklNBCUAAAAAABDUHYzZjwCyBOmACZjs+EJ+/8AAEQgBaAEgAwEiAAIRAQMRAf/EAB8AAAEFAQEBAQEBAAAAAAAAAAABAgMEBQYHCAkKC//EALUQAAIBAwMCBAMFBQQEAAABfQECAwAEEQUSITFBBhNRYQcicRQygZGhCCNCscEVUtHwJDNicoIJChYXGBkaJSYnKCkqNDU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6g4SFhoeIiYqSk5SVlpeYmZqio6Slpqeoqaqys7S1tre4ubrCw8TFxsfIycrS09TV1tfY2drh4uPk5ebn6Onq8fLz9PX29/j5+v/EAB8BAAMBAQEBAQEBAQEAAAAAAAABAgMEBQYHCAkKC//EALURAAIBAgQEAwQHBQQEAAECdwABAgMRBAUhMQYSQVEHYXETIjKBCBRCkaGxwQkjM1LwFWJy0QoWJDThJfEXGBkaJicoKSo1Njc4OTpDREVGR0hJSlNUVVZXWFlaY2RlZmdoaWpzdHV2d3h5eoKDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uLj5OXm5+jp6vLz9PX29/j5+v/bAEMAAwMDAwMDBAMDBAYEBAQGCAYGBgYICggICAgICg0KCgoKCgoNDQ0NDQ0NDQ8PDw8PDxISEhISFBQUFBQUFBQUFP/bAEMBAwMDBQUFCQUFCRUODA4VFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFf/dAAQAEv/aAAwDAQACEQMRAD8A+rrcgCtNRkVQgjOcVqovArxmeuCDnmraJng+lMVKsoMYpiIWt1IxVF7bYeK3FUHrTXgB5osO5gPEdtVmXpmtqWHGTVCRM0DRkyqDWdLHxitp46qSIDUtFGGyYFQngYrSljxzVCRec0rAyq65qBhgc1eIGKrOmc1IzPkx6VQmwa03XtVOSPNAzIkBHSqpHPStV46rGKpaGiiUz0oVKuiOgRc1BQxFNWo1pUj7VcjjFAmRqDmrKpmnCPmrAXApoLEIjx1qVBUu3NKExVJCYgGaCnrU6rS4z1qkiSvtx9KjK5NW8DpSFAadgKJHambMVdKcVGV4pAUmU4xULDjAq46kVCy00hFIx85qNgKsspqEqaaEz//Q+vIB3rRQc5qlbjIrUjXIrxz1yRUHWpttKi9qnC0CGolTDpQFp4HamgK0sW7pWRcQkdq6DHaqk8WRTYHNsuBVRlzWzNFjtVF4+DUlJmRKg5rLlj5Nb7x+tZ8sfXik0VcxmXHFQspxV50wahdamwXMt1qq6ZrRkWqcnTik0MoslRbKubQeTUbKM8GpaHcg8sU4RVMEIqdE71Nh3K6xY5qwqcVMqU8Jz0osAwJUoXI9KmVDUgjzxQBEq1JsBqQJjin7COaokr4xTgualxkUAc4xVIBmwU3ZzVjFJtPWqEVGTJwKiKED1q8VIqJlxTAoMvaq8i4NaJUelQvFn60rAZrIMVCy46VfKYHNQso70JCZ/9H7ChXaAK1ITjiqEI6E1oRDHNePY9cuqKnAqKMZq4FwKdiWyPFOAxUmBSYxTsK4wiomBqYgkUYzSZRnSR7hWXLEQeK6BlqlLEOtFguc7KvFZ8i8VuTxYJNZksZzSKRiyJzVV0Na0kfrVOQKqlmIVRySegFAzIlTFYWo39jp0RlvbhIEXkljivK/iB8atM0VpNM8PBb69BKmTP7tSOvTrivlDxH4r1jXpTNq160zEkiMEhFz6CtqeGlLVmM66ifWGq/GLwnp7mK3mkvHXqIkyPzzXG3P7QOkxvsj0ydh2LOi/wBD/KvlKacshJYKOwyT+PUCsObyVOQjOW7gV1RwkOpzPFS6H2lpnx70C7mEd1E9mueWJDr+OMH9K9r0/wAS6VqNrHd286NE67wQRyK/Ku5MseNuUI9TWnp/j3V9Lhaw+1ypGegDH9KmeDi/hKhi39o/Tl/GGho+wXaEj/aUD82IH5VtWOsWF780UoC+oYMPzBNfl9b+J725kVIZZC75ywOSK6ew8YeIvD80d3BdFiowQ55P41DwXZlxxa6o/TpFBxg5zUuw18tfDH4+6Rqk0WkeIitrcP8AKHH3M9mPpnv2r6ui2SRrJGwZXAII5BB9K450nF2Z1QmpK6IRGaVlxVtVpGQmoKKuzNLsq0I8UhWmIg2A0hQDpUwBzSHr0qxXKzKcVEVyKtEdqjxjpQBTZR2qGQHHFWmU9agYUAUSM1A4GeauutVnTuaBXP/S+yLfsTWpGM1lW/IFbEQ4rxz1i7EAOKtgZqtGBVxFFUiGBUYpjDjipitMxTAiUcc0jDFS45prCkxorkVEy5FTkVExxSRRmTx8GsWYYzXRSrkGsa4jwCaGNMw7iRIkeWVgiICWJ6ACvjH4s/GWTVppvDfhaQizQ7bi4HVyDyBjt/Ouj+P/AMT5rdn8F6BLtlcYu5E6gH+EEdK+OLu48hDbWZHmyDLseg9Tk110KP2pHPWq291DNQ1NISYYGMkrfeOcn3JNU4v3ZLzvgnnB7D+Q/Gs4TW1n8ynzZZOM9ef896lhtriTM86gjOQXICL/AI12HG9TZgVHBkijwn94/wCLc/pWfevYwsTcTh27ANwPyrIvri1fc9zqHnKnARG8tB9AM/zrmp57Q/LbWpmB/ibJ/XNO4jWur6zXKp5f5muYuZYZ2PylGXpj+lW0sLy8G2O3EY9ga7Tw/wCBbu7cTSKTsHK+o9qTkhqDOE026utMuVYqSsvQ16aglmi3rtbcAc7c4496Zr3hyeBvPhhxHFgfMPT0FYkesX1riNreTyz3Ck1KmrlODW5Yltp4ZBK6/OpysigKy+4xX1v8B/jOYpU8G+KLnepIFpO/BH+wxP6V8cz65Jnc/mLnoXyMfic0sWpJIVZm2yKcq/fI6EEUVKamrMKc3B3R+zSgEKynKsMgj0p5Xivmf9nz4rjxNp//AAi+tzA6nZrmFyf9bH689x3r6c6mvJnBxdmepGSkrkW00uBU20imlDUDIGQDpUTLVsrUTL2qkSVcZpjKas7OM1EfSmBSb0qEgd6tOoPNQkYpiKhHNV3HtVtlNQMKEI//0/se2zWvEaqRRqQMcVdRcV5B6xei5NX0FUITV+OmiGPIphHNSijFVYCA+tMIqcjmmEUrAVyKrOOauMtQMAamxdyk44Nec/EbxTb+D/DF7rMxG+NdsSk43SNwor0t1718L/tNeK1udStfDqSH7PYr58yg8FzwoP0rSEbySJk7I+TfEGsPLc3Wq6hL5lzdOzsx5JJOTXnF1qLW52qN9xOeQOefT6Cl8Qass1wxB/dxHI+vYVyqXbQo93NzMwIQHt/9evR2PPbuzdk1GLSAJZgLi8f5gp+6uf8APSspp9U1R907sBnKqcgf8BQfzrpvA/w88ReM77fbQO+Tl5CPlQH3r7i8B/s26baRJc6xm6lOM5HFclfGQp6LVnoYXLqlX3tkfDmk+EdS1aZI4oZbhuyheK9u8PfAnXb1VlngMSnkAiv0H0X4baPpMKx2lrHFjjhQD+ddrb+G7aFAAAAK8ypjasvh0PboZZQh8Wp8X6L8BkjVftKqenQY/M16bZ/CnTrRABFuwuG7ZNfR40+2iACAHFL9jjPReDXNz1H9o7/ZUktInyTr/wAL7R4uLcDrnHX86+YfG3w5fTmM0ELBR6E8Gv1BvNKidWyBzXkvijwpb3aSI8e4EUoYirTe5NXB0asbWPyjvIbi1ZmkJdU4ZZM5H0IrIeRA3yj5W/DFfVvxM+HC2nmXVtH9cDrXyRqEUmnXDW8oOzPB9K97C4lVUfK47BujK3Q7vwd4mvPDmuWeqWchSa2cMhz+an2Nfrt4L8R2ni3w3p+vWhBW5iBbHZ/4gfoa/Ey2uBkKx5U4/wAK+/v2SvHO9b7wbdydQLm2B9ejgfXg0YiF9TOhPofbhBzTguetSge1OYADNcdjruVnXjioCtWipbpTShFArlUrxVWQH8K0GHFV3SmK5nsPWo2XjirLrzUZFNCuU3XiqrDFX3FVHUk0xH//1PtyBOKueXxUduvArRVBivIPVbKseVNXUakKCmqpBzVWJuXVwaftqFDUytVIQhXjmoytT00jFAXKjCoGq44wKpuOahlozr+dbe2kmc4VFJJ9ABk1+QXxa8WDUNY1bV3c/wCm3MgjH/TNCQv6Cv0/+LmstoXgPWb6MhXW3ZFycZZ/lFfip4+1T7Tcrbo2Vj+WurDx1uYVpWRyhneZy7k7M7j7sff2rsPAvhW48Za/DbZ2wBhuPoP/AK/avPvMARV/SvrP9nnSGe7W5OCzMDg9MVpiKnJByM8LS56iifdfw68D6XoGlQ2ltEIkQLwBycDqfUmvbre3ihQBVxiua0ONEhUDmuxjjYrnrXzkJX1PsJLlXKNDqD7+lDThQc0eU244BzVeaPOQDzQ7lw5SPzgxOOKeGBAOelUSgVsBs1Yi6ctUxTubSa6DJX6iucvoA+c11cqxHoeaz5LeNyecmqcGyIzSPC/F2gRXlpKrJng8Yr83vin4d/sy9lcLhSxxX62a1pp8hzjIweK+A/jzoX7maZF6ZJ4rbBzdOokzhzKl7Sk2uh8WQSfLz1Bx/hXr3wm8Vt4T8ZaRq+/bHFMBJ7oeGH5GvFgdpf8AzyK2dNuNsyHOBmvopq6PkoSsz95bO4jvbSG7iO5JkV1I7hhkVMQc4rx34B+JT4j+GukSzPvmtENq56/6o4H6Yr2YivNaPRTI8flTWU9qlxSEdqVguViMVA696tuBVdh2pWApuuarstXmGarsMU0IoPkcYqBl4461ckFVz3FVYD//1fuiAcCtBOOaz7UHFaiCvJR6bJlTPWmtGanUVNtGM1okSZuCpqaM+pqR056VFtIPFFhFgYNNY1GCc040hojc8VUJ5yauN0qnIODSaKufKn7VmvjTPAS2quEa6nXg9wnJ/XFfjrqty11dyOx75r9Ef24fEflXOiaAjfN5Uk7AH+8wUfy4r85fs11NHJcpEzRJy7DoK7KCtG5y1227IW2BllXPQGv0O/Z08Pu1gLt0/dgjB+n+c1+f+jQvdXsMA4V2A/M1+xHwi8Mpo3hHTotuHeIMxx61w5tUtBRXU9PI6XNVcn0PYdFtZGVQDwOPwrb1DxJo2hR5u7hA3Trnp9K426GrXG6C2l+yWq9xw8h789hWFf8Ah/Qoojc67eoiKvWaXA/U151BqKPerQcpasu3nxf8JrK0A1GIOOo54+vFUB8SdGuhutr2KRW6EOM/lXhPibwd8N9RLyafqVrJcHJ/dzAMc/Q14/8A8Igmk3Yeznk+Q8fPkEf1oqVIS6hCMova6Pt+LxZDcN8jqy/7JzVm48SRRxlvMCgdTmvmfwq+oKx3yNg9q6LxFeXEVoyEnGOcVzJnU7b2O81r4u+H9DQG5vF3HPAOSce1ea3H7Q8N5N9n0a3eViwGTk/oK8bk8MWeq3RkuUMm5s4YnH5V6Bpd98KPB7pBr+r2Vpckf6kEFwfdUyR+NdUJRWi3OObnLV6I9R0v4k+KL5Sb7SxNan7xUFZFX1GeDXnHxTt7DxFos13YN5iEHcCMMrDqCK9B0vxP4I1qHPhbVIbor1jVvm/FTg1U1bSbO7srh4Iwkk6kS46EjofrTnNN36oOR2t0Z+TF/Cbe/uIG42Ow/I0lpJtYe1dB41tPsPifUoMf6udx+tczBw+B1r6KLvFM+LkrSaP0l/Y78TNJZav4cmbKxulxED1G4ENx6V9zEd6/J/8AZe8QnS/iHZ2zPtGoxtB6Dd94fyNfrEuGUN6iuGqrSO6m7oZ7UpHHNPIppBxWZZXYVGVyM1YIyKiIp2AqOmQaqspFaDDNV3WiwGe6VWZcGtB1xzVRxQDP/9b7qtecVrR1k2ucCtWM15UT02W1GasBeKgTtVpa0RBCyVEUxV0jNRleKpIRQ245pKsMMVCVqWMjPSqsvAx6nFWTxVSdgqM56KCfyqSj8av2w9eOq/Fy9s0fdFp0MUAHYHbuI/8AHq+ftGW6mtPs1vIVW6Ro2TAO7NdT8bNRk1X4j+IL+Q7jcXsrA+o3YH5AYrG8Gy/OuE8x4ywQe7Dg/hiumWlNMzp61WibwzoU8Gv2kE/ASZA3B9a/abwjAsWi2MQx8sCAflX5OaXayNq1tcRKWCyK8n4HJNfq54QuFl0mykjbcDChz+FePmVXm5WfQZNh+RzRf8SjWLa0efS7Zrp1U4RcZJ/GvinxZ8Hfi74+vzqHiCbyrEs2yySYhlHbcOn4V+h6MDHkcZrjfEvh6TWISkN49pIc4dO2a44NxfPFXPYlRU4unLRH5TS/A3x9Za3FDd6SsdpbyDfcRud5XPX7+Sce1e0eGNC8QwXM+m3cU/kRfNbyT9WXuufUV9C3nwr18yFTr7vGTz8vP55rqPDngGPT3VLm5e7cHO5+gHsK6KuIlVjaUUclHAU8PJypybM/wR4RdgrzLjParnxA8LrDZDy0xzzxXt2iWMccwQDAWqPjexSe3CnHHaohRSg5FSrNzUT4Q8QaJrDWItNHASe4kCGQts8tP4mye/YV4vZ/AXxJdXiwjVNPeKOfzCxZDKecnLFckn3av0El8KWWp2/lzJgngEdRXFzfBKymmLLezoGOflatadedO/IZVcFSrNe0voeEP8Gm/tiPUtM1aKy1BCMx2xBQ4/vEV9DaV4fv7PR2i1CUTXBX5mHArrfDnw30jQB5kbvLL3Zzkmuh1CFEiZV6gYrGrOc/ekdlPDQhHlhsfj78XdH8vxjrflLgRznP414yuVcj0OK+tPjdp8dv4r8RS/dWMpJn13KDivksEl8+v+NfQ4WfNBHxOOpclR/M9Y+Gl5JpvinRr+BgJIdRgJPcDeq8fXdX7Z2TmW3jc/xAH86/E34cWbT65pzBRhtRtEBz3eZRzx0+U1+2Wn48raOikgfhWVfcKGxcK9qZtOOanHtSH0rFI2uVWGKYRxVplBppUDpTC5SIqu4q41Vm4FAyjIKpOuTV+TpVQ9aAP//X+6bdula8fSsW3BXFa0TV5SPTZfSrSVTQ8VbjNaIglxTWXipBQatEsqMvNQt0q6QO9VnXrSaGmUWz0qjdKWhcDqVI/StJxgGqT8qQe/FZln4BfFGHZ4tvVAwRPOrZ55WVwazPB92mlazZTyMFSVtvzdMnpn2r0349aMdN+KOt2DLtC38+xf8AYlbzAf8Ax+vHtYgKNCEGByBj2rtjHmp8pzObhV5l0PsDw14dntje6nbx/akYES25U+ZGr8FlI4OK+yfg9qP2vw3HAW3NZN5TZ64HI/Svgz4P/HLTfDcUWh+MUaN1AjhvwM/If4ZR147N+dfcXw9urSPUruewuYrmx1KJLmN4mDKecHkcd6+cxNOcZ8tRH2WEr0pwU6T9Ue/Ry8c8jtTJpwVPOKxG1BFTg4rAu9e2dWyKmDVrHqRV9ToHdTksar2+pW8MwjYgFjge59K4O98TIAdrYNY3h+/S98S2t3eSYtk3Yz03Ad6ic7PQHTTWp9JaQwkmB6Y60niKKO4Vgpzgc15lrfxK0PRpc284eQ/KVQgn9K466+L+n3CMkRO4/wB71961jiIpcpwPCScufY1Z/EcWlasmn3g8pJc+W56Njt9a7q1uoJ0GwjnvXzjc+K9H8aWjWlu6TXVpOHR4ju8sj73I9fSt7SfEsluDHcScxjA9DU87T12OmnBNHu8rJsJDYrk9SuASQDziuTl8W+YgAbJ+tZkusmcNz8xq+ZPYuXurU+CP2l9ahj8UXelW75nm2NMB2UAYz7mvlhPvivRvi3qh1n4ieIb3OVF00anrxH8o/lXD6VaPfajbWqLuaWRVwO+T0r6GhDkppH59jKrqVmz6X+BujDUPE3h2zKEM19Hcsw6bYAXwe/V1/Kv1s0+Jktk3febLfmc18P8A7Mng6O5vbjxKItsKySQW5PTy4jtZh/vOSM/7NfeIUKAB2rmm7s2grIaARTCKl603FQUQGozUzccYqNqYFcioXHFWCKjOKQFB14qqUHer0lVWxQM//9D7ut0yBV4IVwRUNoAQK0tgIry0j0rkSP0Bq2jVV2YOalVsVSJZfQ1IRVRH5q0p4rRMliFciq7DHNWjUD9/ehgihKOtZ7gjNajrWfIMCs2i7n5NftZ6GLL4pzamkeEureJ8+r/dP8hXzJJZi7tWbbloX5P1Nfef7YWkg3ui6mV3M4njOeg27dtfDmlAs00Eh5lz/LI/lXZQ+E566944zVbPMBlH3lOCPpX0d+yT4lubPxnc+HppmNteWztHGzHaroc/KO2RXiur2p5njG6NhhvqKX4Y+IE8JfEPRtYdtsEdwqSnphHO1v50sTT56colYOr7OtGR+u19dyouwfpXner6xJBuBHGa9D8xL22SaIgq6ggjvmvMvE2lSzEiPrmvlVoz7uE9DklvbrUp1ghOGkbH0r3zRfCinSkgnQEMOcdfrmvArjVrPwPbf2pdRmRkGQACx98Ac12Oh/tFeGrvT45NPt7m8lYYMaxkMPqDyK1px5tSZVXey3OT8cfBWyF7LqltLMs27cCzEkfQ155beFtckuRDd3bSW+drBVwzAdi1eqeI/jH4ivs21h4TnVm5zIrEkevQYrjJPH3iaWF4bTwoUuE++xzhfwOK1VOXRBJR3lJJ+p6p4T8L6VpNq62kIhMuNxxgmsTW7Y2V2QnRs4Neb3PxR8WeHoPtGr2cYgwMg4B5PAGDnP4VS0jx9qvjK/eU6RPYWmQI3mx8/uB2FXVg+W7Rz+2Sdoyv6HbJdSmXBJ4rQvdSGnaVe6nM2EtYJJT/AMBUn+dJa2WGLN1NeVfHTxDHoPgw6VG+251mQQqB18tfmc/yFRh4Oc0iMXiOSm5M+GNReS6uLu9k63EzOSf9o5rsfh7oN/quo20en5W7v51tLdsZ27+Hk5/urnGO9YF/a7bGEYwztivuz9lD4YNcajF4v1SD/R7JB9lRucOw4f64BPTj8a+iqysrHxtKN3c+0Phr4KtPBPhiz0e3XBhjVCT1+UY/+uffNd/ipAMdBR1FcJ2EPOaDxTyMUhHFAEDdelNPpUpWmlcCgCsV5qFxirTYqu4zQMoyCqjjBq+49aquAaAZ/9H72sxWwvTFY1melbSjIFebE9FhtzyKYV9KthRjpTzGCKuxLZQQEGrSvxUboR0qHcRRsBc8wU0kGqwf1p2e9FwsI54OKoSjNXmHH1qpIMVLGfFv7WunPceGbO6RcGCRtx9jivzZiP2a/RojtUv0bseSP51+unx/0iPV/A2oBlLeSgcY9Qc1+SetxG3v4ljwehP6AVvQeljOstmWbtI7iSe0A27l3gjsT/8AXrzK/hZJCxG11O0gdiK9IlljtdRts8rOhTHuT/8AWrkNWtyLy4Vh8yvjH0FdJztH3t8Avievibw1DpOoSgahpcaxsGPLxjhXHr6GveLpkkUuea/J7wVrF14e8S6Vf2srRlZBG+D1VuqkdxX6WeF/EEWsWy+Ydj4B259e4r5vMKHs6l1sz63KsU6tK0t0bx8OW2tToJ4w6oc4Io1HwBoFnMNSXT/LZF+eS2wknHP4iu70SFEYEc56Guvu9OW5tiAOCOorjpTa2PXhPkd2rngUmq2m15zqyiTBQRzxANjtyOprl52W0WS4fxBAN+c7ISDg+hJOa1fHPge+nneWCIN7jg4ryuHwRrFzKI2gkdVPAJOK644mfc7ZrLn7zoa/Kxet9O0fVr7yog+rTkj9/cfcjHqqjjNekyaNb2drEqIAVHUVd8K+EZbCMLJGIyvJAGK39VjihiZmI4FKpNy3POxVZSaUIqKWyOFedYIyzkBFGST2xXwB8XPG58Y+L3a2ctYaf+4g9Dg/M34n9K9o+N3xPj0+OXwpocubudSt1Ip/1aH+Ef7R7+gr46GQxJr1Mvw9lzs+VzXF8z9lH5nqVnY/2rJpltGMtLKqfTcQM1+wXwp0ePSPDcaxqFafbIAOm0DauPwFfkH4VvVt2tLkkgxyA8da/Zb4eX9vqfhbTLq1wI2gUDHpgd66a+5xUVod5g00jFSAHrSFa5zYiOTRTiPSkIpAREcVGemKnPpULHHFAFdhk8VG4xUpPpUT5oGUpCapPkVfkFU2GeKBH//S+8rLkCtyPoKxbA57VuovFedFHoNllanGMVAoqwuMVoQQSLxmqbrWkwqs61LKRnHg0oanOOaiPFSUT545qvOc9KcDxUEzjGAfypiPIfi+6J4J1T5QS0RVc+p4Ffj/AK8Cuoys+CI22gemK/Un9oDXFsPDM0TPsjVTJLtPOeiL+dfl5fKjxtJcD55mMhz2XqAPrVU3qVNe6cndu5u7Vm5KsP1NM1oh9VnaPlZCMH1qzbL9o1BZ5eILQec2fT+EfU1WvBua3dP+Wu+RvzrqRyNHLhjDfQtnHlzg5/EV97+FRLPpFtcWTlJolHzD+Rr4CnfdcjH9/Nff3wvZp9FhGfm2AY9RivKzZe7Fns5JL3pI9e8N+NTARBfny5V456H3Fe1aX4ntZo1O4EH3r5+utGguCQV+b9QaxpI9e0PL2shliH8JPP514Seuh9N6n1dNdafcLjcnPrjNZ8p0m2Qn5QT2AFfJFx49vYji6MkLD2OPzFVP+E6uLptqXUjk9sHiuiMwk423PpXUNasraJyjDmvnX4jeNp4tKv30xsPDE5Djs2DgioGvdS1BdsjssZ9+TXJeNbby/D91AowDE2fyrWnZyRw4iXuux8GSzzXd1Lc3LtLLK5d3Y5JJPJJpNuDz9KYPlmYehI/WrpUFipPDdD719SfEm/oNwxDQZw3VfqK++P2c/i9FDs8K6hdC3uHIWHzTiKTHVSf4WxjHTNfnZaSvBOCvDKa7uwniedLgkiNiBKFO1h7g9j6GsasbnRRkfuPY6m96SgEYI5yrFsj1HAq7NcwwozyyqEUZJJwMV+bfgifxhfWEVv4T8eyIzD5bK/CmdQOgUOdrD3WvprwroGuWwt5vFmu/2heBgwjb5eW6BRgoMe3NcjOqx9D21ys6hx/FyB/s9jVknNZWnwMkYOc7upBz07ZPXFarAYqREZqFvUd6mOOlQtx0oAgOB1qBm71OwzUJWgCpIaqFsE1dkGKpOtAM/9P70sDxW9Ga5mwlGBXRRMDXnRZ6EkXlxVhelVkOasD0rQgRulQPnFWSvFQPxUsaM+QHpVCWQJ987R61pSDJrIu0dlbbg+1SWVZtTgtR/pThR/fHSuU17xx4e0e0kubzUI4woONx5/AVwHjiTxRYRt9jtJ76CQnKxqGZV9B8pBH1xXx/4uXxZr9w8Gl+HdRmJO3a8flqefRGAP5VPMbRprdsPjD8TrPxberFEMadasXQMebl+xcDPyjsM/lXyZqt7Nq164j5Z23Of4VUds17hL8GfGd6st7rzR2USL+7hRxJKx9AFJAx6k4rgPEfh7TvDIaC5uFyi8RKcszfpx7/AJCtqaIqPscBfMsMEemwH55n3SMP4sf0qLU3itoGkPDxRiNfdmotEkuZX1GdcFvljTphRXN61e+bIEU5SMnB/vMe/wBK6FvY5ZaK5mniRectkL+Jxmvvb4PzE6VDk/MFUYr4BibfdRZ+6HFfePwkKraRYPGBXn5mvdSPSyd++z6Tt7aO4AZuP6VJeaaZYSuwuuOCv9RVmzAZV28HvWpMQsW08MOlfPOJ9SmeE69ocMjsoQZHrxXN2WixRyHCDP1r2HVAzFgcMffmuWjhxKXwB+GKuBMylDZIMDpt71w3j5AmkzIBj5TmvVIoy7M/pXlHxHmUWEwJxwf5V10V7xwYh2iz8+bhdl1Kvo7D9amky0SyDqh5+hov/wDj8nI/vt/OnQnKFD0Zf5V9Otj457ig+YoYdR+da1ndHO0n5x78H61hxZRsdv0NaSR+bjYcP3B70mOLPXPBniW/0q+iaJEvFByLecKUP03gj+Vfcnw88WanqAhlk8I3FoTjy3iMaRE+u4uOPYCvzw8OQeIDcpHpbYllIHLADHvu4x9a+yfh1D8UpryHT31K1EEB3Kse6QBv+2e4fpXJUijtpSbR986RPczRK9wEiIAXy1bds9s8c1uHGM1ynhnTr6ysY/7Qm864YZduig98L2/Ek11GayKY0jvUTg1L1pjDIpAVGOD0qNjUzgVCRQMryc5qm6kmrzfSqjg0CZ//1Ptq0kKgV0ltcAgc1zkK4AGK04QQR2rzEekzp4nBGauKaw4ZSBWlHKCK0TM2i8TVeQU4Pmkc5FNgim44rPlUEnNaTjNUZEOeKkoybi3idTvUMK8u8UrYWUMpd0t2YE7uVOe3tx7165Mkao0kpCIoyWYgAD3NfOvxS+KPwr0yyuLHVZ4tauACPs1tiTn3kztX8yfahRctg9pGPxM+LvihreqPN9msvEDXtspLkJFhVz0G/IyfbFfN13aksZr66ABO5tx5P1H/ANeux8d+KdP1a+luNKsF06E5Cxo7vge5djz9MV5PcNczx7zlmbp7CuiNGS3Mp4um9ixqOsRBTBaE7CMFiMZ+g7CuSmZpmLL0XitUabKeXHWrP9n7Y8EfQVvGFjlnXuzmrdSJN3UqQa+2vhPqCvYQNnHC8CvjNIDFeCM9GPavfvhbq39m3w065OElOYmP3SR1XPb2rhx8OaJ6mW1OWfqff+k3KPEvqR610czRtCFcbs15n4cvmKqrHg9P8mu4klZU46fWvnZLU+rgY9/ZRlm+f8xXOPaxo5+Yn9K19RnkfgcVlKryHOaqJU0MdlSJto4ANfOHxP1dIrK5PcA49PavoTVcwWUjdDg18b/E26luZV0yJ9zSvl8foK78LC8lc8jHTag7HzzJG0rSOec5596bGhV1H+ea7DUNMWyRINvzEY/OsOW2Mc6qR94CvdjNM+ZnBx3I7OSK1uRFcxCaByNyk9vUH1r3bwf4X8DeJ5lihu4/tEjLGtlMxgm5OPkfayk+nH414k9i0o6YI6GrEdtNsAIw6cg0Spt7EQrxW5+mHg/9njwWFjuI4LqCWMDiVtxJ/wB4Bcj6fnX0t4c8HaX4ft1jtYhxjrz0GO+a/JDwN8aPiN4G2xaNrlwLdT/x7znzov8AviTOPwxX1Z4W/bIu9scPi3Qop+zTWTmNvr5b5H/jwrGWGnutTaONp7PQ+8QFUYFGa8K0L9oz4Wa6qhtTk0yRuqXkTIAf99dy/rXrOma9omtxCXR9Str9G5BglV//AEE5rCUJLdHRCpGWzNsMAKjZvSkwcc1GTUFiOfSoCcCpCahemBCzVWdsZqZqqyg9qQH/1fuSJCO1aEaU9YgelWkTivLR6QiKe1WUYimKMV5p43+LXg/wHMLPVp5Li9IDG2tVDuoPQuSQq57ZOfatYxbdkZznGKvJ2PVkk7VYDDBYnAA5J7V8ReKf2qyu+Dwhpipjjz707m+oiQ4/NjXzf4n+MHjjxSWXVtZuJIWP+pRvKiHtsTA/OumGEm99DiqZhTj8Op+kfij4ufD7wmHTU9ZimuE/5d7X9/Jn0ITIH4kV81+LP2sH/eQeE9HWIdFuLxt7fURpgfmxr4ll1KSQ5ZjmqjTbzya6oYSC31OCpmNSWi0PSvFvxZ8aeKy51nVppoif9Sp2RD6IuB+leKatdzXLElsitKedT8uawrn7xxW3Klojl9o27s5+e3804bnJq+bNFwgH3Rj8qswwCWVFPqKutFhyT60uUrnMZrRajNkOQa3PKx2ppjABJpWGpnF3NhGs8bsPl3jP0zX0N4X8ExatAsJUowIIkHBB7N9a8RuovOyTwv8ACPX3/wAK+x/gy39r6BbXO0M8X7l/95PX8MV5OZpqKkj6TIpKc3TkdP4f0vWNJMVrdgTRpjEo6/iD/SvUyGaEA54HWt220oPGEKAk9av/ANkoISgXG2vnZa6n2UI20POpoWdiM89OmKkt7ML2zmuoOkh5MAYIrfstCHDFeK0inYmbR5D4tsJU00mNNzHoBXzbJ8PryS7k1W8TzGYkquM7c/196+9NW0JZlVduVTqDXH3ehRBWXYMdMYq4VXExqYdT3Pz31TwfNFdNLMp2D1ryvWrP7PqpQD5QoxX6D+JfCEMqs4Xk+1fHHxG0RdN15Io+FaIH8cmvVwFbmqJM8DOML7Oi5I4SGEEc1ZMQxjFOhXkK3Bq35YPIr3kj45yZgT22w+YB14P1oQMORW20O/KHoazzGUJUjpQ4jUi1bzOuMGt6y1e9spRPaTyQSr0eNip/MYrCgQVaKc8U7EuR7p4d+PPxI0IKsOty3US/8srvE649Mv8AMPwNe4+Hv2rZCUi8S6Gj9mls32n67HyP/Hq+H0+WpxJ0x3rOVCEt0bQxdWOzP090T4+/DfX9Qh0u3vZraefaAbmIogZuil8kA9s9PevXWPcHivxniuXS6ZQeqA5H1Nfpj8DfGL+L/AlqbuXzb7S2+xzsTlmCAbGP1XH4g1w4jDqC5onqYPGOo+WZ6+zVXarDY61Uc1xnon//1v0BgGRzVzy6qWvStNea8yJ6LMnV76HRtJvtXuP9VYwSTv8ASNS39K/I3xPr19rWrXuqXspkmvpWmkJPdjnH0HQV+jH7QviRNA+HlzYo2LjWpFtUGedg+aQ/TAx+NfmFfvuLc5Oc16eDhaLkeJmVW81Ax7ydkPmDgp2qv9oVgHByrDIplxliQeQayLdiryW56Kdy/Q//AF67bnm2NZpetMWR+3QVXDHGR1pDI2MdKZLIppPmqizZc56VNJkkMajI5BFSykN817Y/aEjMpj52jqfpUEXiLTJn8qdjbS/3ZVK/r0/Wrq1Tu9Ot7sESoGz6ipd+hat1NdXikAMbBge4Oaqy/vcj+BTz7mubg0KW2nE1rdSQQg/OoOQR6YPFdC0hKgL0xxSKsuhSePcfWvpP9nDV0ttV1PRZnAE6pNEp9VyGx+BFfO6r3rovB2sPoHijTtRRiqrKEkx/dfg1z4qlz0nE9DLcR7KvGZ+qVmsZQbe9WrhF8sjgVxOhajLLAjq2VIGPpXVrO8i4IyfavlJQR+jwl1KkERaXnBHrXWW6qFBFZdtbnAJGDW0i7F4P50JNaBKz1GXIXyyMVxV/syxA6HvXT3krFcA9K5S5VpCdxoSBuyPPNeuA6sirg18S/FqPf4ij4wFgA/HJr7xvdPWXK7evWvjn48aO2k+K7a3brNZRTfTfkj9K9TLY/vT5/Pp/7P8AM+eyMcH86sRsADvP0NLJHzg1E0YKNG43I3BB9K+hPh3qZl3rIDmCwXzpehP8I/GpbWOdkDXLbpG5JFSQ6bBagtbL8p/h7ir0OCPSjzYSa2QxF2tgVcRQffFRlB1FTx8dOlCZLGOu3rTQPyp7Nv4NNIwKdxFdOZ39dgH6mvefgT4+bwX4rit7qTGmasy29xnopJ+ST/gJ6+xNeBRv+8mOM4wOPpUizskq7Tg5zUTipKzNaU3CSkuh+zJbI+veoHrgfhb4jbxT4A0TVZW3zmAQzH/ppD8jZ+uM/jXdseK8Vxs7H08ZXSaP/9f9A7XkVprWZajitNcAFieAMmvNieiz8/v2qfExvPGNvoayfutJtVBUf89Jvnb9NtfIFyS6lga9M+Kuuf8ACQ+MNb1nduF3eSlD/sKdif8AjoFeSzOy9a9qmrRSPmK0uebkVHmH3W71lTMIbiOTOQTtP41oSyROOvNY95GXQ464yDVkGuuDnHelYYBqhaTiSJWzyRmtAfMucVRDRQYnI9KQ9elSSjDcdKQDGM9KTGMXP0qxErSHJ4UdTVZzzhaks7g72t5Tz1X0PqKkdgunz+7XhRTIF3DBqSdPm46UR56imFyQJ1xUEiN1HBHQir6gfU02QA5FA0z9DfhTd/214I0jVQ2/dH5TnuJI/lINexWduDjIwPpXy/8Asj65DeHW/A1+/wAsmLu2z/C3RsfzNfXT2ctjcPbzrh0PbuPX6V83jcP7OV1sfoGVY5VqST3Q8QALxTSnYmrKnjBpjID0rgPWRlzRr3HSsie03lmx1rpGjU9eTVaSJice1O5NzG07Rlvr2G2x/rG+Y+ijk/pXxD+1SyH4nTIgwkNpAgHoAtfpL4Z09Yba41Fxzgxp/U1+Y37SMxufiZqRznYkS5+iCvcy2nZcz6nyef1+b3V0PnGTlsdqYBzipG5fGKcFwSBXrnyxGFAbjpUkojCFz8u3nNSCPnPY1T1MiOzcD+LAH4mkIfEwddw6GrOML0qGyQCFAfSrcw+QimkJsoq2Xx0qV+FqoG+b6GpHfCZakNFKJ/klcHq5/QAU2HJYse1QxEtbLt/jZj+tTFhbphuppItn3p+ytrZvPDGsaKzZNjdLMg9FmXB/8eU19SMcda+Cf2WdX+x+MbzTGOF1GybA9WiYMP0zX3q3PWvKxMbVGfQYGfNSR//Q/QS1ORWP461caB4K17V87WtbGZkP+2VKr/48RWnZt0zXjv7SGq/2f8L7u2Q7X1K5gtx9A3mN+iVwUVeSR2V58sJSPzK1qQBlXOWAyfcmuWkuFYlW4rd1QmS5YnoBj8q5q8iDA7Rz2Ne0fMorTQbiWQ1mPI6ZRu9Kt1JG22Tp60+aSOYZ9B1FJF2sQ6Y43PEeNjH9ea3l3dR0Fcpbt5eohc/LIv6iuoicZxTRM0DgcMelVXYZA9avTLuU4FZ+0gZqiBCPXrUEykbZU++hyKsA+9TbQRz0NTYpMkJEsSyKfvDNNUY4PHtUFo4jd7dvut8yfXuKsHluaAaLCHn2p7LkcDFRqQKeScYoEehfCHxS3g74iaLqxcrCZhBL7pJ8pr9hb7T49asI7q3wZ1UMhH8Q64/wr8MSzIyyIcMhBBHUEdK/Yr4EeMR4s+H+kX7vumWEQy/78fymubE01JWZ62W13B+7uiz80bMjjBBwQe1Lz1Fdf4n0Ysp1O0HI/wBao/8AQv8AGuHVjzk183XpOnKzPuMNXVWHMiU7uSBT4oZJZFQLlmOB9T0pVweF4zXV+G7Lzbr7S4OyAbv+BHpRTjzyUUFepyQc2bF1ClhpsdnHgbFwfc9zX5JfHt9/xL1sddsgX8lFfrPqzmRyor8hvjXP5/xI8RydcXjr/wB8nFfSYdWdkfEZhJuN33PGmUBsjtTOppCW3k54p6+tdZ5DJVyTWXq+CIIR/E+78q2EwTx1rFu/3uoxxn/lmufzNSxx3NOABUXIxgUs7ArkU7GODVeclUIxTJMzd85HvS3R22znOMAmoQeST1qPUJCLGXJ/hI/OkUldkFrIIrWMt2UUyFmu5t38KmqoDyrHDGe3NbMSR2cPzdaSNHoer/B7VP7G+Img3LNtRrlYW/3Zh5Z/9Cr9QD39q/HnS7+Wzvre/hOGglSUH3Rgf6V+vVjdpe2NrfIcpcxJKMejqG/rXBjFqmetlsvdcT//0fv615r5Z/av1MrYeHNGVuZZJrlh/uhUU/8Ajxr6otcYFfC37Ump/aPHlhYKcix09Mj0aRmb+WK5sIrzRpmErUmfHl9IfOb2JrCdzuIJ4q9fzgTMc96ypctl179q9Q8IrXduHGU71gNK9vIUk71um42HbJ0qpfxxXUQZOSOlIpeZizTKl1BNnCq4z+PFdUZAMMOARXn91vUGMn5hyK6y3nM1vHL2Kg/pU3KlHQ6GN/NUZ6VBKvPFRWkvAWrbr3q4mLKIGOcVajAI/Cq75HSrVuMDBFVYVyvdw4UOnDocipFcSRrIvRv0NXJFBGDyDWbD+4la3/hf5l+vcUrWZV7otIwqYkH3qDgGplxjGMmixIhHy59a+4P2PPF2yTVfCU8nQi6gBPY8MB/Ovh98jgGvRvg54obwj8Q9H1Rn2QvMIJvdJPlP61E43Rvh6nLNM/aiFg6bW5BHINeb+ItJ/syf7REv+iynIx/CfSu4sJxNAjqcggEGrlzDDe272twu5JBg/wCNeZiKKqRsfTYTEulPmW3U8jjYHA55r1DTbf8As/TER+JJBvf6nt+Fcpp2gSW+rGGcFoIf3gfswzwP8a6u9uC52rXLgqDi3KR3ZliYyShB6bmRcZeQtX46fFC4Fx428QTA8PfT4/77NfsZLlYZHP8ACpP5V+LnjOb7RrupzH/lpcyt+bGvYoLVnzOPekUcI33s1MgyoJqMruJ96kjUggdq6TymWFGMmsO3Pm6hcSHkA7R+FbUp2Rs/YDNZGlJlWmPVyT+dIpbGyRj3FZ90e1Xs8nis64fJNBKM4jmqWqMfs23puZR+taOOc1i6zIFWNQerg/kKl7GkFqS2zJChlY4Pao45JL6f0QH86yGmebCA4Uda6LTYflDAYUVKdzRq2pfA8vCDGBiv1L+EmpjV/hv4cvC25hZpEx/2osxn/wBBr8rZnG1mHdsV+iH7MWpG++Gv2Vmy2n3s0WPQPiQf+hGubFr3bndl0rTaP//S+/LQ8V+bP7QOom7+KPiAhsi2EcA9tkSg/qTX6Q2j9BX5X/Fm9N7468W3fUNfzIPorbR/KscD8TDM37iXmeGX7Euxqgku0+vtVi7cEkHnNZrDnKmvQPILUwimTLjBrDnhntT59u+R3WtFpDjDVC0uBjqtA1c5y6ljukLEbZa0dHkL2KqT8yErj6GsrUrUtma3OG7r60eG7nd58T5DK2cfUf8A1qh76mtrxujtLRsHHetVTuHNYsLbXFaysfSqRzyB0H1p0PXI6CnEZpyAKc1qjNlnC9R3rMvYXx5ifeQ5Fa0ZHWmyKDn0oaBOxSQrLEsidGFOU7cetU7djBNJbH7r/Mv171Y53A0kDRKw9uKgDtE6yocMhBH1HQ1KXzwRioioINIaP2O+CPi1fF3w/wBG1QtumMAil9nj+U17Hz2r4C/Y08UF4dY8JTSZMLLdQqf7rcNj8a+/wcLzXHONme9QnzQTKszttIzVPZuPIq6/zZpiJzUWNjG11ha6HqNwTjyraV8/7qE1+JOvyGW8ncnlpGJ/E1+0PxJufsXgTxBcZxssJ/1Qj+tfinqr7pn5ySa6KHU8zMHrFGMuS1W1TJ9KrxgE+lW1B6V0HnFHU3EVk4HUjA/Gm6enlwKD6VDqn71oIMj5myc+gqxvEahQdwHHpQV0JppFRTmsiXzWbcqkj1PA/M1YkmbPA259P8aqOCSSTnNJhYjJMYLSMD6Kv9Sf6VzWtSDzIgx45auhlXCkDvXI6qpm1BE/hRRn8SaiWxtRXvE1hE07hwMRiun8zaoii/E1hwyrEgjj61qQgrHuPWiIpjp2xGqj3Nfb/wCyNfF9L8S6aT/q5becD/eV1P8AIV8MXEg3AZ6DFfXf7I18F8R67ZFsefYJIB7xyAf+zVliFemzpwTtVif/0/vO3+QFj0AzX5G+L7k3uoaveE5+0Xsr5/3nJ/rX6w3E/kabdzk48qCR8n2UmvyI1Zy9tuJ5kZnP4ms8D1M80fwo87ujuJrKy475rZuxwdozWRnDHd0ruZ5qHiQOMMKgdUPGamynU8UpSNvahDOfvAwU4OfSsTTJzHquxhgyLj8RXRX0HXac45rkJGaHUbeQ8YcD86iZrS1TR6RFy2R0Fa6klQcVg2zFivvW2jEcelNGEi1v+Xmo/NUGoWcrx+NQlw1WmQ0akc3IFK8wBwe9Z6O3G081MTwO+OtUmRYrXauQJYzh0O4fhVgOZUSVehFIxBGBVS3fbK8BOAfmX+ooGtS/vpu7AwBTCecL0qTAxmkwR6/8A/FreEfido9077Le8k+yzem2TgfrX7DpMJIwV5zX4LQXMlpdw3cJ2yQSLIpHqpyK/bT4ca/F4o8HaNrcTbxd2sbk/wC1jDfqKwrLqepgZ6OJ3oX5eaWNBTu2KemBXOegeQfHm8Fh8K/EUpON0Aj/AO+3Ar8bL98yFh0r9Xf2q9T+xfC+e3Bwb26ijx6gZY/yr8m7o5kIzXVQXunkY9/vEispIOR1q9EeMnriqKE55qwSFU+1bHGZ8iie+LZ4hXH4mp3kjRCScVm2YMhmmZyqyuT8oGcDgcn/AAq2EgU8KGI7t8x/WgbIWn358mNpMd1GR+fSoCJSPmKx/Xk/px+tXGlboTVKQjd1pMZDIFxydxHr/hXFXU27UJiDyCF/IV18rdzXCpJ5k8kg6uxP61lM6KC3ZtwcYP8AEa6BDujUNwTWNZwliGatR5OuD0GKqJE9ynKQX+pr6c/ZXuhB8Rmh6faNPuE/La/9K+YSCTmvoD9nGbyPinpCg8Sx3CH8YWP9Kir8DNcO/wB5H1P/1PsjxPObfwlrk4PMen3LD8Imr8lNTbEax5+4APxxX6t+OG2+A/EZP/QNuR/5DIr8m9TcNvb1Y4+lRgfhZjmb96Jzk2ACRnmsKcbWJrcds/jWXcLnOa7keaU/vcdqlKhVxmq+4g0jSEn0xUssq3bttIHHFcBfmQTB26hga9CmClSfauG1cYY8damextQfvHeWDb0Rs5yBXQZAC5rk9BkEltC59BXVMw25PpTRhJa2GSNnvn2qFeTgGnYBFRtkcgUBYupxzU2QepqkJflX3FPR8dapMzaLBXArOuSYikq/eQ5/DvVwyZ5zVWZgVOapiRbEiuoZOd3Ip5b1rJsLhQXgfgocr9K0WYYPpTQMR29O1fpp+yB4p/tHwLcaJI+6TSbgqB3CSfMK/MInrX1r+x94h/s3xxqOiu+1NStd6j1eI5/lWVRXidOElaoj9TBICOtDShRxWZHNletLJKMda5D2j4z/AGydXYaLoGlq5AlnlmI/3VAH8zX5xTsdxHfNfaf7X2rCfxPpWnbs/ZbQsR6GRj/QCviWVtzmuyl8KPFxbvVZLGec0zUJjHbNt+83yj8eKEYAcDJrLu5Gmu4YOoT5j/SrbOdLUuQxCKFUHYU4YB4NO354FQs2OvWi4COxxntmqbn5j7095P51CSOtIZSvpfLtpGz0Q/yrkLOONSCxrd1ybZZso6yEL/X+lYFnEZCNx4rJvU66UbQudfb/ACrntSM3f1qBG2oEFKxJqrmFhyjcwr2/4DyCD4peGyeA87If+Bxsv9a8UhUlhXq/wluBZfEbw3cMOFv4F/76cCiesWXSdpx9T//V+p/ibcpZ/DTxPO54/s+VB9XG0fqa/Ku+UFMV+ofxj/5JR4l/69h/6MWvy+vfuipwXwMwzP8AiL0ObcYPXFU5VDg5q7N96qrdD9P612o85mOyFWOelNkAYVNN1qNuh+lDGigxxkGuT1dMgk9q6qbqfrXM6v8AdNZy2NqW6NTwvLut1jP8JrtmIwAP1rgfCv3D9a7s9vpRHYVZe+xobDEYzTXPyml/5afjTZPuU2QiCNsKCee1ShzjnrUC/cH1/qak9KEwaHK+SQTUMrZPWlXrUcnWqRFjNlkEEyTDscH6GuhDApnPBGa5e++4f94V0Mf+pX6ChbjktEDcd69N+CuttoXxP8PXu7ajXAhf6SDFeYyfdFdP4B/5HfQP+v6H/wBCFOQQ0kj9ubSYyRAg9qsnJGSeMVm6b/qR9K0m/wBX+FcB75+Uv7Smrf2l8UNYCNuS02W4/wCAKAf1r5vZvmNe3/HT/kpviT/r7avDW++a7obI8GrrNlotsTNYlm3n3M056E4X6CteX/VGsTTPut9TTe5MVozXYhe+KpySYb1zVmeqD9RSYkNMmaZk9DTewp3936Url2OU16bLxxdgSTUdi44AqPXP+PpfoaLHpWd9TsS/do6BBkZpN+5wop8f3PwqGP8A1tUc9jYtk/jP8NdN4X1EWHiPSr3OPIvIZCfZHBrnbf7jVNp3/H7b/wDXRf51o+xnHe5//9k=';
+
+const C = {
+  name: 'Yixin Liu',
+  role: 'Enterprise AI Solutions Architect',
+  tagline: 'Nine years turning enterprise AI ambition into systems that survive production — and, lately, building the products myself.',
+  nav: ['Work', 'Building', 'Journey', 'Beliefs'],
+  metrics: [
+    ['9+',   'Years in enterprise delivery'],
+    ['$2M+', 'Pipeline contributed'],
+    ['4',    'Countries worked'],
+    ['20+',  'AI engagements'],
+  ],
+  lanes: [
+    { no:'§01', zh:'企业交付', en:'Enterprise',
+      claim:'I ship at scale, under governance',
+      ev:'Four delivered engagements — SAP · Wiz.AI · Salesforce',
+      tags:['Agentforce','Data Cloud','RAG','Voice AI'] },
+    { no:'§02', zh:'从零到一', en:'0 → 1',
+      claim:'I build LLM-native products',
+      ev:'Two products, with a co-founder',
+      tags:['SwiftUI','Multi-agent','0→1'] },
+    { no:'§03', zh:'亲手构建', en:'Built',
+      claim:'I write the code, not only the deck',
+      ev:'An LLM cost model with a test suite; a product atlas',
+      tags:['Python','pytest','Streamlit'] },
+  ],
+};
+
+/* ══════════════════════════════════════════════════════════════
+   Shared canvas kit — value noise, curl, soft sprites.
+   Every engine returns { stop } so switching directions never
+   leaves a rAF loop running behind the new specimen.
+   ══════════════════════════════════════════════════════════════ */
+const REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+function makeNoise(seed){
+  const perm = new Uint8Array(512);
+  const t = Array.from({length:256}, (_,i)=>i);
+  let s = seed >>> 0;
+  const rnd = () => (s = (s * 1664525 + 1013904223) >>> 0) / 4294967296;
+  for (let i = 255; i > 0; i--){ const j = (rnd() * (i + 1)) | 0; const tmp = t[i]; t[i] = t[j]; t[j] = tmp; }
+  for (let i = 0; i < 512; i++) perm[i] = t[i & 255];
+  const fade = v => v * v * v * (v * (v * 6 - 15) + 10);
+  const lerp = (a, b, v) => a + (b - a) * v;
+  const grad = (h, x, y) => ((h & 1) ? x : -x) + ((h & 2) ? y : -y);
+  return (x, y) => {
+    const X = Math.floor(x) & 255, Y = Math.floor(y) & 255;
+    x -= Math.floor(x); y -= Math.floor(y);
+    const u = fade(x), v = fade(y);
+    const A = perm[X] + Y, B = perm[X + 1] + Y;
+    return lerp(
+      lerp(grad(perm[A], x, y),         grad(perm[B], x - 1, y),     u),
+      lerp(grad(perm[A + 1], x, y - 1), grad(perm[B + 1], x - 1, y - 1), u),
+    v);
+  };
+}
+
+function softSprite(size, rgb, peak){
+  const c = document.createElement('canvas');
+  c.width = c.height = size;
+  const g = c.getContext('2d');
+  const r = size / 2;
+  const grd = g.createRadialGradient(r, r, 0, r, r, r);
+  grd.addColorStop(0,   'rgba(' + rgb + ',' + peak + ')');
+  grd.addColorStop(0.4, 'rgba(' + rgb + ',' + (peak * 0.34).toFixed(4) + ')');
+  grd.addColorStop(1,   'rgba(' + rgb + ',0)');
+  g.fillStyle = grd;
+  g.fillRect(0, 0, size, size);
+  return c;
+}
+
+function fitCanvas(cv){
+  const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+  const r = cv.getBoundingClientRect();
+  const w = Math.max(1, Math.round(r.width)), h = Math.max(1, Math.round(r.height));
+  cv.width = Math.round(w * dpr); cv.height = Math.round(h * dpr);
+  const ctx = cv.getContext('2d');
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  return { ctx, w, h };
+}
+
+/* Pointer position in canvas space, shared by the reactive engines. */
+function trackPointer(cv){
+  const p = { x: -1e4, y: -1e4, px: -1e4, py: -1e4, down: false, active: false };
+  const move = e => {
+    const r = cv.getBoundingClientRect();
+    p.px = p.x; p.py = p.y;
+    p.x = e.clientX - r.left; p.y = e.clientY - r.top;
+    if (!p.active){ p.px = p.x; p.py = p.y; p.active = true; }
+  };
+  const leave = () => { p.active = false; p.x = p.y = -1e4; };
+  window.addEventListener('pointermove', move, { passive: true });
+  window.addEventListener('pointerleave', leave, { passive: true });
+  return { p, off(){ window.removeEventListener('pointermove', move); window.removeEventListener('pointerleave', leave); } };
+}
+
+/* ── engine 01 · luminous ink: additive blooms on a dark ground ── */
+function engineScreen(cv){
+  let { ctx, w, h } = fitCanvas(cv);
+  const noise = makeNoise(7);
+  const jade  = softSprite(140, '125,180,155', 0.30);
+  const cyan  = softSprite(180, '110,155,184', 0.24);
+  const spark = softSprite(46,  '190,225,210', 0.5);
+  const N = REDUCED ? 0 : 640;
+  const ps = [];
+  const seed = () => ({
+    x: Math.random() * w, y: Math.random() * h,
+    a: Math.random() * 0.9 + 0.1, r: 0.35 + Math.random() * 0.9,
+    life: Math.random(), sp: 0.18 + Math.random() * 0.5,
+    kind: Math.random() < 0.34 ? 1 : 0,
+  });
+  for (let i = 0; i < N; i++) ps.push(seed());
+  const drops = [];
+  const tr = trackPointer(cv);
+  let t = 0, raf = 0, last = 0;
+
+  function frame(now){
+    raf = requestAnimationFrame(frame);
+    if (now - last < 22) return;      /* soft-cap ~45fps: atmosphere, not a game */
+    last = now; t += 0.0016;
+
+    ctx.globalCompositeOperation = 'source-over';
+    ctx.fillStyle = 'rgba(10,12,11,0.052)';
+    ctx.fillRect(0, 0, w, h);
+
+    /* two slow blooms — the "ink lit from behind" ground */
+    ctx.globalCompositeOperation = 'lighter';
+    const b1x = w * (0.22 + 0.06 * Math.sin(t * 1.7)), b1y = h * (0.16 + 0.05 * Math.cos(t * 1.3));
+    const b2x = w * (0.74 + 0.05 * Math.cos(t * 1.1)), b2y = h * (0.30 + 0.04 * Math.sin(t * 1.9));
+    ctx.drawImage(cyan, b1x - 330, b1y - 330, 660, 660);
+    ctx.drawImage(jade, b2x - 260, b2y - 260, 520, 520);
+
+    /* curl-driven motes */
+    const e = 0.0016;
+    for (const q of ps){
+      const nx = q.x * 0.0022, ny = q.y * 0.0022;
+      const cx =  (noise(nx, ny + e) - noise(nx, ny - e)) / (2 * e);
+      const cy = -(noise(nx + e, ny) - noise(nx - e, ny)) / (2 * e);
+      const m = Math.hypot(cx, cy) || 1;
+      q.x += (cx / m) * q.sp; q.y += (cy / m) * q.sp - 0.06;
+      q.life += 0.0022;
+      if (q.life > 1 || q.x < -40 || q.x > w + 40 || q.y < -40 || q.y > h + 40){
+        Object.assign(q, seed()); q.life = 0; q.y = h + 20;
+      }
+      const fade = Math.sin(q.life * Math.PI);
+      const s = (q.kind ? 26 : 15) * q.r;
+      ctx.globalAlpha = fade * q.a * (q.kind ? 0.5 : 0.85);
+      ctx.drawImage(q.kind ? cyan : jade, q.x - s / 2, q.y - s / 2, s, s);
+    }
+    ctx.globalAlpha = 1;
+
+    /* cursor injects ink that blooms then dissolves */
+    if (tr.p.active && !REDUCED){
+      const d = Math.hypot(tr.p.x - tr.p.px, tr.p.y - tr.p.py);
+      if (d > 1.5 && drops.length < 170){
+        drops.push({ x: tr.p.x, y: tr.p.y, r: 4, life: 1, g: Math.min(d * 0.35, 5) });
+      }
+    }
+    for (let i = drops.length - 1; i >= 0; i--){
+      const d = drops[i];
+      d.r += 0.55 + d.g * 0.1; d.life -= 0.017;
+      if (d.life <= 0){ drops.splice(i, 1); continue; }
+      ctx.globalAlpha = d.life * d.life * 0.62;
+      ctx.drawImage(spark, d.x - d.r, d.y - d.r, d.r * 2, d.r * 2);
+    }
+    ctx.globalAlpha = 1;
+  }
+
+  ctx.fillStyle = '#0A0C0B'; ctx.fillRect(0, 0, w, h);
+  if (REDUCED){
+    ctx.globalCompositeOperation = 'lighter';
+    ctx.drawImage(cyan, w * 0.22 - 330, h * 0.16 - 330, 660, 660);
+    ctx.drawImage(jade, w * 0.74 - 260, h * 0.30 - 260, 520, 520);
+  } else raf = requestAnimationFrame(frame);
+
+  const onResize = () => { const r = fitCanvas(cv); ctx = r.ctx; w = r.w; h = r.h; ctx.fillStyle = '#0A0C0B'; ctx.fillRect(0, 0, w, h); };
+  window.addEventListener('resize', onResize);
+  return { stop(){ cancelAnimationFrame(raf); tr.off(); window.removeEventListener('resize', onResize); } };
+}
+
+/* ── engine 02 · ink drop: advected particles that wet and dry ── */
+function engineDrop(cv){
+  let { ctx, w, h } = fitCanvas(cv);
+  const noise = makeNoise(23);
+  const ink   = softSprite(64, '44,58,70', 0.30);
+  const ink2  = softSprite(96, '92,104,96', 0.16);
+  const N = REDUCED ? 0 : 900;
+  const ps = [];
+  const seed = i => ({
+    x: Math.random() * w, y: Math.random() * h,
+    vx: 0, vy: 0, s: 3 + Math.random() * 16,
+    a: 0.16 + Math.random() * 0.5, wet: Math.random(),
+    heavy: i % 5 === 0,
+  });
+  for (let i = 0; i < N; i++) ps.push(seed(i));
+  const tr = trackPointer(cv);
+  let t = 0, raf = 0, last = 0;
+
+  function frame(now){
+    raf = requestAnimationFrame(frame);
+    if (now - last < 20) return;
+    last = now; t += 0.0012;
+
+    /* the page dries: paper is painted back over the ink, slowly */
+    ctx.globalCompositeOperation = 'source-over';
+    ctx.fillStyle = 'rgba(250,248,243,0.030)';
+    ctx.fillRect(0, 0, w, h);
+
+    const e = 0.0018;
+    const P = tr.p;
+    const vx = P.x - P.px, vy = P.y - P.py;
+    const speed = Math.hypot(vx, vy);
+
+    for (const q of ps){
+      const nx = q.x * 0.0018 + t, ny = q.y * 0.0018;
+      const cx =  (noise(nx, ny + e) - noise(nx, ny - e)) / (2 * e);
+      const cy = -(noise(nx + e, ny) - noise(nx - e, ny)) / (2 * e);
+      const m = Math.hypot(cx, cy) || 1;
+      q.vx += (cx / m) * 0.055; q.vy += (cy / m) * 0.055;
+
+      /* the cursor is a stirring finger, not a paintbrush */
+      if (P.active && speed > 0.6){
+        const dx = q.x - P.x, dy = q.y - P.y;
+        const d2 = dx * dx + dy * dy;
+        if (d2 < 26000){
+          const f = (1 - d2 / 26000) * 0.11;
+          q.vx += vx * f; q.vy += vy * f;
+          q.wet = Math.min(1, q.wet + 0.05);
+        }
+      }
+      q.vx *= 0.955; q.vy *= 0.955;
+      q.x += q.vx; q.y += q.vy;
+      q.wet *= 0.9985;
+
+      if (q.x < -60) q.x = w + 60; else if (q.x > w + 60) q.x = -60;
+      if (q.y < -60) q.y = h + 60; else if (q.y > h + 60) q.y = -60;
+
+      const s = q.s * (1 + q.wet * 1.5);
+      ctx.globalAlpha = q.a * (0.24 + q.wet * 0.76);
+      ctx.drawImage(q.heavy ? ink : ink2, q.x - s / 2, q.y - s / 2, s, s);
+    }
+    ctx.globalAlpha = 1;
+    P.px = P.x; P.py = P.y;
+  }
+
+  if (REDUCED){
+    for (const q of ps.slice(0, 260)){ ctx.globalAlpha = q.a * 0.4; ctx.drawImage(ink2, q.x - q.s, q.y - q.s, q.s * 2, q.s * 2); }
+    ctx.globalAlpha = 1;
+  } else raf = requestAnimationFrame(frame);
+
+  const onResize = () => { const r = fitCanvas(cv); ctx = r.ctx; w = r.w; h = r.h; };
+  window.addEventListener('resize', onResize);
+  return { stop(){ cancelAnimationFrame(raf); tr.off(); window.removeEventListener('resize', onResize); } };
+}
+
+/* ── engine 03 · brush: a tapered stroke written by the scroll ── */
+function brushPath(ctx, pts, width, alpha, col){
+  /* Draw a stroke as stacked round caps whose radius follows the
+     pressure curve — cheaper and wetter-looking than a single
+     variable-width path, and it dry-brushes at the tail for free. */
+  for (let i = 0; i < pts.length; i++){
+    const u = i / (pts.length - 1);
+    const press = Math.sin(Math.pow(u, 0.62) * Math.PI);
+    const r = width * (0.16 + press * 0.84);
+    if (r <= 0.2) continue;
+    const dry = u > 0.72 ? 1 - (u - 0.72) / 0.34 : 1;
+    ctx.globalAlpha = alpha * Math.max(0.12, dry);
+    ctx.fillStyle = col;
+    ctx.beginPath();
+    ctx.arc(pts[i].x, pts[i].y, r, 0, Math.PI * 2);
+    ctx.fill();
+  }
+  ctx.globalAlpha = 1;
+}
+
+function engineBrush(heroCv, spineCv, root){
+  const noise = makeNoise(11);
+  let hero = fitCanvas(heroCv);
+  let spine = fitCanvas(spineCv);
+  let raf = 0, t0 = 0;
+
+  function heroPts(n){
+    const pts = [];
+    for (let i = 0; i < n; i++){
+      const u = i / (n - 1);
+      const x = hero.w * (0.02 + u * 0.86);
+      const y = hero.h * (0.52 + 0.16 * Math.sin(u * 2.4 + 0.4)) + noise(u * 3.2, 0.5) * 16;
+      pts.push({ x, y });
+    }
+    return pts;
+  }
+  const HP = heroPts(320);
+
+  function drawHero(p){
+    hero.ctx.clearRect(0, 0, hero.w, hero.h);
+    const n = Math.max(2, Math.floor(HP.length * p));
+    brushPath(hero.ctx, HP.slice(0, n), 34, 0.16, '#232A2E');
+    brushPath(hero.ctx, HP.slice(0, n), 16, 0.13, '#232A2E');
+  }
+
+  function spinePts(n){
+    const pts = [];
+    for (let i = 0; i < n; i++){
+      const u = i / (n - 1);
+      const x = spine.w * 0.52 + Math.sin(u * 5.1) * spine.w * 0.2 + noise(0.7, u * 4) * 9;
+      pts.push({ x, y: u * spine.h });
+    }
+    return pts;
+  }
+  let SP = spinePts(360);
+
+  function drawSpine(){
+    const el = root;
+    const r = el.getBoundingClientRect();
+    const total = r.height - window.innerHeight;
+    const p = total <= 0 ? 1 : Math.min(1, Math.max(0, -r.top / total));
+    spine.ctx.clearRect(0, 0, spine.w, spine.h);
+    const n = Math.max(2, Math.floor(SP.length * (0.06 + p * 0.94)));
+    brushPath(spine.ctx, SP.slice(0, n), 11, 0.30, '#232A2E');
+    brushPath(spine.ctx, SP.slice(0, n), 4.5, 0.22, '#232A2E');
+  }
+
+  if (REDUCED){ drawHero(1); }
+  else {
+    const dur = 1150;
+    const step = now => {
+      if (!t0) t0 = now;
+      const p = Math.min(1, (now - t0) / dur);
+      drawHero(1 - Math.pow(1 - p, 3));
+      if (p < 1) raf = requestAnimationFrame(step);
+    };
+    raf = requestAnimationFrame(step);
+  }
+
+  const onScroll = () => drawSpine();
+  drawSpine();
+  window.addEventListener('scroll', onScroll, { passive: true });
+  const onResize = () => {
+    hero = fitCanvas(heroCv); spine = fitCanvas(spineCv);
+    SP = spinePts(360); drawHero(1); drawSpine();
+  };
+  window.addEventListener('resize', onResize);
+  return { stop(){ cancelAnimationFrame(raf); window.removeEventListener('scroll', onScroll); window.removeEventListener('resize', onResize); } };
+}
+
+/* ── engine 04 · landscape: ridgelines that breathe ── */
+function engineLand(cv){
+  let { ctx, w, h } = fitCanvas(cv);
+  const noise = makeNoise(5);
+  const LAYERS = 7;
+  let raf = 0, t = 0, last = 0;
+
+  function draw(){
+    ctx.clearRect(0, 0, w, h);
+    for (let L = 0; L < LAYERS; L++){
+      const u = L / (LAYERS - 1);
+      const base = h * (0.34 + u * 0.62);
+      const amp  = h * (0.20 - u * 0.021);
+      const freq = 0.0022 + u * 0.0016;
+      const alpha = 0.10 + u * 0.30;
+
+      ctx.beginPath();
+      ctx.moveTo(-10, h + 10);
+      for (let x = -10; x <= w + 10; x += 3){
+        const y = base
+          - Math.abs(noise(x * freq + L * 12.7, t * (0.24 + u * 0.5))) * amp
+          - noise(x * freq * 2.7 + L * 4.1, t * 0.4 + 3) * amp * 0.22;
+        ctx.lineTo(x, y);
+      }
+      ctx.lineTo(w + 10, h + 10);
+      ctx.closePath();
+      ctx.fillStyle = 'rgba(244,242,235,0.92)';
+      ctx.fill();
+      ctx.lineWidth = L === LAYERS - 1 ? 1.4 : 0.9;
+      ctx.strokeStyle = 'rgba(46,58,52,' + alpha.toFixed(3) + ')';
+      ctx.stroke();
+
+      /* hatching in the near valleys — the survey-map register */
+      if (L > 3){
+        ctx.save();
+        ctx.clip();
+        ctx.strokeStyle = 'rgba(46,58,52,0.055)';
+        ctx.lineWidth = 1;
+        for (let x = -h; x < w + h; x += 9){
+          ctx.beginPath(); ctx.moveTo(x, h + 10); ctx.lineTo(x + h, -10); ctx.stroke();
+        }
+        ctx.restore();
+      }
+    }
+  }
+
+  function frame(now){
+    raf = requestAnimationFrame(frame);
+    if (now - last < 40) return;      /* 25fps is plenty for geology */
+    last = now; t += 0.0022;
+    draw();
+  }
+
+  draw();
+  if (!REDUCED) raf = requestAnimationFrame(frame);
+  const onResize = () => { const r = fitCanvas(cv); ctx = r.ctx; w = r.w; h = r.h; draw(); };
+  window.addEventListener('resize', onResize);
+  return { stop(){ cancelAnimationFrame(raf); window.removeEventListener('resize', onResize); } };
+}
+
+/* ── engine 05 · damp paper: two washes + wet cursor bleed ── */
+function enginePaper(cv){
+  let { ctx, w, h } = fitCanvas(cv);
+  const sage   = softSprite(200, '94,107,80',  0.10);
+  const indigo = softSprite(240, '79,102,117', 0.09);
+  const bleed  = softSprite(70,  '79,102,117', 0.17);
+  const tr = trackPointer(cv);
+  const drops = [];
+  let raf = 0, t = 0, last = 0;
+
+  function washes(){
+    ctx.clearRect(0, 0, w, h);
+    const ax = w * (0.18 + 0.05 * Math.sin(t * 0.9)), ay = h * (0.30 + 0.06 * Math.cos(t * 0.7));
+    const bx = w * (0.82 + 0.04 * Math.cos(t * 0.6)), by = h * (0.66 + 0.05 * Math.sin(t * 1.1));
+    ctx.drawImage(indigo, ax - 320, ay - 320, 640, 640);
+    ctx.drawImage(sage,   bx - 270, by - 270, 540, 540);
+  }
+
+  function frame(now){
+    raf = requestAnimationFrame(frame);
+    if (now - last < 33) return;
+    last = now; t += 0.0011;
+    washes();
+
+    if (tr.p.active){
+      const d = Math.hypot(tr.p.x - tr.p.px, tr.p.y - tr.p.py);
+      if (d > 6 && drops.length < 60) drops.push({ x: tr.p.x, y: tr.p.y, r: 5, life: 1 });
+      tr.p.px = tr.p.x; tr.p.py = tr.p.y;
+    }
+    for (let i = drops.length - 1; i >= 0; i--){
+      const d = drops[i];
+      d.r += 0.9; d.life -= 0.0135;
+      if (d.life <= 0){ drops.splice(i, 1); continue; }
+      ctx.globalAlpha = d.life * 0.85;
+      ctx.drawImage(bleed, d.x - d.r, d.y - d.r, d.r * 2, d.r * 2);
+    }
+    ctx.globalAlpha = 1;
+  }
+
+  washes();
+  if (!REDUCED) raf = requestAnimationFrame(frame);
+  const onResize = () => { const r = fitCanvas(cv); ctx = r.ctx; w = r.w; h = r.h; washes(); };
+  window.addEventListener('resize', onResize);
+  return { stop(){ cancelAnimationFrame(raf); tr.off(); window.removeEventListener('resize', onResize); } };
+}
+
+/* ══════════════════════════════════════════════════════════════
+   Specimen markup
+   ══════════════════════════════════════════════════════════════ */
+const navLinks = C.nav.map(n => '<span>' + n + '</span>').join('');
+const metricRow = (cls) => C.metrics.map(([v, l]) =>
+  '<div class="metric"><div class="metric-v num">' + v + '</div><div class="metric-l">' + l + '</div>' + (cls || '') + '</div>'
+).join('');
+const tagRow = tags => '<div class="tags">' + tags.map(t => '<span class="tag">' + t + '</span>').join('') + '</div>';
+
+const SPECIMENS = {
+
+/* 01 ── 墨屏 */
+screen: () => `
+<div class="spm v-screen">
+  <canvas class="spm-canvas" data-engine="screen"></canvas>
+  <div class="scan"></div>
+  <div class="wrap">
+    <nav class="sp-nav"><div class="mark">YL</div><div class="sp-navlinks">${navLinks}</div></nav>
+    <section class="hero">
+      <div class="hero-grid">
+        <div>
+          <div class="eyebrow">Open to Applied AI roles · US &amp; APAC</div>
+          <h1 class="name">Yixin <em>Liu</em></h1>
+          <div class="role">${C.role}</div>
+          <p class="tagline">${C.tagline}</p>
+        </div>
+        <div class="portrait"><img src="${PORTRAIT}" alt="Yixin Liu"></div>
+      </div>
+    </section>
+    <div class="sp-metrics">${metricRow('<div class="metric-bar"></div>')}</div>
+    <section class="lanes-sec">
+      <div class="sec-head"><span class="sec-no">§ WORK</span><h2 class="sec-t">Three lanes of evidence</h2></div>
+      <div class="sp-lanes">
+        ${C.lanes.map(l => `
+        <article class="lane">
+          <div class="lane-no">${l.no} · ${l.zh}</div>
+          <h3 class="lane-t">${l.en}</h3>
+          <p class="lane-c">${l.claim}</p>
+          ${tagRow(l.tags)}
+          <div class="lane-e">${l.ev}</div>
+        </article>`).join('')}
+      </div>
+    </section>
+  </div>
+</div>`,
+
+/* 02 ── 落墨 */
+drop: () => `
+<div class="spm v-drop">
+  <canvas class="spm-canvas" data-engine="drop"></canvas>
+  <div class="wrap">
+    <nav class="sp-nav">
+      <div class="mark">Yixin Liu</div>
+      <div class="sp-navlinks">${navLinks}</div>
+    </nav>
+    <section class="hero">
+      <h1 class="name">Yixin<br>Liu</h1>
+      <div class="role">${C.role}</div>
+      <p class="tagline">${C.tagline}</p>
+      <div class="hint">拖动鼠标，墨会散开，然后慢慢干掉</div>
+    </section>
+    <div class="sp-metrics">${metricRow()}</div>
+    <section class="lanes-sec">
+      <div class="sp-lanes">
+        ${C.lanes.map(l => `
+        <article class="lane">
+          <div class="lane-no">${l.no}</div>
+          <h3 class="lane-t">${l.en}</h3>
+          <p class="lane-c">${l.claim}</p>
+          <div class="lane-e">${l.ev}</div>
+        </article>`).join('')}
+      </div>
+    </section>
+    <div class="statusline">
+      <span><b>ink</b> 900 particles</span>
+      <span><b>field</b> curl-noise + pointer force</span>
+      <span><b>dry</b> 3% / frame</span>
+      <span><b>lib</b> none</span>
+    </div>
+  </div>
+</div>`,
+
+/* 03 ── 笔锋 */
+brush: () => `
+<div class="spm v-brush" id="brushRoot">
+  <canvas class="spine" data-engine="brush-spine"></canvas>
+  <div class="wrap">
+    <nav class="sp-nav"><div class="mark">Yixin Liu</div><div class="sp-navlinks">${navLinks}</div></nav>
+    <section class="hero">
+      <canvas class="hero-canvas" data-engine="brush-hero"></canvas>
+      <h1 class="name wipe">Yixin Liu</h1>
+      <div class="role wipe" style="animation-delay:.28s">${C.role}</div>
+      <div class="hero-row">
+        <p class="tagline">${C.tagline}</p>
+        <div class="portrait"><img src="${PORTRAIT}" alt="Yixin Liu"></div>
+      </div>
+    </section>
+    <div class="sp-metrics">${metricRow()}</div>
+    <section class="lanes-sec">
+      <div class="sec-head"><span class="sec-no">§ WORK</span><h2 class="sec-t">Three lanes of evidence</h2></div>
+      <div class="sp-lanes">
+        ${C.lanes.map(l => `
+        <article class="lane">
+          <div class="lane-no">${l.no} · ${l.zh}</div>
+          <h3 class="lane-t">${l.en}</h3>
+          <p class="lane-c">${l.claim}</p>
+          <div class="lane-e">${l.ev}</div>
+        </article>`).join('')}
+      </div>
+    </section>
+  </div>
+</div>`,
+
+/* 04 ── 山水数据 */
+land: () => `
+<div class="spm v-land">
+  <div class="wrap">
+    <nav class="sp-nav"><div class="mark-l">Yixin Liu</div><div class="sp-navlinks">${navLinks}</div></nav>
+  </div>
+  <div class="map">
+    <canvas data-engine="land"></canvas>
+    <div class="grat"></div>
+    <div class="map-over">
+      <div class="pin" style="left:16%;top:32%"><b>2017</b> Baidu · Beijing</div>
+      <div class="pin" style="left:39%;top:22%"><b>2019</b> SAP · Beijing / California</div>
+      <div class="pin" style="left:62%;top:38%"><b>2024</b> Wiz.AI · Singapore</div>
+      <div class="pin" style="left:80%;top:24%"><b>2025</b> Salesforce · APAC</div>
+      <div class="legend">
+        CONTOUR · 1 yr = 1 line<br>
+        ELEV · pipeline contributed<br>
+        SURVEY 2017–2026
+      </div>
+    </div>
+  </div>
+  <div class="wrap">
+    <section class="hero">
+      <div>
+        <h1 class="name">Yixin Liu</h1>
+        <div class="role">${C.role}</div>
+        <p class="tagline">${C.tagline}</p>
+      </div>
+      <figure class="plate">
+        <img src="${PORTRAIT}" alt="Yixin Liu">
+        <figcaption class="plate-cap">PLATE 01<br>1°17′N 103°51′E</figcaption>
+      </figure>
+    </section>
+    <div class="sp-metrics">
+      ${C.metrics.map(([v, l], i) => `
+      <div class="metric">
+        <div class="metric-k">R-0${i + 1}</div>
+        <div class="metric-v num">${v}</div>
+        <div class="metric-l">${l}</div>
+      </div>`).join('')}
+    </div>
+    <section class="lanes-sec">
+      <div class="sec-head"><span class="sec-no">SHEET 02</span><h2 class="sec-t">Three lanes of evidence</h2></div>
+      <div class="sp-lanes">
+        ${C.lanes.map((l, i) => `
+        <article class="lane">
+          <div class="lane-hd"><b>${l.no}</b><span>REGION ${String.fromCharCode(65 + i)}</span></div>
+          <h3 class="lane-t">${l.en}</h3>
+          <p class="lane-c">${l.claim}</p>
+          <div class="lane-e">${l.ev}</div>
+        </article>`).join('')}
+      </div>
+    </section>
+  </div>
+</div>`,
+
+/* 05 ── 宣纸留白 */
+paper: () => `
+<div class="spm v-paper">
+  <canvas class="spm-canvas" data-engine="paper"></canvas>
+  <div class="wrap">
+    <nav class="sp-nav"><div class="mark">Yixin Liu</div><div class="sp-navlinks">${navLinks}</div></nav>
+    <section class="hero">
+      <div class="coord"><i>◈</i> 2026 · Singapore → United States</div>
+      <div class="hero-grid">
+        <div>
+          <h1 class="name">Yixin Liu</h1>
+          <div class="rule"></div>
+          <div class="role">${C.role}</div>
+          <p class="tagline">${C.tagline}</p>
+        </div>
+        <div class="portrait"><img src="${PORTRAIT}" alt="Yixin Liu"></div>
+      </div>
+      <div class="ticks">${Array.from({ length: 40 }, () => '<div class="tick"></div>').join('')}</div>
+    </section>
+    <div class="sp-metrics">${metricRow()}</div>
+    <section class="lanes-sec">
+      <div class="sec-head"><span class="sec-no">§ 01</span><h2 class="sec-t">Three lanes of evidence</h2></div>
+      <div class="sp-lanes">
+        ${C.lanes.map(l => `
+        <article class="lane">
+          <div class="lane-no">${l.no} · ${l.zh}</div>
+          <h3 class="lane-t">${l.en}</h3>
+          <p class="lane-c">${l.claim}</p>
+          <div class="lane-e">${l.ev}</div>
+        </article>`).join('')}
+      </div>
+    </section>
+  </div>
+</div>`,
+};
+
+/* ══════════════════════════════════════════════════════════════
+   Direction metadata — spec strip + implementation notes
+   ══════════════════════════════════════════════════════════════ */
+const DIRS = [
+  {
+    id: 'screen', no: '01', zh: '墨屏', en: 'Ink Screen',
+    spec: [
+      ['概念', '墨即光。焦墨黑底上，墨以「被背光照亮的水中墨」形态扩散 — 水墨的形，科技的质'],
+      ['动效引擎', 'Canvas 2D 加法混合 · curl-noise 粒子 520 + 光标注墨 + 一次性扫描线'],
+      ['成本', '约 14KB JS，无第三方库，帧率上限 45fps，移动端自动降级'],
+      ['最适合', 'AI / 技术公司雇主。五个里第一眼记忆点最强，最不像模板'],
+    ],
+    notes: [
+      ['字体', '<b>Instrument Serif</b>（高对比衬线，Google Fonts 免费）做大标题 + <b>Inter</b> 正文 + <b>JetBrains Mono</b> 数据。深色底上细衬线的对比度是这个方向的一半气质。'],
+      ['引擎', '一个 <code>&lt;canvas&gt;</code>，<code>globalCompositeOperation = "lighter"</code>，520 个粒子沿 curl noise 漂移，画的是预渲染的径向渐变精灵而不是 <code>arc()</code> — 快 3–5 倍。'],
+      ['光标', '鼠标移动注入「墨滴」，半径扩张 + 透明度平方衰减，看起来像墨在水里化开。这是唯一的交互彩蛋，克制地只放在首屏。'],
+      ['风险', '深色 + 发光要小心显得廉价。规避方法：只用低饱和的青/花青，绝不用纯 <code>#00FFxx</code> 霓虹；发光半径大、透明度低。'],
+      ['无障碍', '正文用 <code>#EAE7DC</code> on <code>#0A0C0B</code> = 15.8:1；辅助文字 <code>#9AA29B</code> = 7.4:1。深色底反而更容易过 WCAG AA。'],
+      ['改造量', '换 tokens.css 全套 + 新增 canvas 组件。你现有的组件结构（Section / Metric / Coord）都能留，只换皮。约 2–3 天。'],
+    ],
+  },
+  {
+    id: 'drop', no: '02', zh: '落墨', en: 'Ink Drop',
+    spec: [
+      ['概念', '近乎空白的纸，巨大的细衬线字，和一场可以用鼠标搅动的墨。内容极简，动效即内容'],
+      ['动效引擎', 'Canvas 2D 平流粒子 900 · curl-noise 场 + 光标力场 + 每帧 3% 干燥'],
+      ['成本', '约 16KB JS，CPU 中等，老机器需要降到 400 粒子'],
+      ['最适合', '想让人停下来玩一会儿、想直接证明「我会做东西」'],
+    ],
+    notes: [
+      ['字体', '<b>Cormorant Garamond Light</b> 打到 150px — 极细高对比衬线在大量留白里最显气质。搭 <b>JetBrains Mono</b> 做全部标签，反差就是设计。'],
+      ['引擎', '900 个粒子有速度和「湿度」两个状态。curl noise 给基础漂移，光标速度作为力注入并把附近粒子「打湿」（变大变深），之后 <code>wet *= 0.9985</code> 慢慢干。'],
+      ['关键一招', 'canvas 用 <code>mix-blend-mode: multiply</code> 垫在文字下面，墨会「透过」文字而不是盖住它 — 这一行 CSS 是这个方向成立的原因。'],
+      ['风险', '内容密度低，招聘方三秒内必须看懂你是谁。所以名字、职位、一句话价值主张必须在首屏且极大。'],
+      ['降级', '<code>prefers-reduced-motion</code> 下渲染一帧静态墨；检测到低端设备时把粒子数砍到 300，视觉几乎无损。'],
+      ['改造量', '布局要重写（现在的信息密度太高，得砍掉一半）。约 4–5 天，主要花在做减法上。'],
+    ],
+  },
+  {
+    id: 'brush', no: '03', zh: '笔锋', en: 'Brushstroke',
+    spec: [
+      ['概念', '一笔墨贯穿整页。首屏一笔扫出，之后这一笔随滚动继续「写」下去，把所有章节串成一句话'],
+      ['动效引擎', 'Canvas 变宽笔触（压感曲线 + 飞白）· 滚动进度绑定 · CSS clip-path 擦除标题'],
+      ['成本', '约 9KB JS，极轻，移动端最友好，可完全静态降级'],
+      ['最适合', '叙事性强的个人网站。最有「人味」，最像一个人而不是一个产品'],
+    ],
+    notes: [
+      ['字体', '保留你现在的 <b>Fraunces</b> — 它本身就是有笔锋的软衬线，和毛笔逻辑一致，不用换。'],
+      ['笔触算法', '不画变宽路径，而是沿路径叠圆点，半径 = <code>sin(u^0.62 · π)</code> 的压感曲线；尾段 28% 降透明度做飞白。三行代码换来真实的起笔收笔。'],
+      ['滚动绑定', '侧边一条 <code>position: fixed</code> 的窄 canvas，笔画长度 = 页面滚动进度。滚多少写多少，回滚就退回去 — 可逆，不是一次性动画。'],
+      ['擦除', '标题用 <code>clip-path: inset(0 100% 0 0)</code> → <code>inset(0 -2% 0 0)</code>，配 1.05s 的 <code>cubic-bezier(.16,.68,.3,1)</code>，读起来像被一笔刷出来。'],
+      ['风险', '滚动绑定动画容易做成「劫持滚动」。这里只读进度不改滚动，鼠标滚轮行为完全原生。'],
+      ['改造量', '最小。加两个 canvas 组件 + 一条擦除动画，其余保持不动。约 1–2 天。'],
+    ],
+  },
+  {
+    id: 'land', no: '04', zh: '山水数据', en: 'Data Landscape',
+    spec: [
+      ['概念', '山水即数据。首屏是一张测绘图：山脊线由噪声生成并缓慢形变，你的履历是图上的标记点'],
+      ['动效引擎', 'Canvas 2D 七层山脊线 + 斜线晕滃 · 25fps 缓慢形变 · HTML 图注引线层'],
+      ['成本', '约 11KB JS，很轻（25fps 足够），可退化成一张静态 SVG'],
+      ['最适合', '想直接展示「我用系统思考」。概念最聪明，也最需要克制'],
+    ],
+    notes: [
+      ['字体', '<b>Instrument Serif</b> 做标题 + <b>JetBrains Mono</b> 做全部图注、坐标、图例。测绘图的语言就是等宽字 + 缩写 + 数字。'],
+      ['山脊', '七层，每层 <code>base − |noise(x·freq, t)| · amp</code>，越近的层振幅越小颜色越深 — 这是空气透视，山水画的原理和地图渲染的原理是同一个。'],
+      ['晕滃', '近处三层里 <code>clip()</code> 后画 9px 间隔斜线，透明度 0.055。这是 19 世纪地图的 hachure 画法，也是水墨的皴法 — 一个笔触同时说两种话。'],
+      ['真实性', '标记点必须绑真数据（2017 Baidu → 2025 Salesforce），图例要写真单位。一旦是装饰性的假地图，整个概念就塌了。'],
+      ['风险', '最容易做过头。规则：地图只占首屏，往下必须回到极其规矩的排版，让地图成为一个「入口」而不是全站主题。'],
+      ['改造量', '新增地图组件 + 履历数据结构要加坐标字段。约 3–4 天，主要花在调山脊参数上。'],
+    ],
+  },
+  {
+    id: 'paper', no: '05', zh: '宣纸留白', en: 'Rice Paper',
+    spec: [
+      ['概念', '保留你现在的纸感，把「科技」做成仪器刻度而不是霓虹。现有设计的正确版本'],
+      ['动效引擎', 'Canvas 2D 两团慢移淡墨 + 光标湿墨渗透 · 30fps · CSS 刻度尺 / 生长横线'],
+      ['成本', '约 7KB JS，最轻，Lighthouse 完全无压力'],
+      ['最适合', '风险最低、改动最小。如果你还想给自己留退路，这是那条退路'],
+    ],
+    notes: [
+      ['诊断', '你现在的站问题不在配色，在于<b>动效几乎不可见</b>：两团 wash 的位移小到看不出来，其余全是 fade-up。所以它读起来像印刷品，不像网页。'],
+      ['修法一', '把 wash 从 CSS <code>@keyframes</code> 换成 canvas，加上光标湿墨渗透 — 页面第一次对人有反应，这是「灵动」的最小成本实现。'],
+      ['修法二', '把「科技」从语义提到视觉：刻度尺（每 5 格加长）、生长的 46px 短横线、坐标行、tabular-nums。仪器感来自密度和精度，不来自发光。'],
+      ['修法三', '卡片 hover 时墨从底边渗上来 78px，<code>cubic-bezier(.22,.61,.36,1)</code> 450ms。全站唯一的 hover 反馈，只此一处所以成立。'],
+      ['要修的 bug', '线上首屏数字从 0 开始跳（现在显示 <code>1+ / $0M+ / 0 / 2+</code>），和你 README 里写的「真实数字是初始状态」相矛盾。慢网络下访客会看到 $0M+。'],
+      ['改造量', '最小。tokens 微调 + 换掉 wash 实现 + 加刻度组件。约 1 天。'],
+    ],
+  },
+];
+
+/* ══════════════════════════════════════════════════════════════
+   Switcher
+   ══════════════════════════════════════════════════════════════ */
+const tabsEl  = document.getElementById('tabs');
+const specEl  = document.getElementById('spec');
+const stageEl = document.getElementById('stage');
+const notesEl = document.getElementById('notes');
+const notesH  = document.getElementById('notesH');
+let live = [];
+
+DIRS.forEach((d, i) => {
+  const b = document.createElement('button');
+  b.className = 'tab';
+  b.type = 'button';
+  b.setAttribute('role', 'tab');
+  b.setAttribute('aria-selected', i === 0 ? 'true' : 'false');
+  b.innerHTML = '<span class="tab-no">' + d.no + '</span><span class="tab-zh">' + d.zh + '</span>';
+  b.addEventListener('click', () => show(i));
+  tabsEl.appendChild(b);
+});
+
+function show(i){
+  const d = DIRS[i];
+  live.forEach(e => e.stop());
+  live = [];
+
+  [...tabsEl.children].forEach((t, j) => t.setAttribute('aria-selected', j === i ? 'true' : 'false'));
+
+  specEl.innerHTML = d.spec.map(([k, v]) =>
+    '<div class="spec-cell"><div class="spec-k">' + k + '</div><div class="spec-v">' + v + '</div></div>'
+  ).join('');
+
+  stageEl.innerHTML = SPECIMENS[d.id]();
+
+  notesH.textContent = d.no + ' · ' + d.zh + ' ' + d.en + ' — 要做出这个效果，需要什么';
+  notesEl.innerHTML = d.notes.map(([k, v]) =>
+    '<div class="note"><div class="note-i">' + k + '</div><p class="note-b">' + v + '</p></div>'
+  ).join('');
+
+  /* canvases only exist after markup lands, so wire engines here */
+  requestAnimationFrame(() => {
+    const q = s => stageEl.querySelector(s);
+    if (d.id === 'screen') live.push(engineScreen(q('[data-engine="screen"]')));
+    if (d.id === 'drop')   live.push(engineDrop(q('[data-engine="drop"]')));
+    if (d.id === 'paper')  live.push(enginePaper(q('[data-engine="paper"]')));
+    if (d.id === 'land')   live.push(engineLand(q('[data-engine="land"]')));
+    if (d.id === 'brush')  live.push(engineBrush(q('[data-engine="brush-hero"]'), q('[data-engine="brush-spine"]'), q('#brushRoot')));
+  });
+
+  window.scrollTo({ top: 0, behavior: 'auto' });
+}
+
+show(0);
+</script>

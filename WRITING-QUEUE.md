@@ -27,8 +27,8 @@ with a `body: [ ... ]` array in the matching file under `src/content/`.
 
 `Enterprise · Wiz.AI · 2024`  —  `#/work/wizai-first-llm-customer`
 
-- [ ] **Architecture** — This is the single most Anthropic-relevant case on the page and it is currently three sentences long. Expand it: what the LLM actually did, how you grounded it, what you did about hallucination and escalation to a human, how quality was measured before go-live, and what the customer was afraid of. Treat this as the flagship.
-- [ ] **What I'd do differently** — First-of-anything deployments teach the most. What would you set up differently on day one?
+- [x] **Architecture** — written 2026-09-08. Three decisions: CMS as source of truth, a deliberately high answering bar with human routing, and correctness judged by the customer's editors.
+- [x] **What I'd do differently** — written 2026-09-08. Two of four ownership boundaries drawn; maintenance and acceptance left open, and why the vendor/customer asymmetry made that expensive.
 
 ## Lead-to-Cash CRM transformation for a lighthouse customer
 
@@ -55,4 +55,4 @@ with a `body: [ ... ]` array in the matching file under `src/content/`.
 - [x] **llm-tco-calculator is live** at `github.com/Piaodiver/llm-tco-calculator` (3 commits, screenshots, clean README). The site's link resolves.
 - [ ] **DECISIONS.md** — 21 fields still blank across 7 decisions. Correctly kept out of the repo (gitignored alongside `NOTES.local.md`), so nothing is publicly broken; this is writing owed to yourself, not a leak. Its own header says an AI must not fill it in, and that is right: the interview will point at a design choice and ask why. `.gitignore` carries a note to un-ignore both files once written.
 
-_10 case-study sections outstanding. Live tracker: https://claude.ai/code/artifact/b2fae819-9876-40e3-b2ef-b99fb43bac14_
+_8 case-study sections outstanding. Live tracker: https://claude.ai/code/artifact/b2fae819-9876-40e3-b2ef-b99fb43bac14_

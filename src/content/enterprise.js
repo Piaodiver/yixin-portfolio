@@ -85,7 +85,7 @@ export const enterprise = [
     ],
   },
   {
-    slug: 'wizai-first-llm-customer',
+slug: 'wizai-first-llm-customer',
     lane: 'enterprise',
     org: 'Wiz.AI',
     region: 'Singapore',
@@ -93,30 +93,51 @@ export const enterprise = [
     status: 'delivered',
     kicker: "The company's first LLM customer",
     title: "Wiz.AI's first LLM product customer",
-    summary: 'A leading Singapore entertainment group taking on its first enterprise LLM deployment — end to end, from solution design to delivery.',
+    summary: 'A retrieval agent for a major Singapore destination, grounded strictly in content the customer already owned — and the first LLM deployment for the customer and for us both.',
     metrics: [
       { value: '1st', label: 'LLM customer for the company' },
+      { value: '8',   label: 'Deployment modules built from zero' },
     ],
     sections: [
       {
         heading: 'The problem',
-        body: ['A leading entertainment group in Singapore was exploring its first enterprise LLM adoption.'],
-      },
-      {
-        heading: 'What I did',
-        body: ["Secured Wiz.AI's first LLM product customer and led the end-to-end implementation from solution design to delivery."],
-      },
-      {
-        heading: 'Outcome',
-        body: ['Created a strategic breakthrough reference case for both Wiz.AI and the client.'],
+        body: [
+          'The obvious way to give an organisation an AI agent is to build it a knowledge base. It is also the way to guarantee the agent will be wrong within a month.',
+          'A leading Singapore entertainment destination already held years of official content — attractions, events, visitor guides, transport, ticketing, FAQs — in their CMS, maintained by an editorial team with its own approval workflow. They were exploring their first enterprise LLM deployment. It was also our first: no mature platform to configure, no playbook, and no prior deployment to copy.',
+        ],
       },
       {
         heading: 'Architecture',
-        todo: 'This is the single most Anthropic-relevant case on the page and it is currently three sentences long. Expand it: what the LLM actually did, how you grounded it, what you did about hallucination and escalation to a human, how quality was measured before go-live, and what the customer was afraid of. Treat this as the flagship.',
+        body: [
+          'The CMS stays the source of truth. The editorial team already had a publishing workflow and no appetite for a second one. The options were a hand-curated AI knowledge base, scheduled ingestion from the CMS, or live retrieval at query time. We chose scheduled ingestion: it costs freshness, since content can lag by up to one refresh cycle, and it adds a pipeline to operate. It buys one place to edit, no dual maintenance, and an agent that inherits the CMS\u2019s existing editorial approval for free.',
+          'The bar for answering is set high, and uncertainty routes to a human. This is a product decision wearing technical clothes: it turns on which costs more, answering wrong or not answering at all. For a destination where a wrong opening time or ticket price becomes a real complaint at a real gate, that is not a close call. Anything below the bar went to the official site or the customer service line rather than to a guess.',
+          'The customer judges correctness. We built the evaluation set with their content editors and agreed the scoring criteria with them, because they owned the facts. That is the same decision as the first one, one layer up — authority stays with the people who hold it already, and the generated layer stays downstream and rebuildable.',
+        ],
+      },
+      {
+        heading: 'What I built',
+        body: [
+          'Without a mature platform underneath, the deployment surface was the deliverable: a chat layer on the customer\u2019s site, an orchestration backend, an ingestion pipeline that pulled approved CMS content and cleaned, chunked and tagged it, a vector store, integration with a third-party frontier model, guardrails and fallback logic, and a maintenance process for the knowledge base.',
+          'The model was the language engine. Everything that made it dependable for an enterprise — what it was allowed to say, what it had to refuse, where its facts came from, and how they stayed current — sat in the layer around it. That distinction is most of what enterprise AI work actually is.',
+        ],
+      },
+      {
+        heading: 'How it was evaluated',
+        body: [
+          'Before launch: a labelled question set built with the customer\u2019s content editors, spread across attractions, events, transport, ticketing and FAQs, scored against criteria agreed with them.',
+          'After launch: their team reviewed conversation logs on a fixed daily cadence. Two failure modes appeared, and separating them mattered more than fixing either. Content that had gone stale in the CMS, which the system faithfully repeated, is a content problem and goes back to the editors. Retrieval that pulled the adjacent-but-wrong section is a chunking and metadata problem and comes back to us. A team that cannot tell those apart fixes the wrong layer.',
+          'What I would add now is fallback rate as the primary health metric. It moves only for diagnosable reasons — a content gap, a new class of question, a CMS restructure — and it is the number I would have wanted on a dashboard from day one.',
+          'I left before there was enough operating history to quote, and I do not quote numbers I did not verify myself.',
+        ],
       },
       {
         heading: "What I'd do differently",
-        todo: 'First-of-anything deployments teach the most. What would you set up differently on day one?',
+        body: [
+          'We drew two of the four boundaries. Content ownership and correctness judgment both sat correctly with the customer. Two others were never drawn at all: who maintains the knowledge base over time, and what counts as a successful delivery.',
+          'Both are the same missing artefact as my third regret — never writing down what "correct" meant before we started building. At the answer level that is a scoring rubric, at the project level it is acceptance criteria, and after go-live it is an operating agreement. All three were left to be worked out later, and later is the worst time to open them.',
+          'The asymmetry is why it hurt. A small vendor negotiating with a large, senior customer has the least leverage to start that conversation and the most to lose from leaving it open — which is exactly backwards from what is prudent. "Who maintains this" was never a technical question; it was a negotiation, and we treated it as something the architecture would settle on its own.',
+          'The delivery team also did not know the customer\u2019s domain well enough going in, and we paid for it in communication overhead — time spent building shared context that should have gone into the build. On a first-of-its-kind project that gap compounds, because there is no reference implementation to argue from.',
+        ],
       },
     ],
   },

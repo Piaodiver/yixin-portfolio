@@ -16,12 +16,12 @@ with a `body: [ ... ]` array in the matching file under `src/content/`.
 - [ ] **Architecture** — Pick ONE of these 20 engagements and draw it: where Data Cloud sat, how identity resolution was handled, what grounded the agent, and where the trust boundary was. Then 3–5 decisions in the form "constraint → options → chose → would revisit if". This is the section an Applied AI Architect interview will spend twenty minutes on.
 - [ ] **What I'd do differently** — One honest thing. The 35% figure implies you found a bottleneck — name what it was and what you would sequence differently now.
 
-## First-of-its-kind Salesforce AI implementation in the region
+## NOVA — an admissions agent for the University of Nottingham Malaysia
 
 `Enterprise · Salesforce · 2025`  —  `#/work/salesforce-regional-first`
 
-- [ ] **Architecture** — What made this "first of its kind"? Name the specific capability nobody in the region had put into production before, and what was unresolved about it. That is the whole story and it is currently missing.
-- [ ] **What I'd do differently** — Being first means something went sideways. What was it?
+- [x] **Architecture** — written 2026-09-08. Eligibility is computed, not retrieved, which is why grounding is Data Cloud structured data; scope is written in plain language rather than tuned as a threshold.
+- [x] **What I'd do differently** — written 2026-09-08. The taxonomy fork (discipline vs degree type), arriving mid-implementation, and the contrast between the two enterprise deployments' content problems.
 
 ## Wiz.AI's first LLM product customer
 
@@ -55,4 +55,4 @@ with a `body: [ ... ]` array in the matching file under `src/content/`.
 - [x] **llm-tco-calculator is live** at `github.com/Piaodiver/llm-tco-calculator` (3 commits, screenshots, clean README). The site's link resolves.
 - [ ] **DECISIONS.md** — 21 fields still blank across 7 decisions. Correctly kept out of the repo (gitignored alongside `NOTES.local.md`), so nothing is publicly broken; this is writing owed to yourself, not a leak. Its own header says an AI must not fill it in, and that is right: the interview will point at a design choice and ask why. `.gitignore` carries a note to un-ignore both files once written.
 
-_8 case-study sections outstanding. Live tracker: https://claude.ai/code/artifact/b2fae819-9876-40e3-b2ef-b99fb43bac14_
+_6 case-study sections outstanding. Live tracker: https://claude.ai/code/artifact/b2fae819-9876-40e3-b2ef-b99fb43bac14_

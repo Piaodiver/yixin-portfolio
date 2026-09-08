@@ -104,6 +104,10 @@ export const enterprise = [
         ],
       },
     ],
+    links: [
+      { label: 'Salesforce press release', href: 'https://www.salesforce.com/ap/news/press-releases/2025/12/15/university-of-nottingham-malaysia-deploys-agentforce-to-create-a-seamless-experience-for-prospective-students/' },
+      { label: 'University announcement', href: 'https://www.nottingham.edu.my/NewsEvents/News/2025/University-of-Nottingham-Malaysia-Deploys-Agentforce-to-Create-a-Seamless-Experience-for-Prospective-Students.aspx' },
+    ],
   },
   {
     slug: 'wizai-first-llm-customer',
@@ -212,6 +216,9 @@ export const enterprise = [
           'That is worth putting next to my later work at Wiz.AI, where the central regret is that nobody wrote down what "delivered" meant. It was not that I had forgotten the lesson; it was that I no longer had the standing to insist on it. At SAP I came in through the bid, on a structured programme, representing a vendor the customer had chosen deliberately. At a small vendor facing a much larger customer, the person with the least leverage to open that conversation is the one with the most to lose from leaving it open. Knowing the right thing to do and being positioned to do it are different problems, and the second one is structural.',
         ],
       },
+    ],
+    links: [
+      { label: 'SAP customer story', href: 'https://www.sap.com/documents/2024/02/fc105f35-a87e-0010-bca6-c68f7e60039b.html' },
     ],
   },
 ];

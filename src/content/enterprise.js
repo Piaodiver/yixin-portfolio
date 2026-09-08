@@ -91,7 +91,8 @@ export const enterprise = [
         heading: 'How it was evaluated',
         body: [
           'Phase one passed UAT in full and the planned scope went live on schedule. We tracked containment and escalation rates, topic coverage against incoming questions, UAT pass rate, response time against the human baseline, volume handled outside business hours, and satisfaction.',
-          'I have no post-launch figures to quote. I was there for the launch, not for a long enough operating history, and I do not quote numbers I did not verify myself.',
+          'The metric I would add now is self-scheduled appointments. Everything else on that list measures the conversation; that one measures whether the conversation became the thing the university actually wanted \u2014 a student sitting in front of a counsellor. On an admissions agent it is the closest available proxy for business value, and it is the one we did not instrument.',
+          'Operating figures belong to the customer to publish, not to me. I was also there for the launch rather than for a long enough history to draw on, and I do not quote numbers I have not verified myself.',
         ],
       },
       {

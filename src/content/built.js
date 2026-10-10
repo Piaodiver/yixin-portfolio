@@ -17,9 +17,9 @@ export const built = [
     title: 'Enterprise LLM deployment TCO calculator',
     summary: 'A cost model for a year of a Claude workload, and — more usefully — which architectural levers actually move the number. Three of its findings contradict the standard advice.',
     metrics: [
-      { value: '21.7%',    label: 'Cache hit rate below which caching costs more' },
+      { value: '~20%',     label: 'Cache hit rate floor below which caching costs more' },
       { value: '50%',      label: 'Batch API discount, the largest single lever' },
-      { value: '745',      label: 'Lines, model and UI kept separate' },
+      { value: '969',      label: 'Lines, model and UI kept separate' },
     ],
     sections: [
       {
@@ -61,9 +61,9 @@ export const built = [
     ],
     links: [
       { label: 'Repo', href: 'https://github.com/Piaodiver/llm-tco-calculator' },
-      { label: 'Live app', href: '', pending: true },
+      { label: 'Live app', href: 'https://llm-tco-calculator.streamlit.app/' },
     ],
-    note: 'Pricing retrieved from claude.com/pricing on 2026-09-07 and recorded with that date in the source.',
+    note: 'Prices retrieved from claude.com/pricing on 2026-10-05, context windows from the models overview, both recorded with that date in the source.',
   },
   {
     slug: 'claude-adoption-atlas',

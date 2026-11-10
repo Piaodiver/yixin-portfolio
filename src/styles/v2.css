@@ -141,11 +141,29 @@ body::before {
   font-family: Inter, system-ui, sans-serif;
   font-size: 0.8rem; color: var(--ink-300);
 }
-/* the mount target: full box, both height vars the scenes read */
+/* the mount target: full box, both height vars the scenes read. The scene
+   CSS defaults min-height to 400px, which would overflow the 220px mobile
+   band, so pin the min-height vars to the band height too. */
 .scene-band__host {
   position: absolute; inset: 0;
   --kc-height: var(--scene-h);
   --gg-height: var(--scene-h);
+  --kc-min-height: var(--scene-h);
+  --gg-min-height: var(--scene-h);
+}
+/* once a scene mounts, its root class sets position: relative; keep the host
+   filling the band so the label sits over it and nothing reflows. */
+.scene-band__host.toh-scene,
+.scene-band__host.gg-scene { position: absolute; }
+.scene-band__label { z-index: 1; pointer-events: none; }
+/* China: the scene composes a 620px-tall frame (roof, then the glyph curtain
+   hanging from the eaves). At 400px the roof alone fills the band and the
+   curtain, the interactive part, falls below the clip line. --temple-width is
+   the knob the scene exposes on its root; a smaller roof leaves room for the
+   curtain. Desktop only: at 220px nothing fits, so the phone band keeps the
+   roof crown as a still. Revert this block to get the full-size roof back. */
+@media (min-width: 768px) {
+  .scene-band__host[data-place="china"] { --temple-width: min(300px, 26cqw); }
 }
 /* bottom-right control; sits above the host */
 .scene-band__expand {

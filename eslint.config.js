@@ -5,7 +5,9 @@ import reactRefresh from 'eslint-plugin-react-refresh'
 import { defineConfig, globalIgnores } from 'eslint/config'
 
 export default defineConfig([
-  globalIgnores(['dist']),
+  // Vendored Kinetic Curtains scene modules (verbatim copies from the
+  // kinetic-curtains repo); lint only our wrappers (src/scenes/*/index.js).
+  globalIgnores(['dist', 'src/scenes/**/*.js', '!src/scenes/**/index.js']),
   {
     files: ['**/*.{js,jsx}'],
     extends: [

@@ -43,7 +43,7 @@ export default function Page() {
       </Place>
 
       <section id="about" className="v2-wrap border-t border-rule py-14 md:py-20">
-        <div className="v2-photo" aria-label="photo placeholder">photo</div>
+        <img className="v2-photo" src={`${import.meta.env.BASE_URL}yixin.jpg`} width="720" height="900" alt="Yixin Liu" loading="lazy" />
         <div className="v2-prose mt-8">
           {about.map((t) => <p key={t}>{t}</p>)}
           <p className="v2-placeholder">[About: the route, eight years by place, pending]</p>

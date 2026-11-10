@@ -252,13 +252,12 @@ body::before {
 
 /* about photo */
 .v2-photo {
-  width: 240px; height: 240px; max-width: 100%;
-  display: grid; place-items: center;
-  border: 1px dashed var(--ink-300);
-  color: var(--ink-400);
-  font-family: Inter, system-ui, sans-serif;
-  font-size: 0.85rem;
+  width: 220px; max-width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  display: block;
 }
+@media (min-width: 768px) { .v2-photo { width: 260px; } }
 
 /* skip link */
 .u-skip { position: absolute; left: -9999px; }

@@ -1,5 +1,6 @@
-import { useRef } from 'react';
+import { useCallback, useRef, useState } from 'react';
 import useScene, { hasScene } from './useScene';
+import SceneOverlay from './SceneOverlay';
 
 /**
  * SceneBand — a fixed-height band holding one Kinetic Curtains scene.
@@ -33,6 +34,15 @@ export default function SceneBand({ place }) {
   const mounted = hasScene(place);
   useScene(hostRef, place);
 
+  // dev only: ?expand=china opens the overlay on load, for screenshots
+  const [open, setOpen] = useState(() =>
+    import.meta.env.DEV && new URLSearchParams(window.location.search).get('expand') === place);
+  const expandRef = useRef(null);
+  const close = useCallback(() => {
+    setOpen(false);
+    expandRef.current?.focus();
+  }, []);
+
   return (
     <div className="scene-band" data-place={place}>
       <span className="scene-band__label" aria-hidden="true">{label}</span>
@@ -41,15 +51,19 @@ export default function SceneBand({ place }) {
       )}
       {/* mount target — must stay an empty div with this id; the scene owns its children */}
       <div ref={hostRef} id={id} className="scene-band__host" data-place={place} />
-      {/* No-op for now: the full-screen scene opens from here later. */}
-      <button
-        type="button"
-        className="scene-band__expand"
-        data-scene={place}
-        aria-label={`Expand the ${label} scene`}
-      >
-        Expand <span aria-hidden="true">↗</span>
-      </button>
+      {mounted ? (
+        <button
+          ref={expandRef}
+          type="button"
+          className="scene-band__expand"
+          data-scene={place}
+          onClick={() => setOpen(true)}
+          aria-label={`Expand the ${label} scene`}
+        >
+          Expand <span aria-hidden="true">↗</span>
+        </button>
+      ) : null}
+      {open ? <SceneOverlay place={place} onClose={close} /> : null}
     </div>
   );
 }

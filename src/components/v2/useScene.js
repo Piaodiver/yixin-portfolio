@@ -29,6 +29,37 @@ const EMBED_OPTIONS = {
   pauseOffscreen: true,
 };
 
+/* Full-screen options (SceneOverlay): the scene's own chrome comes back so
+   the viewer can switch day/night, turn the sound on and open the settings
+   panel; the title block and touch counter too. The nav links are demo
+   placeholders upstream, so they stay off. */
+const FULL_OPTIONS = {
+  chrome: true,
+  title: true,
+  hud: true,
+  cursor: true,
+  settings: true,
+  nav: [],
+  sound: 'off',
+  theme: 'day',
+  persistTheme: false,
+  pauseOffscreen: false,
+};
+
+/** Mounts the full-screen version of `place` into `host`. Resolves to the
+    scene handle (destroy it on close), or null if the module fails. */
+export async function mountFull(host, place) {
+  const load = LOADERS[place];
+  if (!host || !load) return null;
+  try {
+    const mod = await load();
+    return mod.mount(host, { ...FULL_OPTIONS, assetBase: mod.assetBase });
+  } catch (err) {
+    console.warn(`[scene:${place}] full-screen mount failed`, err);
+    return null;
+  }
+}
+
 const NEAR_VIEWPORT = '200px';
 
 /**

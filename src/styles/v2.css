@@ -214,6 +214,28 @@ body::before {
 }
 .scene-band__expand:hover { border-color: var(--accent); }
 @media (min-width: 768px) { .scene-band__expand { right: 24px; bottom: 16px; } }
+/* no scene mounts under reduced motion (useScene), so nothing to expand */
+@media (prefers-reduced-motion: reduce) { .scene-band__expand { display: none; } }
+
+/* full-screen scene (SceneOverlay): a viewport-sized host above the page and
+   the side nav. The scenes size themselves from the height vars; Jaffa's
+   artboard is pinned to 100svh upstream, which is the right box here. */
+.scene-overlay {
+  position: fixed; inset: 0; z-index: 50;
+  background: var(--paper-sunk);
+}
+.scene-overlay__host {
+  position: absolute; inset: 0;
+  --kc-height: 100%;
+  --gg-height: 100%;
+  --kc-min-height: 100%;
+  --gg-min-height: 100%;
+}
+.scene-overlay__host.toh-scene,
+.scene-overlay__host.gg-scene,
+.scene-overlay__host.jaffa-scene,
+.scene-overlay__host.merlion-scene { position: absolute; }
+.scene-overlay__close { z-index: 30; }
 
 /* section nav. Top row below 1024px (the 64ch column plus a side column
    does not fit before that); fixed right-edge column from 1024px up. */

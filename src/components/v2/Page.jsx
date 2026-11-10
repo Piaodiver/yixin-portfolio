@@ -46,7 +46,6 @@ export default function Page() {
         <img className="v2-photo" src={`${import.meta.env.BASE_URL}yixin.jpg`} width="720" height="900" alt="Yixin Liu" loading="lazy" />
         <div className="v2-prose mt-8">
           {about.map((t) => <p key={t}>{t}</p>)}
-          <p className="v2-placeholder">[About: the route, eight years by place, pending]</p>
           <p className="v2-placeholder">[About: outside work, pending]</p>
         </div>
         <p className="mt-10 text-[0.92rem]">

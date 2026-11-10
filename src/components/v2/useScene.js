@@ -10,6 +10,8 @@ import { useEffect } from 'react';
 const LOADERS = {
   china: () => import('../../scenes/china/index.js'),
   'united-states': () => import('../../scenes/united-states/index.js'),
+  israel: () => import('../../scenes/israel/index.js'),
+  singapore: () => import('../../scenes/singapore/index.js'),
 };
 
 export const hasScene = (place) => Object.hasOwn(LOADERS, place);

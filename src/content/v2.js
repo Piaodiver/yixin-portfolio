@@ -23,6 +23,7 @@ export const hero = {
   name: 'Yixin Liu',
   headline: 'Most enterprise AI projects are content problems in disguise. I find out which kind you have.',
   subline: 'Over eight years of this. The technology kept changing. The problem did not.',
+  person: 'Seattle, by way of Beijing, Tel Aviv and Singapore. Underwater when I can be.',
 };
 
 export const cases = {

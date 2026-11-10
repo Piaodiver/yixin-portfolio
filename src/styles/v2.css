@@ -106,6 +106,12 @@ body::before {
 .v2-prose p { margin: 0 0 1.1em; max-width: 64ch; color: var(--ink-900); }
 .v2-prose p:last-child { margin-bottom: 0; }
 .v2-placeholder { color: var(--ink-500); font-style: italic; }
+.v2-person {
+  font-family: Inter, system-ui, sans-serif;
+  font-size: 0.92rem; line-height: 1.6;
+  color: var(--ink-500);
+  max-width: 64ch;
+}
 
 /* links: accent, hairline underline */
 .v2-link {

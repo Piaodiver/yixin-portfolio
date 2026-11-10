@@ -9,6 +9,8 @@ export default function Hero() {
       <p className="v2-sub v2-hang mt-6">
         <span className="v2-hang__swing">{hero.subline}</span>
       </p>
+      {/* the person, not the job: one line, small, under the hanging sub-line */}
+      <p className="v2-person mt-5">{hero.person}</p>
 
       <ul className="mt-14 grid gap-6 md:grid-cols-3 md:gap-8">
         {heroCards.map((c) => (

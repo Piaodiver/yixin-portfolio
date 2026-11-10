@@ -161,6 +161,9 @@ body::before {
 }
 .scene-band__label {
   position: absolute; top: 12px; left: 16px;
+  padding: 2px 6px; margin: -2px -6px;
+  background: color-mix(in srgb, var(--paper-sunk) 85%, transparent);
+  border-radius: 3px;
   font-family: Inter, system-ui, sans-serif;
   font-size: 0.72rem; font-weight: 500;
   letter-spacing: 0.1em; text-transform: uppercase;
@@ -197,6 +200,17 @@ body::before {
 .scene-band__host.jaffa-scene,
 .scene-band__host.merlion-scene { position: absolute; }
 .scene-band__label { z-index: 1; pointer-events: none; }
+/* Phone: 220px shows only the temple roof, so China gets a taller band and
+   a narrower temple (the scene's own narrow-container rule sets the width
+   on .temple directly, so it is overridden here, not via --temple-width).
+   The bridge wants a little more height than the shared band too. */
+@media (max-width: 767px) {
+  .scene-band[data-place="china"] { height: 360px; }
+  .scene-band__host[data-place="china"] { --kc-height: 360px; --kc-min-height: 360px; }
+  .scene-band__host[data-place="china"] .temple { top: 18px; width: min(250px, 64cqw); }
+  .scene-band[data-place="united-states"] { height: 280px; }
+  .scene-band__host[data-place="united-states"] { --gg-height: 280px; --gg-min-height: 280px; }
+}
 /* Per-place band heights. The shared --scene-h is the fallback; these two
    scenes were composed for taller frames and look squashed at 400px.
    China: the roof plus the glyph curtain needs about 620px on desktop.
@@ -279,6 +293,9 @@ body::before {
 .v2-nav a:hover { color: var(--ink-900); }
 /* the name: back to top; sits apart from the section labels */
 .v2-nav__home { color: var(--ink-900); }
+/* on the phone row the name would push About off screen; the row is the
+   way back up anyway, so the name is desktop only */
+@media (max-width: 1023px) { .v2-nav__home { display: none; } }
 @media (min-width: 1024px) { .v2-nav__home { margin-bottom: 8px; } }
 .v2-nav a[aria-current="true"] { color: var(--accent); }
 /* anchor jumps must clear the sticky row */

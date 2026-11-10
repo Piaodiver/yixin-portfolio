@@ -15,7 +15,7 @@ export const israel = [
 
 export const about = [
   'In mid-2026 I moved from Singapore to Seattle, left a job I liked to do it, and started building on my own. Now I am looking for the next one. What I want from it: a hard problem, people who want it solved, and a seat close enough to the users to know whether it is.',
-  'The route, by place. Economics at Wesleyan in Connecticut. Tel Aviv for an MBA and an internship at a computer vision company. Beijing for two years at Baidu as a project manager, then SAP, where I went from management trainee to solution architect on the LGMG program, with a stretch in California. Singapore from 2024: Wiz.AI, then Salesforce as a technical architect for AI and data. Seattle since mid-2026.',
+  'The route, by place. Economics at Wesleyan in Connecticut, then Tel Aviv for an MBA. Beijing for two years at Baidu, where I built the event app for a quarterly summit of 200 leaders; it cut the coordination team from twelve people to three, and the feature later went into Baidu Hi, the company\'s own messaging app. Then SAP, which sent me to its academy in San Ramon, California, for six months from late 2019, the one presales trainee from East Asia that year, before I came back to Beijing as a solution architect on the LGMG program. Singapore from 2024: Wiz.AI, then Salesforce as a technical architect for AI and data. Seattle since mid-2026.',
 ];
 
 export const hero = {

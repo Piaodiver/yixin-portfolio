@@ -46,8 +46,15 @@ export default function SideNav() {
     return () => io.disconnect();
   }, []);
 
+  const toTop = (e) => {
+    e.preventDefault();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    if (window.location.hash) history.replaceState(null, '', window.location.pathname + window.location.search);
+  };
+
   return (
     <nav className="v2-nav" aria-label="Sections">
+      <a href="#" className="v2-nav__home" onClick={toTop}>Yixin Liu</a>
       {ITEMS.map(({ id, label }) => (
         <a key={id} href={`#${id}`} aria-current={active === id ? 'true' : undefined}>
           {label}

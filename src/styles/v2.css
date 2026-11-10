@@ -118,6 +118,18 @@ body::before {
 .v2-link:hover { text-decoration-color: var(--accent); }
 .v2-card-link { display: block; color: inherit; text-decoration: none; }
 .v2-card-link:hover .v2-eyebrow { color: var(--accent); }
+.v2-card-link__read { color: var(--accent); }
+.v2-card-link:hover .v2-card-link__read { text-decoration: underline; text-underline-offset: 3px; }
+/* links inside case text: ink-coloured, hairline underline, accent on hover;
+   quieter than .v2-link so the paragraphs do not light up */
+.v2-prose a {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  text-decoration-color: var(--ink-300);
+}
+.v2-prose a:hover { color: var(--accent); text-decoration-color: var(--accent); }
 
 /* scene band placeholder */
 .scene-band {
@@ -259,6 +271,9 @@ body::before {
   flex: none;
 }
 .v2-nav a:hover { color: var(--ink-900); }
+/* the name: back to top; sits apart from the section labels */
+.v2-nav__home { color: var(--ink-900); }
+@media (min-width: 1024px) { .v2-nav__home { margin-bottom: 8px; } }
 .v2-nav a[aria-current="true"] { color: var(--accent); }
 /* anchor jumps must clear the sticky row */
 @media (max-width: 1023px) { main > section[id] { scroll-margin-top: 56px; } }

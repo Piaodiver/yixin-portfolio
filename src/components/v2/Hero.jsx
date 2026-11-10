@@ -16,6 +16,7 @@ export default function Hero() {
             <a href={`#${c.id}`} className="v2-card-link">
               <span className="v2-eyebrow">{c.name}</span>
               <p className="mt-2 text-[0.92rem] leading-relaxed text-ink-700">{c.card}</p>
+              <span className="v2-card-link__read mt-2 inline-block text-[0.85rem]">Read <span aria-hidden="true">↓</span></span>
             </a>
           </li>
         ))}

@@ -26,10 +26,25 @@ export function CaseHead({ item }) {
   );
 }
 
+const LINK = /\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g;
+
+/** Paragraph text with [text](url) links; everything else is plain text. */
+export function Inline({ text }) {
+  const out = [];
+  let last = 0;
+  for (const m of text.matchAll(LINK)) {
+    if (m.index > last) out.push(text.slice(last, m.index));
+    out.push(<a key={m.index} href={m[2]} target="_blank" rel="noreferrer">{m[1]}</a>);
+    last = m.index + m[0].length;
+  }
+  if (last < text.length) out.push(text.slice(last));
+  return out;
+}
+
 export function Prose({ paragraphs }) {
   return (
     <div className="v2-prose mt-4">
-      {paragraphs.map((p, i) => <p key={i}>{p}</p>)}
+      {paragraphs.map((p, i) => <p key={i}><Inline text={p} /></p>)}
     </div>
   );
 }

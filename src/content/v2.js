@@ -23,11 +23,11 @@ export const cases = {
     year: '2025',
     section: 'singapore',
     card:
-      "Admissions agent for the University of Nottingham Malaysia on Salesforce Agentforce, 2025. Answers eligibility and visa timing questions from Data Cloud and books counsellor sessions. Live on the website and WhatsApp. Malaysia's first university on Agentforce.",
+      "Admissions agent for the University of Nottingham Malaysia on Salesforce Agentforce, 2025. I was the Salesforce technical architect, working with the implementation partner. Answers course, eligibility, fee and scholarship questions and books counsellor sessions and campus tours. Malaysia's first university on Agentforce.",
     long: [
-      "Over half of Nottingham Malaysia's applicants are international, and they ask about eligibility, fees and visas at night, Malaysian time. In 2025 I directed the solution architecture for NOVA, the university's admissions agent on Salesforce Agentforce.",
-      'I grounded the agent in structured data in Data Cloud rather than a document corpus, because eligibility has to be computed. It depends on nationality, qualification system (A-Level, STPM, IB, Gaokao), discipline, degree level and today’s date, since visa processing time differs by passport.',
-      'What cost us most was deciding whether to organise the data by discipline or by degree type. The 2+2 and 3+1 routes between Malaysia and the UK broke both cuts, because a split-campus route is neither. It is a delivery mode. The first phase launched on schedule, on the website and WhatsApp.',
+      "Over half of Nottingham Malaysia's applicants are international, from more than 70 countries, and they ask about courses, eligibility, fees and scholarships at night, Malaysian time. In 2025 the university built NOVA, its admissions agent on Salesforce Agentforce, the first at a Malaysian university. I was the Salesforce technical architect on the project, working alongside the implementation partner.",
+      "We grounded the agent in structured student data in Salesforce rather than a document corpus, because eligibility has to be computed. It depends on nationality, qualification system (A-Level, STPM, IB, Gaokao), discipline and degree level. Scholarship eligibility works the same way, from a student's results.",
+      "The agent also acts. A student can book a counsellor session or a campus tour in seconds, and a counsellor stays reachable from inside the conversation. What cost us most was deciding whether to organise the data by discipline or by degree type. The 2+2 and 3+1 routes between Malaysia and the UK broke both cuts, because a split-campus route is neither. It is a delivery mode. NOVA was announced in December 2025, on the website, WhatsApp, Facebook and WeChat.",
     ],
   },
   lgmg: {
@@ -38,11 +38,11 @@ export const cases = {
     year: '2022',
     section: 'china',
     card:
-      'SAP global lighthouse case. A Chinese machinery maker with subsidiaries on three continents needed dealers, customers, logistics and finance on one set of orders. I won the bid and stayed as solution architect through go-live, Q1 2022.',
+      'SAP global lighthouse case. A Chinese machinery maker with subsidiaries on three continents needed dealers, customers, logistics and finance on one set of orders. I won the bid and stayed as solution architect through go-live, Q1 2022. SAP reports order processing 25% faster.',
     long: [
-      'LGMG had just passed ¥10 billion in output and opened subsidiaries in Europe, North America and Japan, each with its own standards. It makes aerial work platforms and mining equipment in China. A machine reaches its buyer through a dealer, on credit or a lease, shipped by a logistics provider, cleared through customs, then needs parts for a decade.',
-      'I won the bid and stayed as solution architect to go-live. The hardest requirement was pricing. Prices differ by region, and dealers must not see each other’s. I put that rule in the data model instead of a report filter.',
-      'Requirements kept arriving, so I re-stated [needs: to whom, in which document] what a successful delivery meant. Phase one went live in Q1 2022 on SAP Commerce Cloud with S/4HANA Cloud Private Edition.',
+      'LGMG makes aerial work platforms and mining equipment in Shandong. By 2022 its output had passed US$1.4 billion (¥10 billion) for the first time, with subsidiaries in Europe, North America and Japan and a plan to earn half its revenue from exports. Each subsidiary had grown up with its own standards. A machine reaches its buyer through a dealer, on credit or a lease, shipped by a logistics provider, cleared through customs, then needs parts for a decade.',
+      'I won the bid and stayed as solution architect to go-live. The hardest part was not the software. Each subsidiary had its own material codes and its own way of booking a sale, so every requirements meeting was really an argument about whose definitions would become the group’s. We settled that first, as one master data hierarchy and one set of accounting rules, and built the portals on top of it. Credit checks moved to the moment an order is taken, not after.',
+      'Phase one went live in Q1 2022 on SAP Commerce Cloud with S/4HANA Cloud Private Edition. SAP later published the programme: order processing 25% faster, and one master data hierarchy and one set of accounting rules across the group.',
     ],
   },
   wizai: {
@@ -53,10 +53,10 @@ export const cases = {
     year: '2024',
     section: 'singapore',
     card:
-      "Retrieval agent for a Singapore entertainment destination, Wiz.AI's first LLM customer, 2024. The CMS stayed the source of truth through scheduled ingestion. Uncertain answers went to a human, not a guess.",
+      "Retrieval agent for a Singapore entertainment destination, Wiz.AI's first LLM customer, 2024. The CMS stayed the source of truth through scheduled ingestion. Anything below the bar went to the official site or the customer service line rather than to a guess.",
     long: [
       "The customer's CMS already held every fact the agent would need, years of approved content run by an editorial team with its own approval workflow. In 2024 this Singapore entertainment destination wanted its first LLM deployment. It was Wiz.AI's first too, with no platform yet.",
-      'I decided the CMS would stay the source of truth, with a scheduled ingestion pipeline feeding the vector store, instead of a hand-built knowledge base. That costs freshness, up to one refresh cycle. The editors keep one place to edit and the agent inherits their approvals. Anything below the answer bar went to the official site or the service line, not to a guess.',
+      'I decided the CMS would stay the source of truth, with a scheduled ingestion pipeline feeding the vector store, instead of a hand-built knowledge base. That costs freshness, up to one refresh cycle. The editors keep one place to edit and the agent inherits their approvals. Anything below the bar went to the official site or the customer service line rather than to a guess.',
       'What I would change: I never wrote down what "correct" meant before we built, as a scoring rubric or as acceptance criteria. And who maintains the knowledge base was a negotiation. We treated it as something the architecture would settle. I left before there was enough operating history to quote.',
     ],
   },

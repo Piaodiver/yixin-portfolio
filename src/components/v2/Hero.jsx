@@ -5,7 +5,10 @@ export default function Hero() {
     <header className="v2-wrap pt-16 pb-14 md:pt-28 md:pb-20">
       <p className="v2-eyebrow">{hero.name}</p>
       <h1 className="v2-h1 mt-5">{hero.headline}</h1>
-      <p className="v2-sub mt-6">{hero.subline}</p>
+      {/* hangs from two threads; CSS sway is a stand-in for the pendulum physics */}
+      <p className="v2-sub v2-hang mt-6">
+        <span className="v2-hang__swing">{hero.subline}</span>
+      </p>
 
       <ul className="mt-14 grid gap-6 md:grid-cols-3 md:gap-8">
         {heroCards.map((c) => (

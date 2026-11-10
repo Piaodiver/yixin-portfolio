@@ -37,12 +37,22 @@ const LABELS = {
 
 export default function SceneBand({ place }) {
   const id = `scene-${place}`;
+  const label = LABELS[place] ?? place;
   return (
-    <div className="scene-band" aria-hidden="true">
-      <span className="scene-band__label">{LABELS[place] ?? place}</span>
-      <span className="scene-band__caption">scene loads here</span>
+    <div className="scene-band">
+      <span className="scene-band__label" aria-hidden="true">{label}</span>
+      <span className="scene-band__caption" aria-hidden="true">scene loads here</span>
       {/* mount target — must stay an empty div with this id */}
       <div id={id} className="scene-band__host" data-place={place} />
+      {/* No-op for now: the full-screen scene opens from here later. */}
+      <button
+        type="button"
+        className="scene-band__expand"
+        data-scene={place}
+        aria-label={`Expand the ${label} scene`}
+      >
+        Expand <span aria-hidden="true">↗</span>
+      </button>
     </div>
   );
 }

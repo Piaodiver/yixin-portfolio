@@ -1,10 +1,12 @@
 import Hero from './Hero';
+import SideNav from './SideNav';
 import Place, { CaseHead, Prose } from './Place';
 import { cases, built, links } from '../../content/v2';
 
 export default function Page() {
   return (
     <main id="main">
+      <SideNav />
       <Hero />
 
       <Place place="china">

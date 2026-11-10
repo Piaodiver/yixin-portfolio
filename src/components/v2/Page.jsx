@@ -1,7 +1,7 @@
 import Hero from './Hero';
 import SideNav from './SideNav';
 import Place, { CaseHead, Prose } from './Place';
-import { cases, built, links, israel } from '../../content/v2';
+import { cases, built, links, israel, about } from '../../content/v2';
 
 export default function Page() {
   return (
@@ -45,9 +45,9 @@ export default function Page() {
       <section id="about" className="v2-wrap border-t border-rule py-14 md:py-20">
         <div className="v2-photo" aria-label="photo placeholder">photo</div>
         <div className="v2-prose mt-8">
-          <p className="v2-placeholder">[About: pending]</p>
-          <p className="v2-placeholder">[About: pending]</p>
-          <p className="v2-placeholder">[About: pending]</p>
+          {about.map((t) => <p key={t}>{t}</p>)}
+          <p className="v2-placeholder">[About: the route, eight years by place, pending]</p>
+          <p className="v2-placeholder">[About: outside work, pending]</p>
         </div>
         <p className="mt-10 text-[0.92rem]">
           <a className="v2-link" href={`mailto:${links.email}`}>{links.email}</a>

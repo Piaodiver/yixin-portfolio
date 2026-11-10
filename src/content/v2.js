@@ -13,6 +13,10 @@ export const israel = [
   'I got the internship by writing to the CEO on LinkedIn when nothing said the company wanted an intern. I sent about 30 messages like that, about one in four got a reply, and I asked each for a meeting.',
 ];
 
+export const about = [
+  'In mid-2026 I moved from Singapore to Seattle, left a job I liked to do it, and started building on my own. Now I am looking for the next one. What I want from it: a hard problem, people who want it solved, and a seat close enough to the users to know whether it is.',
+];
+
 export const hero = {
   name: 'Yixin Liu',
   headline: 'Most enterprise AI projects are content problems in disguise. I find out which kind you have.',

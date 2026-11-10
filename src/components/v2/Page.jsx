@@ -1,7 +1,7 @@
 import Hero from './Hero';
 import SideNav from './SideNav';
 import Place, { CaseHead, Prose } from './Place';
-import { cases, built, links } from '../../content/v2';
+import { cases, built, links, israel } from '../../content/v2';
 
 export default function Page() {
   return (
@@ -15,9 +15,8 @@ export default function Page() {
       </Place>
 
       <Place place="israel">
-        <div className="v2-prose">
-          <p className="v2-placeholder">[Israel: three to five sentences, pending from Yixin]</p>
-        </div>
+        <p className="v2-eyebrow">Tel Aviv University · EyeSight Technologies · 2015–2017</p>
+        <Prose paragraphs={israel} />
       </Place>
 
       <Place place="singapore">

@@ -5,8 +5,13 @@
 export const links = {
   github: 'https://github.com/Piaodiver',
   linkedin: 'https://www.linkedin.com/in/liuyixin/',
-  email: '[email]', // mailto placeholder
+  email: 'liuyixin10@gmail.com',
 };
+
+export const israel = [
+  'Tel Aviv, 2015 to 2017. An MBA in innovative technology at Tel Aviv University, and alongside it an internship at EyeSight Technologies, now Cipia, in Herzliya Pituach: a computer vision company whose software watches drivers for signs of fatigue. I handled marketing and international partnerships there, among them Continental AG and Kuang-Chi, the Shenzhen group that put US$20 million into the company in 2016. I was also the China representative of the Israel-Asia Center.',
+  'I got the internship by writing to the CEO on LinkedIn when nothing said the company wanted an intern. I sent about 30 messages like that, about one in four got a reply, and I asked each for a meeting.',
+];
 
 export const hero = {
   name: 'Yixin Liu',

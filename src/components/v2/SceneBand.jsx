@@ -34,7 +34,7 @@ export default function SceneBand({ place }) {
   useScene(hostRef, place);
 
   return (
-    <div className="scene-band">
+    <div className="scene-band" data-place={place}>
       <span className="scene-band__label" aria-hidden="true">{label}</span>
       {mounted ? null : (
         <span className="scene-band__caption" aria-hidden="true">scene loads here</span>

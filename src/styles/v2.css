@@ -156,15 +156,18 @@ body::before {
 .scene-band__host.toh-scene,
 .scene-band__host.gg-scene { position: absolute; }
 .scene-band__label { z-index: 1; pointer-events: none; }
-/* China: the scene composes a 620px-tall frame (roof, then the glyph curtain
-   hanging from the eaves). At 400px the roof alone fills the band and the
-   curtain, the interactive part, falls below the clip line. --temple-width is
-   the knob the scene exposes on its root; a smaller roof leaves room for the
-   curtain. Desktop only: at 220px nothing fits, so the phone band keeps the
-   roof crown as a still. Revert this block to get the full-size roof back. */
+/* Per-place band heights. The shared --scene-h is the fallback; these two
+   scenes were composed for taller frames and look squashed at 400px.
+   China: the roof plus the glyph curtain needs about 620px on desktop.
+   United States: the bridge is drawn against a 1672x941 reference frame and
+   scales with the box, so it keeps its original full-viewport height. */
 @media (min-width: 768px) {
-  .scene-band__host[data-place="china"] { --temple-width: min(300px, 26cqw); }
+  .scene-band[data-place="china"] { --scene-h: 620px; }
+  /* roof image is 901x~726; at 620px wide it alone is ~500px tall and the
+     curtain falls off the bottom. 440px leaves ~170px for the curtain. */
+  .scene-band__host[data-place="china"] { --temple-width: min(440px, 40cqw); }
 }
+.scene-band[data-place="united-states"] { --scene-h: clamp(560px, 100svh, 900px); }
 /* bottom-right control; sits above the host */
 .scene-band__expand {
   position: absolute; right: 20px; bottom: 14px; z-index: 1;

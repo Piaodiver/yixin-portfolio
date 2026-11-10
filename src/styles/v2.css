@@ -1,0 +1,132 @@
+/* v2 tokens and page styles. Paper ground, one accent. Light only. */
+:root {
+  color-scheme: light;
+  --paper:      #F7F2E9;
+  --paper-sunk: #F0EADF;
+  --paper-raise:#FBF8F1;
+  --ink-900:    #1C1B18;
+  --ink-700:    #403D36;
+  --ink-500:    #5F5B52;
+  --ink-400:    #716C62;
+  --ink-300:    #A9A396;   /* decorative only */
+  --ink-100:    #D9D2C3;
+  --ink-050:    #E8E2D4;
+  --rule:       #DDD5C5;
+  --accent:     #E8561C;   /* International Orange, sparingly */
+  --scene-h:    160px;
+  /* faint paper fibre; one inline SVG, no request */
+  --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23g)'/%3E%3C/svg%3E");
+}
+@media (min-width: 768px) { :root { --scene-h: 240px; } }
+
+body::before {
+  content: '';
+  position: fixed; inset: 0; z-index: -1;
+  pointer-events: none;
+  background-image: var(--grain);
+  opacity: 0.035;
+}
+
+/* layout */
+.v2-wrap {
+  width: 100%;
+  max-width: 64ch;
+  margin-inline: auto;
+  padding-inline: 16px;
+}
+@media (min-width: 768px) { .v2-wrap { padding-inline: 24px; } }
+
+/* type */
+.v2-eyebrow {
+  font-family: Inter, system-ui, sans-serif;
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-500);
+}
+.v2-h1 {
+  font-family: Fraunces, Georgia, serif;
+  font-weight: 400;
+  font-size: clamp(1.75rem, 1.2rem + 2.4vw, 2.6rem);
+  line-height: 1.2;
+  color: var(--ink-900);
+}
+.v2-h2 {
+  font-family: Fraunces, Georgia, serif;
+  font-weight: 400;
+  font-size: clamp(1.4rem, 1.1rem + 1.2vw, 1.9rem);
+  line-height: 1.25;
+  color: var(--ink-900);
+}
+.v2-sub {
+  font-family: Fraunces, Georgia, serif;
+  font-size: 1.15rem;
+  line-height: 1.5;
+  color: var(--ink-700);
+}
+.v2-prose p { margin: 0 0 1.1em; max-width: 64ch; color: var(--ink-900); }
+.v2-prose p:last-child { margin-bottom: 0; }
+.v2-placeholder { color: var(--ink-500); font-style: italic; }
+
+/* links: accent, hairline underline */
+.v2-link {
+  color: var(--accent);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  text-decoration-color: color-mix(in srgb, var(--accent) 45%, transparent);
+}
+.v2-link:hover { text-decoration-color: var(--accent); }
+.v2-card-link { display: block; color: inherit; text-decoration: none; }
+.v2-card-link:hover .v2-eyebrow { color: var(--accent); }
+
+/* scene band placeholder */
+.scene-band {
+  position: relative;
+  width: 100%;
+  height: var(--scene-h);
+  background: var(--paper-sunk);
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+}
+.scene-band__label {
+  position: absolute; top: 12px; left: 16px;
+  font-family: Inter, system-ui, sans-serif;
+  font-size: 0.72rem; font-weight: 500;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--ink-500);
+}
+.scene-band__caption {
+  position: absolute; left: 50%; top: 50%;
+  transform: translate(-50%, -50%);
+  font-family: Inter, system-ui, sans-serif;
+  font-size: 0.8rem; color: var(--ink-300);
+}
+/* the mount target: full box, both height vars the scenes read */
+.scene-band__host {
+  position: absolute; inset: 0;
+  --kc-height: var(--scene-h);
+  --gg-height: var(--scene-h);
+}
+
+/* about photo */
+.v2-photo {
+  width: 240px; height: 240px; max-width: 100%;
+  display: grid; place-items: center;
+  border: 1px dashed var(--ink-300);
+  color: var(--ink-400);
+  font-family: Inter, system-ui, sans-serif;
+  font-size: 0.85rem;
+}
+
+/* skip link */
+.u-skip { position: absolute; left: -9999px; }
+.u-skip:focus {
+  left: 1rem; top: 1rem; z-index: 100;
+  padding: 0.6rem 1rem;
+  background: var(--ink-900); color: var(--paper);
+}
+
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+::selection { background: var(--accent); color: var(--paper); }

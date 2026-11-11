@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 // names a recruiter scans for. The phone row shows the place only.
 const ITEMS = [
   { id: 'china', label: 'China', sub: 'LGMG · SAP' },
-  { id: 'israel', label: 'Israel', sub: 'TAU · EyeSight' },
+  { id: 'israel', label: 'Israel', sub: 'TAU · MBA' },
   { id: 'singapore', label: 'Singapore', sub: 'Salesforce · Wiz.AI' },
   { id: 'united-states', label: 'United States', sub: 'Building now' },
   { id: 'about', label: 'About', sub: 'The route' },

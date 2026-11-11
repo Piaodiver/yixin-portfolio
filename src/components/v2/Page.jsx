@@ -19,7 +19,7 @@ export default function Page() {
         </div>
       </Place>
 
-      <Place place="israel" title="Israel" sub="Tel Aviv · Tel Aviv University, EyeSight · 2015–2017">
+      <Place place="israel" title="Israel" sub="Tel Aviv · Tel Aviv University · 2015–2017">
         <p className="v2-eyebrow">Tel Aviv University · EyeSight Technologies · 2015–2017</p>
         <Prose paragraphs={israel} />
       </Place>

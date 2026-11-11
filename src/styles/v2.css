@@ -191,7 +191,12 @@ body::before {
   background: var(--paper-sunk);
   border-top: 1px solid var(--rule);
   border-bottom: 1px solid var(--rule);
+  transition: border-color 250ms ease;
 }
+/* a mounted band is a way into the full-screen scene: the frame answers the
+   pointer so the reader knows it is live */
+.scene-band[data-state="mounted"] { cursor: pointer; }
+.scene-band[data-state="mounted"]:hover { border-color: var(--accent); }
 /* Desktop: the bands no longer bleed edge to edge. Each is a centred frame of
    at most 1040px whose height follows its width, so every scene scales down
    together (about two thirds of the full-bleed size on a 1440 screen). The
@@ -290,19 +295,43 @@ body::before {
    box and clipped. Pin it to the scene root here rather than editing the
    vendored file. */
 .scene-band__host.jaffa-scene .artboard { height: 100%; }
-/* bottom-right control; sits above the host */
+/* bottom-right control; sits above the host. Fills with the accent when the
+   band is hovered, so the whole frame reads as one control. */
 .scene-band__expand {
-  position: absolute; right: 20px; bottom: 14px; z-index: 2;
-  padding: 4px 10px;
+  position: absolute; right: 16px; bottom: 14px; z-index: 2;
+  padding: 7px 14px;
   border: 1px solid var(--rule);
   border-radius: 999px;
   background: var(--paper);
   color: var(--accent);
   font-family: Inter, system-ui, sans-serif;
-  font-size: 12px; line-height: 1.4;
+  font-size: 13px; font-weight: 500; line-height: 1.4;
   cursor: pointer;
+  transition: background-color 200ms ease, color 200ms ease, border-color 200ms ease;
 }
-.scene-band__expand:hover { border-color: var(--accent); }
+.scene-band__expand:hover,
+.scene-band[data-state="mounted"]:hover .scene-band__expand {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: var(--paper);
+}
+/* the invitation pill: bottom centre, ink on paper, a slow bob, gone on hover */
+.scene-band__hint {
+  position: absolute; left: 50%; bottom: 16px; z-index: 2;
+  transform: translateX(-50%);
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: var(--ink-900);
+  color: var(--paper);
+  font-family: Inter, system-ui, sans-serif;
+  font-size: 12px; line-height: 1.4; white-space: nowrap;
+  pointer-events: none;
+  animation: scene-hint-in 300ms ease both, scene-hint-bob 2.4s ease-in-out 300ms infinite;
+}
+@keyframes scene-hint-in { from { opacity: 0; transform: translate(-50%, 6px); } to { opacity: 1; transform: translate(-50%, 0); } }
+@keyframes scene-hint-bob { 0%, 100% { transform: translate(-50%, 0); } 50% { transform: translate(-50%, -3px); } }
+@media (max-width: 767px) { .scene-band__hint { bottom: 12px; font-size: 11px; } }
 @media (min-width: 768px) { .scene-band__expand { right: 24px; bottom: 16px; } }
 /* no scene mounts under reduced motion (useScene), so nothing to expand */
 @media (prefers-reduced-motion: reduce) { .scene-band__expand { display: none; } }

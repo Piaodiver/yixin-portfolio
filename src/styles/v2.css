@@ -212,11 +212,23 @@ body::before {
   font-family: Inter, system-ui, sans-serif;
   font-size: 0.8rem; color: var(--ink-300);
 }
+/* poster: a still of the scene, under the host. Covers the band at every
+   size (the phone bands are shorter than the still, so the sides crop);
+   fades once the scene has mounted. Under reduced motion nothing mounts,
+   so it simply stays. */
+.scene-band__poster {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: center top;
+  display: block;
+  transition: opacity 600ms ease;
+}
+.scene-band__poster[data-state="mounted"] { opacity: 0; }
 /* the mount target: full box, both height vars the scenes read. The scene
    CSS defaults min-height to 400px, which would overflow the 220px mobile
    band, so pin the min-height vars to the band height too. */
 .scene-band__host {
-  position: absolute; inset: 0;
+  position: absolute; inset: 0; z-index: 1;
   --kc-height: var(--scene-h);
   --gg-height: var(--scene-h);
   --kc-min-height: var(--scene-h);
@@ -236,7 +248,7 @@ body::before {
 .scene-band__host.gg-scene,
 .scene-band__host.jaffa-scene,
 .scene-band__host.merlion-scene { position: absolute; }
-.scene-band__label { z-index: 1; pointer-events: none; }
+.scene-band__label { z-index: 2; pointer-events: none; }
 /* Phone: 220px shows only the temple roof, so China gets a taller band and
    a narrower temple (the scene's own narrow-container rule sets the width
    on .temple directly, so it is overridden here, not via --temple-width).
@@ -271,7 +283,7 @@ body::before {
 .scene-band__host.jaffa-scene .artboard { height: 100%; }
 /* bottom-right control; sits above the host */
 .scene-band__expand {
-  position: absolute; right: 20px; bottom: 14px; z-index: 1;
+  position: absolute; right: 20px; bottom: 14px; z-index: 2;
   padding: 4px 10px;
   border: 1px solid var(--rule);
   border-radius: 999px;

@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 /**
  * Lazy loaders for the Kinetic Curtains scenes. Each resolves to a wrapper
@@ -70,9 +70,13 @@ const NEAR_VIEWPORT = '200px';
  *
  * Reduced motion: neither module exposes a way to stop its loop or render one
  * still frame (Golden Gate only damps its forces), so under
- * `prefers-reduced-motion: reduce` we do not mount and leave the paper band.
+ * `prefers-reduced-motion: reduce` we do not mount and leave the poster.
+ *
+ * Returns the mount state: 'idle' (not yet, or never), 'mounted', 'failed'.
+ * SceneBand keeps its poster image visible until 'mounted'.
  */
 export default function useScene(hostRef, place) {
+  const [state, setState] = useState('idle');
   useEffect(() => {
     const host = hostRef.current;
     const load = LOADERS[place];
@@ -88,13 +92,16 @@ export default function useScene(hostRef, place) {
         mod = await load();
       } catch (err) {
         console.warn(`[scene:${place}] failed to load`, err);
+        setState('failed');
         return;
       }
       if (cancelled || !hostRef.current) return;
       try {
         handle = mod.mount(host, { ...EMBED_OPTIONS, assetBase: mod.assetBase });
+        setState('mounted');
       } catch (err) {
         console.warn(`[scene:${place}] failed to mount`, err);
+        setState('failed');
       }
     };
 
@@ -121,4 +128,5 @@ export default function useScene(hostRef, place) {
       }
     };
   }, [hostRef, place]);
+  return state;
 }

@@ -13,11 +13,15 @@ import SceneOverlay from './SceneOverlay';
  * uses container queries, so the host div must be the sizing box. Scenes
  * write data-theme on their own root, never on <html>.
  *
- * Mounted today (useScene): china -> mountTempleOfHeaven, united-states ->
- * mountGoldenGate. israel and singapore still show the placeholder caption
- * until their scenes are copied in (task 10). Mounting happens lazily when the
- * band is near the viewport, and the band height is fixed by CSS, so the
- * scene arriving causes no layout shift.
+ * All four places mount (useScene). Mounting happens lazily when the band
+ * is near the viewport, and the band height is fixed by CSS, so the scene
+ * arriving causes no layout shift.
+ *
+ * Poster: public/scenes/<place>/poster.jpg is a still of the scene at band
+ * size. It sits under the host from the first paint and fades out once the
+ * scene has mounted, so the band is never an empty box: before the chunk
+ * loads, if it fails, and under reduced motion (where nothing mounts), the
+ * poster is what the reader sees.
  */
 
 const LABELS = {
@@ -32,7 +36,8 @@ export default function SceneBand({ place }) {
   const label = LABELS[place] ?? place;
   const hostRef = useRef(null);
   const mounted = hasScene(place);
-  useScene(hostRef, place);
+  const state = useScene(hostRef, place);
+  const poster = `${import.meta.env.BASE_URL}scenes/${place}/poster.jpg`;
 
   // dev only: ?expand=china opens the overlay on load, for screenshots
   const [open, setOpen] = useState(() =>
@@ -46,7 +51,18 @@ export default function SceneBand({ place }) {
   return (
     <div className="scene-band" data-place={place}>
       <span className="scene-band__label" aria-hidden="true">{label}</span>
-      {mounted ? null : (
+      {mounted ? (
+        <img
+          className="scene-band__poster"
+          src={poster}
+          alt=""
+          width="1280"
+          height={place === 'china' ? 768 : 720}
+          loading="lazy"
+          decoding="async"
+          data-state={state}
+        />
+      ) : (
         <span className="scene-band__caption" aria-hidden="true">scene loads here</span>
       )}
       {/* mount target — must stay an empty div with this id; the scene owns its children */}

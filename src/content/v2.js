@@ -36,9 +36,9 @@ export const hero = {
 
 // The Salesforce year, as the frame around NOVA. Sits first in the Singapore section.
 export const salesforce = {
-  eyebrow: 'Salesforce · Technical Architect, AI & Data · 2025–2026',
+  eyebrow: 'Salesforce · Senior Technical Architect, AI & Data · 2025–2026',
   paragraphs: [
-    'From 2025 I was a technical architect for AI and data at Salesforce in Singapore. The clients were spread across Southeast Asia: banks and other financial firms, universities, retailers, entertainment and cultural venues, manufacturers. Most had run a pilot and wanted something in production. The first workshop usually ended on the same question: what the agent would be allowed to say. That depended on what the company had already written down, and who kept it current. The line at the top of this page is that answer, shortened. NOVA, below, is the one project from that year that was announced publicly.',
+    'From 2025 I was a senior technical architect for AI and data at Salesforce in Singapore. The clients were spread across Southeast Asia: banks and other financial firms, universities, retailers, entertainment and cultural venues, manufacturers. Most had run a pilot and wanted something in production. The first workshop usually ended on the same question: what the agent would be allowed to say. That depended on what the company had already written down, and who kept it current. The line at the top of this page is that answer, shortened. NOVA, below, is the one project from that year that was announced publicly.',
   ],
 };
 

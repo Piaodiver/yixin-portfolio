@@ -45,7 +45,7 @@ export const salesforce = {
 // The four places, in page order. Used by the section headings, the nav,
 // the scene bands and overlay, and the route map in the hero.
 export const places = [
-  { id: 'china', label: 'China', city: 'Beijing', sub: 'Beijing · Baidu, SAP · 2017–2023', years: 'grew up · 2017–2023' },
+  { id: 'china', label: 'China', city: 'Beijing', sub: 'Beijing · Baidu, SAP · 2017–2023', years: '2017–2023' },
   { id: 'israel', label: 'Israel', city: 'Tel Aviv', sub: 'Tel Aviv · Tel Aviv University · 2015–2017', years: '2015–2017' },
   { id: 'singapore', label: 'Singapore', city: 'Singapore', sub: 'Wiz.AI, Salesforce · 2024–2026', years: '2024–2026' },
   { id: 'united-states', label: 'United States', city: 'Seattle', sub: 'Connecticut 2014 · San Ramon 2019–2020 · Seattle since 2026', years: 'since 2026' },

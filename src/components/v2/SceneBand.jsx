@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import useScene, { hasScene } from './useScene';
 import SceneOverlay from './SceneOverlay';
+import { placeById } from '../../content/v2';
 
 /**
  * SceneBand — a fixed-height band holding one Kinetic Curtains scene.
@@ -31,16 +32,9 @@ import SceneOverlay from './SceneOverlay';
  * scene; the Expand button stays as the keyboard route.
  */
 
-const LABELS = {
-  china: 'China',
-  'united-states': 'United States',
-  israel: 'Israel',
-  singapore: 'Singapore',
-};
-
 export default function SceneBand({ place }) {
   const id = `scene-${place}`;
-  const label = LABELS[place] ?? place;
+  const label = placeById[place]?.label ?? place;
   const hostRef = useRef(null);
   const mounted = hasScene(place);
   const state = useScene(hostRef, place);

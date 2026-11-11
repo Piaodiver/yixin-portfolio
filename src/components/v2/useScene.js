@@ -16,6 +16,13 @@ const LOADERS = {
 
 export const hasScene = (place) => Object.hasOwn(LOADERS, place);
 
+/* L3: the scenes follow the visitor's clock. Night from 19:00 to 06:00 local;
+   day otherwise. Decided once per mount, not watched. */
+export const themeNow = () => {
+  const h = new Date().getHours();
+  return h >= 19 || h < 6 ? 'night' : 'day';
+};
+
 /* Embedding options from kinetic-curtains/docs/EMBEDDING.md: no masthead,
    no title block, no HUD, silent, no localStorage writes, pause offscreen.
    The host page does its own typography around the band. */
@@ -24,7 +31,6 @@ const EMBED_OPTIONS = {
   title: false,
   hud: false,
   sound: 'off',
-  theme: 'day',
   persistTheme: false,
   pauseOffscreen: true,
 };
@@ -41,7 +47,6 @@ const FULL_OPTIONS = {
   settings: true,
   nav: [],
   sound: 'off',
-  theme: 'day',
   persistTheme: false,
   pauseOffscreen: false,
 };
@@ -53,7 +58,7 @@ export async function mountFull(host, place) {
   if (!host || !load) return null;
   try {
     const mod = await load();
-    return mod.mount(host, { ...FULL_OPTIONS, assetBase: mod.assetBase });
+    return mod.mount(host, { ...FULL_OPTIONS, theme: themeNow(), assetBase: mod.assetBase });
   } catch (err) {
     console.warn(`[scene:${place}] full-screen mount failed`, err);
     return null;
@@ -97,7 +102,7 @@ export default function useScene(hostRef, place) {
       }
       if (cancelled || !hostRef.current) return;
       try {
-        handle = mod.mount(host, { ...EMBED_OPTIONS, assetBase: mod.assetBase });
+        handle = mod.mount(host, { ...EMBED_OPTIONS, theme: themeNow(), assetBase: mod.assetBase });
         setState('mounted');
       } catch (err) {
         console.warn(`[scene:${place}] failed to mount`, err);

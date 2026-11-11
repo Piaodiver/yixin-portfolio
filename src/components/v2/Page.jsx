@@ -3,7 +3,7 @@ import SideNav from './SideNav';
 import Place, { CaseHead, Prose } from './Place';
 import About from './About';
 import End from './End';
-import { cases, built, israel, salesforce, china, baidu } from '../../content/v2';
+import { cases, built, israel, salesforce, china, baidu, placeById as P } from '../../content/v2';
 
 export default function Page() {
   return (
@@ -11,7 +11,7 @@ export default function Page() {
       <SideNav />
       <Hero />
 
-      <Place place="china" title="China" sub="Beijing · Baidu, SAP · 2017–2023">
+      <Place place="china" title={P["china"].label} sub={P["china"].sub}>
         <Prose paragraphs={china} />
         <div className="mt-12">
           <p className="v2-eyebrow pt-2">{baidu.eyebrow}</p>
@@ -23,12 +23,12 @@ export default function Page() {
         </div>
       </Place>
 
-      <Place place="israel" title="Israel" sub="Tel Aviv · Tel Aviv University · 2015–2017">
+      <Place place="israel" title={P["israel"].label} sub={P["israel"].sub}>
         <p className="v2-eyebrow">Tel Aviv University · EyeSight Technologies · 2015–2017</p>
         <Prose paragraphs={israel} />
       </Place>
 
-      <Place place="singapore" title="Singapore" sub="Wiz.AI, Salesforce · 2024–2026">
+      <Place place="singapore" title={P["singapore"].label} sub={P["singapore"].sub}>
         <p className="v2-eyebrow pt-2">{salesforce.eyebrow}</p>
         <Prose paragraphs={salesforce.paragraphs} />
         <div className="mt-12">
@@ -41,7 +41,7 @@ export default function Page() {
         </div>
       </Place>
 
-      <Place place="united-states" title="United States" sub="Seattle · since 2026">
+      <Place place="united-states" title={P["united-states"].label} sub={P["united-states"].sub}>
         <p className="v2-eyebrow">Building now</p>
         <ul className="mt-3 divide-y divide-rule border-y border-rule">
           {built.map((b) => (

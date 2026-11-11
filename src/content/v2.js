@@ -42,6 +42,16 @@ export const salesforce = {
   ],
 };
 
+// The four places, in page order. Used by the section headings, the nav,
+// the scene bands and overlay, and the route map in the hero.
+export const places = [
+  { id: 'china', label: 'China', city: 'Beijing', sub: 'Beijing · Baidu, SAP · 2017–2023', years: 'grew up · 2017–2023' },
+  { id: 'israel', label: 'Israel', city: 'Tel Aviv', sub: 'Tel Aviv · Tel Aviv University · 2015–2017', years: '2015–2017' },
+  { id: 'singapore', label: 'Singapore', city: 'Singapore', sub: 'Wiz.AI, Salesforce · 2024–2026', years: '2024–2026' },
+  { id: 'united-states', label: 'United States', city: 'Seattle', sub: 'Seattle · since 2026', years: 'now' },
+];
+export const placeById = Object.fromEntries(places.map((p) => [p.id, p]));
+
 // One line at the top of the China section, before the LGMG case.
 export const china = [
   'I grew up in Beijing, and came back to it after Tel Aviv: two years at Baidu, then SAP.',

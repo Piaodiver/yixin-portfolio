@@ -1,12 +1,11 @@
 import { useEffect, useState } from 'react';
+import { places } from '../../content/v2';
 
 // Two lines per entry on the desktop column: the place, and under it the
 // names a recruiter scans for. The phone row shows the place only.
+const NAV_SUBS = { china: 'LGMG · SAP', israel: 'TAU · MBA', singapore: 'Salesforce · Wiz.AI', 'united-states': 'Building now' };
 const ITEMS = [
-  { id: 'china', label: 'China', sub: 'LGMG · SAP' },
-  { id: 'israel', label: 'Israel', sub: 'TAU · MBA' },
-  { id: 'singapore', label: 'Singapore', sub: 'Salesforce · Wiz.AI' },
-  { id: 'united-states', label: 'United States', sub: 'Building now' },
+  ...places.map((p) => ({ id: p.id, label: p.label, sub: NAV_SUBS[p.id] })),
   { id: 'about', label: 'About', sub: 'The route' },
 ];
 

@@ -59,6 +59,15 @@ body::before {
   line-height: 1.25;
   color: var(--ink-900);
 }
+/* under a place heading: city, employers, years, in the eyebrow voice */
+.v2-h2__sub {
+  display: block;
+  margin-top: 6px;
+  font-family: Inter, system-ui, sans-serif;
+  font-size: 0.78rem; font-weight: 500;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--ink-500);
+}
 .v2-sub {
   font-family: Fraunces, Georgia, serif;
   font-size: 1.15rem;
@@ -347,8 +356,10 @@ body::before {
 @media (max-width: 1023px) { .v2-nav__home { display: none; } }
 @media (min-width: 1024px) { .v2-nav__home { margin-bottom: 8px; } }
 .v2-nav a[aria-current="true"] { color: var(--accent); }
-/* anchor jumps must clear the sticky row */
-@media (max-width: 1023px) { main > section[id] { scroll-margin-top: 56px; } }
+/* anchor jumps must clear the sticky row: sections and the case headings
+   (#nova, #lgmg, #wizai) alike, so a Read link never lands under the nav */
+@media (max-width: 1023px) { main [id] { scroll-margin-top: 64px; } }
+@media (min-width: 1024px) { main [id] { scroll-margin-top: 24px; } }
 @media (min-width: 1024px) {
   .v2-nav {
     position: fixed; top: 140px; right: 28px; left: auto;

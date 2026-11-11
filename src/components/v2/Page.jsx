@@ -9,17 +9,17 @@ export default function Page() {
       <SideNav />
       <Hero />
 
-      <Place place="china">
+      <Place place="china" title="China" sub="Beijing · Baidu, SAP · 2017–2023">
         <CaseHead item={cases.lgmg} />
         <Prose paragraphs={cases.lgmg.long} />
       </Place>
 
-      <Place place="israel">
+      <Place place="israel" title="Israel" sub="Tel Aviv · Tel Aviv University, EyeSight · 2015–2017">
         <p className="v2-eyebrow">Tel Aviv University · EyeSight Technologies · 2015–2017</p>
         <Prose paragraphs={israel} />
       </Place>
 
-      <Place place="singapore">
+      <Place place="singapore" title="Singapore" sub="Wiz.AI, Salesforce · 2024–2026">
         <p className="v2-eyebrow pt-2">{salesforce.eyebrow}</p>
         <Prose paragraphs={salesforce.paragraphs} />
         <div className="mt-12">
@@ -32,8 +32,8 @@ export default function Page() {
         </div>
       </Place>
 
-      <Place place="united-states" title="Now">
-        <p className="v2-eyebrow mt-8">Built</p>
+      <Place place="united-states" title="United States" sub="Seattle · since 2026">
+        <p className="v2-eyebrow">Building now</p>
         <ul className="mt-3 divide-y divide-rule border-y border-rule">
           {built.map((b) => (
             <li key={b.title} className="py-4">

@@ -1,12 +1,21 @@
 import SceneBand from './SceneBand';
 
-/** A place section: scene band, then prose. `place` must match SceneBand's set. */
-export default function Place({ place, id = place, title, children }) {
+/**
+ * A place section: a heading (the place, and one small line of city, employers
+ * and years), the scene band, then prose. Every place gets the same heading
+ * so the four sections read at one level. `place` must match SceneBand's set.
+ */
+export default function Place({ place, id = place, title, sub, children }) {
   return (
-    <section id={id} className="scroll-mt-6">
+    <section id={id} className="pt-10 md:pt-14">
+      <div className="v2-wrap pb-5">
+        <h2 className="v2-h2">
+          {title}
+          {sub ? <small className="v2-h2__sub">{sub}</small> : null}
+        </h2>
+      </div>
       <SceneBand place={place} />
-      <div className="v2-wrap py-12 md:py-16">
-        {title ? <h2 className="v2-h2">{title}</h2> : null}
+      <div className="v2-wrap py-10 md:py-12">
         {children}
       </div>
     </section>
@@ -16,7 +25,7 @@ export default function Place({ place, id = place, title, children }) {
 /** Small case heading: client, platform, year. */
 export function CaseHead({ item }) {
   return (
-    <h3 id={item.id} className="v2-eyebrow scroll-mt-6 pt-2">
+    <h3 id={item.id} className="v2-eyebrow pt-2">
       {item.client}
       <span className="text-ink-300"> · </span>
       {item.platform}

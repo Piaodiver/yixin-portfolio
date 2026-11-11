@@ -141,6 +141,13 @@ export const built = [
     href: 'https://github.com/Piaodiver/llm-tco-calculator',
   },
   {
+    // Tariff Engine: repository is private until its README is finished, so no
+    // link yet, same treatment as MultiVerse. Added 2026-11-11 (step 24).
+    title: 'Tariff Engine',
+    body: 'Estimates US import duties layer by layer, every dollar traced to its legal source. The LLM only classifies the product; the duty math is deterministic. In progress, 2026.',
+    href: null,
+  },
+  {
     // MultiVerse I: title and one line only for now, a page of its own later.
     // Cleared with the co-founder on 2026-09-07 for positioning and screenshots;
     // no backend or implementation detail here.

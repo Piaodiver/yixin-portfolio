@@ -16,12 +16,9 @@ const LOADERS = {
 
 export const hasScene = (place) => Object.hasOwn(LOADERS, place);
 
-/* L3: the scenes follow the visitor's clock. Night from 19:00 to 06:00 local;
-   day otherwise. Decided once per mount, not watched. */
-export const themeNow = () => {
-  const h = new Date().getHours();
-  return h >= 19 || h < 6 ? 'night' : 'day';
-};
+/* The scenes always mount in day mode. Night by the visitor's clock was
+   tried on 2026-11-10 and dropped: the night renders did not earn it. */
+export const themeNow = () => 'day';
 
 /* Embedding options from kinetic-curtains/docs/EMBEDDING.md: no masthead,
    no title block, no HUD, silent, no localStorage writes, pause offscreen.

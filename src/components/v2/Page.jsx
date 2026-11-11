@@ -1,8 +1,9 @@
 import Hero from './Hero';
 import SideNav from './SideNav';
 import Place, { CaseHead, Prose } from './Place';
-import Reveal from './Reveal';
-import { cases, built, links, israel, about, salesforce, china } from '../../content/v2';
+import About from './About';
+import End from './End';
+import { cases, built, israel, salesforce, china } from '../../content/v2';
 
 export default function Page() {
   return (
@@ -50,19 +51,8 @@ export default function Page() {
         </ul>
       </Place>
 
-      <Reveal as="section" id="about" className="v2-wrap border-t border-rule py-14 md:py-20">
-        <img className="v2-photo" src={`${import.meta.env.BASE_URL}yixin.jpg`} width="720" height="900" alt="Yixin Liu" loading="lazy" />
-        <div className="v2-prose mt-8">
-          {about.map((t) => <p key={t}>{t}</p>)}
-        </div>
-        <p className="mt-10 text-[0.92rem]">
-          <a className="v2-link" href={`mailto:${links.email}`}>{links.email}</a>
-          <span className="mx-3 text-ink-300">/</span>
-          <a className="v2-link" href={links.github}>GitHub</a>
-          <span className="mx-3 text-ink-300">/</span>
-          <a className="v2-link" href={links.linkedin}>LinkedIn</a>
-        </p>
-      </Reveal>
+      <About />
+      <End />
     </main>
   );
 }

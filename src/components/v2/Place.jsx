@@ -1,4 +1,5 @@
 import SceneBand from './SceneBand';
+import Reveal from './Reveal';
 
 /**
  * A place section: a heading (the place, and one small line of city, employers
@@ -8,16 +9,16 @@ import SceneBand from './SceneBand';
 export default function Place({ place, id = place, title, sub, children }) {
   return (
     <section id={id} className="pt-10 md:pt-14">
-      <div className="v2-wrap pb-5">
+      <Reveal className="v2-wrap pb-5">
         <h2 className="v2-h2">
           {title}
           {sub ? <small className="v2-h2__sub">{sub}</small> : null}
         </h2>
-      </div>
+      </Reveal>
       <SceneBand place={place} />
-      <div className="v2-wrap py-10 md:py-12">
+      <Reveal className="v2-wrap py-10 md:py-12">
         {children}
-      </div>
+      </Reveal>
     </section>
   );
 }

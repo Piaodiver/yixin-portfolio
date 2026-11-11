@@ -97,6 +97,65 @@ body::before {
 .v2-prose p { margin: 0 0 1.1em; max-width: 64ch; color: var(--ink-900); }
 .v2-prose p:last-child { margin-bottom: 0; }
 .v2-placeholder { color: var(--ink-500); font-style: italic; }
+
+/* case architecture: a monospace diagram and the decisions list.
+   The diagram is about 90 columns wide; below that it scrolls inside its own
+   box rather than breaking the page (C2: no decoration, no horizontal page
+   scroll). */
+.v2-diagram {
+  margin: 14px 0 0;
+  padding: 14px 16px;
+  max-width: 64ch;
+  overflow-x: auto;
+  font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.72rem;
+  line-height: 1.45;
+  color: var(--ink-700);
+  background: var(--paper-sunk);
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  white-space: pre;
+}
+@media (min-width: 1024px) { .v2-diagram { max-width: none; width: fit-content; } }
+.v2-decisions {
+  margin: 12px 0 0;
+  padding: 0;
+  list-style: none;
+  max-width: 64ch;
+  border-top: 1px solid var(--rule);
+  counter-reset: decision;
+}
+.v2-decisions > li {
+  position: relative;
+  padding: 16px 0 18px;
+  border-bottom: 1px solid var(--rule);
+  counter-increment: decision;
+}
+.v2-decisions dl {
+  margin: 0;
+  display: grid;
+  grid-template-columns: 8.75rem 1fr;
+  column-gap: 16px;
+  row-gap: 6px;
+}
+.v2-decisions dt {
+  font-family: Inter, system-ui, sans-serif;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-500);
+  padding-top: 3px;
+}
+.v2-decisions dd { margin: 0; font-size: 0.95rem; line-height: 1.55; color: var(--ink-900); }
+.v2-decisions dd ul { margin: 0; padding: 0; list-style: none; }
+.v2-decisions dd ul li { padding-left: 14px; position: relative; color: var(--ink-700); }
+.v2-decisions dd ul li::before { content: "·"; position: absolute; left: 2px; color: var(--ink-300); }
+@media (max-width: 480px) {
+  .v2-decisions dl { grid-template-columns: 1fr; row-gap: 2px; }
+  .v2-decisions dd { margin-bottom: 8px; }
+}
+
 .v2-person {
   font-family: Inter, system-ui, sans-serif;
   font-size: 0.92rem; line-height: 1.6;

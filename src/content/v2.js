@@ -77,9 +77,69 @@ export const cases = {
       "Malaysia's first university admissions agent, on Salesforce Agentforce, 2025. I was its technical architect.",
     long: [
       "Over half of Nottingham Malaysia's applicants are international, from more than 70 countries, and they ask about courses, eligibility, fees and scholarships at night, Malaysian time. In 2025 the university built NOVA, its admissions agent on Salesforce Agentforce, [the first at a Malaysian university](https://www.nottingham.edu.my/NewsEvents/News/2025/University-of-Nottingham-Malaysia-Deploys-Agentforce-to-Create-a-Seamless-Experience-for-Prospective-Students.aspx). I was the Salesforce technical architect on the project, working alongside the implementation partner.",
-      "We grounded the agent in structured student data in Salesforce rather than a document corpus, because eligibility has to be computed. It depends on nationality, qualification system (A-Level, STPM, IB, Gaokao), discipline and degree level. Scholarship eligibility works the same way, from a student's results.",
-      "The agent also acts. A student can book a counselor session or a campus tour in seconds, and a counselor stays reachable from inside the conversation. What cost us most was deciding whether to organize the data by discipline or by degree type. The 2+2 and 3+1 routes between Malaysia and the UK broke both cuts, because a split-campus route is neither. It is a delivery mode. NOVA was [announced in December 2025](https://www.salesforce.com/ap/news/press-releases/2025/12/15/university-of-nottingham-malaysia-deploys-agentforce-to-create-a-seamless-experience-for-prospective-students/), on the website, WhatsApp, Facebook and WeChat.",
+      "Eligibility needs two inputs. The student's side is structured: nationality, qualification system (A-Level, STPM, IB, Gaokao), intended level and area of study, collected before the conversation starts and kept on their record in Salesforce. The requirements are documents, chunked and indexed in Data Cloud. The agent uses the student's attributes to pick the paragraph that applies, and says so when none does.",
+      "The agent also acts. A student can book a counselor session or a campus tour in seconds, and a counselor stays reachable from inside the conversation. NOVA was [announced in December 2025](https://www.salesforce.com/ap/news/press-releases/2025/12/15/university-of-nottingham-malaysia-deploys-agentforce-to-create-a-seamless-experience-for-prospective-students/), on the website, WhatsApp, Facebook and WeChat.",
     ],
+    // The architecture half. Facts: the owner's account (2026-11-11), the
+    // resume library, and public Salesforce documentation; see
+    // +个人网站/drafts/case-nova-architecture.md for the source of each line.
+    architecture: {
+      eyebrow: 'How NOVA is put together',
+      diagram: [
+        'student or parent ──► pre-chat form: name · nationality · email · phone · level · area of study',
+        '                              │',
+        '        website · WhatsApp · Facebook · WeChat ──► one agent configuration',
+        '                              │',
+        '        Agentforce (Atlas reasoning engine; 2025: topics + plain-language instructions)',
+        '                              │',
+        '      ┌───────────────────────┼──────────────────────────────┐',
+        '  the student                 the rules                     the actions',
+        '  a record in Sales Cloud     documents chunked into a       book a counselor session',
+        '  (and Marketing Cloud),      Data Cloud search index:       or campus tour (Flow)',
+        '  matched on email / phone    entry requirements, program    hand off to a counselor',
+        '                              requirements, international    (Omni-Channel)',
+        '                              student matters, fees, visas,',
+        '                              accommodation, 2+2 / 3+1',
+      ],
+      paragraphs: [
+        'Before the first message, the student fills in a short form: name, nationality, email, phone, the level they intend to study at and the area they are interested in. The form does three things. It is where the privacy notice sits. It gives the agent the inputs that decide which entry requirements apply, so it never has to ask for them mid-conversation. And it matches the person to a record, using an email address or phone number the form or the channel already has, so the enquiry and the person stay one record.',
+        'The knowledge itself is documents: entry requirements by nationality and qualification system, program requirements by discipline and level, international-student matters, fees and scholarships, accommodation, and the 2+2 and 3+1 routes between Malaysia and the UK. I chunked and indexed them in Data Cloud (now Data 360), and deciding the cut, by discipline, by degree type or by delivery mode, was the part that took the longest.',
+        'Three things bound what the agent does. Scope: each topic has a description and plain-language instructions saying what the agent may answer, and the admissions team can read and change them without a developer. Data: the agent runs as a named Salesforce user and sees only what that user may see, and prompts go to the model provider under zero data retention. Hand-off: I wrote four conditions with the admissions team. The question is outside the knowledge base, the agent is not confident in its answer, the topic is one the university decided a person should always handle, or the student asks. The agent is also instructed never to ask for passport numbers or other sensitive identifiers.',
+      ],
+      decisionsTitle: 'Five decisions, and what would change them',
+      decisions: [
+        {
+          constraint: 'Eligibility depends on who is asking (nationality, qualifications, level, area) and on rules that change every intake.',
+          options: ['Let the model read the documents and judge', 'Put the rules in structured tables and compute with Flow', "Collect the student's side up front and use it to retrieve the right rule"],
+          chose: "The third. The student's attributes are structured; the rules stay as documents the admissions team already maintains.",
+          change: 'The logs show the agent combining two documents to reach a verdict. Then the rules go into a table and a Flow.',
+        },
+        {
+          constraint: 'The boundary has to move with admissions policy, and admissions, not IT, owns the policy.',
+          options: ['A similarity threshold', 'Plain-language scope instructions', 'Hard-coded gates (Agent Script did not exist in 2025)'],
+          chose: 'Plain-language instructions the admissions team can edit.',
+          change: 'The same instruction keeps being edited to close the same gap. Today, with Agent Script, the hard refusals (passport numbers, visa verdicts) would go into a deterministic block and only tone and scope would stay as prose.',
+        },
+        {
+          constraint: 'The 2+2 and 3+1 routes between Malaysia and the UK are neither a discipline nor a degree level.',
+          options: ['Cut by discipline', 'Cut by degree type', 'Make delivery mode a third axis'],
+          chose: 'A third axis.',
+          change: 'Students start asking by destination rather than by program. Then delivery mode becomes the top level of the knowledge base instead of a tag.',
+        },
+        {
+          constraint: 'Four channels, and a visitor arrives with a different amount of identity and a different first language on each.',
+          options: ['One agent per channel', 'One configuration behind every channel'],
+          chose: 'One configuration. Same topics, grounding and hand-off everywhere; only presentation differs.',
+          change: "One channel's audience splits from the others. Parents ask about safety, cost and whether the degree carries weight at home, and on WeChat they ask in Chinese. Split the welcome and the language first; the topics stay shared.",
+        },
+        {
+          constraint: 'The same applicant may arrive on the web, then on WhatsApp, then in the admissions system.',
+          options: ['Ask for identity before the conversation', 'Resolve it afterwards with a Data Cloud ruleset on normalized email and phone', 'De-duplicate per channel'],
+          chose: 'Ask before the conversation. Some people leave at the form. In return the agent has the grounding inputs before the first message.',
+          change: 'The agent moves to a channel without a form: voice, or an anonymous widget added to cut drop-off. Then identity has to be resolved after the fact, and that is the case for Data Cloud identity resolution.',
+        },
+      ],
+    },
   },
   lgmg: {
     id: 'lgmg',

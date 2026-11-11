@@ -1,6 +1,7 @@
 import Hero from './Hero';
 import SideNav from './SideNav';
 import Place, { CaseHead, Prose } from './Place';
+import CaseArchitecture from './CaseArchitecture';
 import About from './About';
 import End from './End';
 import { cases, built, israel, salesforce, china, baidu, unitedStates, placeById as P } from '../../content/v2';
@@ -34,6 +35,7 @@ export default function Page() {
         <div className="mt-12">
           <CaseHead item={cases.nova} />
           <Prose paragraphs={cases.nova.long} />
+          <CaseArchitecture arch={cases.nova.architecture} />
         </div>
         <div className="mt-12">
           <CaseHead item={cases.wizai} />

@@ -6,7 +6,7 @@ import { places } from '../../content/v2';
 const NAV_SUBS = { china: 'LGMG · SAP', israel: 'TAU · MBA', singapore: 'Salesforce · Wiz.AI', 'united-states': 'Building now' };
 const ITEMS = [
   ...places.map((p) => ({ id: p.id, label: p.label, sub: NAV_SUBS[p.id] })),
-  { id: 'about', label: 'About', sub: 'The route' },
+  { id: 'about', label: 'About', sub: 'Outside work' },
 ];
 
 // 0, .05, .1 … 1: fine enough steps that the visible-height ranking below

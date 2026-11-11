@@ -17,7 +17,7 @@ export const israel = [
 // most visitors never reach the foot of the page. What stays here is for the
 // reader who does.
 export const about = [
-  'The route, by place. I grew up in Beijing. A liberal arts education at Wesleyan in Connecticut, with economics on the diploma. Tel Aviv for a master\'s in the management of innovative technology. Beijing for two years at Baidu, improving how internal teams ran their processes and building an app for them, and then for SAP, which selected me for its global presales academy in San Ramon, California, the only presales trainee from East Asia that year, and brought me back as a solution architect on the LGMG program. Singapore from 2024, covering Southeast Asia for Wiz.AI, then Salesforce as a technical architect for AI and data. Seattle since mid-2026.',
+  'The route, by place. I grew up in Beijing. A liberal arts education at Wesleyan in Connecticut. Tel Aviv for a master\'s in the management of innovative technology. Beijing for two years at Baidu, improving how internal teams ran their processes and building an app for them, and then for SAP, which selected me for its global presales academy in San Ramon, California, the only presales trainee from East Asia that year, and brought me back as a solution architect on the LGMG program. Singapore from 2024, covering Southeast Asia for Wiz.AI, then Salesforce as a technical architect for AI and data. Seattle since mid-2026.',
   'Outside work, the sea first. In 2013 I crewed a research sailing ship for two months from Tahiti to Hawaii, standing watches through the night and writing papers in between, and I have been diving ever since, mostly in Southeast Asia. On land it is long walks: 80 kilometers across the Altai mountains in two days, and the wadi from St. George\'s Monastery down to Jericho, where people have lived for ten thousand years. Four times I went to Lhasa to lead volunteer teachers at two schools for children with disabilities. And once a year, a road trip with my family.',
 ];
 
@@ -121,7 +121,7 @@ export const unitedStates = [
   {
     eyebrow: 'Wesleyan University · Connecticut · class of 2014',
     paragraphs: [
-      'A liberal arts degree from Wesleyan in Connecticut, with economics on the diploma. What it left me with is a habit: read closely, argue from more than one side, and go a few levels deeper than the question asked for. I remember a history seminar where the discussion ran so far past the hour that nobody noticed, and a paper finished at three in the morning, too awake to sleep, walking under the moon and still arguing with myself.',
+      'A liberal arts education at Wesleyan in Connecticut. What it left me with is a habit: read closely, argue from more than one side, and go a few levels deeper than the question asked for. I remember a history seminar where the discussion ran so far past the hour that nobody noticed, and a paper finished at three in the morning, too awake to sleep, walking under the moon and still arguing with myself.',
     ],
   },
   {

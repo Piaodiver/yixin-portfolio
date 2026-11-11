@@ -25,9 +25,9 @@ export const hero = {
   subline: 'Over eight years of this. The technology kept changing. The problem did not.',
   person: 'Seattle, by way of Beijing, Tel Aviv and Singapore. Underwater when I can be.',
   // the ask: one line, email link on 'Write to me'
-  looking: 'Looking for the next role. Seattle first, the rest of the West Coast for the right one.',
+  looking: 'Looking for the next role. Seattle first, elsewhere for the right one.',
   lookingCta: 'Write to me',
-  lookingTail: ' and I will send a resume written for it.',
+  lookingTail: ' and I will send a resume.',
 };
 
 // The Salesforce year, as the frame around NOVA. Sits first in the Singapore section.

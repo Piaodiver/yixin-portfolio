@@ -1,5 +1,6 @@
 import Reveal from './Reveal';
 import { about } from '../../content/v2';
+import { Inline } from './Place';
 
 /**
  * About — the portrait beside the route and the outside-work paragraphs.
@@ -26,7 +27,7 @@ export default function About() {
           loading="lazy"
         />
         <div className="v2-prose v2-about__text">
-          {about.map((t) => <p key={t}>{t}</p>)}
+          {about.map((t) => <p key={t}><Inline text={t} /></p>)}
         </div>
       </div>
     </Reveal>

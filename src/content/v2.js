@@ -18,7 +18,7 @@ export const israel = [
 // reader who does.
 export const about = [
   'The route, by place. I grew up in Beijing. A liberal arts education at Wesleyan in Connecticut. Tel Aviv for a master\'s in the management of innovative technology. Beijing for two years at Baidu, improving how internal teams ran their processes and building an app for them, and then for SAP, which selected me for its global presales academy in San Ramon, California, the only presales trainee from East Asia that year, and brought me back as a solution architect on the LGMG program. Singapore from 2024, covering Southeast Asia for Wiz.AI, then Salesforce as a technical architect for AI and data. Seattle since mid-2026.',
-  'Outside work, the sea first. In 2013 I crewed a research sailing ship for two months from Tahiti to Hawaii, standing watches through the night and writing papers in between, and I have been diving ever since, mostly in Southeast Asia. On land it is long walks: 80 kilometers across the Altai mountains in two days, and the wadi from St. George\'s Monastery down to Jericho, where people have lived for ten thousand years. Four times I went to Lhasa to lead volunteer teachers at two schools for children with disabilities. And once a year, a road trip with my family.',
+  'Outside work, the sea first. In 2013 I crewed [a research sailing ship](https://sea.edu/) for two months from Tahiti to Hawaii, standing watches through the night and writing papers in between, and I have been diving ever since, mostly in Southeast Asia. On land it is long walks: 80 kilometers across the Altai mountains in two days, and the wadi from St. George\'s Monastery down to Jericho, where people have lived for ten thousand years. Four times I went to Lhasa to lead volunteer teachers at [two schools for children with disabilities](https://www.braillewithoutborders.org/ENGLISH/). And once a year, a road trip with my family.',
 ];
 
 export const hero = {
@@ -61,7 +61,7 @@ export const china = [
 export const baidu = {
   eyebrow: 'Baidu · 2017–2019',
   paragraphs: [
-    "Every quarter Baidu brought 200-odd leaders from eight business units together for a summit, and it took a team of twelve to run it. I built the event app: each person's agenda, the logistics, the day's changes, as a mini-program on their phone. The coordination team went from twelve to three. The feature was later folded into Baidu Hi, the company's own messaging app. Between summits I did the quarterly analyses for the executive and general-manager meetings: where operations were stuck, and where the growth was.",
+    "Every quarter Baidu brought 200-odd leaders from eight business units together for a summit, and it took a team of twelve to run it. I built the event app: each person's agenda, the logistics, the day's changes, as a mini-program on their phone. The coordination team went from twelve to three. The feature was later folded into [Baidu Hi](https://infoflow.baidu.com/newweb/#/), the company's own messaging app. Between summits I did the quarterly analyses for the executive and general-manager meetings: where operations were stuck, and where the growth was.",
   ],
 };
 

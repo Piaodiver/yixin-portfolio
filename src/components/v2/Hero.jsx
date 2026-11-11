@@ -3,18 +3,9 @@ import { hero, heroCards, links } from '../../content/v2';
 export default function Hero() {
   return (
     <header className="v2-wrap v2-hero pt-12 pb-8 md:pt-16 md:pb-10">
-      {/* the portrait: beside the column on wide screens, a small one by the
-          name below that (.v2-hero__photo in v2.css). The face is in the first
-          screen either way. */}
-      <img
-        className="v2-hero__photo"
-        src={`${import.meta.env.BASE_URL}yixin.jpg`}
-        width="720"
-        height="900"
-        alt="Yixin Liu"
-        fetchPriority="high"
-      />
-      <p className="v2-eyebrow v2-hero__name">{hero.name}</p>
+      {/* no portrait here for now: with the same photo in About it read as a
+          repeat (2026-11-10). The About block is due a rethink; see the plan. */}
+      <p className="v2-eyebrow">{hero.name}</p>
       <h1 className="v2-h1 mt-4">{hero.headline}</h1>
       {/* hangs from two threads; CSS sway is a stand-in for the pendulum physics */}
       <p className="v2-sub v2-hang mt-5">

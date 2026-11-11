@@ -131,31 +131,6 @@ body::before {
   text-decoration-color: color-mix(in srgb, var(--accent) 45%, transparent);
 }
 .v2-link:hover { text-decoration-color: var(--accent); }
-/* the hero portrait. Below 1360px: a small photo beside the name, so the
-   headline keeps the full column. From 1360px: a 200px photo in the empty
-   margin to the right of the column, top aligned with the name; the nav
-   column sits further right, clear of it. */
-.v2-hero { position: relative; }
-.v2-hero__photo {
-  display: block;
-  width: 72px; height: auto;
-  aspect-ratio: 4 / 5; object-fit: cover;
-  float: right;
-  margin: 0 0 8px 16px;
-}
-/* the headline runs beside the small photo rather than under it */
-.v2-hero .v2-h1 { clear: none; }
-@media (min-width: 768px) { .v2-hero__photo { width: 96px; margin-left: 24px; } }
-@media (min-width: 1360px) {
-  .v2-hero__photo {
-    float: none;
-    position: absolute;
-    left: calc(100% + 32px);
-    top: 64px;          /* matches the header's top padding */
-    width: 200px;
-    margin: 0;
-  }
-}
 /* where things stand: ink, between the person line and the ask */
 .v2-now {
   font-family: Inter, system-ui, sans-serif;

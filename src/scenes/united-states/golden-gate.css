@@ -1,0 +1,258 @@
+/* Golden Gate Signal Curtain —— 可嵌入组件样式
+ *
+ * 1. 所有规则都在 .gg-scene 作用域下，不会外溢到宿主页面。
+ * 2. 尺寸由容器给：设 --gg-height 即可，默认满视口。
+ * 3. 断点用 @container、单位用 cqw/cqh —— 嵌进窄栏目时按栏目宽度
+ *    切换构图，而不是按浏览器视口。这是嵌入与独立页的唯一行为差异来源。 */
+/* 作用域重置：只影响场景内部，绝不碰宿主页面 */
+  .gg-scene, .gg-scene *, .gg-scene *::before, .gg-scene *::after {
+    margin: 0; padding: 0; box-sizing: border-box;
+  }
+
+  /* ===== 色板：与天坛篇共用纸/墨底，只换强调色 =====
+     强调色：金门锈红（国际橘印在纸上的效果）/ 海湾雾蓝钢灰 */
+  /* 色值来自 design-spec.json，不再散落硬编码 */
+  .gg-scene {
+    --paper: #eae6dc;
+    --ink: #131211;
+    --muted: #6f6a61;
+    --hairline: rgba(19, 18, 17, .30);
+    --panel: rgba(234, 230, 220, .94);
+    --orange: #a8482e;          /* color-bridge */
+    --bridge-dark: #693021;
+    --bead: #cc5a35;
+    --steel: #b9c4c8;           /* color-fog */
+    --signal: #35bfd2;
+    --signal-halo: rgba(53, 191, 210, .24);
+    --accent: #cbe621;
+  }
+  /* spec 没有给夜间值，这里按同一组色相关系推导 */
+  .gg-scene[data-theme="night"] {
+    --paper: #0e1519;
+    --ink: #eae6dc;
+    --muted: #8a978f;
+    --hairline: rgba(234, 230, 220, .26);
+    --panel: rgba(14, 21, 25, .94);
+    --orange: #d4623f;
+    --bridge-dark: #8a4028;
+    --bead: #e0764a;
+    --steel: #4a6470;
+    --signal: #4fd8e8;
+    --signal-halo: rgba(79, 216, 232, .26);
+    --accent: #cbe621;
+  }
+
+  /* 场景根：尺寸由容器给，不再霸占整个视口。
+     container-type: size 让内部所有 cqw/cqh 指向这个盒子而不是浏览器视口。 */
+  .gg-scene {
+    position: relative;
+    height: var(--gg-height, 100svh);
+    min-height: var(--gg-min-height, 400px);
+    container-type: size;
+    isolation: isolate;
+    overflow: hidden;
+    color: var(--ink);
+    font-family: 'Noto Serif SC', Georgia, serif;
+    line-height: 1.8;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ===== 画板：纸质纹理底（与天坛篇一致） ===== */
+  .gg-scene .artboard {
+    position: absolute; inset: 0;
+    overflow: hidden;
+    isolation: isolate;
+    /* 点阵纸纹：参考图用的是网点而不是细线，网点更「图纸」、更安静 */
+    background:
+      radial-gradient(circle at 50% 50%, rgba(19,18,17,.075) 0 1.1px, transparent 1.3px) 0 0 / 23px 23px,
+      radial-gradient(circle at 53% 14%, rgba(255,255,255,.30), transparent 38%),
+      var(--paper);
+  }
+  .gg-scene[data-theme="night"] .artboard {
+    background:
+      radial-gradient(circle at 50% 50%, rgba(234,230,220,.05) 0 1.1px, transparent 1.3px) 0 0 / 23px 23px,
+      radial-gradient(circle at 53% 14%, rgba(70,110,130,.16), transparent 38%),
+      var(--paper);
+  }
+  /* 纸面颗粒噪点 */
+  .gg-scene .artboard::after {
+    content: ""; position: absolute; inset: 0; z-index: 10; pointer-events: none;
+    opacity: .14; mix-blend-mode: multiply;
+    background-image:
+      radial-gradient(circle at 24% 31%, currentColor 0 .5px, transparent .65px),
+      radial-gradient(circle at 71% 56%, currentColor 0 .45px, transparent .6px);
+    background-size: 9px 11px, 13px 15px;
+  }
+  .gg-scene[data-theme="night"] .artboard::after { mix-blend-mode: screen; opacity: .08; }
+
+  /* ===== 海湾雾带：横向漫射的一层，桥塔基座溶进去 ===== */
+  /* 前景雾：盖在桥体层之上，把塔基和桥面右段吞进去。
+     桥体 canvas 是 multiply（只能压暗），提亮的雾必须走这一层。 */
+  .gg-scene .fog {
+    position: absolute; z-index: 3; left: 0; right: 0;
+    top: 50%; height: 42%; pointer-events: none;
+    background: linear-gradient(to bottom,
+      rgba(255,255,255,0) 0%,
+      rgba(255,255,255,.30) 26%,
+      rgba(255,255,255,.20) 52%,
+      rgba(255,255,255,0) 100%);
+  }
+  .gg-scene[data-theme="night"] .fog {
+    background: linear-gradient(to bottom,
+      rgba(120,170,190,0) 0%,
+      rgba(120,170,190,.10) 26%,
+      rgba(120,170,190,.07) 52%,
+      rgba(120,170,190,0) 100%);
+  }
+
+  /* ===== 导航栏 ===== */
+  .gg-scene .masthead {
+    position: absolute; z-index: 8; top: 28px;
+    left: clamp(24px, 5cqw, 94px); right: clamp(24px, 5cqw, 94px);
+    display: grid; grid-template-columns: 1fr auto 1fr;
+    align-items: center; gap: 28px;
+    font: 12px/1 'Inter', ui-monospace, monospace; color: var(--muted);
+  }
+  .gg-scene .brand {
+    color: var(--ink); white-space: nowrap;
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 14px; font-weight: 600;
+    text-decoration: none; letter-spacing: .5px;
+  }
+  .gg-scene .nav-links { display: flex; gap: 28px; list-style: none; }
+  .gg-scene .nav-links a { color: inherit; text-decoration: none; transition: color .3s; }
+  .gg-scene .nav-links a:hover { color: var(--ink); }
+
+  .gg-scene .masthead-actions { justify-self: end; display: flex; align-items: center; gap: 18px; }
+
+  .gg-scene .configure {
+    border: 1px solid var(--ink); border-radius: 999px;
+    padding: 9px 22px; color: var(--ink); background: transparent;
+    font: 500 11px/1 'Inter', sans-serif; letter-spacing: .04em;
+    cursor: pointer; transition: all .3s;
+  }
+  .gg-scene .configure:hover { background: var(--ink); color: var(--paper); }
+
+  .gg-scene .toggle-btn {
+    width: 36px; height: 36px;
+    border: 1px solid var(--hairline); border-radius: 2px;
+    background: transparent; color: var(--muted);
+    cursor: pointer; display: grid; place-content: center;
+    font-size: 16px; line-height: 1; transition: all .3s;
+  }
+  .gg-scene .toggle-btn:hover { color: var(--ink); border-color: var(--muted); }
+  .gg-scene .toggle-btn.active { color: var(--ink); border-color: var(--ink); }
+
+  /* ===== 标题区：spec 的三行英文，左下角 ===== */
+  .gg-scene .headline {
+    position: absolute; z-index: 6;
+    left: clamp(28px, 4.4cqw, 92px); bottom: clamp(40px, 7cqh, 84px);
+    width: min(880px, 60cqw); pointer-events: none;
+  }
+  .gg-scene h1 {
+    margin: 0 0 14px; color: var(--ink);
+    font: 400 clamp(34px, 4.6cqw, 76px)/1.08 'Bodoni Moda', Didot, 'Bodoni 72', 'Bodoni MT', Georgia, serif;
+    letter-spacing: .008em; white-space: nowrap;
+  }
+  .gg-scene h1 .ag-char { display: inline-block; cursor: default; user-select: none; }
+  .gg-scene h1 .sp { display: inline-block; width: .26em; }
+  .gg-scene .subtitle {
+    margin: 0 0 11px; color: var(--ink);
+    font: 400 clamp(12px, 1.05cqw, 17px)/1 'IBM Plex Mono', 'Space Mono', ui-monospace, monospace;
+    letter-spacing: .18em; white-space: nowrap;
+  }
+  /* 唯一一处荧光绿：副标题前的极短线 */
+  .gg-scene .accent-rule {
+    display: inline-block; width: 44px; margin-right: 18px;
+    border-top: 2px solid var(--accent); transform: translateY(-.30em);
+  }
+  .gg-scene .locality {
+    margin: 0; color: var(--muted);
+    font: 400 clamp(10px, .8cqw, 13px)/1 'IBM Plex Mono', 'Space Mono', ui-monospace, monospace;
+    letter-spacing: .28em;
+  }
+
+  /* ===== 进度条 / 计数器 / 光标 ===== */
+  .gg-scene .progress {
+    position: absolute; z-index: 6; left: 50%; bottom: 22px;
+    width: 140px; height: 2px; transform: translateX(-50%);
+    background: rgba(46,37,31,.18);
+  }
+  .gg-scene[data-theme="night"] .progress { background: rgba(232,223,202,.15); }
+  .gg-scene .progress::before {
+    content: ""; display: block; width: 42%; height: 100%;
+    background: rgba(46,37,31,.55); transition: width .3s;
+  }
+  .gg-scene[data-theme="night"] .progress::before { background: rgba(232,223,202,.5); }
+
+  .gg-scene .counter {
+    position: absolute; z-index: 6; left: 50%; bottom: 36px;
+    transform: translateX(-50%); opacity: 0; transition: opacity .4s;
+    font: 10px/1 'Inter', ui-monospace, monospace; color: var(--muted);
+    letter-spacing: .05em;
+  }
+  .gg-scene .counter.visible { opacity: 1; }
+
+  /* ===== Canvas 桥体 =====
+     整块 canvas 走 multiply，桥"印"进纸里（天坛篇是 img 走 multiply，同一手法） */
+  /* 背景层：日轮、远山、雾、天际线、水。正常混合，能提亮。
+     只在 resize / 换主题时重画，不进逐帧循环。 */
+  .gg-scene .scenery {
+    position: absolute; inset: 0; z-index: 1;
+    width: 100%; height: 100%; pointer-events: none;
+  }
+  .gg-scene .bridge {
+    position: absolute; inset: 0; z-index: 2;
+    width: 100%; height: 100%; cursor: none; touch-action: none;
+    mix-blend-mode: multiply;
+  }
+  .gg-scene[data-theme="night"] #bridge { mix-blend-mode: screen; }
+
+  .gg-scene .cursor {
+    position: absolute; z-index: 12; width: 12px; height: 12px;
+    border: 1px solid rgba(46,37,31,.72); border-radius: 50%;
+    transform: translate(-50%, -50%); opacity: 0; pointer-events: none;
+  }
+  .gg-scene[data-theme="night"] .cursor { border-color: rgba(232,223,202,.72); }
+  .gg-scene .artboard.is-active .cursor { opacity: 1; }
+
+  /* ===== 配置面板 ===== */
+  .gg-scene .settings {
+    position: absolute; z-index: 20; top: 62px;
+    right: clamp(24px, 5cqw, 94px); width: 238px; padding: 16px;
+    border: 1px solid var(--hairline); background: var(--panel);
+    box-shadow: 16px 18px 32px rgba(46,37,31,.12);
+    backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+  }
+  .gg-scene[data-theme="night"] .settings { box-shadow: 16px 18px 32px rgba(0,0,0,.4); }
+  .gg-scene .settings[hidden] { display: none; }
+  .gg-scene .setting { display: grid; gap: 6px; margin-bottom: 13px; }
+  .gg-scene .setting label {
+    display: flex; justify-content: space-between; color: var(--muted);
+    font: 11px/1 'Inter', ui-monospace, monospace;
+  }
+  .gg-scene .setting input { width: 100%; accent-color: var(--orange); }
+  .gg-scene .reset-btn {
+    width: 100%; border: 1px solid var(--hairline); padding: 7px 10px;
+    color: var(--ink); background: transparent; cursor: pointer;
+    font: 11px/1 'Inter', ui-monospace, monospace; transition: all .3s;
+  }
+  .gg-scene .reset-btn:hover { border-color: var(--muted); }
+
+  /* ===== 响应式 ===== */
+  @container (max-width: 720px) {
+    .gg-scene .masthead { grid-template-columns: 1fr auto; gap: 12px; }
+    .gg-scene .nav-links, .gg-scene .brand-en { display: none; }
+    .gg-scene .masthead-actions { gap: 12px; }
+    .gg-scene .headline { left: 24px; bottom: 34px; width: min(330px, 88cqw); }
+    .gg-scene h1 { font-size: clamp(26px, 8.4cqw, 42px); }
+    .gg-scene .subtitle { font-size: 11px; letter-spacing: .14em; }
+    .gg-scene .accent-rule { width: 30px; margin-right: 12px; }
+    .gg-scene .progress, .gg-scene .counter { display: none; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .gg-scene *, .gg-scene *::before, .gg-scene *::after {
+      animation-duration: .01ms !important; animation-iteration-count: 1 !important;
+      transition-duration: .01ms !important;
+    }
+  }

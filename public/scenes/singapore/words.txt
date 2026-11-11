@@ -1,0 +1,34 @@
+# Singapore / 鱼尾狮 —— 水帘文字源
+#
+# 格式：一行一组，四语用 | 分隔，顺序固定 en | zh | ms | ta
+# ★ 同一行必须是同一个意思 —— 水帘顺流循环四种语言，靠这一条才读得出
+#   「同一句话被这座城市说了四遍」，而不是四堆互不相干的词。
+# # 开头为注释，空行忽略。
+#
+# 独占一行的 __ARC__ 之后是主水弧上的那一句（嘴部最集中的一股）。
+#
+# 选词约束（实测）：
+#   en 3–7 字母最稳；ms 常比 en 长 1.5 倍，超过 10 字母的会被拉到股线外；
+#   ta 按 grapheme 数算，不按 code point 数算（见 index.html 的 splitGraphemes）。
+#   下面这组已按 ms 长度筛过，最长 Kedamaian / Perpaduan (9)。
+#
+# 全部取自 singapore_four_official_languages_positive_words.md，未作改写。
+# ★ Malay 与 Tamil 仍待母语者复核后定稿。
+
+Hope        | 希望   | Harapan    | நம்பிக்கை
+Light       | 光明   | Cahaya     | ஒளி
+Unity       | 团结   | Perpaduan  | ஒற்றுமை
+Peace       | 和平   | Kedamaian  | அமைதி
+Community   | 社区   | Komuniti   | சமூகம்
+Opportunity | 机会   | Peluang    | வாய்ப்பு
+Innovation  | 创新   | Inovasi    | புதுமை
+Technology  | 科技   | Teknologi  | தொழில்நுட்பம்
+Progress    | 进步   | Kemajuan   | முன்னேற்றம்
+Beautiful   | 美好   | Indah      | அழகு
+Growth      | 成长   | Pertumbuhan| வளர்ச்சி
+Knowledge   | 知识   | Pengetahuan| அறிவு
+
+# 主水弧：城市的名字，被四种语言各说一遍。
+# 这一句直接呼应原设计稿 —— 那张图上四条水带写的正是这四个名字。
+__ARC__
+Singapore | 新加坡 | Singapura | சிங்கப்பூர்

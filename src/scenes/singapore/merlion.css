@@ -1,0 +1,246 @@
+/* 鱼尾狮多语言水帘 —— 可嵌入组件样式
+ *
+ * 1. 所有规则都在 .merlion-scene 作用域下，不会外溢到宿主页面。
+ * 2. 尺寸由容器给：设 --kc-height 即可，默认满视口。
+ * 3. 断点用 @container、单位用 cqw/cqh —— 嵌进窄栏目时按栏目宽度
+ *    切换构图，而不是按浏览器视口。
+ * 见 docs/EMBEDDING.md */
+
+/* 作用域重置：只影响场景内部，绝不碰宿主页面 */
+.merlion-scene, .merlion-scene *, .merlion-scene *::before, .merlion-scene *::after {
+  margin: 0; padding: 0; box-sizing: border-box;
+}
+
+/* ===== 色板 =====
+   纸色 #efe4ce 是从底图天空直接取的样，CSS 纸底与底图接缝因此消失。
+   ★ 强调色明确往青瓷绿走、蓝只留一点 —— 金门篇已经占了「雾蓝 + 海湾深青」，
+     两篇都是蓝色水景的话并排看会像同一篇的两个版本。 */
+.merlion-scene {
+  --paper:#efe4ce;
+  --ink:#26332c;              /* 墨绿墨，不是天坛的褐墨 */
+  --muted:#6f7c73;
+  --hairline:rgba(38,51,44,.34);
+  --panel:rgba(239,228,206,.94);
+  /* ★ 水色取自交接包 design-spec.json：浅海玻璃蓝 + 更亮的水芯。
+     原来用的深青瓷绿 #4a7a6b 对比确实更强，但和已确认的视觉稿不一致。
+     改浅之后靠「宽水带 + 颗粒」而不是靠深色来保证文字对比。 */
+  --water:#9bcfd3;
+  --water-core:#c9e6e5;
+  /* ★ 落水段用近白的水沫色。
+     底图海面实测 #98bac2 / #b6c9ca，和水色 #9bcfd3 几乎同色 ——
+     水一到海面上就整段消失，「落进海里」根本看不出来。
+     真实的水也正是这样：成股时是玻璃蓝，碎成花时是白的。 */
+  --foam:#f4fcfb;
+  /* ★ 水上文字的墨色：不用 --ink（#26332c 近乎黑）。
+     整幅是低对比水彩调，纯墨实心压上去读作「盖上去的章」，很突兀。
+     实测自底图底座马赛克：蓝瓦均值 #395274、最深四分位 #243556，取二者之间。 */
+  --word-ink:#2c4568;
+  --sea:#8fb0b8;              /* 底图海色，只用于极少数呼应 */
+  --apricot:#cf9a6b;          /* 杏色：只做高光 */
+  --scene-filter:none;
+
+  /* ===== 容器 =====
+     ★ container-type: size 让内部所有 cqw/cqh 指向这个盒子而不是浏览器视口。
+     场景独占整页时 cqw === vw，行为不变；嵌进 800px 栏目时才见分晓。 */
+  position:relative;
+  height:var(--kc-height, 100svh);
+  overflow:hidden;
+  container-type:size;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:'Noto Serif SC',Georgia,serif;
+  line-height:1.8;
+  -webkit-font-smoothing:antialiased;
+  transition:background .6s,color .6s;
+}
+
+/* ★ 夜间是墨绿黑 —— 天坛紫 / 金门蓝青 / 雅法暖夜都已被占，第四种只能是绿。
+   ★ data-theme 写在场景根上，不写 <html>：否则会和宿主站点的主题系统抢属性。 */
+.merlion-scene[data-theme="night"] {
+  --paper:#0e1714;
+  --ink:#dbe7dc;
+  --muted:#7d8d83;
+  --hairline:rgba(219,231,220,.26);
+  --panel:rgba(14,23,20,.94);
+  --water:#7fc3c8;            /* 夜间提亮，墨绿黑底上才浮得起来 */
+  --water-core:#b6e2e2;
+  --foam:#dff2ef;
+  --word-ink:#b9cde8;         /* 夜间反过来：淡钴蓝，仍是底座那支色 */
+  --sea:#5b7f88;
+  --apricot:#d9a878;
+  --scene-filter:brightness(.56) saturate(.70) hue-rotate(-8deg) contrast(1.06);
+}
+
+.merlion-scene .artboard {
+  position:absolute; inset:0; overflow:hidden; isolation:isolate;
+  background:var(--paper);
+}
+
+/* ===== 鱼尾狮底图 =====
+   cover + 左对齐：鱼尾狮是视觉锚点，任何视口下都不能被裁掉；
+   裁只裁右侧的海（水弧落点会跟着可视宽度收，见 merlion.js 的 landFar）。 */
+.merlion-scene .scene {
+  position:absolute; z-index:1; inset:0;
+  width:100%; height:100%;
+  object-fit:cover; object-position:left center;
+  display:block; pointer-events:none; user-select:none;
+  filter:var(--scene-filter); transition:filter .6s;
+}
+/* 夜间在底图上再压一层墨绿，让海和石头一起沉下去 */
+.merlion-scene .nightwash {
+  position:absolute; z-index:2; inset:0; pointer-events:none;
+  background:linear-gradient(180deg,#0d1a16 0%,#101f1a 60%,#0b1512 100%);
+  mix-blend-mode:multiply; opacity:0; transition:opacity .6s;
+}
+.merlion-scene[data-theme="night"] .nightwash { opacity:.42; }
+
+/* ★ 纸纹画在底图之上（雅法篇踩过的坑）：
+   画在底图之下时，左半纸面有纹理、图自带的纸边没有，接缝会露出一条竖线。 */
+.merlion-scene .grain {
+  position:absolute; z-index:5; inset:0; pointer-events:none;
+  background:
+    repeating-linear-gradient(91deg, rgba(38,51,44,.020) 0 1px, transparent 1px 11px),
+    repeating-linear-gradient(2deg, rgba(38,51,44,.015) 0 1px, transparent 1px 14px),
+    radial-gradient(circle at 26% 18%, rgba(255,255,255,.16), transparent 44%);
+}
+.merlion-scene[data-theme="night"] .grain {
+  background:
+    repeating-linear-gradient(91deg, rgba(219,231,220,.014) 0 1px, transparent 1px 11px),
+    repeating-linear-gradient(2deg, rgba(219,231,220,.011) 0 1px, transparent 1px 14px),
+    radial-gradient(circle at 62% 30%, rgba(110,180,150,.07), transparent 46%);
+}
+.merlion-scene .artboard::after {
+  content:""; position:absolute; inset:0; z-index:10; pointer-events:none;
+  opacity:.13; mix-blend-mode:multiply;
+  background-image:
+    radial-gradient(circle at 24% 31%, currentColor 0 .5px, transparent .65px),
+    radial-gradient(circle at 71% 56%, currentColor 0 .45px, transparent .6px);
+  background-size:9px 11px,13px 15px;
+}
+.merlion-scene[data-theme="night"] .artboard::after { mix-blend-mode:screen; opacity:.07; }
+
+/* ===== 水帘 Canvas ===== */
+.merlion-scene .water {
+  position:absolute; inset:0; z-index:4;
+  width:100%; height:100%; touch-action:none;
+}
+.merlion-scene.has-cursor .water { cursor:none; }
+.merlion-scene .cursor {
+  position:absolute; z-index:12; width:13px; height:13px;
+  border:1px solid rgba(38,51,44,.7); border-radius:50%;
+  transform:translate(-50%,-50%); opacity:0; pointer-events:none;
+}
+.merlion-scene[data-theme="night"] .cursor { border-color:rgba(219,231,220,.7); }
+.merlion-scene .artboard.is-active .cursor { opacity:1; }
+
+/* ===== 导航 ===== */
+.merlion-scene .masthead {
+  position:absolute; z-index:8; top:28px;
+  left:clamp(24px,5cqw,94px); right:clamp(24px,5cqw,94px);
+  display:grid; grid-template-columns:1fr auto 1fr; align-items:center; gap:28px;
+  font:12px/1 'Inter',ui-monospace,monospace; color:var(--muted);
+}
+.merlion-scene .brand {
+  color:var(--ink); font-family:'Playfair Display',Georgia,serif;
+  font-size:14px; font-weight:600; text-decoration:none; letter-spacing:.5px;
+}
+.merlion-scene .brand-en { font-weight:400; opacity:.72; }
+.merlion-scene .nav-links { display:flex; gap:28px; list-style:none; justify-self:center; }
+.merlion-scene .nav-links a { color:inherit; text-decoration:none; transition:color .3s; }
+.merlion-scene .nav-links a:hover { color:var(--ink); }
+.merlion-scene .masthead-actions { justify-self:end; display:flex; align-items:center; gap:18px; }
+.merlion-scene .configure {
+  border:1px solid var(--ink); border-radius:999px; padding:9px 22px;
+  color:var(--ink); background:transparent;
+  font:500 11px/1 'Inter',sans-serif; letter-spacing:.04em;
+  cursor:pointer; transition:all .3s;
+}
+.merlion-scene .configure:hover { background:var(--ink); color:var(--paper); }
+.merlion-scene .toggle-btn {
+  width:36px; height:36px; border:1px solid var(--hairline); border-radius:2px;
+  background:transparent; color:var(--muted); cursor:pointer;
+  display:grid; place-content:center; font-size:16px; line-height:1; transition:all .3s;
+}
+.merlion-scene .toggle-btn:hover { color:var(--ink); border-color:var(--muted); }
+.merlion-scene .toggle-btn.active { color:var(--ink); border-color:var(--ink); }
+
+/* ===== 标题 =====
+   左下角 —— 天坛 / 金门 / 雅法三篇都在这个位置，第四篇跟上。
+   水弧全部走右上、落点在 .70W–.95W，这里净空约 44% 高。 */
+.merlion-scene .headline {
+  position:absolute; z-index:6;
+  left:clamp(28px,5.75cqw,112px); bottom:clamp(40px,6.6cqh,80px);
+  width:min(600px,46cqw); pointer-events:none;
+}
+.merlion-scene .eyebrow {
+  margin:0 0 16px; color:var(--muted);
+  font:12px/1.3 'Inter',ui-monospace,monospace;
+}
+/* ★ 一定要写成 .merlion-scene h1，不能是裸 h1 ——
+   裸 h1 会把宿主网站上每一个标题都变成 106px 的 Playfair。 */
+.merlion-scene h1 {
+  margin:0; color:var(--ink); letter-spacing:-.045em;
+  font:700 clamp(42px,6.6cqw,106px)/.86 'Playfair Display',Georgia,serif;
+  white-space:nowrap;
+}
+.merlion-scene h1 .ag-char { display:inline-block; cursor:default; user-select:none; }
+.merlion-scene .rule {
+  display:inline-block; width:84px; margin-left:20px;
+  border-top:1px solid var(--ink); transform:translateY(-.3em); opacity:.35;
+}
+
+/* ===== 进度 / 计数 ===== */
+.merlion-scene .progress {
+  position:absolute; z-index:6; left:50%; bottom:22px;
+  width:140px; height:2px; transform:translateX(-50%); background:rgba(38,51,44,.18);
+}
+.merlion-scene[data-theme="night"] .progress { background:rgba(219,231,220,.15); }
+.merlion-scene .progress::before {
+  content:""; display:block; width:42%; height:100%; background:rgba(38,51,44,.55);
+}
+.merlion-scene[data-theme="night"] .progress::before { background:rgba(219,231,220,.5); }
+.merlion-scene .counter {
+  position:absolute; z-index:6; left:50%; bottom:36px; transform:translateX(-50%);
+  opacity:0; transition:opacity .4s;
+  font:10px/1 'Inter',ui-monospace,monospace; color:var(--muted); letter-spacing:.05em;
+}
+.merlion-scene .counter.visible { opacity:1; }
+
+/* ===== 配置面板 ===== */
+.merlion-scene .settings {
+  position:absolute; z-index:20; top:62px; right:clamp(24px,5cqw,94px);
+  width:238px; padding:16px;
+  border:1px solid var(--hairline); background:var(--panel);
+  box-shadow:16px 18px 32px rgba(38,51,44,.14);
+  backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px);
+}
+.merlion-scene[data-theme="night"] .settings { box-shadow:16px 18px 32px rgba(0,0,0,.45); }
+.merlion-scene .settings[hidden] { display:none; }
+.merlion-scene .setting { display:grid; gap:6px; margin-bottom:13px; }
+.merlion-scene .setting label {
+  display:flex; justify-content:space-between; color:var(--muted);
+  font:11px/1 'Inter',ui-monospace,monospace;
+}
+.merlion-scene .setting input { width:100%; accent-color:var(--ink); }
+.merlion-scene .reset-btn {
+  width:100%; border:1px solid var(--hairline); padding:7px 10px;
+  color:var(--ink); background:transparent; cursor:pointer;
+  font:11px/1 'Inter',ui-monospace,monospace; transition:all .3s;
+}
+.merlion-scene .reset-btn:hover { border-color:var(--muted); }
+
+/* ★ 断点按容器宽度，不按浏览器视口：
+   嵌进 800px 栏目、而窗口 1600px 时，@media 不会触发，构图会错。 */
+@container (max-width: 720px) {
+  .merlion-scene .masthead { grid-template-columns:1fr auto; }
+  .merlion-scene .nav-links { display:none; }
+  .merlion-scene .headline { left:22px; bottom:26px; width:min(88cqw,420px); }
+  .merlion-scene h1 { font-size:clamp(34px,11cqw,54px); }
+  .merlion-scene .progress, .merlion-scene .counter { display:none; }
+}
+
+@media (prefers-reduced-motion:reduce) {
+  .merlion-scene *, .merlion-scene *::before, .merlion-scene *::after {
+    transition-duration:.01ms !important;
+  }
+}

@@ -1,0 +1,225 @@
+/* 天坛汉字珠帘 —— 可嵌入组件样式
+ *
+ * 1. 所有规则都在 .toh-scene 作用域下，不会外溢到宿主页面。
+ * 2. 尺寸由容器给：设 --kc-height 即可，默认满视口。
+ * 3. 断点用 @container、单位用 cqw/cqh —— 嵌进窄栏目时按栏目宽度
+ *    切换构图，而不是按浏览器视口。
+ * 见 docs/EMBEDDING.md */
+/* 作用域重置：只影响场景内部，绝不碰宿主页面 */
+  .toh-scene, .toh-scene *, .toh-scene *::before, .toh-scene *::after {
+    margin: 0; padding: 0; box-sizing: border-box;
+  }
+
+  /* ===== 色板：白天纸质 / 夜间深紫 ===== */
+  .toh-scene {
+    --paper: #e8dfca;
+    --ink: #2e251f;
+    --muted: #70665b;
+    --hairline: rgba(46, 37, 31, .36);
+    --panel: rgba(232, 223, 202, .93);
+    --temple-width: min(620px, 62cqw);
+  }
+  .toh-scene[data-theme="night"] {
+    --paper: #1a1520;
+    --ink: #e8dfca;
+    --muted: #968a7e;
+    --hairline: rgba(232, 223, 202, .28);
+    --panel: rgba(26, 21, 32, .93);
+  }
+
+  /* 场景根：尺寸由容器给，不再霸占整个视口。
+     container-type: size 让内部所有 cqw/cqh 指向这个盒子而不是浏览器视口。 */
+  .toh-scene {
+    position: relative;
+    height: var(--kc-height, 100svh);
+    min-height: var(--kc-min-height, 400px);
+    container-type: size;
+    isolation: isolate;
+    overflow: hidden;
+    color: var(--ink);
+    line-height: 1.8;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ===== 画板：纸质纹理底 ===== */
+  .toh-scene .artboard {
+    position: absolute; inset: 0;
+    overflow: hidden;
+    isolation: isolate;
+    background:
+      repeating-linear-gradient(91deg, rgba(46,37,31,.022) 0 1px, transparent 1px 11px),
+      repeating-linear-gradient(2deg, rgba(46,37,31,.017) 0 1px, transparent 1px 14px),
+      radial-gradient(circle at 53% 16%, rgba(255,255,255,.26), transparent 34%),
+      var(--paper);
+  }
+  .toh-scene[data-theme="night"] .artboard {
+    background:
+      repeating-linear-gradient(91deg, rgba(232,223,202,.015) 0 1px, transparent 1px 11px),
+      repeating-linear-gradient(2deg, rgba(232,223,202,.012) 0 1px, transparent 1px 14px),
+      radial-gradient(circle at 53% 16%, rgba(100,80,130,.12), transparent 34%),
+      var(--paper);
+  }
+  /* 纸面颗粒噪点 */
+  .toh-scene .artboard::after {
+    content: ""; position: absolute; inset: 0; z-index: 10; pointer-events: none;
+    opacity: .14; mix-blend-mode: multiply;
+    background-image:
+      radial-gradient(circle at 24% 31%, currentColor 0 .5px, transparent .65px),
+      radial-gradient(circle at 71% 56%, currentColor 0 .45px, transparent .6px);
+    background-size: 9px 11px, 13px 15px;
+  }
+  .toh-scene[data-theme="night"] .artboard::after { mix-blend-mode: screen; opacity: .08; }
+
+  /* ===== 导航栏 ===== */
+  .toh-scene .masthead {
+    position: absolute; z-index: 8; top: 28px;
+    left: clamp(24px, 5cqw, 94px); right: clamp(24px, 5cqw, 94px);
+    display: grid; grid-template-columns: 1fr auto 1fr;
+    align-items: center; gap: 28px;
+    font: 12px/1 'Inter', ui-monospace, monospace; color: var(--muted);
+  }
+  .toh-scene .brand {
+    color: var(--ink);
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 14px; font-weight: 600;
+    text-decoration: none; letter-spacing: .5px;
+  }
+  .toh-scene .nav-links { display: flex; gap: 28px; list-style: none; }
+  .toh-scene .nav-links a { color: inherit; text-decoration: none; transition: color .3s; }
+  .toh-scene .nav-links a:hover { color: var(--ink); }
+
+  .toh-scene .masthead-actions { justify-self: end; display: flex; align-items: center; gap: 18px; }
+
+  /* 配置按钮：胶囊描边 */
+  .toh-scene .configure {
+    border: 1px solid var(--ink); border-radius: 999px;
+    padding: 9px 22px; color: var(--ink); background: transparent;
+    font: 500 11px/1 'Inter', sans-serif; letter-spacing: .04em;
+    cursor: pointer; transition: all .3s;
+  }
+  .toh-scene .configure:hover { background: var(--ink); color: var(--paper); }
+
+  /* 主题 / 声音切换按钮 */
+  .toh-scene .toggle-btn {
+    width: 36px; height: 36px;
+    border: 1px solid var(--hairline); border-radius: 2px;
+    background: transparent; color: var(--muted);
+    cursor: pointer; display: grid; place-content: center;
+    font-size: 16px; line-height: 1; transition: all .3s;
+  }
+  .toh-scene .toggle-btn:hover { color: var(--ink); border-color: var(--muted); }
+  .toh-scene .toggle-btn.active { color: var(--ink); border-color: var(--ink); }
+
+  /* ===== 天坛图片 ===== */
+  .toh-scene .temple {
+    position: absolute; z-index: 4;
+    top: clamp(48px, 6cqh, 72px); left: 50%;
+    width: var(--temple-width); transform: translateX(-50%);
+    pointer-events: none; transition: filter .6s;
+  }
+  .toh-scene .temple img {
+    width: 100%; height: auto; display: block;
+    mix-blend-mode: multiply;
+    filter: drop-shadow(34px 38px 18px rgba(46,37,31,.19))
+            drop-shadow(70px 64px 34px rgba(46,37,31,.10));
+  }
+  .toh-scene[data-theme="night"] .temple img {
+    mix-blend-mode: screen;
+    filter: drop-shadow(34px 38px 18px rgba(100,80,130,.25))
+            drop-shadow(0 0 60px rgba(80,60,120,.15))
+            brightness(.85) saturate(1.1);
+  }
+
+  /* ===== 标题 ===== */
+  .toh-scene .headline {
+    position: absolute; z-index: 6;
+    left: clamp(28px, 6cqw, 112px); bottom: clamp(38px, 8cqh, 92px);
+    width: min(330px, 31cqw); pointer-events: none;
+  }
+  .toh-scene .eyebrow {
+    margin: 0 0 16px; color: var(--muted);
+    font: 12px/1.3 'Inter', ui-monospace, monospace;
+  }
+  .toh-scene h1 {
+    margin: 0; color: var(--ink); letter-spacing: -1px;
+    font: 700 clamp(48px, 5.5cqw, 86px)/.86 'Playfair Display', Georgia, serif;
+  }
+  .toh-scene h1 .ag-char { display: inline-block; cursor: default; user-select: none; }
+  .toh-scene .rule {
+    display: inline-block; width: 76px; margin-left: 15px;
+    border-top: 1px solid var(--ink); transform: translateY(-.35em); opacity: .3;
+  }
+
+  /* ===== 进度条 ===== */
+  .toh-scene .progress {
+    position: absolute; z-index: 6; left: 50%; bottom: 22px;
+    width: 140px; height: 2px; transform: translateX(-50%);
+    background: rgba(46,37,31,.18);
+  }
+  .toh-scene[data-theme="night"] .progress { background: rgba(232,223,202,.15); }
+  .toh-scene .progress::before {
+    content: ""; display: block; width: 42%; height: 100%;
+    background: rgba(46,37,31,.55); transition: width .3s;
+  }
+  .toh-scene[data-theme="night"] .progress::before { background: rgba(232,223,202,.5); }
+
+  /* ===== 交互计数器 ===== */
+  .toh-scene .counter {
+    position: absolute; z-index: 6; left: 50%; bottom: 36px;
+    transform: translateX(-50%); opacity: 0; transition: opacity .4s;
+    font: 10px/1 'Inter', ui-monospace, monospace; color: var(--muted);
+    letter-spacing: .05em;
+  }
+  .toh-scene .counter.visible { opacity: 1; }
+
+  /* ===== Canvas 珠帘 ===== */
+  .toh-scene .curtain {
+    position: absolute; inset: 0; z-index: 2;
+    width: 100%; height: 100%; cursor: none; touch-action: none;
+  }
+  .toh-scene .cursor {
+    position: absolute; z-index: 12; width: 12px; height: 12px;
+    border: 1px solid rgba(46,37,31,.72); border-radius: 50%;
+    transform: translate(-50%, -50%); opacity: 0; pointer-events: none;
+  }
+  .toh-scene[data-theme="night"] .cursor { border-color: rgba(232,223,202,.72); }
+  .toh-scene .artboard.is-active .cursor { opacity: 1; }
+
+  /* ===== 配置面板 ===== */
+  .toh-scene .settings {
+    position: absolute; z-index: 20; top: 62px;
+    right: clamp(24px, 5cqw, 94px); width: 238px; padding: 16px;
+    border: 1px solid var(--hairline); background: var(--panel);
+    box-shadow: 16px 18px 32px rgba(46,37,31,.12);
+    backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+  }
+  .toh-scene[data-theme="night"] .settings { box-shadow: 16px 18px 32px rgba(0,0,0,.4); }
+  .toh-scene .settings[hidden] { display: none; }
+  .toh-scene .setting { display: grid; gap: 6px; margin-bottom: 13px; }
+  .toh-scene .setting label {
+    display: flex; justify-content: space-between; color: var(--muted);
+    font: 11px/1 'Inter', ui-monospace, monospace;
+  }
+  .toh-scene .setting input { width: 100%; accent-color: var(--ink); }
+  .toh-scene .reset-btn {
+    width: 100%; border: 1px solid var(--hairline); padding: 7px 10px;
+    color: var(--ink); background: transparent; cursor: pointer;
+    font: 11px/1 'Inter', ui-monospace, monospace; transition: all .3s;
+  }
+  .toh-scene .reset-btn:hover { border-color: var(--muted); }
+
+  /* ===== 响应式 ===== */
+  @container (max-width: 720px) {
+    .toh-scene .masthead { grid-template-columns: 1fr auto; }
+    .toh-scene .nav-links { display: none; }
+    .toh-scene .temple { top: 66px; width: min(520px, 96cqw); }
+    .toh-scene .headline { left: 24px; bottom: 38px; width: min(285px, 72cqw); }
+    .toh-scene h1 { font-size: clamp(42px, 14cqw, 66px); }
+    .toh-scene .progress, .toh-scene .counter { display: none; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .toh-scene *, .toh-scene *::before, .toh-scene *::after {
+      animation-duration: .01ms !important; animation-iteration-count: 1 !important;
+      transition-duration: .01ms !important;
+    }
+  }

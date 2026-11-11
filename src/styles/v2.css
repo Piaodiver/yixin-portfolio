@@ -1,0 +1,331 @@
+/* v2 tokens and page styles. Paper ground, one accent. Light only. */
+:root {
+  color-scheme: light;
+  --paper:      #F7F2E9;
+  --paper-sunk: #F0EADF;
+  --paper-raise:#FBF8F1;
+  --ink-900:    #1C1B18;
+  --ink-700:    #403D36;
+  --ink-500:    #5F5B52;
+  --ink-400:    #716C62;
+  --ink-300:    #A9A396;   /* decorative only */
+  --ink-100:    #D9D2C3;
+  --ink-050:    #E8E2D4;
+  --rule:       #DDD5C5;
+  --accent:     #E8561C;   /* International Orange, sparingly */
+  --scene-h:    220px;
+  /* faint paper fibre; one inline SVG, no request */
+  --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23g)'/%3E%3C/svg%3E");
+}
+@media (min-width: 768px) { :root { --scene-h: 400px; } }
+
+body::before {
+  content: '';
+  position: fixed; inset: 0; z-index: -1;
+  pointer-events: none;
+  background-image: var(--grain);
+  opacity: 0.035;
+}
+
+/* layout */
+.v2-wrap {
+  width: 100%;
+  max-width: 64ch;
+  margin-inline: auto;
+  padding-inline: 16px;
+}
+@media (min-width: 768px) { .v2-wrap { padding-inline: 24px; } }
+
+/* type */
+.v2-eyebrow {
+  font-family: Inter, system-ui, sans-serif;
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-500);
+}
+.v2-h1 {
+  font-family: Fraunces, Georgia, serif;
+  font-weight: 400;
+  font-size: clamp(1.75rem, 1.2rem + 2.4vw, 2.6rem);
+  line-height: 1.2;
+  color: var(--ink-900);
+}
+.v2-h2 {
+  font-family: Fraunces, Georgia, serif;
+  font-weight: 400;
+  font-size: clamp(1.4rem, 1.1rem + 1.2vw, 1.9rem);
+  line-height: 1.25;
+  color: var(--ink-900);
+}
+.v2-sub {
+  font-family: Fraunces, Georgia, serif;
+  font-size: 1.15rem;
+  line-height: 1.5;
+  color: var(--ink-700);
+}
+/* hanging sub-line: two threads, a slow sway. CSS placeholder; the real
+   pendulum physics (pointer-driven, damped) replaces this later. */
+.v2-hang { position: relative; padding-top: 14px; }
+.v2-hang::before,
+.v2-hang::after {
+  content: '';
+  position: absolute; top: 0;
+  width: 1px; height: 12px;
+  background: var(--ink-100);
+}
+.v2-hang::before { left: 12px; }
+.v2-hang::after  { left: 52%; }
+.v2-hang__swing {
+  display: inline-block;
+  transform-origin: top center;
+  animation: v2-sway 6s ease-in-out infinite;
+}
+.v2-hang:hover .v2-hang__swing {
+  /* one larger push, then it settles at rest */
+  animation: v2-sway-nudge 2.8s ease-in-out 1 forwards;
+}
+@keyframes v2-sway {
+  0%, 100% { transform: rotate(-0.6deg); }
+  50%      { transform: rotate(0.6deg); }
+}
+@keyframes v2-sway-nudge {
+  0%   { transform: rotate(0deg); }
+  18%  { transform: rotate(1.5deg); }
+  42%  { transform: rotate(-1.2deg); }
+  64%  { transform: rotate(0.7deg); }
+  82%  { transform: rotate(-0.3deg); }
+  100% { transform: rotate(0deg); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .v2-hang__swing,
+  .v2-hang:hover .v2-hang__swing { animation: none; }
+}
+
+.v2-prose p { margin: 0 0 1.1em; max-width: 64ch; color: var(--ink-900); }
+.v2-prose p:last-child { margin-bottom: 0; }
+.v2-placeholder { color: var(--ink-500); font-style: italic; }
+.v2-person {
+  font-family: Inter, system-ui, sans-serif;
+  font-size: 0.92rem; line-height: 1.6;
+  color: var(--ink-500);
+  max-width: 64ch;
+}
+
+/* links: accent, hairline underline */
+.v2-link {
+  color: var(--accent);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  text-decoration-color: color-mix(in srgb, var(--accent) 45%, transparent);
+}
+.v2-link:hover { text-decoration-color: var(--accent); }
+.v2-card-link { display: block; color: inherit; text-decoration: none; }
+.v2-card-link:hover .v2-eyebrow { color: var(--accent); }
+.v2-card-link__read { color: var(--accent); }
+.v2-card-link:hover .v2-card-link__read { text-decoration: underline; text-underline-offset: 3px; }
+/* links inside case text: ink-coloured, hairline underline, accent on hover;
+   quieter than .v2-link so the paragraphs do not light up */
+.v2-prose a {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  text-decoration-color: var(--ink-300);
+}
+.v2-prose a:hover { color: var(--accent); text-decoration-color: var(--accent); }
+
+/* scene band placeholder */
+.scene-band {
+  position: relative;
+  width: 100%;
+  height: var(--scene-h);
+  background: var(--paper-sunk);
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+}
+/* Desktop: the bands no longer bleed edge to edge. Each is a centred frame of
+   at most 1040px whose height follows its width, so every scene scales down
+   together (about two thirds of the full-bleed size on a 1440 screen). The
+   scenes read --kc-height / --gg-height, so those are pinned to the frame. */
+@media (min-width: 768px) {
+  .scene-band {
+    width: min(100% - 48px, 1040px);
+    margin-inline: auto;
+    height: auto;
+    aspect-ratio: 16 / 9;
+    border: 1px solid var(--rule);
+  }
+}
+.scene-band__label {
+  position: absolute; top: 12px; left: 16px;
+  padding: 2px 6px; margin: -2px -6px;
+  background: color-mix(in srgb, var(--paper-sunk) 85%, transparent);
+  border-radius: 3px;
+  font-family: Inter, system-ui, sans-serif;
+  font-size: 0.72rem; font-weight: 500;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--ink-500);
+}
+.scene-band__caption {
+  position: absolute; left: 50%; top: 50%;
+  transform: translate(-50%, -50%);
+  font-family: Inter, system-ui, sans-serif;
+  font-size: 0.8rem; color: var(--ink-300);
+}
+/* the mount target: full box, both height vars the scenes read. The scene
+   CSS defaults min-height to 400px, which would overflow the 220px mobile
+   band, so pin the min-height vars to the band height too. */
+.scene-band__host {
+  position: absolute; inset: 0;
+  --kc-height: var(--scene-h);
+  --gg-height: var(--scene-h);
+  --kc-min-height: var(--scene-h);
+  --gg-min-height: var(--scene-h);
+}
+@media (min-width: 768px) {
+  .scene-band__host {
+    --kc-height: 100%;
+    --gg-height: 100%;
+    --kc-min-height: 100%;
+    --gg-min-height: 100%;
+  }
+}
+/* once a scene mounts, its root class sets position: relative; keep the host
+   filling the band so the label sits over it and nothing reflows. */
+.scene-band__host.toh-scene,
+.scene-band__host.gg-scene,
+.scene-band__host.jaffa-scene,
+.scene-band__host.merlion-scene { position: absolute; }
+.scene-band__label { z-index: 1; pointer-events: none; }
+/* Phone: 220px shows only the temple roof, so China gets a taller band and
+   a narrower temple (the scene's own narrow-container rule sets the width
+   on .temple directly, so it is overridden here, not via --temple-width).
+   The bridge wants a little more height than the shared band too. */
+@media (max-width: 767px) {
+  .scene-band[data-place="china"] { height: 360px; }
+  .scene-band__host[data-place="china"] { --kc-height: 360px; --kc-min-height: 360px; }
+  .scene-band__host[data-place="china"] .temple { top: 18px; width: min(250px, 64cqw); }
+  .scene-band[data-place="united-states"] { height: 280px; }
+  .scene-band__host[data-place="united-states"] { --gg-height: 280px; --gg-min-height: 280px; }
+}
+/* Per-place band heights. The shared --scene-h is the fallback; these two
+   scenes were composed for taller frames and look squashed at 400px.
+   China: the roof plus the glyph curtain needs about 620px on desktop.
+   United States: the bridge is drawn against a 1672x941 reference frame and
+   scales with the box, so it keeps its original full-viewport height. */
+@media (min-width: 768px) {
+  /* China: roof plus curtain wants a squarer frame than the others. */
+  .scene-band[data-place="china"] { aspect-ratio: 5 / 3; }
+  /* roof image is 901x~726; at full width it alone fills the frame and the
+     curtain falls off the bottom. ~42% of the frame width leaves room. */
+  .scene-band__host[data-place="china"] { --temple-width: min(440px, 42cqw); }
+}
+/* Israel and Singapore were composed for a full-viewport frame too (the arch
+   is an 866x992 portrait clipped to the right edge; the Merlion backdrop is
+   cover-fit, left-anchored), so they get the same clamp. */
+/* jaffa.css sizes its inner .artboard with a hard `height: 100svh` instead of
+   --kc-height; inside the band that is the browser viewport, not the band, so
+   the backdrop (height: 100%) and the canvas would be laid out for the wrong
+   box and clipped. Pin it to the scene root here rather than editing the
+   vendored file. */
+.scene-band__host.jaffa-scene .artboard { height: 100%; }
+/* bottom-right control; sits above the host */
+.scene-band__expand {
+  position: absolute; right: 20px; bottom: 14px; z-index: 1;
+  padding: 4px 10px;
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+  background: var(--paper);
+  color: var(--accent);
+  font-family: Inter, system-ui, sans-serif;
+  font-size: 12px; line-height: 1.4;
+  cursor: pointer;
+}
+.scene-band__expand:hover { border-color: var(--accent); }
+@media (min-width: 768px) { .scene-band__expand { right: 24px; bottom: 16px; } }
+/* no scene mounts under reduced motion (useScene), so nothing to expand */
+@media (prefers-reduced-motion: reduce) { .scene-band__expand { display: none; } }
+
+/* full-screen scene (SceneOverlay): a viewport-sized host above the page and
+   the side nav. The scenes size themselves from the height vars; Jaffa's
+   artboard is pinned to 100svh upstream, which is the right box here. */
+.scene-overlay {
+  position: fixed; inset: 0; z-index: 50;
+  background: var(--paper-sunk);
+}
+.scene-overlay__host {
+  position: absolute; inset: 0;
+  --kc-height: 100%;
+  --gg-height: 100%;
+  --kc-min-height: 100%;
+  --gg-min-height: 100%;
+}
+.scene-overlay__host.toh-scene,
+.scene-overlay__host.gg-scene,
+.scene-overlay__host.jaffa-scene,
+.scene-overlay__host.merlion-scene { position: absolute; }
+.scene-overlay__close { z-index: 30; }
+
+/* section nav. Top row below 1024px (the 64ch column plus a side column
+   does not fit before that); fixed right-edge column from 1024px up. */
+.v2-nav {
+  position: sticky; top: 0; z-index: 20;
+  display: flex; gap: 14px;
+  padding: 14px 16px;
+  background: var(--paper);
+  border-bottom: 1px solid var(--rule);
+  overflow-x: auto; white-space: nowrap;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+.v2-nav::-webkit-scrollbar { display: none; }
+.v2-nav a {
+  font-family: Inter, system-ui, sans-serif;
+  font-size: 11px; font-weight: 500;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--ink-500);
+  text-decoration: none;
+  flex: none;
+}
+.v2-nav a:hover { color: var(--ink-900); }
+/* the name: back to top; sits apart from the section labels */
+.v2-nav__home { color: var(--ink-900); }
+/* on the phone row the name would push About off screen; the row is the
+   way back up anyway, so the name is desktop only */
+@media (max-width: 1023px) { .v2-nav__home { display: none; } }
+@media (min-width: 1024px) { .v2-nav__home { margin-bottom: 8px; } }
+.v2-nav a[aria-current="true"] { color: var(--accent); }
+/* anchor jumps must clear the sticky row */
+@media (max-width: 1023px) { main > section[id] { scroll-margin-top: 56px; } }
+@media (min-width: 1024px) {
+  .v2-nav {
+    position: fixed; top: 140px; right: 28px; left: auto;
+    flex-direction: column; gap: 10px;
+    padding: 0; background: transparent; border: 0;
+    overflow: visible; white-space: normal;
+  }
+  .v2-nav a { white-space: nowrap; }
+}
+
+/* about photo */
+.v2-photo {
+  width: 220px; max-width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  display: block;
+}
+@media (min-width: 768px) { .v2-photo { width: 260px; } }
+
+/* skip link */
+.u-skip { position: absolute; left: -9999px; }
+.u-skip:focus {
+  left: 1rem; top: 1rem; z-index: 100;
+  padding: 0.6rem 1rem;
+  background: var(--ink-900); color: var(--paper);
+}
+
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+::selection { background: var(--accent); color: var(--paper); }

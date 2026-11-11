@@ -18,6 +18,8 @@ export default {
           100: 'var(--ink-100)',
           50:  'var(--ink-050)',
         },
+        rule:   'var(--rule)',
+        accent: 'var(--accent)',
         wash: {
           indigo: 'var(--wash-indigo)',
           sage:   'var(--wash-sage)',
@@ -35,7 +37,7 @@ export default {
         label: '0.14em',
       },
       maxWidth: {
-        prose: '68ch',
+        prose: '64ch',
       },
       transitionTimingFunction: {
         ink: 'cubic-bezier(0.22, 0.61, 0.36, 1)',

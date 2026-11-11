@@ -1,0 +1,24 @@
+# United States / Golden Gate — 吊索文字源
+#
+# 选词标准：科技 / AI / building 相关，且必须是正向词。
+# 视觉上：等宽体竖排堆叠，3–6 字母最稳；8–10 字母的长词只会落到
+# 靠塔的长索上（分词是按"装得下的最长未用词"贪心装配的）。
+#
+# 注：这不是 HANDOFF.md 的标准词表。作者要求换成正向科技词，
+#     design-spec.json 的 copy.strandWords 已同步。
+
+BUILD
+SIGNAL
+MODEL
+LEARN
+PROMPT
+CRAFT
+CONNECTION
+TRAIN
+MOMENTUM
+ADAPT
+REASON
+CURIOSITY
+
+__CABLE__
+SIGNALS CROSS THE SPAN · SHAPING HOW I BUILD ·

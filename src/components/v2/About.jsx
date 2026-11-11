@@ -2,7 +2,8 @@ import Reveal from './Reveal';
 import { about } from '../../content/v2';
 
 /**
- * About — the portrait beside the three paragraphs.
+ * About — the portrait beside the route and the outside-work paragraphs.
+ * The first paragraph (where things stand) lives in the hero now.
  *
  * Desktop: two columns, the photo in a fixed 280px column at its own 4:5
  * ratio (the file is 720x900, so nothing is cropped), which comes to about
@@ -14,6 +15,7 @@ import { about } from '../../content/v2';
 export default function About() {
   return (
     <Reveal as="section" id="about" className="v2-about border-t border-rule">
+      <p className="v2-eyebrow v2-about__eyebrow">More about me</p>
       <div className="v2-about__inner">
         <img
           className="v2-about__photo"

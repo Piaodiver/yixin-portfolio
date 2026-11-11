@@ -13,12 +13,12 @@ export const israel = [
   'I got the internship by writing to the CEO on LinkedIn when nothing said the company wanted an intern. I sent about 30 messages like that, about one in four got a reply, and I asked each for a meeting.',
 ];
 
-// The first About paragraph moved up into the hero (hero.now) on 2026-11-10:
-// most visitors never reach the foot of the page. What stays here is for the
-// reader who does.
+// About, step 28 (2026-11-11): the reader who gets here has just read the
+// four places, so the route paragraph went (archived in
+// +个人网站/drafts/about.v1-before-step28.md, git tag about-v1-route-280px).
+// What stays is the one thing they have not read: outside work.
 export const about = [
-  'The route, by place. I grew up in Beijing. A liberal arts education at Wesleyan in Connecticut. Tel Aviv for a master\'s in the management of innovative technology. Beijing for two years at Baidu, improving how internal teams ran their processes and building an app for them, and then for SAP, which selected me for its global presales academy in San Ramon, California, the only presales trainee from East Asia that year, and brought me back as a solution architect on the LGMG program. Singapore from 2024, covering Southeast Asia for Wiz.AI, then Salesforce as a technical architect for AI and data. Seattle since mid-2026.',
-  'Outside work, the sea first. In 2013 I crewed [a research sailing ship](https://sea.edu/) for two months from Tahiti to Hawaii, standing watches through the night and writing papers in between, and I have been diving ever since, mostly in Southeast Asia. On land it is long walks: 80 kilometers across the Altai mountains in two days, and the wadi from St. George\'s Monastery down to Jericho, where people have lived for ten thousand years. Four times I went to Lhasa to lead volunteer teachers at [two schools for children with disabilities](https://www.braillewithoutborders.org/ENGLISH/). And once a year, a road trip with my family.',
+  'The sea first. In 2013 I crewed [a research sailing ship](https://sea.edu/) for two months from Tahiti to Hawaii, standing watches through the night and writing papers in between, and I have been diving ever since, mostly in Southeast Asia. On land it is long walks: 80 kilometers across the Altai mountains in two days, and the wadi from St. George\'s Monastery down to Jericho, where people have lived for ten thousand years. Four times I went to Lhasa to lead volunteer teachers at [two schools for children with disabilities](https://www.braillewithoutborders.org/ENGLISH/). And once a year, a road trip with my family.',
 ];
 
 export const hero = {

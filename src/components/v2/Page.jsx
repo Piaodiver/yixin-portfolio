@@ -3,7 +3,7 @@ import SideNav from './SideNav';
 import Place, { CaseHead, Prose } from './Place';
 import About from './About';
 import End from './End';
-import { cases, built, israel, salesforce, china, baidu, placeById as P } from '../../content/v2';
+import { cases, built, israel, salesforce, china, baidu, unitedStates, placeById as P } from '../../content/v2';
 
 export default function Page() {
   return (
@@ -42,7 +42,14 @@ export default function Page() {
       </Place>
 
       <Place place="united-states" title={P["united-states"].label} sub={P["united-states"].sub}>
-        <p className="v2-eyebrow">Building now</p>
+        {unitedStates.map((block, i) => (
+          <div key={block.eyebrow} className={i === 0 ? '' : 'mt-12'}>
+            <p className="v2-eyebrow pt-2">{block.eyebrow}</p>
+            <Prose paragraphs={block.paragraphs} />
+          </div>
+        ))}
+        <p className="v2-eyebrow mt-12 pt-2">Seattle · since 2026</p>
+        <p className="v2-eyebrow mt-6">Building now</p>
         <ul className="mt-3 divide-y divide-rule border-y border-rule">
           {built.map((b) => (
             <li key={b.title} className="py-4">

@@ -48,7 +48,7 @@ export const places = [
   { id: 'china', label: 'China', city: 'Beijing', sub: 'Beijing · Baidu, SAP · 2017–2023', years: 'grew up · 2017–2023' },
   { id: 'israel', label: 'Israel', city: 'Tel Aviv', sub: 'Tel Aviv · Tel Aviv University · 2015–2017', years: '2015–2017' },
   { id: 'singapore', label: 'Singapore', city: 'Singapore', sub: 'Wiz.AI, Salesforce · 2024–2026', years: '2024–2026' },
-  { id: 'united-states', label: 'United States', city: 'Seattle', sub: 'Seattle · since 2026', years: 'now' },
+  { id: 'united-states', label: 'United States', city: 'Seattle', sub: 'Connecticut 2014 · San Ramon 2019–2020 · Seattle since 2026', years: 'Connecticut · Bay Area · now' },
 ];
 export const placeById = Object.fromEntries(places.map((p) => [p.id, p]));
 
@@ -114,6 +114,23 @@ export const cases = {
 };
 
 export const heroCards = [cases.nova, cases.lgmg, cases.wizai];
+
+// United States, before Seattle: the degree and the Academy year. Facts and
+// memories from the owner (2026-11-10); draft in +个人网站/drafts/united-states.md.
+export const unitedStates = [
+  {
+    eyebrow: 'Wesleyan University · Connecticut · class of 2014',
+    paragraphs: [
+      'Four years at a liberal arts college in Connecticut, with economics on the diploma. It left me a habit of reading closely, arguing from more than one side, and going a few levels deeper than the question asked. I remember a history seminar that ran well past the hour before anyone noticed, and a paper finished at three in the morning, then a walk under the moon because I was too awake to sleep.',
+    ],
+  },
+  {
+    eyebrow: 'SAP Academy for Presales · San Ramon, California · 2019–2020',
+    paragraphs: [
+      'A year in the Bay Area with trainees from more than 20 countries. I was the only one from East Asia that year. The program covered presenting, the SAP stack, an ERP certification, building demos, pitching to customers, and reading people. Before each assessed presentation most of us rehearsed until two or three in the morning. I came out more confident. Practice makes perfect, and go even when you are not ready, because starting beats perfect. It was my first step into SaaS, as a solution architect.',
+    ],
+  },
+];
 
 // Built list. TCO sentence is from yixinportfolio架构20260908.md §04; the
 // adoption atlas and the Kinetic Curtains line were dropped on 2026-11-10.

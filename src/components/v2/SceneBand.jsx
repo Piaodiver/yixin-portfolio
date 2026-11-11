@@ -18,7 +18,7 @@ import { placeById } from '../../content/v2';
  * is near the viewport, and the band height is fixed by CSS, so the scene
  * arriving causes no layout shift.
  *
- * Poster: public/scenes/<place>/poster.jpg is a still of the scene at band
+ * Poster: public/scenes/<place>/poster.jpg is a 2x still of the scene at band
  * size. It sits under the host from the first paint and fades out once the
  * scene has mounted, so the band is never an empty box: before the chunk
  * loads, if it fails, and under reduced motion (where nothing mounts), the
@@ -100,8 +100,8 @@ export default function SceneBand({ place }) {
           className="scene-band__poster"
           src={poster}
           alt=""
-          width="1280"
-          height={place === 'china' ? 768 : 720}
+          width="2076"
+          height={place === 'china' ? 1244 : 1166}
           loading="lazy"
           decoding="async"
           data-state={state}

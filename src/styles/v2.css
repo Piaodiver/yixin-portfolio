@@ -249,11 +249,18 @@ body::before {
 @media (min-width: 768px) {
   .scene-band {
     width: min(100% - 48px, 1040px);
+    /* from 1024px the nav is a fixed column at the right edge (about 120px
+       plus its 28px margin, on both sides for symmetry); the band stays
+       clear of it until the screen is wide enough for both */
+    --scene-max: 1040px;
     margin-inline: auto;
     height: auto;
     aspect-ratio: 16 / 9;
     border: 1px solid var(--rule);
   }
+}
+@media (min-width: 1024px) {
+  .scene-band { width: min(100% - 340px, 1040px); }
 }
 .scene-band__label {
   position: absolute; top: 12px; left: 16px;

@@ -88,8 +88,8 @@ export const cases = {
 
 export const heroCards = [cases.nova, cases.lgmg, cases.wizai];
 
-// Built list. First two sentences are from yixinportfolio架构20260908.md §04.
-// Kinetic Curtains is not in §04; its sentence is ours.
+// Built list. TCO sentence is from yixinportfolio架构20260908.md §04; the
+// adoption atlas was dropped on 2026-11-10. Kinetic Curtains' sentence is ours.
 export const built = [
   {
     title: 'LLM deployment TCO calculator',
@@ -97,9 +97,12 @@ export const built = [
     href: 'https://github.com/Piaodiver/llm-tco-calculator',
   },
   {
-    title: 'Anthropic Claude adoption atlas',
-    body: 'An interactive map of Anthropic’s product line as landmark buildings, each panel covering one product, with comparison tables and code previews.',
-    href: 'https://piaodiver.github.io/anthropic-claude-adoption-atlas/',
+    // MultiVerse I: title and one line only for now, a page of its own later.
+    // Cleared with the co-founder on 2026-09-07 for positioning and screenshots;
+    // no backend or implementation detail here.
+    title: 'MultiVerse I: Journey to the West, as anyone in it',
+    body: 'An AI interactive reader, built with a co-founder. Play Sun Wukong, or a demon who gets one line in the original. 90% reading, 10% changing fate. iOS, 2026.',
+    href: null,
   },
   {
     title: 'Kinetic Curtains',

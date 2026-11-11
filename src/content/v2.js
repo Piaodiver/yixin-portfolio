@@ -24,6 +24,18 @@ export const hero = {
   headline: 'Most enterprise AI projects are content problems in disguise. I find out which kind you have.',
   subline: 'Over eight years of this. The technology kept changing. The problem did not.',
   person: 'Seattle, by way of Beijing, Tel Aviv and Singapore. Underwater when I can be.',
+  // the ask: one line, email link on 'Write to me'
+  looking: 'Looking for the next role. Seattle first, the rest of the West Coast for the right one.',
+  lookingCta: 'Write to me',
+  lookingTail: ' and I will send a resume written for it.',
+};
+
+// The Salesforce year, as the frame around NOVA. Sits first in the Singapore section.
+export const salesforce = {
+  eyebrow: 'Salesforce · Technical Architect, AI & Data · 2025–2026',
+  paragraphs: [
+    'From 2025 I was a technical architect for AI and data at Salesforce in Singapore. The clients were spread across Southeast Asia: banks and other financial firms, universities, retailers, entertainment and cultural venues, manufacturers. Most had run a pilot and wanted something in production. The first workshop usually ended on the same question: what the agent would be allowed to say. That depended on what the company had already written down, and who kept it current. The line at the top of this page is that answer, shortened. NOVA, below, is the one project from that year that was announced publicly.',
+  ],
 };
 
 export const cases = {
@@ -69,7 +81,7 @@ export const cases = {
     long: [
       "The customer's CMS already held every fact the agent would need, years of approved content run by an editorial team with its own approval workflow. In 2024 this Singapore entertainment destination wanted its first LLM deployment. It was [Wiz.AI](https://www.wiz.ai/)'s first too, with no platform yet.",
       'I decided the CMS would stay the source of truth, with a scheduled ingestion pipeline feeding the vector store, instead of a hand-built knowledge base. That costs freshness, up to one refresh cycle. The editors keep one place to edit and the agent inherits their approvals. Anything below the bar went to the official site or the customer service line rather than to a guess.',
-      'What I would change: I never wrote down what "correct" meant before we built, as a scoring rubric or as acceptance criteria. And who maintains the knowledge base was a negotiation. We treated it as something the architecture would settle. I left before there was enough operating history to quote.',
+      'What I would change: I never wrote down what "correct" meant before we built, as a scoring rubric or as acceptance criteria. And who maintains the knowledge base was a negotiation. We treated it as something the architecture would settle. I left before there was enough operating history to quote. I made the same two decisions on NOVA the next year: the customer\'s own system as the source of truth, and a hand-off to a person when the agent is not sure.',
     ],
   },
 };

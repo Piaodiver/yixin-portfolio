@@ -11,6 +11,9 @@ export default function Hero() {
       </p>
       {/* the person, not the job: one line, small, under the hanging sub-line */}
       <p className="v2-person mt-5">{hero.person}</p>
+      <p className="v2-person mt-3">
+        {hero.looking} <a className="v2-link" href={`mailto:${links.email}`}>{hero.lookingCta}</a>{hero.lookingTail}
+      </p>
 
       <ul className="mt-14 grid gap-6 md:grid-cols-3 md:gap-8">
         {heroCards.map((c) => (

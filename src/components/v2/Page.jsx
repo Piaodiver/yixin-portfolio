@@ -1,7 +1,7 @@
 import Hero from './Hero';
 import SideNav from './SideNav';
 import Place, { CaseHead, Prose } from './Place';
-import { cases, built, links, israel, about } from '../../content/v2';
+import { cases, built, links, israel, about, salesforce } from '../../content/v2';
 
 export default function Page() {
   return (
@@ -20,8 +20,12 @@ export default function Page() {
       </Place>
 
       <Place place="singapore">
-        <CaseHead item={cases.nova} />
-        <Prose paragraphs={cases.nova.long} />
+        <p className="v2-eyebrow pt-2">{salesforce.eyebrow}</p>
+        <Prose paragraphs={salesforce.paragraphs} />
+        <div className="mt-12">
+          <CaseHead item={cases.nova} />
+          <Prose paragraphs={cases.nova.long} />
+        </div>
         <div className="mt-12">
           <CaseHead item={cases.wizai} />
           <Prose paragraphs={cases.wizai.long} />

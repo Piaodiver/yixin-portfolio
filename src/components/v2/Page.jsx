@@ -3,7 +3,7 @@ import SideNav from './SideNav';
 import Place, { CaseHead, Prose } from './Place';
 import About from './About';
 import End from './End';
-import { cases, built, israel, salesforce, china } from '../../content/v2';
+import { cases, built, israel, salesforce, china, baidu } from '../../content/v2';
 
 export default function Page() {
   return (
@@ -13,6 +13,10 @@ export default function Page() {
 
       <Place place="china" title="China" sub="Beijing · Baidu, SAP · 2017–2023">
         <Prose paragraphs={china} />
+        <div className="mt-12">
+          <p className="v2-eyebrow pt-2">{baidu.eyebrow}</p>
+          <Prose paragraphs={baidu.paragraphs} />
+        </div>
         <div className="mt-12">
           <CaseHead item={cases.lgmg} />
           <Prose paragraphs={cases.lgmg.long} />

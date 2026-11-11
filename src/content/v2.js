@@ -43,6 +43,14 @@ export const china = [
   'I grew up in Beijing, and came back to it after Tel Aviv: two years at Baidu, then SAP.',
 ];
 
+// Baidu, 2017–2019. Facts from the owner's resume bullets (2026-11-10).
+export const baidu = {
+  eyebrow: 'Baidu · 2017–2019',
+  paragraphs: [
+    "Every quarter Baidu brought 200-odd leaders from eight business units together for a summit, and it took a team of twelve to run it. I built the event app: each person's agenda, the logistics, the day's changes, as a mini-program on their phone. The coordination team went from twelve to three. The feature was later folded into Baidu Hi, the company's own messaging app. Between summits I did the quarterly analyses for the executive and general-manager meetings: where operations were stuck, and where the growth was.",
+  ],
+};
+
 export const cases = {
   nova: {
     id: 'nova',

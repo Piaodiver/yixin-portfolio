@@ -139,6 +139,8 @@ export const built = [
     title: 'LLM deployment TCO calculator',
     body: 'A cost model for a year of a Claude workload, and, more usefully, which architectural levers actually move the number.',
     href: 'https://github.com/Piaodiver/llm-tco-calculator',
+    // one more line, added 2026-11-11: the README's scoping-questions section
+    more: { text: 'Five questions I ask before quoting one, ', label: 'in the README', href: 'https://github.com/Piaodiver/llm-tco-calculator#what-i-would-ask-before-quoting-any-of-this' },
   },
   {
     // Tariff Engine: repository is private until its README is finished, so no

@@ -57,6 +57,11 @@ export default function Page() {
                 {b.href ? <a className="v2-link" href={b.href}>{b.title}</a> : b.title}
               </p>
               <p className="mt-1 max-w-prose text-[0.92rem] text-ink-700">{b.body}</p>
+              {b.more ? (
+                <p className="mt-1 max-w-prose text-[0.92rem] text-ink-700">
+                  {b.more.text}<a className="v2-link" href={b.more.href}>{b.more.label}</a>.
+                </p>
+              ) : null}
             </li>
           ))}
         </ul>

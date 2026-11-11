@@ -2,22 +2,24 @@ import { hero, heroCards, links } from '../../content/v2';
 
 export default function Hero() {
   return (
-    <header className="v2-wrap pt-16 pb-14 md:pt-28 md:pb-20">
+    <header className="v2-wrap pt-12 pb-10 md:pt-16 md:pb-12">
       <p className="v2-eyebrow">{hero.name}</p>
-      <h1 className="v2-h1 mt-5">{hero.headline}</h1>
+      <h1 className="v2-h1 mt-4">{hero.headline}</h1>
       {/* hangs from two threads; CSS sway is a stand-in for the pendulum physics */}
-      <p className="v2-sub v2-hang mt-6">
+      <p className="v2-sub v2-hang mt-5">
         <span className="v2-hang__swing">{hero.subline}</span>
       </p>
       {/* the person, not the job: one line, small, under the hanging sub-line */}
-      <p className="v2-person mt-5">{hero.person}</p>
-      <p className="v2-person mt-3">
-        {hero.looking} <a className="v2-link" href={`mailto:${links.email}`}>{hero.lookingCta}</a>{hero.lookingTail}
+      <p className="v2-person mt-4">{hero.person}</p>
+      {/* the ask: its own line, in the accent, so it is the one thing on the screen in colour */}
+      <p className="v2-ask mt-3">
+        {hero.looking} <a href={`mailto:${links.email}`}>{hero.lookingCta}</a>{hero.lookingTail}
       </p>
 
-      <ul className="mt-14 grid gap-6 md:grid-cols-3 md:gap-8">
+      {/* three cards: a row on desktop, a swipeable row on the phone (.v2-cards) */}
+      <ul className="v2-cards mt-10">
         {heroCards.map((c) => (
-          <li key={c.id} className="border-t border-rule pt-3">
+          <li key={c.id} className="v2-card">
             <a href={`#${c.id}`} className="v2-card-link">
               <span className="v2-eyebrow">{c.name}</span>
               <p className="mt-2 text-[0.92rem] leading-relaxed text-ink-700">{c.card}</p>
@@ -26,12 +28,6 @@ export default function Hero() {
           </li>
         ))}
       </ul>
-
-      <p className="mt-12 text-[0.92rem]">
-        <a className="v2-link" href={links.github}>GitHub</a>
-        <span className="mx-3 text-ink-300">/</span>
-        <a className="v2-link" href={links.linkedin}>LinkedIn</a>
-      </p>
     </header>
   );
 }

@@ -47,7 +47,7 @@ export const cases = {
     year: '2025',
     section: 'singapore',
     card:
-      "Malaysia's first university admissions agent on Salesforce Agentforce, 2025. It answers a prospective student's course, fee and scholarship questions and books a counselor session. I was its technical architect.",
+      "Malaysia's first university admissions agent, on Salesforce Agentforce, 2025. I was its technical architect.",
     long: [
       "Over half of Nottingham Malaysia's applicants are international, from more than 70 countries, and they ask about courses, eligibility, fees and scholarships at night, Malaysian time. In 2025 the university built NOVA, its admissions agent on Salesforce Agentforce, [the first at a Malaysian university](https://www.nottingham.edu.my/NewsEvents/News/2025/University-of-Nottingham-Malaysia-Deploys-Agentforce-to-Create-a-Seamless-Experience-for-Prospective-Students.aspx). I was the Salesforce technical architect on the project, working alongside the implementation partner.",
       "We grounded the agent in structured student data in Salesforce rather than a document corpus, because eligibility has to be computed. It depends on nationality, qualification system (A-Level, STPM, IB, Gaokao), discipline and degree level. Scholarship eligibility works the same way, from a student's results.",
@@ -62,7 +62,7 @@ export const cases = {
     year: '2022',
     section: 'china',
     card:
-      "One set of orders for a Chinese machinery maker's dealers, customers, logistics and finance across three continents. I won the bid and stayed as solution architect to go-live, Q1 2022. SAP made it a global lighthouse case.",
+      "One set of orders across three continents for a Chinese machinery maker, 2022. I won the bid and stayed to go-live. SAP's global lighthouse case.",
     long: [
       'LGMG makes aerial work platforms and mining equipment in Shandong. By 2022 its output had passed US$1.4 billion (¥10 billion) for the first time, with subsidiaries in Europe, North America and Japan and a plan to earn half its revenue from exports. Each subsidiary had grown up with its own standards. A machine reaches its buyer through a dealer, on credit or a lease, shipped by a logistics provider, cleared through customs, then needs parts for a decade.',
       'I won the bid and stayed as solution architect to go-live. The hardest part was not the software. Each subsidiary had its own material codes and its own way of booking a sale, so every requirements meeting was really an argument about whose definitions would become the group’s. We settled that first, as one master data hierarchy and one set of accounting rules, and built the portals on top of it. Credit checks moved to the moment an order is taken, not after.',
@@ -77,7 +77,7 @@ export const cases = {
     year: '2024',
     section: 'singapore',
     card:
-      "Wiz.AI's first LLM deployment, a retrieval agent for a Singapore entertainment destination, 2024. The architecture was mine: the CMS stayed the source of truth, pulled on a schedule, and low-confidence questions went to the official site or the customer service line.",
+      "Wiz.AI's first LLM deployment, 2024. The CMS stayed the source of truth, and unsure answers went to a person.",
     long: [
       "The customer's CMS already held every fact the agent would need, years of approved content run by an editorial team with its own approval workflow. In 2024 this Singapore entertainment destination wanted its first LLM deployment. It was [Wiz.AI](https://www.wiz.ai/)'s first too, with no platform yet.",
       'I decided the CMS would stay the source of truth, with a scheduled ingestion pipeline feeding the vector store, instead of a hand-built knowledge base. That costs freshness, up to one refresh cycle. The editors keep one place to edit and the agent inherits their approvals. Anything below the bar went to the official site or the customer service line rather than to a guess.',

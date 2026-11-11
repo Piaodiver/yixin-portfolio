@@ -1,7 +1,7 @@
 import Hero from './Hero';
 import SideNav from './SideNav';
 import Place, { CaseHead, Prose } from './Place';
-import { cases, built, links, israel, about, salesforce } from '../../content/v2';
+import { cases, built, links, israel, about, salesforce, china } from '../../content/v2';
 
 export default function Page() {
   return (
@@ -10,8 +10,11 @@ export default function Page() {
       <Hero />
 
       <Place place="china" title="China" sub="Beijing · Baidu, SAP · 2017–2023">
-        <CaseHead item={cases.lgmg} />
-        <Prose paragraphs={cases.lgmg.long} />
+        <Prose paragraphs={china} />
+        <div className="mt-12">
+          <CaseHead item={cases.lgmg} />
+          <Prose paragraphs={cases.lgmg.long} />
+        </div>
       </Place>
 
       <Place place="israel" title="Israel" sub="Tel Aviv · Tel Aviv University, EyeSight · 2015–2017">

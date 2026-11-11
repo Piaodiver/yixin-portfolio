@@ -525,14 +525,13 @@ body::before {
    height on wide screens); stacked on the phone */
 .v2-about { padding-block: 56px 48px; }
 @media (min-width: 768px) { .v2-about { padding-block: 64px 64px; } }
-.v2-about__eyebrow {
-  width: 100%; max-width: calc(64ch + 200px);
-  margin: 0 auto 20px;
-  padding-inline: 16px;
-}
-@media (min-width: 768px) { .v2-about__eyebrow { padding-inline: 24px; } }
+/* the eyebrow sits in a .v2-wrap: 64ch measured in the body font, not its own */
+.v2-about__eyebrow { margin-bottom: 20px; }
+/* the text column is the page's 64ch column; the photo sits above it on
+   narrow screens and hangs in the left margin once there is room for it */
 .v2-about__inner {
-  width: 100%; max-width: calc(64ch + 200px);
+  position: relative;
+  width: 100%; max-width: 64ch;
   margin-inline: auto;
   padding-inline: 16px;
   display: grid;
@@ -540,8 +539,9 @@ body::before {
   gap: 24px;
   align-items: start;
 }
-@media (min-width: 768px) {
-  .v2-about__inner { grid-template-columns: 160px minmax(0, 1fr); gap: 40px; padding-inline: 24px; }
+@media (min-width: 768px) { .v2-about__inner { padding-inline: 24px; } }
+@media (min-width: 1100px) {
+  .v2-about__photo { position: absolute; top: 0; right: calc(100% - 24px + 40px); }
 }
 .v2-about__photo {
   display: block;

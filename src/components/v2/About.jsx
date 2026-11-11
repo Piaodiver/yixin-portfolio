@@ -14,7 +14,7 @@ import { Inline } from './Place';
 export default function About() {
   return (
     <Reveal as="section" id="about" className="v2-about border-t border-rule">
-      <p className="v2-eyebrow v2-about__eyebrow">Outside work</p>
+      <div className="v2-wrap"><p className="v2-eyebrow v2-about__eyebrow">Outside work</p></div>
       <div className="v2-about__inner">
         <img
           className="v2-about__photo"

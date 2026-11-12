@@ -66,9 +66,10 @@ export const places = [
 ];
 export const placeById = Object.fromEntries(places.map((p) => [p.id, p]));
 
-// One line at the top of the China section, before the LGMG case.
+// One line at the top of the China section, before Baidu and LGMG. Reworded
+// 2026-11-11: names the two departures so "came back" has somewhere to come back from.
 export const china = [
-  'I grew up in Beijing, and came back to it after Tel Aviv: two years at Baidu, then SAP.',
+  "Beijing is where I grew up, and where I came back to after college in the United States and a master's in Israel: two years at Baidu, then four at SAP.",
 ];
 
 // Baidu, 2017–2019. Facts from the owner's resume bullets (2026-11-10).

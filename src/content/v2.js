@@ -83,7 +83,7 @@ export const hero = {
   subline: 'Over eight years of this. The technology kept changing. The problem did not.',
   person: 'Seattle, by way of Beijing, Tel Aviv and Singapore. Underwater when I can be.',
   // where things stand, and what the next role should be: was the first About paragraph
-  now: 'In mid-2026 I moved from Singapore to Seattle, left a job I liked to do it, and started building on my own. What I want from the next one: a hard problem, people who want it solved, and a seat close enough to the users to know whether it is.',
+  now: 'In mid-2026 I moved from Singapore to Seattle, left a job I liked to do it, and started building on my own. What I want from the next job: a hard problem, people who want it solved, and a seat close enough to the users to know whether it is.',
   // the ask: one line, email link on 'Write to me'
   looking: 'Looking for the next role. Seattle first, elsewhere for the right one.',
   lookingCta: 'Write to me',

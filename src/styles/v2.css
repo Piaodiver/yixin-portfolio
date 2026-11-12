@@ -845,3 +845,21 @@ body::before {
   .v2-beacon[data-pulse] .v2-beacon__halo, .v2-beacon:hover .v2-beacon__halo { animation: none; }
   .v2-hq, .v2-hq__stage, .v2-hero [data-dim], .v2-promise { transition: none; animation: none; }
 }
+
+/* reading: the sources behind the quiz, each with a take (step 33) */
+.v2-reading-band { padding-block: 56px 48px; }
+@media (min-width: 768px) { .v2-reading-band { padding-block: 64px; } }
+.v2-reading { list-style: none; margin: 12px 0 0; padding: 0; border-top: 1px solid var(--rule); }
+.v2-reading li { padding: 16px 0 18px; border-bottom: 1px solid var(--rule); scroll-margin-top: 80px; }
+.v2-reading__title { font-family: Inter, system-ui, sans-serif; font-size: 0.98rem; font-weight: 500; line-height: 1.5; color: var(--ink-900); max-width: 64ch; }
+.v2-reading__link { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; text-decoration-color: var(--ink-300); }
+.v2-reading__link:hover { color: var(--accent); text-decoration-color: var(--accent); }
+.v2-reading__who { font-weight: 400; color: var(--ink-500); }
+.v2-reading__what { margin-top: 4px; font-family: Inter, system-ui, sans-serif; font-size: 0.9rem; line-height: 1.55; color: var(--ink-500); max-width: 64ch; }
+.v2-reading__take { margin-top: 10px; font-family: Inter, system-ui, sans-serif; font-size: 0.95rem; line-height: 1.6; color: var(--ink-900); max-width: 64ch; }
+.v2-reading__k { display: inline-block; margin-right: 8px; font-size: 0.72rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); }
+/* the research line on a quiz result */
+.v2-hq__r { margin-top: 18px; padding-left: 16px; border-left: 2px solid var(--ink-100); font-family: Inter, system-ui, sans-serif; font-size: 0.88rem; line-height: 1.6; color: var(--ink-700); max-width: 56ch; }
+.v2-hq__rk { display: block; margin-bottom: 2px; font-size: 0.72rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); }
+.v2-hq__r a { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; text-decoration-color: var(--ink-300); }
+.v2-hq__r a:hover { color: var(--accent); }

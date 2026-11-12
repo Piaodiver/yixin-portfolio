@@ -90,6 +90,12 @@ export function QuizPanel({ open, onClose }) {
                     <a key={l.href} className="v2-link" href={l.href}>{l.label} <span aria-hidden="true">↓</span></a>
                   ))}
                 </p>
+                {Q.results[kind].research && (
+                  <p className="v2-hq__r">
+                    <span className="v2-hq__rk">What the research says</span>
+                    {Q.results[kind].research} <a href={Q.results[kind].source.href}>{Q.results[kind].source.label}</a>
+                  </p>
+                )}
                 <p className="v2-hq__c">
                   {Q.closing} <a className="v2-link" href={`mailto:${links.email}`}>{Q.closingCta}</a>{Q.closingTail}
                 </p>

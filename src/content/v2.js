@@ -39,6 +39,39 @@ export const questions = {
   ],
 };
 
+// Reading (step 33, 2026-11-11): three sources behind the quiz's "what the
+// research says" lines, each with the owner's own take. Rule: only what the
+// owner has read. Notes and the take drafts: +个人网站/drafts/reading-notes.md.
+export const reading = {
+  eyebrow: 'Reading',
+  items: [
+    {
+      id: 'barnett-2024',
+      title: 'Seven Failure Points When Engineering a RAG System',
+      who: 'Barnett et al., Deakin University, 2024',
+      href: 'https://arxiv.org/abs/2401.05856',
+      what: 'The first catalogue of how RAG fails in practice, from three running systems.',
+      take: 'Failure point one is not a model failure. The system was asked something nothing in the corpus could answer, and it answered anyway, like a colleague who would rather say something than say "I don\'t know". On Wiz.AI we treated that as a design rule, not a bug: below the confidence bar, the agent sent people to the official site or a person. The other line of theirs I keep: you cannot validate one of these systems before it runs.',
+    },
+    {
+      id: 'garani-2026',
+      title: 'A Systematic Taxonomy of Failure Modes in RAG Systems',
+      who: 'Garani, TrustNLP 2026',
+      href: 'https://aclanthology.org/2026.trustnlp-main.27/',
+      what: 'Thirty-three failure modes across seven stages, each graded by how much evidence stands behind it.',
+      take: 'The sentence I underlined: generation-stage symptoms usually have ingestion causes. That is my whole argument in one line. When an agent is wrong, I check the prompt, and then I check who last edited the document it read and whether a second copy disagrees. Most of the time the answer is in the second place. She is also honest about what the field does not know yet: none of the eight agentic failure modes has a dedicated study behind it. Worth saying out loud in a workshop.',
+    },
+    {
+      id: 'salesforce-2026',
+      title: 'AI Guardrails: A Guide to Responsible AI',
+      who: 'Salesforce, 2026',
+      href: 'https://www.salesforce.com/welcome-to-the-agentic-enterprise/ai-guardrails/',
+      what: 'The vendor\'s own framing of what an agent may do, see, say, and when it must stop.',
+      take: 'It names topic scope and hand-off to a human as two separate boundaries, decided before launch and owned by the business, not IT. That is what we did on NOVA. Agent Script did not exist in 2025, so the boundary was prose the admissions team could edit themselves. I would still start there; the hard refusals can move into code later.',
+    },
+  ],
+};
+
 export const hero = {
   name: 'Yixin Liu',
   headline: 'Most enterprise AI projects are content problems in disguise. I find out which kind you have.',
@@ -61,8 +94,8 @@ export const hero = {
 // beacon at the end of the headline. Nothing is recorded. Each option maps to a
 // kind (0 writing-down, 1 ownership, 2 judgment); majority wins, the third
 // question breaks a three-way tie. Draft and research check:
-// +个人网站/drafts/which-kind-quiz.md. The "what the research says" lines wait
-// for the Reading section (the owner writes a take on each paper first).
+// +个人网站/drafts/which-kind-quiz.md. The "what the research says" lines link
+// to the Reading section below (`reading`).
 export const heroQuiz = {
   beaconLabel: 'Three questions',
   ariaLabel: 'Find out which kind in three questions',
@@ -98,16 +131,22 @@ export const heroQuiz = {
       title: 'A writing-down problem.',
       text: 'The agent is the easy part. Before any model, someone has to write the answers down, and that is the real project.',
       links: [{ label: 'Read the Salesforce year', href: '#singapore' }],
+      research: 'In the first published catalogue of RAG failures, missing content is failure point one.',
+      source: { label: 'Barnett et al., 2024', href: '#barnett-2024' },
     },
     {
       title: 'An ownership problem.',
       text: 'The answers exist, in more than one place. Decide which system is the source of truth and whose approval carries through to the agent. I made that call twice.',
       links: [{ label: 'Read Wiz.AI', href: '#wizai' }, { label: 'Read NOVA', href: '#nova' }],
+      research: 'A 2026 taxonomy of 33 RAG failure modes lists stale data first, and counts unresolved conflicts between sources among the best-evidenced failures.',
+      source: { label: 'Garani, TrustNLP 2026', href: '#garani-2026' },
     },
     {
       title: 'A judgment problem.',
       text: "The content is there and someone keeps it. What is missing is which rule applies to the person asking, and when the agent must hand over. That is where the first workshop usually ended, and it was the whole of NOVA's design.",
       links: [{ label: 'Read the three decisions', href: '#nova-full' }],
+      research: "Salesforce's own guardrail guidance names topic scope and hand-off to a human as two separate boundaries.",
+      source: { label: 'Salesforce, 2026', href: '#salesforce-2026' },
     },
   ],
   closing: 'Three questions is a guess, not a diagnosis. If none of this sounds like you, it may not be a content problem. Those exist too, and they are usually easier.',

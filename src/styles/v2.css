@@ -650,3 +650,33 @@ body::before {
 
 :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
 ::selection { background: var(--accent); color: var(--paper); }
+
+/* fold: the summary layer stays, the full story expands in place (step 30) */
+.v2-fold__toggle {
+  display: inline-flex; align-items: center; gap: 0.6rem;
+  margin-top: 1rem; padding: 0; border: 0; background: none; cursor: pointer;
+  font-family: Inter, system-ui, sans-serif;
+  font-size: 0.8rem; letter-spacing: 0.01em;
+  color: var(--ink-500);
+}
+.v2-fold__toggle:hover { color: var(--accent); }
+.v2-fold__toggle:focus-visible { outline: 1px solid var(--accent); outline-offset: 4px; }
+.v2-fold__chev {
+  display: inline-block; width: 8px; height: 8px;
+  border-right: 1px solid currentColor; border-bottom: 1px solid currentColor;
+  transform: rotate(45deg) translateY(-2px);
+  transition: transform 0.25s;
+}
+.v2-fold__toggle[aria-expanded="true"] .v2-fold__chev,
+.v2-fold__chev[data-up] { transform: rotate(225deg) translateY(1px); }
+.v2-fold {
+  display: grid; grid-template-rows: 0fr;
+  transition: grid-template-rows 0.45s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.v2-fold > div { overflow: hidden; }
+.v2-fold[data-open] { grid-template-rows: 1fr; }
+.v2-fold__inner { padding-top: 1.5rem; }
+.v2-fold__inner { transition: visibility 0s linear 0.45s; }
+.v2-fold:not([data-open]) .v2-fold__inner { visibility: hidden; }
+.v2-fold[data-open] .v2-fold__inner { transition-delay: 0s; }
+@media (prefers-reduced-motion: reduce) { .v2-fold, .v2-fold__chev { transition: none; } }

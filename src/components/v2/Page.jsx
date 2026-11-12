@@ -2,6 +2,7 @@ import Hero from './Hero';
 import SideNav from './SideNav';
 import Place, { CaseHead, Prose } from './Place';
 import CaseArchitecture from './CaseArchitecture';
+import Fold from './Fold';
 import About from './About';
 import End from './End';
 import { cases, built, israel, salesforce, china, baidu, unitedStates, placeById as P } from '../../content/v2';
@@ -34,12 +35,18 @@ export default function Page() {
         <Prose paragraphs={salesforce.paragraphs} />
         <div className="mt-12">
           <CaseHead item={cases.nova} />
-          <Prose paragraphs={cases.nova.long} />
-          <CaseArchitecture arch={cases.nova.architecture} />
+          <Prose paragraphs={[cases.nova.summary]} />
+          <Fold id={cases.nova.id} label={cases.nova.foldLabel}>
+            <Prose paragraphs={cases.nova.long} />
+            <CaseArchitecture arch={cases.nova.architecture} />
+          </Fold>
         </div>
         <div className="mt-12">
           <CaseHead item={cases.wizai} />
-          <Prose paragraphs={cases.wizai.long} />
+          <Prose paragraphs={[cases.wizai.summary]} />
+          <Fold id={cases.wizai.id} label={cases.wizai.foldLabel}>
+            <Prose paragraphs={cases.wizai.long} />
+          </Fold>
         </div>
       </Place>
 

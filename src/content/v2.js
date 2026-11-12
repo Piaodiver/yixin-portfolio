@@ -75,6 +75,10 @@ export const cases = {
     section: 'singapore',
     card:
       "Malaysia's first university admissions agent, on Salesforce Agentforce, 2025. I was its technical architect.",
+    // The summary layer: what stays visible when the case is folded (step 30).
+    summary:
+      "Malaysia's first university admissions agent. Over half of Nottingham Malaysia's applicants are international, and they ask about eligibility, fees and visas at night, Malaysian time. NOVA answers from the documents the admissions team already maintains, picks the rule that applies to the student in front of it, books a counselor or a campus tour, and hands over to a person when it is not sure. [Announced in December 2025](https://www.salesforce.com/ap/news/press-releases/2025/12/15/university-of-nottingham-malaysia-deploys-agentforce-to-create-a-seamless-experience-for-prospective-students/) on the website, WhatsApp, Facebook and WeChat. I was its technical architect.",
+    foldLabel: 'The full story: how it is put together, and five decisions',
     long: [
       "Over half of Nottingham Malaysia's applicants are international, from more than 70 countries, and they ask about courses, eligibility, fees and scholarships at night, Malaysian time. In 2025 the university built NOVA, its admissions agent on Salesforce Agentforce, [the first at a Malaysian university](https://www.nottingham.edu.my/NewsEvents/News/2025/University-of-Nottingham-Malaysia-Deploys-Agentforce-to-Create-a-Seamless-Experience-for-Prospective-Students.aspx). I was the Salesforce technical architect on the project, working alongside the implementation partner.",
       "Eligibility needs two inputs. The student's side is structured: nationality, qualification system (A-Level, STPM, IB, Gaokao), intended level and area of study, collected before the conversation starts and kept on their record in Salesforce. The requirements are documents, chunked and indexed in Data Cloud. The agent uses the student's attributes to pick the paragraph that applies, and says so when none does.",
@@ -165,6 +169,9 @@ export const cases = {
     section: 'singapore',
     card:
       "Wiz.AI's first LLM deployment, 2024. The CMS stayed the source of truth, and unsure answers went to a person.",
+    summary:
+      "[Wiz.AI](https://www.wiz.ai/)'s first LLM deployment, for a Singapore entertainment destination whose CMS already held every approved fact. I kept the CMS as the single source of truth, feeding the vector store on a schedule, so the agent inherited the editors' approvals instead of a hand-built knowledge base. Anything the agent was not sure of went to the official site or a person. One thing I would do differently: write down what \"correct\" means before building.",
+    foldLabel: 'The full story',
     long: [
       "The customer's CMS already held every fact the agent would need, years of approved content run by an editorial team with its own approval workflow. In 2024 this Singapore entertainment destination wanted its first LLM deployment. It was [Wiz.AI](https://www.wiz.ai/)'s first too, with no platform yet.",
       'I decided the CMS would stay the source of truth, with a scheduled ingestion pipeline feeding the vector store, instead of a hand-built knowledge base. That costs freshness, up to one refresh cycle. The editors keep one place to edit and the agent inherits their approvals. Anything below the bar went to the official site or the customer service line rather than to a guess.',

@@ -226,7 +226,7 @@ body::before {
   letter-spacing: 0.08em; text-transform: uppercase;
   color: var(--ink-900);
 }
-.v2-route__years { display: block; margin-top: 2px; font-size: 11px; color: var(--ink-500); }
+.v2-route__years { display: block; margin-top: 2px; font-size: 11px; color: var(--ink-500); white-space: nowrap; }
 .v2-route__thumb {
   position: absolute; left: 50%; bottom: calc(100% - 2px);
   width: 180px; aspect-ratio: 16 / 9;
@@ -245,7 +245,11 @@ body::before {
 .v2-route__stop a:focus-visible .v2-route__thumb { opacity: 1; transform: translate(-50%, 0); }
 @media (max-width: 767px) {
   .v2-route { height: 120px; margin-top: 20px; }
-  .v2-route__stop { top: 66px; width: 84px; }
+  .v2-route__stop { top: 66px; width: 96px; }
+  /* country names only, tighter, so UNITED STATES stays on one line; the
+     city is dropped from the small line (the sentence above names it) */
+  .v2-route__name { font-size: 0.66rem; letter-spacing: 0.04em; white-space: nowrap; }
+  .v2-route__city { display: none; }
   .v2-route__thumb { display: none; }
   .v2-route__title { display: none; }
 }

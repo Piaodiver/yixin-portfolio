@@ -6,6 +6,11 @@ import { places } from '../../content/v2';
  * stop shows that scene's thumbnail; clicking scrolls to its section. The
  * thumbnails (public/scenes/<place>/thumb.jpg, ~13 KB each) load on first
  * hover. On the phone the thumbnails are off and the stops sit closer.
+ *
+ * Step 38, 2026-11-12: the big label is the country (same names as the
+ * section headings and the scenes, so the Golden Gate under "Seattle" stops
+ * looking wrong), the small line is "city · years". The phone keeps years
+ * only; the sentence above the map already names the cities.
  */
 const W = 1040;
 const H = 150;
@@ -55,8 +60,11 @@ export default function RouteMap() {
                 style={hot.has(p.id) ? { backgroundImage: `url(${import.meta.env.BASE_URL}scenes/${p.id}/thumb.jpg)` } : undefined}
               />
               <span className="v2-route__dot" aria-hidden="true" />
-              <span className="v2-route__name">{p.city}</span>
-              <span className="v2-route__years">{p.years}</span>
+              <span className="v2-route__name">{p.label}</span>
+              <span className="v2-route__years">
+                {p.city !== p.label && <span className="v2-route__city">{p.city} · </span>}
+                {p.years}
+              </span>
             </a>
           </li>
         ))}

@@ -775,7 +775,7 @@ body::before {
 /* step 33: the beacon at the end of the headline, a route stop you can visit */
 .v2-beacon {
   display: inline-block; vertical-align: middle; position: relative;
-  width: 34px; height: 34px; margin-left: 0.3em; margin-top: -0.2em;
+  width: 24px; height: 34px; margin-left: 0.22em; margin-top: -0.2em;
   padding: 0; border: 0; background: none; cursor: pointer;
 }
 .v2-beacon__dot, .v2-beacon__halo {
@@ -840,7 +840,7 @@ body::before {
 .v2-hq__p { margin-top: 12px; font-family: Inter, system-ui, sans-serif; font-size: 0.98rem; line-height: 1.65; color: var(--ink-900); max-width: 56ch; }
 .v2-hq__go { margin-top: 14px; display: flex; gap: 22px; flex-wrap: wrap; font-family: Inter, system-ui, sans-serif; font-size: 0.95rem; font-weight: 500; }
 .v2-hq__c { margin-top: 18px; font-family: Inter, system-ui, sans-serif; font-size: 0.9rem; line-height: 1.6; color: var(--ink-500); max-width: 56ch; }
-@media (max-width: 640px) { .v2-hq__opt { padding: 13px 10px 13px 6px; } .v2-beacon { width: 30px; height: 30px; } }
+@media (max-width: 640px) { .v2-hq__opt { padding: 13px 10px 13px 6px; } .v2-beacon { height: 30px; } }
 @media (prefers-reduced-motion: reduce) {
   .v2-beacon[data-pulse] .v2-beacon__halo, .v2-beacon:hover .v2-beacon__halo { animation: none; }
   .v2-hq, .v2-hq__stage, .v2-hero [data-dim], .v2-promise { transition: none; animation: none; }

@@ -16,8 +16,8 @@ export default function Hero() {
           repeat (2026-11-10). The About block is due a rethink; see the plan. */}
       <p className="v2-eyebrow" data-dim>{hero.name}</p>
       <h1 className="v2-h1 mt-4">
-        {hero.headlineBefore}<span className="v2-promise">{hero.headlinePromise}</span>{hero.headlineAfter}
-        <Beacon open={quizOpen} onToggle={() => setQuizOpen((o) => !o)} />
+        {hero.headlineBefore}<span className="v2-promise">{hero.headlinePromise}</span>
+        <span className="whitespace-nowrap"><span className="v2-promise">{hero.headlineLast}</span>{hero.headlineAfter}<Beacon open={quizOpen} onToggle={() => setQuizOpen((o) => !o)} /></span>
       </h1>
       {/* hangs from two threads; a real pendulum, pushed by the pointer (usePendulum) */}
       <p ref={hangRef} className="v2-sub v2-hang mt-5">

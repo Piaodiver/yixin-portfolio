@@ -44,7 +44,8 @@ export const hero = {
   headline: 'Most enterprise AI projects are content problems in disguise. I find out which kind you have.',
   // The headline split for the quiz (step 33): the promise is underlined while the quiz is open.
   headlineBefore: 'Most enterprise AI projects are content problems in disguise. I find out ',
-  headlinePromise: 'which kind you have',
+  headlinePromise: 'which kind you ',
+  headlineLast: 'have', // kept on one line with the full stop and the beacon, so the dot never sits alone
   headlineAfter: '.',
   subline: 'Over eight years of this. The technology kept changing. The problem did not.',
   person: 'Seattle, by way of Beijing, Tel Aviv and Singapore. Underwater when I can be.',

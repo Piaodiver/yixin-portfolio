@@ -324,13 +324,13 @@ export const unitedStates = [
   {
     eyebrow: 'Wesleyan University · Connecticut · class of 2014',
     paragraphs: [
-      'A liberal arts education at Wesleyan in Connecticut. What it left me with is a habit: read closely, argue from more than one side, and go a few levels deeper than the question asked for. I remember a history seminar where the discussion ran so far past the hour that nobody noticed, and a paper finished at three in the morning, too awake to sleep, walking under the moon and still arguing with myself.',
+      "I remember Vera Schwarcz's seminar running so far past the hour that nobody noticed, and a paper finished at three in the morning, too awake to sleep, walking under the moon and still arguing with myself. That is what Wesleyan left me with: read closely, argue from more than one side, and go a few levels deeper than the question asked for.",
     ],
   },
   {
     eyebrow: 'SAP Academy for Presales · San Ramon, California · 2019–2020',
     paragraphs: [
-      'A year in the Bay Area with trainees from more than twenty countries, the only one from East Asia that year. The program ran from how to present, through the SAP stack and an ERP certification, to building demos, pitching to customers, and reading the people across the table. Before each assessed presentation most of us rehearsed until two or three in the morning. It left me more confident, and with two rules I still use: practice until it is good, and when it is not ready, go anyway. Starting matters more than perfect. It was also my first step into SaaS as a solution architect. The road since began there.',
+      'A year in the Bay Area with trainees from more than twenty countries, the only one from East Asia that year. The program ran from how to present, through the SAP stack and an ERP certification, to building demos, pitching to customers, and reading the people across the table. Before each assessed presentation most of us rehearsed until two or three in the morning. It left me more confident, and with two rules I still use: practice until it is good, and when it is not ready, go anyway. From there SAP sent me back to Beijing as a solution architect, on the LGMG program above.',
     ],
   },
 ];

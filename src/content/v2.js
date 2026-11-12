@@ -21,6 +21,20 @@ export const about = [
   'The sea first. In 2013 I crewed [a research sailing ship](https://sea.edu/) for two months from Tahiti to Hawaii, standing watches through the night and writing papers in between, and I have been diving ever since, mostly in Southeast Asia. On land it is long walks: 80 kilometers through the Altay mountains of northern Xinjiang in two days, and the wadi from St. George\'s Monastery down to Jericho, where people have lived for ten thousand years. Four times I went to Lhasa to lead volunteer teachers at [two schools for children with disabilities](https://www.braillewithoutborders.org/ENGLISH/). And once a year, a road trip with my family.',
 ];
 
+// Open questions (C1, 2026-11-11): a band of its own between About and End,
+// five things the owner is turning over, no answers on purpose. One optional line of provenance each. Wording went
+// through the copy-editor; drafts and rounds in +个人网站/drafts/questions.md.
+export const questions = {
+  eyebrow: 'Open questions · November 2026',
+  items: [
+    { q: 'When the agent is not sure and hands over to a person, how often was that the right call, and how would I know?', from: 'NOVA and the Wiz.AI deployment both do this.' },
+    { q: "Who should own an agent's knowledge base, the people who write the documents or the people who build the agent?", from: null },
+    { q: 'When the model only classifies and the math is deterministic, what is left for the model to get wrong?', from: 'Tariff Engine, in progress.' },
+    { q: 'If the reader can play a demon who gets one line in the original, what has to stay fixed for it still to be Journey to the West?', from: 'MultiVerse I, with Shane Zhang.' },
+    { q: "At three in the morning on watch, at thirty meters down, and in an agent's hand-off, the same decision: how do I know it is time to call someone?", from: 'The Pacific, 2013; Southeast Asia, 2024 to 2026.' },
+  ],
+};
+
 export const hero = {
   name: 'Yixin Liu',
   headline: 'Most enterprise AI projects are content problems in disguise. I find out which kind you have.',

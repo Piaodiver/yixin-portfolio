@@ -5,6 +5,7 @@ import CaseArchitecture from './CaseArchitecture';
 import Fold from './Fold';
 import About from './About';
 import End from './End';
+import Questions from './Questions';
 import { cases, built, israel, salesforce, china, baidu, unitedStates, placeById as P } from '../../content/v2';
 
 export default function Page() {
@@ -77,6 +78,7 @@ export default function Page() {
       </Place>
 
       <About />
+      <Questions />
       <End />
     </main>
   );

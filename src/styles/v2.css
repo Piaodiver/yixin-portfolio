@@ -618,6 +618,14 @@ body::before {
 }
 .v2-about__text { min-width: 0; max-width: 64ch; }
 
+/* questions (C1): five open questions, hairlines between, provenance smaller */
+.v2-questions { list-style: none; margin: 12px 0 0; padding: 0; border-top: 1px solid var(--rule); }
+.v2-questions li { padding: 14px 0; border-bottom: 1px solid var(--rule); }
+.v2-questions__q { font-size: 0.98rem; line-height: 1.55; color: var(--ink-900); max-width: 64ch; }
+.v2-questions__from { margin-top: 4px; font-size: 0.82rem; color: var(--ink-500); }
+.v2-questions-band { padding-block: 56px 48px; }
+@media (min-width: 768px) { .v2-questions-band { padding-block: 64px; } }
+
 /* the end: the ask once more, the address as text with a copy button */
 .v2-end { padding-block: 56px 72px; }
 .v2-end__mail { display: inline-flex; align-items: center; gap: 10px; flex-wrap: wrap; }

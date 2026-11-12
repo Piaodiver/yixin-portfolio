@@ -119,7 +119,7 @@ export const heroQuiz = {
 export const salesforce = {
   eyebrow: 'Salesforce · Senior Technical Architect, AI & Data · 2025–2026',
   paragraphs: [
-    'I moved to Singapore in 2024, first to Wiz.AI and the next year to Salesforce, where the clients were spread across Southeast Asia: banks and other financial firms, universities, retailers, entertainment and cultural venues, manufacturers. Most had run a pilot and wanted something in production. The first workshop usually ended on the same question: what the agent would be allowed to say. That depended on what the company had already written down, and who kept it current. The line at the top of this page is that answer, shortened. NOVA, below, is the one project from that year that was announced publicly.',
+    'I moved to Singapore in 2024, first to Wiz.AI and the next year to Salesforce, where the clients were spread across Southeast Asia: banks and other financial firms, universities, retailers, entertainment and cultural venues, manufacturers. They were at every stage: some wanted to understand the basics first and then a proof of concept, a few were ready for production. Whatever the stage, the first workshop usually ended on the same question: what the agent would be allowed to say. That depended on what the company had already written down, and who kept it current. The line at the top of this page is that answer, shortened. NOVA, below, is the one project from that year that was announced publicly.',
   ],
 };
 

@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import SceneBand from './SceneBand';
 import Reveal from './Reveal';
 
@@ -51,10 +52,55 @@ export function Inline({ text }) {
   return out;
 }
 
+const NOTE = /\{\{([^|}]+)\|([^}]+)\}\}/g;
+
+/**
+ * Para — one paragraph. `{{word|aside}}` in the text marks a word that can be
+ * clicked (dotted underline) to show one extra sentence under the paragraph,
+ * as a small note with a hairline at the left (step 35). Several notes in one
+ * paragraph are independent. Nothing else in the text changes.
+ */
+export function Para({ text }) {
+  const [open, setOpen] = useState(() => new Set());
+  const parts = [];
+  const notes = [];
+  let last = 0;
+  for (const m of text.matchAll(NOTE)) {
+    if (m.index > last) parts.push(<Inline key={last} text={text.slice(last, m.index)} />);
+    const i = notes.length;
+    notes.push({ word: m[1], aside: m[2] });
+    const on = open.has(i);
+    parts.push(
+      <button
+        key={`n${i}`}
+        type="button"
+        className="v2-note"
+        aria-expanded={on}
+        onClick={() => setOpen((prev) => { const next = new Set(prev); if (next.has(i)) next.delete(i); else next.add(i); return next; })}
+      >
+        {m[1]}
+      </button>,
+    );
+    last = m.index + m[0].length;
+  }
+  if (last < text.length) parts.push(<Inline key={last} text={text.slice(last)} />);
+  if (notes.length === 0) return <p><Inline text={text} /></p>;
+  return (
+    <>
+      <p>{parts}</p>
+      {notes.map((n, i) => open.has(i) && (
+        <p key={i} className="v2-note__aside">
+          <b>{n.word.charAt(0).toUpperCase() + n.word.slice(1)}</b> {n.aside}
+        </p>
+      ))}
+    </>
+  );
+}
+
 export function Prose({ paragraphs }) {
   return (
     <div className="v2-prose mt-4">
-      {paragraphs.map((p, i) => <p key={i}><Inline text={p} /></p>)}
+      {paragraphs.map((p, i) => <Para key={i} text={p} />)}
     </div>
   );
 }

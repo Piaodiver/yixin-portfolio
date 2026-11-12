@@ -1,4 +1,4 @@
-import { Inline } from './Place';
+import { Para } from './Place';
 import DecisionQuiz from './DecisionQuiz';
 
 /**
@@ -12,7 +12,7 @@ export default function CaseArchitecture({ arch }) {
       <p className="v2-eyebrow pt-2">{arch.eyebrow}</p>
       <pre className="v2-diagram" aria-label="Architecture diagram">{arch.diagram.join('\n')}</pre>
       <div className="v2-prose mt-6">
-        {arch.paragraphs.map((p, i) => <p key={i}><Inline text={p} /></p>)}
+        {arch.paragraphs.map((p, i) => <Para key={i} text={p} />)}
       </div>
       <DecisionQuiz arch={arch} />
     </div>

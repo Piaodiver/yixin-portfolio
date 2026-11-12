@@ -863,3 +863,24 @@ body::before {
 .v2-hq__rk { display: block; margin-bottom: 2px; font-size: 0.72rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); }
 .v2-hq__r a { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; text-decoration-color: var(--ink-300); }
 .v2-hq__r a:hover { color: var(--accent); }
+
+/* notes in prose: a dotted word opens one sentence under the paragraph (step 35) */
+.v2-note {
+  padding: 0; margin: 0; border: 0; background: none; cursor: pointer;
+  font: inherit; color: inherit;
+  text-decoration: underline; text-decoration-style: dotted; text-decoration-thickness: 1px;
+  text-underline-offset: 3px; text-decoration-color: var(--ink-400);
+  transition: text-decoration-color 0.15s;
+}
+.v2-note:hover { text-decoration-color: var(--accent); }
+.v2-note[aria-expanded="true"] { text-decoration-style: solid; text-decoration-color: var(--ink-900); }
+.v2-note:focus-visible { outline: 1px solid var(--accent); outline-offset: 2px; }
+.v2-prose p.v2-note__aside {
+  margin: -0.5em 0 1.1em; padding-left: 14px; border-left: 2px solid var(--ink-100);
+  font-family: Inter, system-ui, sans-serif; font-size: 0.9rem; line-height: 1.6;
+  color: var(--ink-700); max-width: 60ch;
+  animation: v2-note-in 0.25s ease-out;
+}
+.v2-prose p.v2-note__aside b { font-weight: 500; color: var(--ink-900); }
+@keyframes v2-note-in { from { opacity: 0; } to { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .v2-prose p.v2-note__aside { animation: none; } .v2-note { transition: none; } }

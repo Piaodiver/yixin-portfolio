@@ -18,7 +18,7 @@ export const israel = [
 // +个人网站/drafts/about.v1-before-step28.md, git tag about-v1-route-280px).
 // What stays is the one thing they have not read: outside work.
 export const about = [
-  'The sea first. In 2013 I crewed [a research sailing ship](https://sea.edu/) for two months from Tahiti to Hawaii, standing watches through the night and writing papers in between, and I have been diving ever since, mostly in Southeast Asia. On land it is long walks: 80 kilometers across the Altai mountains in two days, and the wadi from St. George\'s Monastery down to Jericho, where people have lived for ten thousand years. Four times I went to Lhasa to lead volunteer teachers at [two schools for children with disabilities](https://www.braillewithoutborders.org/ENGLISH/). And once a year, a road trip with my family.',
+  'The sea first. In 2013 I crewed [a research sailing ship](https://sea.edu/) for two months from Tahiti to Hawaii, standing watches through the night and writing papers in between, and I have been diving ever since, mostly in Southeast Asia. On land it is long walks: 80 kilometers through the Altay mountains of northern Xinjiang in two days, and the wadi from St. George\'s Monastery down to Jericho, where people have lived for ten thousand years. Four times I went to Lhasa to lead volunteer teachers at [two schools for children with disabilities](https://www.braillewithoutborders.org/ENGLISH/). And once a year, a road trip with my family.',
 ];
 
 export const hero = {

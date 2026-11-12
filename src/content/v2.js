@@ -119,7 +119,7 @@ export const heroQuiz = {
 export const salesforce = {
   eyebrow: 'Salesforce · Senior Technical Architect, AI & Data · 2025–2026',
   paragraphs: [
-    'From 2025 I was a senior technical architect for AI and data at Salesforce in Singapore. The clients were spread across Southeast Asia: banks and other financial firms, universities, retailers, entertainment and cultural venues, manufacturers. Most had run a pilot and wanted something in production. The first workshop usually ended on the same question: what the agent would be allowed to say. That depended on what the company had already written down, and who kept it current. The line at the top of this page is that answer, shortened. NOVA, below, is the one project from that year that was announced publicly.',
+    'I moved to Singapore in 2024, first to Wiz.AI and the next year to Salesforce, where the clients were spread across Southeast Asia: banks and other financial firms, universities, retailers, entertainment and cultural venues, manufacturers. Most had run a pilot and wanted something in production. The first workshop usually ended on the same question: what the agent would be allowed to say. That depended on what the company had already written down, and who kept it current. The line at the top of this page is that answer, shortened. NOVA, below, is the one project from that year that was announced publicly.',
   ],
 };
 
@@ -162,9 +162,9 @@ export const cases = {
       "Malaysia's first university admissions agent. Over half of Nottingham Malaysia's applicants are international, and they ask about eligibility, fees and visas at night, Malaysian time. NOVA answers from the documents the admissions team already maintains, picks the rule that applies to the student in front of it, books a counselor or a campus tour, and hands over to a person when it is not sure. [Announced in December 2025](https://www.salesforce.com/ap/news/press-releases/2025/12/15/university-of-nottingham-malaysia-deploys-agentforce-to-create-a-seamless-experience-for-prospective-students/) on the website, WhatsApp, Facebook and WeChat. I was its technical architect.",
     foldLabel: 'The full story: how it is put together, and three decisions',
     long: [
-      "Over half of Nottingham Malaysia's applicants are international, from more than 70 countries, and they ask about courses, eligibility, fees and scholarships at night, Malaysian time. In 2025 the university built NOVA, its admissions agent on Salesforce Agentforce, [the first at a Malaysian university](https://www.nottingham.edu.my/NewsEvents/News/2025/University-of-Nottingham-Malaysia-Deploys-Agentforce-to-Create-a-Seamless-Experience-for-Prospective-Students.aspx). I was the Salesforce technical architect on the project, working alongside the implementation partner.",
+      "The applicants come from more than 70 countries, and in 2025 the university built NOVA, [the first admissions agent at a Malaysian university](https://www.nottingham.edu.my/NewsEvents/News/2025/University-of-Nottingham-Malaysia-Deploys-Agentforce-to-Create-a-Seamless-Experience-for-Prospective-Students.aspx). I was the Salesforce technical architect on the project, working alongside the implementation partner.",
       "Eligibility needs two inputs. The student's side is structured: nationality, qualification system (A-Level, STPM, IB, Gaokao), intended level and area of study, collected before the conversation starts and kept on their record in Salesforce. The requirements are documents, chunked and indexed in Data Cloud. The agent uses the student's attributes to pick the paragraph that applies, and says so when none does.",
-      "The agent also acts. A student can book a counselor session or a campus tour in seconds, and a counselor stays reachable from inside the conversation. NOVA was [announced in December 2025](https://www.salesforce.com/ap/news/press-releases/2025/12/15/university-of-nottingham-malaysia-deploys-agentforce-to-create-a-seamless-experience-for-prospective-students/), on the website, WhatsApp, Facebook and WeChat.",
+      "The agent also acts. A student can book a counselor session or a campus tour in seconds, and a counselor stays reachable from inside the conversation.",
     ],
     // The architecture half. Facts: the owner's account (2026-11-11), the
     // resume library, and public Salesforce documentation; see
@@ -271,7 +271,7 @@ export const cases = {
     foldLabel: 'The full story',
     long: [
       "The customer's CMS already held every fact the agent would need, years of approved content run by an editorial team with its own approval workflow. In 2024 this Singapore entertainment destination wanted its first LLM deployment. It was [Wiz.AI](https://www.wiz.ai/)'s first too, with no platform yet.",
-      'I decided the CMS would stay the source of truth, with a scheduled ingestion pipeline feeding the vector store, instead of a hand-built knowledge base. That costs freshness, up to one refresh cycle. The editors keep one place to edit and the agent inherits their approvals. Anything below the bar went to the official site or the customer service line rather than to a guess.',
+      'Keeping the CMS as the source costs freshness, up to one refresh cycle. In return the editors keep one place to edit and the agent inherits their approvals. Anything below the bar went to the official site or the customer service line rather than to a guess.',
       'What I would change: I never wrote down what "correct" meant before we built, as a scoring rubric or as acceptance criteria. And who maintains the knowledge base was a negotiation. We treated it as something the architecture would settle. I left before there was enough operating history to quote. I made the same two decisions on NOVA the next year: the customer\'s own system as the source of truth, and a hand-off to a person when the agent is not sure.',
     ],
   },

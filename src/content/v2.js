@@ -130,7 +130,7 @@ export const heroQuiz = {
     {
       title: 'A writing-down problem.',
       text: 'The agent is the easy part. Before any model, someone has to write the answers down, and that is the real project.',
-      links: [{ label: 'Read the Salesforce year', href: '#singapore' }],
+      links: [{ label: 'Read the Salesforce year', href: '#salesforce' }],
       research: 'In the first published catalogue of RAG failures, missing content is failure point one.',
       source: { label: 'Barnett et al., 2024', href: '#barnett-2024' },
     },
@@ -156,7 +156,7 @@ export const heroQuiz = {
 
 // The Salesforce year, as the frame around NOVA. Sits first in the Singapore section.
 export const salesforce = {
-  eyebrow: 'Salesforce · Senior Technical Architect, AI & Data · 2025–2026',
+  eyebrow: 'Salesforce, Singapore · Senior Technical Architect, AI & Data · 2025–2026',
   paragraphs: [
     'I moved to Singapore in 2024, first to Wiz.AI and the next year to Salesforce, where the clients were spread across Southeast Asia: banks and other financial firms, universities, retailers, entertainment and cultural venues, manufacturers. They were at every stage: some wanted to understand the basics first and then a proof of concept, a few were ready for production. Whatever the stage, the first workshop usually ended on the same question: what the agent would be allowed to say. That depended on what the company had already written down, and who kept it current. The line at the top of this page is that answer, shortened. NOVA, below, is the one project from that year that was announced publicly.',
   ],
@@ -317,6 +317,29 @@ export const cases = {
 };
 
 export const heroCards = [cases.nova, cases.lgmg, cases.wizai];
+
+// Step 39 (2026-11-12), the page in two speeds. The work: the two agents,
+// first and in full, no scene (the owner: the site is not about Singapore).
+// Four places: the four scenes side by side, one fold each, the long texts
+// behind the folds. Decided in +个人网站/yixinportfolio架构202611.md §十四.
+export const work = {
+  title: 'The work',
+  sub: 'Two agents · 2024–2026',
+  // ties the section to the headline and the three questions: Wiz.AI was an
+  // ownership problem, NOVA a judgment problem
+  line: 'One ownership problem, one judgment problem.',
+};
+
+export const fourPlaces = {
+  title: 'Four places',
+  // one toggle label per stop; Singapore points up instead
+  folds: {
+    china: 'Two years at Baidu, four at SAP, and LGMG',
+    israel: 'Why Israel, and how I got the internship',
+    'united-states': 'Wesleyan, then a year in San Ramon',
+  },
+  singaporeUp: { label: 'The two agents are above', href: '#work' },
+};
 
 // United States, before Seattle: the degree and the Academy year. Facts and
 // memories from the owner (2026-11-10); draft in +个人网站/drafts/united-states.md.

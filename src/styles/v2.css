@@ -888,3 +888,49 @@ body::before {
 .v2-prose p.v2-note__aside b { font-weight: 500; color: var(--ink-900); }
 @keyframes v2-note-in { from { opacity: 0; } to { opacity: 1; } }
 @media (prefers-reduced-motion: reduce) { .v2-prose p.v2-note__aside { animation: none; } .v2-note { transition: none; } }
+
+/* step 39: the page in two speeds. The work: one line under the heading
+   that ties the section to the headline. Four places: four stops in a row,
+   each a poster frame that opens the full-screen scene, one fold each. */
+.v2-work__line { margin-top: 14px; font-family: Fraunces, Georgia, serif; font-size: 1.1rem; line-height: 1.45; color: var(--ink-700); max-width: 48ch; }
+.v2-stops { display: grid; grid-template-columns: 1fr; gap: 28px 20px; width: min(100% - 32px, 1040px); margin-inline: auto; }
+@media (min-width: 768px) { .v2-stops { width: min(100% - 48px, 1040px); grid-template-columns: repeat(4, 1fr); gap: 24px 20px; } }
+@media (min-width: 1024px) { .v2-stops { width: min(100% - 340px, 1040px); } }
+.v2-stop { min-width: 0; }
+.v2-stop__frame {
+  position: relative; display: block; width: 100%; aspect-ratio: 4 / 3; overflow: hidden;
+  padding: 0; border: 1px solid var(--rule); background: var(--paper-sunk); cursor: pointer;
+  transition: border-color 200ms ease;
+}
+.v2-stop__frame img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.v2-stop__frame:hover, .v2-stop__frame:focus-visible { border-color: var(--accent); outline: none; }
+.v2-stop__label {
+  position: absolute; top: 10px; left: 12px; padding: 1px 6px;
+  background: color-mix(in srgb, var(--paper-sunk) 85%, transparent); border-radius: 3px;
+  font-family: Inter, system-ui, sans-serif; font-size: 0.72rem; font-weight: 500; color: var(--ink-500);
+}
+.v2-stop__expand {
+  position: absolute; right: 10px; bottom: 10px; padding: 4px 10px;
+  border: 1px solid var(--rule); border-radius: 999px; background: var(--paper); color: var(--accent);
+  font-family: Inter, system-ui, sans-serif; font-size: 12px; font-weight: 500; line-height: 1.4;
+  opacity: 0; transition: opacity 200ms ease, background-color 200ms ease, color 200ms ease;
+}
+.v2-stop__frame:hover .v2-stop__expand, .v2-stop__frame:focus-visible .v2-stop__expand { opacity: 1; }
+@media (hover: none) { .v2-stop__expand { opacity: 1; } }
+.v2-stop__up { font-family: Inter, system-ui, sans-serif; font-size: 0.92rem; color: var(--ink-700); }
+/* desktop: the open fold spans the row and sits under all four stops. Each
+   stop is display: contents, so its frame, its text block and its panel are
+   grid items of their own: frames fill row one in order, text blocks row
+   two, and the panels (order 2, full width) come after both rows. The panel
+   text is capped at the prose measure. */
+@media (min-width: 768px) {
+  .v2-stop { display: contents; }
+  .v2-stop__frame { order: 0; }
+  .v2-stop__text { order: 1; }
+  .v2-stop__panel { order: 2; grid-column: 1 / -1; }
+}
+.v2-stop__text { margin-top: 12px; }
+.v2-stop__text .v2-fold__toggle { margin-top: 8px; text-align: left; }
+.v2-stop__text .v2-stop__up { margin-top: 8px; }
+.v2-prose-wrap { max-width: 64ch; margin-inline: auto; padding-inline: 16px; }
+@media (min-width: 768px) { .v2-prose-wrap { padding-inline: 24px; } }

@@ -1,82 +1,121 @@
 import Hero from './Hero';
 import SideNav from './SideNav';
-import Place, { CaseHead, Prose } from './Place';
+import Places from './Places';
+import { CaseHead, Prose } from './Place';
 import CaseArchitecture from './CaseArchitecture';
 import Fold from './Fold';
+import Reveal from './Reveal';
 import About from './About';
 import End from './End';
 import Questions from './Questions';
 import Reading from './Reading';
-import { cases, built, israel, salesforce, china, baidu, unitedStates, placeById as P } from '../../content/v2';
+import { cases, built, israel, salesforce, china, baidu, unitedStates, work } from '../../content/v2';
 
+/**
+ * The page in two speeds (step 39, 2026-11-12): hero, then The work (the two
+ * agents, in full, no scene), then Four places (the four scenes side by side,
+ * long texts behind one fold each), then Building now, About, Questions,
+ * Reading, End. The old order, four equal place chapters, is at git tag
+ * places-v1-before-step39.
+ */
 export default function Page() {
+  const stops = [
+    {
+      id: 'china',
+      inside: ['lgmg', 'baidu'],
+      children: (
+        <>
+          <Prose paragraphs={china} />
+          <div className="mt-10">
+            <p id="baidu" className="v2-eyebrow pt-2">{baidu.eyebrow}</p>
+            <Prose paragraphs={baidu.paragraphs} />
+          </div>
+          <div className="mt-10">
+            <CaseHead item={cases.lgmg} />
+            <Prose paragraphs={cases.lgmg.long} />
+          </div>
+        </>
+      ),
+    },
+    {
+      id: 'israel',
+      inside: [],
+      children: (
+        <>
+          <p className="v2-eyebrow">Tel Aviv University · EyeSight Technologies · 2015–2017</p>
+          <Prose paragraphs={israel} />
+        </>
+      ),
+    },
+    { id: 'singapore' },
+    {
+      id: 'united-states',
+      inside: [],
+      children: unitedStates.map((block, i) => (
+        <div key={block.eyebrow} className={i === 0 ? '' : 'mt-10'}>
+          <p className="v2-eyebrow pt-2">{block.eyebrow}</p>
+          <Prose paragraphs={block.paragraphs} />
+        </div>
+      )),
+    },
+  ];
+
   return (
     <main id="main">
       <SideNav />
       <Hero />
 
-      <Place place="china" title={P["china"].label} sub={P["china"].sub}>
-        <Prose paragraphs={china} />
-        <div className="mt-12">
-          <p className="v2-eyebrow pt-2">{baidu.eyebrow}</p>
-          <Prose paragraphs={baidu.paragraphs} />
-        </div>
-        <div className="mt-12">
-          <CaseHead item={cases.lgmg} />
-          <Prose paragraphs={cases.lgmg.long} />
-        </div>
-      </Place>
-
-      <Place place="israel" title={P["israel"].label} sub={P["israel"].sub}>
-        <p className="v2-eyebrow">Tel Aviv University · EyeSight Technologies · 2015–2017</p>
-        <Prose paragraphs={israel} />
-      </Place>
-
-      <Place place="singapore" title={P["singapore"].label} sub={P["singapore"].sub}>
-        <p className="v2-eyebrow pt-2">{salesforce.eyebrow}</p>
-        <Prose paragraphs={salesforce.paragraphs} />
-        <div className="mt-12">
-          <CaseHead item={cases.nova} />
-          <Prose paragraphs={[cases.nova.summary]} />
-          <Fold id={cases.nova.id} label={cases.nova.foldLabel}>
-            <Prose paragraphs={cases.nova.long} />
-            <CaseArchitecture arch={cases.nova.architecture} />
-          </Fold>
-        </div>
-        <div className="mt-12">
-          <CaseHead item={cases.wizai} />
-          <Prose paragraphs={[cases.wizai.summary]} />
-          <Fold id={cases.wizai.id} label={cases.wizai.foldLabel}>
-            <Prose paragraphs={cases.wizai.long} />
-          </Fold>
-        </div>
-      </Place>
-
-      <Place place="united-states" title={P["united-states"].label} sub={P["united-states"].sub}>
-        {unitedStates.map((block, i) => (
-          <div key={block.eyebrow} className={i === 0 ? '' : 'mt-12'}>
-            <p className="v2-eyebrow pt-2">{block.eyebrow}</p>
-            <Prose paragraphs={block.paragraphs} />
+      <section id="work" className="pt-10 md:pt-14">
+        <Reveal className="v2-wrap pb-5">
+          <h2 className="v2-h2">
+            {work.title}
+            <small className="v2-h2__sub">{work.sub}</small>
+          </h2>
+          <p className="v2-work__line">{work.line}</p>
+        </Reveal>
+        <Reveal className="v2-wrap py-6 md:py-8">
+          <p id="salesforce" className="v2-eyebrow pt-2">{salesforce.eyebrow}</p>
+          <Prose paragraphs={salesforce.paragraphs} />
+          <div className="mt-12">
+            <CaseHead item={cases.nova} />
+            <Prose paragraphs={[cases.nova.summary]} />
+            <Fold id={cases.nova.id} label={cases.nova.foldLabel}>
+              <Prose paragraphs={cases.nova.long} />
+              <CaseArchitecture arch={cases.nova.architecture} />
+            </Fold>
           </div>
-        ))}
-        <p className="v2-eyebrow mt-12 pt-2">Seattle · since 2026</p>
-        <p className="v2-eyebrow mt-6">Building now</p>
-        <ul className="mt-3 divide-y divide-rule border-y border-rule">
-          {built.map((b) => (
-            <li key={b.title} className="py-4">
-              <p className="font-body text-[1rem] font-medium text-ink-900">
-                {b.href ? <a className="v2-link" href={b.href}>{b.title}</a> : b.title}
-              </p>
-              <p className="mt-1 max-w-prose text-[0.92rem] text-ink-700">{b.body}</p>
-              {b.more ? (
-                <p className="mt-1 max-w-prose text-[0.92rem] text-ink-700">
-                  {b.more.text}<a className="v2-link" href={b.more.href}>{b.more.label}</a>.
+          <div className="mt-12">
+            <CaseHead item={cases.wizai} />
+            <Prose paragraphs={[cases.wizai.summary]} />
+            <Fold id={cases.wizai.id} label={cases.wizai.foldLabel}>
+              <Prose paragraphs={cases.wizai.long} />
+            </Fold>
+          </div>
+        </Reveal>
+      </section>
+
+      <Places stops={stops} />
+
+      <section id="building" className="pt-10 md:pt-14">
+        <Reveal className="v2-wrap pb-10 md:pb-12">
+          <h2 className="v2-h2">Building now<small className="v2-h2__sub">Seattle · since 2026</small></h2>
+          <ul className="mt-6 divide-y divide-rule border-y border-rule">
+            {built.map((b) => (
+              <li key={b.title} className="py-4">
+                <p className="font-body text-[1rem] font-medium text-ink-900">
+                  {b.href ? <a className="v2-link" href={b.href}>{b.title}</a> : b.title}
                 </p>
-              ) : null}
-            </li>
-          ))}
-        </ul>
-      </Place>
+                <p className="mt-1 max-w-prose text-[0.92rem] text-ink-700">{b.body}</p>
+                {b.more ? (
+                  <p className="mt-1 max-w-prose text-[0.92rem] text-ink-700">
+                    {b.more.text}<a className="v2-link" href={b.more.href}>{b.more.label}</a>.
+                  </p>
+                ) : null}
+              </li>
+            ))}
+          </ul>
+        </Reveal>
+      </section>
 
       <About />
       <Questions />

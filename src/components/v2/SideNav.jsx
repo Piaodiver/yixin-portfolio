@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
-import { places } from '../../content/v2';
 
-// Two lines per entry on the desktop column: the place, and under it the
-// names a recruiter scans for. The phone row shows the place only.
-const NAV_SUBS = { china: 'LGMG · SAP', israel: 'TAU · MBA', singapore: 'Salesforce · Wiz.AI', 'united-states': 'Building now' };
+// Two lines per entry on the desktop column: the section, and under it the
+// names a recruiter scans for. The phone row shows the first line only.
+// Step 39: four sections, The work first; the places are one section.
 const ITEMS = [
-  ...places.map((p) => ({ id: p.id, label: p.label, sub: NAV_SUBS[p.id] })),
+  { id: 'work', label: 'The work', sub: 'NOVA · Wiz.AI · Salesforce' },
+  { id: 'places', label: 'Four places', sub: 'Beijing · Tel Aviv · Singapore · Seattle' },
+  { id: 'building', label: 'Building now', sub: 'TCO · Tariff Engine · MultiVerse' },
   { id: 'about', label: 'About', sub: 'Outside work · Questions · Reading' },
 ];
 

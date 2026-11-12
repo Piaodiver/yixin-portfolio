@@ -293,7 +293,7 @@ export const cases = {
     long: [
       '[LGMG](https://www.lgmglifts.com/) makes aerial work platforms and mining equipment in Shandong. By 2022 its output had passed US$1.4 billion (¥10 billion) for the first time, with subsidiaries in Europe, North America and Japan and a plan to earn half its revenue from exports. Each subsidiary had grown up with its own standards. A machine reaches its buyer through a dealer, on credit or a lease, shipped by a logistics provider, cleared through customs, then needs parts for a decade.',
       'I won the bid and stayed as solution architect to go-live. The hardest part was not the software. Each subsidiary had its own material codes and its own way of booking a sale, so every requirements meeting was really an argument about whose definitions would become the group’s. We settled that first, as one master data hierarchy and one set of accounting rules, and built the portals on top of it. Credit checks moved to the moment an order is taken, not after.',
-      'Phase one went live in Q1 2022 on SAP Commerce Cloud with S/4HANA Cloud Private Edition. [SAP later published the program](https://www.sap.com/documents/2024/02/fc105f35-a87e-0010-bca6-c68f7e60039b.html): order processing 25% faster, and one master data hierarchy and one set of accounting rules across the group.',
+      'Phase one went live in Q1 2022 on SAP Commerce Cloud with S/4HANA Cloud Private Edition. [SAP later published the program](https://web.archive.org/web/20260315211141/https://www.sap.com/documents/2024/02/fc105f35-a87e-0010-bca6-c68f7e60039b.html): order processing 25% faster, and one master data hierarchy and one set of accounting rules across the group.',
     ],
   },
   wizai: {

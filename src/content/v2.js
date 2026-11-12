@@ -14,7 +14,7 @@ export const israel = [
   // Israel-Asia Center line was dropped; no superlatives, no private names.
   "At Wesleyan, newly abroad and often homesick, I took Vera Schwarcz's course on the Jewish experiences in China: Kaifeng under the Northern Song, Shanghai in the 1940s, two peoples who have each spent centuries living in other people's countries. I was studying diaspora while starting my own. Later my boss at a Beijing internship, who ran a Jewish community association there, mentioned a technology MBA at Tel Aviv University. I applied at twenty-two and got in.",
   'The internship was at EyeSight Technologies, now [Cipia](https://cipia.com/), in Herzliya Pituach: computer vision that watches drivers for signs of fatigue. I handled marketing and international partnerships there, among them Continental AG and Kuang-Chi, the Shenzhen group that [put US$20 million into the company in 2016](https://www.globenewswire.com/news-release/2016/05/04/1228645/0/en/Chinese-Technology-Conglomerate-Kuang-Chi-to-Invest-20-Million-in-eyeSight-Technologies-a-Leader-in-Embedded-Computer-Vision.html).',
-  'I got the internship by writing to the CEO on LinkedIn when nothing said the company wanted an intern. I sent about 30 messages like that, about one in four got a reply, and I asked each for a meeting.',
+  'I got the internship by writing to the CEO on LinkedIn when nothing said the company wanted an intern. I sent about 30 messages like that, about one in eight got a reply, and I asked each for a meeting.',
 ];
 
 // About, step 28 (2026-11-11): the reader who gets here has just read the

@@ -210,11 +210,13 @@ export const built = [
     href: null,
   },
   {
-    // MultiVerse I: title and one line only for now, a page of its own later.
+    // MultiVerse I: title and a few lines for now, a page of its own later.
     // Cleared with the co-founder on 2026-09-07 for positioning and screenshots;
-    // no backend or implementation detail here.
+    // no backend or implementation detail here. Split of work added 2026-11-11
+    // from the owner's own account (step 25); source note in
+    // +个人网站/drafts/multiverse-split.md.
     title: 'MultiVerse I: Journey to the West, as anyone in it',
-    body: 'An AI interactive reader, built with a co-founder. Play Sun Wukong, or a demon who gets one line in the original. 90% reading, 10% changing fate. iOS, 2026.',
+    body: 'An AI interactive reader, built with Shane Zhang. Play Sun Wukong, or a demon who gets one line in the original. 90% reading, 10% changing fate. I design and build the front end and write the story logic, where the reader gets a choice and what it changes. Shane builds the backend. iOS, 2026.',
     href: null,
   },
 ];

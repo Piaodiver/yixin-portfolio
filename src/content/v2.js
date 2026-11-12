@@ -9,7 +9,11 @@ export const links = {
 };
 
 export const israel = [
-  'Tel Aviv, 2015 to 2017. An MBA in innovative technology at Tel Aviv University, and alongside it an internship at EyeSight Technologies, now [Cipia](https://cipia.com/), in Herzliya Pituach: a computer vision company whose software watches drivers for signs of fatigue. I handled marketing and international partnerships there, among them Continental AG and Kuang-Chi, the Shenzhen group that [put US$20 million into the company in 2016](https://www.globenewswire.com/news-release/2016/05/04/1228645/0/en/Chinese-Technology-Conglomerate-Kuang-Chi-to-Invest-20-Million-in-eyeSight-Technologies-a-Leader-in-Embedded-Computer-Vision.html). I was also the China representative of the [Israel-Asia Center](https://israelasiacenter.org/).',
+  // Rewritten 2026-11-11 from the owner's account (why Israel: a Wesleyan course,
+  // a boss's remark); draft and choices in +个人网站/drafts/israel.md. The
+  // Israel-Asia Center line was dropped; no superlatives, no private names.
+  "At Wesleyan, newly abroad and often homesick, I took Vera Schwarcz's course on the Jewish experiences in China: Kaifeng under the Northern Song, Shanghai in the 1940s, two peoples who have each spent centuries living in other people's countries. I was studying diaspora while starting my own. Later my boss at a Beijing internship, who ran a Jewish community association there, mentioned a technology MBA at Tel Aviv University. I applied at twenty-two and got in.",
+  'The internship was at EyeSight Technologies, now [Cipia](https://cipia.com/), in Herzliya Pituach: computer vision that watches drivers for signs of fatigue. I handled marketing and international partnerships there, among them Continental AG and Kuang-Chi, the Shenzhen group that [put US$20 million into the company in 2016](https://www.globenewswire.com/news-release/2016/05/04/1228645/0/en/Chinese-Technology-Conglomerate-Kuang-Chi-to-Invest-20-Million-in-eyeSight-Technologies-a-Leader-in-Embedded-Computer-Vision.html).',
   'I got the internship by writing to the CEO on LinkedIn when nothing said the company wanted an intern. I sent about 30 messages like that, about one in four got a reply, and I asked each for a meeting.',
 ];
 
@@ -38,6 +42,10 @@ export const questions = {
 export const hero = {
   name: 'Yixin Liu',
   headline: 'Most enterprise AI projects are content problems in disguise. I find out which kind you have.',
+  // The headline split for the quiz (step 33): the promise is underlined while the quiz is open.
+  headlineBefore: 'Most enterprise AI projects are content problems in disguise. I find out ',
+  headlinePromise: 'which kind you have',
+  headlineAfter: '.',
   subline: 'Over eight years of this. The technology kept changing. The problem did not.',
   person: 'Seattle, by way of Beijing, Tel Aviv and Singapore. Underwater when I can be.',
   // where things stand, and what the next role should be: was the first About paragraph
@@ -46,6 +54,64 @@ export const hero = {
   looking: 'Looking for the next role. Seattle first, elsewhere for the right one.',
   lookingCta: 'Write to me',
   lookingTail: ' and I will send a resume.',
+};
+
+// Step 33: the headline's promise, kept. Three questions, one at a time, behind a
+// beacon at the end of the headline. Nothing is recorded. Each option maps to a
+// kind (0 writing-down, 1 ownership, 2 judgment); majority wins, the third
+// question breaks a three-way tie. Draft and research check:
+// +个人网站/drafts/which-kind-quiz.md. The "what the research says" lines wait
+// for the Reading section (the owner writes a take on each paper first).
+export const heroQuiz = {
+  beaconLabel: 'Three questions',
+  ariaLabel: 'Find out which kind in three questions',
+  questions: [
+    {
+      text: 'When a customer asks your best person a hard question today, where does the answer come from?',
+      options: [
+        'Honestly? Whoever has been here longest. If she is on leave, we wait.',
+        'There is a document. There are a few, actually, and they do not all say the same thing.',
+        'Depends who is asking. We check their account before we answer, every time.',
+      ],
+    },
+    {
+      text: 'If the rule behind that answer changed next month, how would you find out?',
+      options: [
+        'Usually when a customer tells us we got it wrong.',
+        'Someone updates the main page. The other copies catch up when someone notices.',
+        'It would not change for everyone. The question is always which customers it applies to.',
+      ],
+    },
+    {
+      text: 'What worries you most about letting an agent answer instead?',
+      options: [
+        'That it will make something up and sound confident doing it.',
+        'That it will be right at launch and quietly wrong by March.',
+        'That it will give the right answer to the wrong person, or not know when to stop and get a human.',
+      ],
+    },
+  ],
+  resultLead: 'Which kind you have, probably:',
+  results: [
+    {
+      title: 'A writing-down problem.',
+      text: 'The agent is the easy part. Before any model, someone has to write the answers down, and that is the real project.',
+      links: [{ label: 'Read the Salesforce year', href: '#singapore' }],
+    },
+    {
+      title: 'An ownership problem.',
+      text: 'The answers exist, in more than one place. Decide which system is the source of truth and whose approval carries through to the agent. I made that call twice.',
+      links: [{ label: 'Read Wiz.AI', href: '#wizai' }, { label: 'Read NOVA', href: '#nova' }],
+    },
+    {
+      title: 'A judgment problem.',
+      text: "The content is there and someone keeps it. What is missing is which rule applies to the person asking, and when the agent must hand over. That is where the first workshop usually ended, and it was the whole of NOVA's design.",
+      links: [{ label: 'Read the three decisions', href: '#nova-full' }],
+    },
+  ],
+  closing: 'Three questions is a guess, not a diagnosis. If none of this sounds like you, it may not be a content problem. Those exist too, and they are usually easier.',
+  closingCta: 'Write to me',
+  closingTail: ' with the real version.',
 };
 
 // The Salesforce year, as the frame around NOVA. Sits first in the Singapore section.

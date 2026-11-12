@@ -327,7 +327,7 @@ export const work = {
   sub: 'Two agents · 2024–2026',
   // ties the section to the headline and the three questions: Wiz.AI was an
   // ownership problem, NOVA a judgment problem
-  line: 'One ownership problem, one judgment problem.',
+  line: 'Two agents in production, two kinds of content problem.',
 };
 
 export const fourPlaces = {

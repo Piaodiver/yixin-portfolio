@@ -40,8 +40,8 @@ export default function RouteMap() {
   };
 
   return (
-    <nav className="v2-route" aria-label="The route">
-      <span className="v2-route__title" aria-hidden="true">The route</span>
+    <nav className="v2-route" aria-label="Four places">
+      <span className="v2-route__title" aria-hidden="true">Four places</span>
       <svg className="v2-route__line" viewBox={`0 0 ${W} ${H}`} preserveAspectRatio="none" aria-hidden="true">
         <path d={path()} fill="none" stroke="currentColor" strokeWidth="1.2" strokeDasharray="4 5" />
       </svg>

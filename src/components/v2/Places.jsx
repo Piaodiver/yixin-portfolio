@@ -1,42 +1,41 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Reveal from './Reveal';
-import SceneOverlay from './SceneOverlay';
+import SceneBand from './SceneBand';
 import { places, fourPlaces } from '../../content/v2';
+import { stopsHint, chapterClose } from '../../content/places-chapters';
+import '../../styles/places.css';
 
 /**
- * Places — "Four places", step 39 (2026-11-12). The four scenes side by side
- * as stops, each with its poster, the "city · employers · years" line and one
- * fold. On wide screens the folds open in one shared row under the stops
- * (CSS order + grid-column), one at a time; on the phone each fold opens
- * under its own stop.
- *
- * The small frames show the poster only. The live scene opens full screen
- * from the frame (SceneOverlay), where it has the room it was drawn for;
- * four live canvases at a quarter width were not worth it. The old full-width
- * bands are archived at git tag places-v1-before-step39.
+ * Places — "Four places", one door per picture (step 41, 2026-11-12; the
+ * step-39 version with two doors, picture → full screen and chevron → fold,
+ * is at commit 47c7da1). The four posters side by side; clicking one opens
+ * that place's chapter under the row: the live scene band first (SceneBand,
+ * which still opens full screen on click or Expand), then the story. The
+ * title under the picture is the same door's handle. One chapter open at a
+ * time; on wide screens it spans the row (CSS order + grid-column), on the
+ * phone it opens under its own picture, where the band takes the picture's
+ * place.
  *
  * Hash routing: #china opens nothing; #china-full, or the id of anything
- * inside a fold (#lgmg from the hero cards), opens that stop's fold first
- * and then scrolls to the target.
+ * inside a chapter (#lgmg from the hero cards), opens that chapter first and
+ * then scrolls to the target.
  */
 export default function Places({ stops }) {
   const [open, setOpen] = useState(null); // place id, or null
-  const [scene, setScene] = useState(null); // place id, or null
-  const openerRef = useRef(null);
-  const closeScene = useCallback(() => {
-    setScene(null);
-    openerRef.current?.focus();
-  }, []);
 
-  // one open at a time; folding back brings the toggle to the middle of the view
+  // one open at a time; opening brings the band to the top of the view,
+  // closing brings the picture back to the middle
   const toggle = (id) => {
     const next = open === id ? null : id;
     setOpen(next);
     history.replaceState(null, '', next ? `#${id}-full` : `#${id}`);
-    if (!next) document.getElementById(`${id}-toggle`)?.scrollIntoView({ block: 'center', behavior: 'smooth' });
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      if (next) document.getElementById(`${id}-panel`)?.scrollIntoView({ block: 'start', behavior: 'smooth' });
+      else document.getElementById(`${id}-frame`)?.scrollIntoView({ block: 'center', behavior: 'smooth' });
+    }));
   };
 
-  // open the right fold for a hash, on load and on hash change
+  // open the right chapter for a hash, on load and on hash change
   useEffect(() => {
     const follow = () => {
       const hash = window.location.hash.slice(1);
@@ -44,9 +43,8 @@ export default function Places({ stops }) {
       for (const s of stops) {
         if (hash === `${s.id}-full` || s.inside?.includes(hash)) {
           setOpen(s.id);
-          // the target is inside a fold that is only now opening
           requestAnimationFrame(() => requestAnimationFrame(() => {
-            document.getElementById(hash)?.scrollIntoView({ block: 'start' });
+            document.getElementById(hash === `${s.id}-full` ? `${s.id}-panel` : hash)?.scrollIntoView({ block: 'start' });
           }));
           return;
         }
@@ -65,13 +63,18 @@ export default function Places({ stops }) {
       <div className="v2-stops">
         {places.map((p) => {
           const stop = stops.find((s) => s.id === p.id);
+          const on = open === p.id;
+          const title = fourPlaces.folds[p.id] ?? fourPlaces.singaporeUp.label;
           return (
-            <div key={p.id} id={p.id} className="v2-stop">
+            <div key={p.id} id={p.id} className="v2-stop" data-open={on || undefined}>
               <button
                 type="button"
+                id={`${p.id}-frame`}
                 className="v2-stop__frame"
-                onClick={(e) => { openerRef.current = e.currentTarget; setScene(p.id); }}
-                aria-label={`Open the ${p.label} scene`}
+                aria-expanded={on}
+                aria-controls={`${p.id}-panel`}
+                aria-label={on ? `Close ${p.label}` : `Open ${p.label}`}
+                onClick={() => toggle(p.id)}
               >
                 <img
                   src={`${import.meta.env.BASE_URL}scenes/${p.id}/poster.jpg`}
@@ -82,49 +85,44 @@ export default function Places({ stops }) {
                   decoding="async"
                 />
                 <span className="v2-stop__label" aria-hidden="true">{p.label}</span>
-                <span className="v2-stop__expand" aria-hidden="true">Open <span>↗</span></span>
+                <span className="v2-stop__expand" aria-hidden="true">{on ? 'Close ↑' : 'Open ↓'}</span>
               </button>
               <div className="v2-stop__text">
                 <p className="v2-eyebrow">{p.sub}</p>
-                {stop?.children ? (
-                  <button
-                    type="button"
-                    id={`${p.id}-toggle`}
-                    className="v2-fold__toggle"
-                    aria-expanded={open === p.id}
-                    aria-controls={`${p.id}-panel`}
-                    onClick={() => toggle(p.id)}
-                  >
-                    <span className="v2-fold__chev" aria-hidden="true" />
-                    {open === p.id ? 'Fold it back' : fourPlaces.folds[p.id]}
-                  </button>
-                ) : (
-                  <p className="v2-stop__up">
-                    <a className="v2-link" href={fourPlaces.singaporeUp.href}>{fourPlaces.singaporeUp.label}</a>
-                    <span aria-hidden="true"> ↑</span>
-                  </p>
-                )}
+                <button
+                  type="button"
+                  id={`${p.id}-toggle`}
+                  className="v2-stop__title"
+                  aria-expanded={on}
+                  aria-controls={`${p.id}-panel`}
+                  onClick={() => toggle(p.id)}
+                >
+                  {title}
+                </button>
               </div>
-              {stop?.children ? (
-                <div id={`${p.id}-panel`} className="v2-fold v2-stop__panel" data-open={open === p.id ? 'true' : undefined}>
-                  <div>
-                    <div className="v2-fold__inner v2-prose-wrap">
-                      {stop.children}
-                      {open === p.id && (
-                        <button type="button" className="v2-fold__toggle mt-8" onClick={() => toggle(p.id)}>
+              <div id={`${p.id}-panel`} className="v2-fold v2-stop__panel" data-open={on ? 'true' : undefined}>
+                <div>
+                  <div className="v2-fold__inner">
+                    <div className="v2-chapter__band">
+                      {on ? <SceneBand place={p.id} /> : null}
+                    </div>
+                    <div className="v2-prose-wrap mt-8">
+                      {stop?.children}
+                      {on && (
+                        <button type="button" className="v2-fold__toggle v2-chapter__close" onClick={() => toggle(p.id)}>
                           <span className="v2-fold__chev" data-up aria-hidden="true" />
-                          Fold it back
+                          {chapterClose(p.label)}
                         </button>
                       )}
                     </div>
                   </div>
                 </div>
-              ) : null}
+              </div>
             </div>
           );
         })}
+        <p className="v2-stops__hint" aria-hidden="true">{stopsHint}</p>
       </div>
-      {scene ? <SceneOverlay place={scene} onClose={closeScene} /> : null}
     </section>
   );
 }

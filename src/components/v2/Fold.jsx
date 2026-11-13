@@ -11,11 +11,25 @@ export default function Fold({ id, label, closeLabel = 'Fold it back', children 
   const panelId = useId();
   const [open, setOpen] = useState(false);
 
+  // open on load for a shared link, and later when a link on the page (the
+  // Four places index cards, step 41) sets the hash
   useEffect(() => {
-    if (window.location.hash === `#${id}-full`) setOpen(true);
+    const follow = (scroll) => {
+      if (window.location.hash !== `#${id}-full`) return;
+      setOpen(true);
+      if (scroll) {
+        requestAnimationFrame(() => requestAnimationFrame(() => {
+          document.getElementById(`${id}-toggle`)?.scrollIntoView({ block: 'start', behavior: 'smooth' });
+        }));
+      }
+    };
+    follow(false);
+    const onHash = () => follow(true);
+    window.addEventListener('hashchange', onHash);
+    return () => window.removeEventListener('hashchange', onHash);
   }, [id]);
 
-  function toggle(e) {
+  function toggle() {
     const next = !open;
     setOpen(next);
     if (next) {

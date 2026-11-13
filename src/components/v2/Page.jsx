@@ -11,11 +11,12 @@ import Questions from './Questions';
 import Reading from './Reading';
 import { cases, built, israel, salesforce, china, baidu, unitedStates, work } from '../../content/v2';
 import { archGraphs } from '../../content/arch-graphs';
+import { singaporeChapter } from '../../content/places-chapters';
 
 /**
  * The page in two speeds (step 39, 2026-11-12): hero, then The work (the two
  * agents, in full, no scene), then Four places (the four scenes side by side,
- * long texts behind one fold each), then Building now, About, Questions,
+ * each picture a door to its chapter, step 41), then Building now, About, Questions,
  * Reading, End. The old order, four equal place chapters, is at git tag
  * places-v1-before-step39.
  */
@@ -48,7 +49,25 @@ export default function Page() {
         </>
       ),
     },
-    { id: 'singapore' },
+    {
+      id: 'singapore',
+      inside: [],
+      children: (
+        <>
+          <p className="v2-eyebrow">{singaporeChapter.eyebrow}</p>
+          <p className="v2-chapter__lead mt-3">{singaporeChapter.lead}</p>
+          <div className="v2-chapter__cards">
+            {singaporeChapter.cards.map((c) => (
+              <a key={c.caseId} className="v2-chapter__card" href={c.href}>
+                <span className="v2-eyebrow">{c.eyebrow}</span>
+                <span>{cases[c.caseId].card}</span>
+                <span className="v2-chapter__card-read">{singaporeChapter.read}</span>
+              </a>
+            ))}
+          </div>
+        </>
+      ),
+    },
     {
       id: 'united-states',
       inside: [],

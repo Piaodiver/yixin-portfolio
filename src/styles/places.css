@@ -1,0 +1,47 @@
+/* step 41: one door per picture (Places.jsx). The picture opens a chapter:
+   the live scene band on top, the story under it. Uses the motion tokens
+   from arch.css. */
+.v2-stops__hint {
+  grid-column: 1 / -1; margin: 0; font-family: Inter, system-ui, sans-serif;
+  font-size: 0.86rem; font-style: italic; color: var(--ink-300);
+}
+@media (min-width: 768px) { .v2-stops__hint { order: 3; margin-top: -8px; } }
+.v2-stop__frame {
+  transition: border-color var(--v2-dur) var(--v2-ease), transform var(--v2-dur) var(--v2-ease), box-shadow var(--v2-dur) var(--v2-ease);
+}
+.v2-stop__frame:hover { transform: translateY(-2px); box-shadow: 0 8px 20px -12px rgba(28, 27, 24, 0.5); }
+.v2-stop__frame:active { transform: scale(var(--v2-press)); }
+.v2-stop[data-open] .v2-stop__frame { border-color: var(--accent); box-shadow: 0 0 0 2px var(--accent); }
+.v2-stop[data-open] .v2-stop__expand { opacity: 1; background: var(--accent); color: var(--paper); border-color: var(--accent); }
+.v2-stop__expand { transition: opacity var(--v2-dur) var(--v2-ease), background-color var(--v2-dur) var(--v2-ease), color var(--v2-dur) var(--v2-ease), transform var(--v2-dur) var(--v2-ease); transform: translateY(4px); }
+.v2-stop__frame:hover .v2-stop__expand, .v2-stop__frame:focus-visible .v2-stop__expand, .v2-stop[data-open] .v2-stop__expand { transform: none; }
+@media (hover: none) { .v2-stop__expand { transform: none; } }
+/* the chapter title under the picture: the same door's handle, not a chevron */
+.v2-stop__title {
+  display: block; margin: 6px 0 0; padding: 0; border: 0; background: none; text-align: left; cursor: pointer;
+  font-family: Fraunces, Georgia, serif; font-size: 1.05rem; line-height: 1.35; color: var(--ink-900);
+  transition: color var(--v2-dur) var(--v2-ease);
+}
+.v2-stop__title:hover, .v2-stop[data-open] .v2-stop__title { color: var(--accent); }
+.v2-stop__title:focus-visible { outline: 1px solid var(--accent); outline-offset: 4px; }
+/* the chapter: band first, then the story in the page column */
+.v2-chapter__band { margin-top: 10px; }
+.v2-chapter__band .scene-band { width: 100%; max-width: none; }
+.v2-chapter__close { margin-top: 1.5rem; }
+/* phone: the open picture gives way to the live band, which carries the label */
+@media (max-width: 767px) {
+  .v2-stop[data-open] .v2-stop__frame { display: none; }
+  .v2-chapter__band { margin-top: 0; }
+  .v2-stop__panel .v2-fold__inner { padding-top: 0; }
+}
+/* Singapore: the two index cards */
+.v2-chapter__lead { font-family: Inter, system-ui, sans-serif; font-size: 1rem; line-height: 1.6; color: var(--ink-900); margin: 0 0 1.1em; }
+.v2-chapter__cards { display: grid; grid-template-columns: 1fr; gap: 18px; margin: 18px 0 0; }
+@media (min-width: 600px) { .v2-chapter__cards { grid-template-columns: 1fr 1fr; gap: 24px; } }
+.v2-chapter__card {
+  display: flex; flex-direction: column; gap: 8px; border-top: 1px solid var(--rule); padding-top: 12px;
+  font-family: Inter, system-ui, sans-serif; font-size: 0.95rem; line-height: 1.5; color: var(--ink-900); text-decoration: none;
+}
+.v2-chapter__card .v2-eyebrow { transition: color var(--v2-dur) var(--v2-ease); }
+.v2-chapter__card:hover .v2-eyebrow { color: var(--accent); }
+.v2-chapter__card-read { color: var(--accent); font-size: 0.9rem; font-weight: 500; }

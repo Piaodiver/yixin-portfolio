@@ -221,7 +221,7 @@ export const hotspots = {
     { id: 'fog', anchor: 'bridge', x: 0.35, y: 0.30,
       text: 'Near the end of SAP Academy, a few of us drove an hour and a half to watch the sunset from the bridge. The fog was so thick we could not see the bridge, let alone the sunset. We stood by the road laughing, took the photo anyway, and sent it to the Academy group chat. It got more replies than any sunset would have.' },
     { id: 'boat', anchor: 'bridge', x: 0.615, y: 0.56, narrow: false,
-      text: 'Same boat, different ocean. In Tel Aviv I wrote to strangers asking for an internship. In Seattle I am building on my own.',
+      text: 'Same boat, different ocean. Many times I have landed somewhere I hardly knew anyone and started again.',
       links: [{ label: 'The other boat', place: 'israel' }] },
     { id: 'tower', anchor: 'bridge', x: 0.909, y: 0.35, narrow: false,
       text: 'Wesleyan had late-night dining. Every exam week we left the library around midnight and went to eat. I reached my peak weight and, by my own assessment, my peak brilliance. Classmates who see me now still say: Yixin, you used to be so much rounder.' },

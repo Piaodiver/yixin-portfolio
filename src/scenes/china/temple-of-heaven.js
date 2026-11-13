@@ -22,6 +22,10 @@ export const DEFAULTS = {
   templeImage: 'temple-roof-cutout-web.webp',
   templeAlt:   '天坛祈年殿屋顶',
 
+  /* 界面文案：嵌入时按宿主语言覆盖（见 docs/EMBEDDING.md）。soundOn/soundOff 给单字符就是图标按钮，给词就变成带字的胶囊 */
+
+  labels: { theme: '切换昼夜主题', sound: '开关声音', soundOn: '♪', soundOff: '✕', settings: '配置', counter: '珠帘触碰' },
+
   sound: 'off',            // 作品集惯例：默认静音
   theme: 'day',
   persistTheme: false,     // 嵌入时别写 localStorage，会和宿主站点的主题互相打架
@@ -45,9 +49,9 @@ ${o.chrome ? `  <header class="masthead">
     <a class="brand" href="#">${esc(o.brand)}</a>
     <nav class="nav-links" aria-label="Primary">${nav}</nav>
     <div class="masthead-actions">
-      <button class="toggle-btn toggle-theme" type="button" title="切换昼夜主题" aria-label="切换昼夜主题">☀</button>
-      <button class="toggle-btn toggle-sound" type="button" title="开关声音" aria-label="开关声音">♪</button>
-      ${o.settings ? '<button class="configure" type="button" aria-expanded="false">配置</button>' : ''}
+      <button class="toggle-btn toggle-theme" type="button" title="${esc(o.labels.theme)}" aria-label="${esc(o.labels.theme)}">☀</button>
+      <button class="toggle-btn toggle-sound${[...String(o.labels.soundOn)].length > 1 ? ' is-text' : ''}" type="button" title="${esc(o.labels.sound)}" aria-label="${esc(o.labels.sound)}">${esc(o.sound === 'on' ? o.labels.soundOn : o.labels.soundOff)}</button>
+      ${o.settings ? `<button class="configure" type="button" aria-expanded="false">${esc(o.labels.settings)}</button>` : ''}
     </div>
   </header>` : ''}
   <div class="temple">
@@ -59,7 +63,7 @@ ${o.title ? `  <section class="headline">
     <h1>${lines}</h1>
   </section>` : ''}
 ${o.hud ? `  <div class="progress" aria-hidden="true"></div>
-  <div class="counter" aria-hidden="true">珠帘触碰 · 0</div>` : ''}
+  <div class="counter" aria-hidden="true">${esc(o.labels.counter)} · 0</div>` : ''}
 ${o.cursor ? '  <div class="cursor" aria-hidden="true"></div>' : ''}
 ${o.chrome && o.settings ? `  <aside class="settings" hidden>
     <div class="setting"><label>Strength <output data-kc-out="strength">72</output></label><input data-kc="strength" type="range" min="20" max="110" value="72"></div>
@@ -75,6 +79,7 @@ let seq = 0;
 
 export function mountTempleOfHeaven(host, options = {}) {
   const opt = { ...DEFAULTS, ...options };
+  opt.labels = { ...DEFAULTS.labels, ...(options.labels || {}) };
   if (!opt.chrome) opt.settings = false;
   const root = typeof host === 'string' ? document.querySelector(host) : host;
   if (!root) throw new Error('mountTempleOfHeaven: 找不到容器元素 ' + host);
@@ -411,7 +416,7 @@ export function mountTempleOfHeaven(host, options = {}) {
   function registerInteraction() {
     interactionCount++;
     if (!counterEl) return;
-    counterEl.textContent = `珠帘触碰 · ${interactionCount}`;
+    counterEl.textContent = `${opt.labels.counter} · ${interactionCount}`;
     counterEl.classList.add('visible');
     clearTimeout(counterEl._timer);
     counterEl._timer = setTimeout(() => counterEl.classList.remove('visible'), 2000);
@@ -548,7 +553,7 @@ export function mountTempleOfHeaven(host, options = {}) {
 
   if (soundToggle) {
     const paintSound = () => {
-      soundToggle.textContent = soundEnabled ? '♪' : '✕';
+      soundToggle.textContent = soundEnabled ? opt.labels.soundOn : opt.labels.soundOff;
       soundToggle.classList.toggle('active', soundEnabled);
     };
     paintSound();

@@ -23,6 +23,10 @@ export const DEFAULTS = {
   backdropImage: 'merlion-scene.jpg',
   backdropAlt:   '新加坡鱼尾狮立在滨海湾岸边的石基座上，面朝右方，远处是滨海湾金沙与艺术科学博物馆',
 
+  /* 界面文案：嵌入时按宿主语言覆盖（见 docs/EMBEDDING.md）。soundOn/soundOff 给单字符就是图标按钮，给词就变成带字的胶囊 */
+
+  labels: { theme: '切换昼夜主题', sound: '开关声音', soundOn: '♪', soundOff: '✕', settings: '配置', counter: '水帘拨动' },
+
   sound: 'off',            // ★ 作品集惯例：默认关闭
   theme: 'day',
   persistTheme: false,     // 嵌入时别写 localStorage
@@ -53,9 +57,9 @@ ${o.chrome ? `  <header class="masthead">
     <a class="brand" href="#">${esc(o.brand)}<span class="brand-en">${esc(o.brandSuffix)}</span></a>
     <nav class="nav-links" aria-label="Primary">${nav}</nav>
     <div class="masthead-actions">
-      <button class="toggle-btn toggle-theme" type="button" title="切换昼夜主题" aria-label="切换昼夜主题">☀</button>
-      <button class="toggle-btn toggle-sound" type="button" title="开关声音" aria-label="开关声音">♪</button>
-      ${o.settings ? '<button class="configure" type="button" aria-expanded="false">配置</button>' : ''}
+      <button class="toggle-btn toggle-theme" type="button" title="${esc(o.labels.theme)}" aria-label="${esc(o.labels.theme)}">☀</button>
+      <button class="toggle-btn toggle-sound${[...String(o.labels.soundOn)].length > 1 ? ' is-text' : ''}" type="button" title="${esc(o.labels.sound)}" aria-label="${esc(o.labels.sound)}">${esc(o.sound === 'on' ? o.labels.soundOn : o.labels.soundOff)}</button>
+      ${o.settings ? `<button class="configure" type="button" aria-expanded="false">${esc(o.labels.settings)}</button>` : ''}
     </div>
   </header>` : ''}
 ${o.title ? `  <section class="headline">
@@ -63,7 +67,7 @@ ${o.title ? `  <section class="headline">
     <h1>${chars}<span class="rule"></span></h1>
   </section>` : ''}
 ${o.hud ? `  <div class="progress" aria-hidden="true"></div>
-  <div class="counter" aria-hidden="true">水帘拨动 · 0</div>` : ''}
+  <div class="counter" aria-hidden="true">${esc(o.labels.counter)} · 0</div>` : ''}
 ${o.cursor ? '  <div class="cursor" aria-hidden="true"></div>' : ''}
 ${o.chrome && o.settings ? `  <aside class="settings" hidden>
     <div class="setting"><label>Flow <output data-kc-out="flow">100</output></label><input data-kc="flow" type="range" min="20" max="220" value="100"></div>
@@ -80,6 +84,7 @@ let seq = 0;
 
 export function mountMerlion(host, options = {}) {
   const opt = { ...DEFAULTS, ...options };
+  opt.labels = { ...DEFAULTS.labels, ...(options.labels || {}) };
   if (!opt.chrome) opt.settings = false;
   const root = typeof host === 'string' ? document.querySelector(host) : host;
   if (!root) throw new Error('mountMerlion: 找不到容器元素 ' + host);
@@ -553,7 +558,7 @@ export function mountMerlion(host, options = {}) {
   function registerInteraction() {
     interactionCount++;
     if (!counterEl) return;                 // hud:false 时整块不存在
-    counterEl.textContent = `水帘拨动 · ${interactionCount}`;
+    counterEl.textContent = `${opt.labels.counter} · ${interactionCount}`;
     counterEl.classList.add('visible');
     clearTimeout(counterEl._t);
     counterEl._t = setTimeout(() => counterEl.classList.remove('visible'), 2000);
@@ -990,11 +995,11 @@ export function mountMerlion(host, options = {}) {
     if (sound.context && sound.context.state === 'running') sound.context.suspend().catch(() => {});
   }
   if (soundToggle) {
-    soundToggle.textContent = soundEnabled ? '♪' : '✕';
+    soundToggle.textContent = soundEnabled ? opt.labels.soundOn : opt.labels.soundOff;
     soundToggle.classList.toggle('active', soundEnabled);
     on(soundToggle, 'click', () => {
       soundEnabled = !soundEnabled;
-      soundToggle.textContent = soundEnabled ? '♪' : '✕';
+      soundToggle.textContent = soundEnabled ? opt.labels.soundOn : opt.labels.soundOff;
       soundToggle.classList.toggle('active', soundEnabled);
       if (soundEnabled) unlockSound(); else silence();
     });

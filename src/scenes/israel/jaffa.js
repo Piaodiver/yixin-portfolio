@@ -23,6 +23,10 @@ export const DEFAULTS = {
   backdropImage: 'jaffa-arch.jpg',
   backdropAlt:   '雅法砂岩石拱框住地中海，远处有旧城石屋、灯塔和一艘小帆船',
 
+  /* 界面文案：嵌入时按宿主语言覆盖（见 docs/EMBEDDING.md）。soundOn/soundOff 给单字符就是图标按钮，给词就变成带字的胶囊 */
+
+  labels: { theme: '切换昼夜主题', sound: '开关声音', soundOn: '♪', soundOff: '✕', settings: '配置', counter: '风线拨动' },
+
   sound: 'off',
   theme: 'day',
   persistTheme: false,
@@ -56,9 +60,9 @@ ${o.chrome ? `  <header class="masthead">
     <a class="brand" href="#">${esc(o.brand)}<span class="brand-en">${esc(o.brandSuffix)}</span></a>
     <nav class="nav-links" aria-label="Primary">${nav}</nav>
     <div class="masthead-actions">
-      <button class="toggle-btn toggle-theme" type="button" title="切换昼夜主题" aria-label="切换昼夜主题">☀</button>
-      <button class="toggle-btn toggle-sound" type="button" title="开关声音" aria-label="开关声音">♪</button>
-      ${o.settings ? '<button class="configure" type="button" aria-expanded="false">配置</button>' : ''}
+      <button class="toggle-btn toggle-theme" type="button" title="${esc(o.labels.theme)}" aria-label="${esc(o.labels.theme)}">☀</button>
+      <button class="toggle-btn toggle-sound${[...String(o.labels.soundOn)].length > 1 ? ' is-text' : ''}" type="button" title="${esc(o.labels.sound)}" aria-label="${esc(o.labels.sound)}">${esc(o.sound === 'on' ? o.labels.soundOn : o.labels.soundOff)}</button>
+      ${o.settings ? `<button class="configure" type="button" aria-expanded="false">${esc(o.labels.settings)}</button>` : ''}
     </div>
   </header>` : ''}
 ${o.title ? `  <section class="headline">
@@ -66,7 +70,7 @@ ${o.title ? `  <section class="headline">
     <h1>${chars}<span class="rule"></span></h1>
   </section>` : ''}
 ${o.hud ? `  <div class="progress" aria-hidden="true"></div>
-  <div class="counter" aria-hidden="true">风线拨动 · 0</div>` : ''}
+  <div class="counter" aria-hidden="true">${esc(o.labels.counter)} · 0</div>` : ''}
 ${o.cursor ? '  <div class="cursor" aria-hidden="true"></div>' : ''}
 ${o.chrome && o.settings ? `  <aside class="settings" hidden>
     <div class="setting"><label>Strength <output data-kc-out="strength">55</output></label><input data-kc="strength" type="range" min="15" max="120" value="55"></div>
@@ -83,6 +87,7 @@ let seq = 0;
 
 export function mountJaffa(host, options = {}) {
   const opt = { ...DEFAULTS, ...options };
+  opt.labels = { ...DEFAULTS.labels, ...(options.labels || {}) };
   if (!opt.chrome) opt.settings = false;
   const root = typeof host === 'string' ? document.querySelector(host) : host;
   if (!root) throw new Error('mountJaffa: 找不到容器元素 ' + host);
@@ -547,7 +552,8 @@ export function mountJaffa(host, options = {}) {
 
   function registerInteraction() {
     interactionCount++;
-    counterEl.textContent = `风线拨动 · ${interactionCount}`;
+    if (!counterEl) return;                 // hud:false 时整块不存在
+    counterEl.textContent = `${opt.labels.counter} · ${interactionCount}`;
     counterEl.classList.add('visible');
     clearTimeout(counterEl._timer);
     counterEl._timer = setTimeout(() => counterEl.classList.remove('visible'), 2000);
@@ -731,7 +737,7 @@ export function mountJaffa(host, options = {}) {
     applyTheme(root.getAttribute('data-theme') !== 'night'));
 
   if (soundToggle) {
-    soundToggle.textContent = soundEnabled ? '♪' : '✕';
+    soundToggle.textContent = soundEnabled ? opt.labels.soundOn : opt.labels.soundOff;
     soundToggle.classList.toggle('active', soundEnabled);
     on(soundToggle, 'click', () => {
       soundEnabled = !soundEnabled;

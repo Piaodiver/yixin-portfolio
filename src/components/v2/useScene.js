@@ -33,19 +33,68 @@ const EMBED_OPTIONS = {
 };
 
 /* Full-screen options (SceneOverlay): the scene's own chrome comes back so
-   the viewer can switch day/night, turn the sound on and open the settings
-   panel; the title block and touch counter too. The nav links are demo
-   placeholders upstream, so they stay off. */
+   the viewer can switch day/night, turn the sound off and open the settings
+   panel; the title block too. No HUD: the touch counter read as tracking
+   (owner, 2026-11-12), and the progress line it comes with is never drawn.
+   The nav links are demo placeholders upstream, so they stay off. Sound
+   starts on (step 42): the overlay opens from a click, so the audio context
+   is allowed to run. */
 const FULL_OPTIONS = {
   chrome: true,
   title: true,
-  hud: true,
+  hud: false,
   cursor: true,
   settings: true,
   nav: [],
-  sound: 'off',
+  sound: 'on',
   persistTheme: false,
   pauseOffscreen: false,
+};
+
+/* The scenes' own copy is Chinese upstream (brand, eyebrow, button labels,
+   touch counter). The site's readers are international, so every visible
+   string is passed in English here (step 42, 2026-11-12). The characters in
+   the curtain and the words in the water are the pictures themselves and
+   stay. Sound labels are words, so the scene renders them as a pill. The
+   counter labels are kept for completeness; the HUD is off. */
+const LABELS = {
+  theme: 'Day / night',
+  sound: 'Sound',
+  soundOn: 'Sound on',
+  soundOff: 'Sound off',
+  settings: 'Settings',
+};
+const TEXT = {
+  china: {
+    brand: 'Temple of Heaven · Beijing',
+    eyebrow: 'Move across the curtain',
+    labels: { ...LABELS, counter: 'Touches' },
+    ariaLabel: 'A curtain of Chinese characters hanging from the Temple of Heaven roof; move across it and the strands swing',
+    templeAlt: 'The roof of the Hall of Prayer for Good Harvests, Temple of Heaven',
+  },
+  'united-states': {
+    brand: 'Golden Gate',
+    brandSuffix: ' · San Francisco',
+    locality: 'SAN FRANCISCO · PLUCK THE CABLES',
+    labels: { ...LABELS, counter: 'Plucks' },
+    ariaLabel: 'The main cables and suspenders of the Golden Gate Bridge; pluck them and they vibrate like strings, with words along the cables',
+  },
+  israel: {
+    brand: 'Jaffa',
+    brandSuffix: ' · Tel Aviv',
+    eyebrow: 'Push the wind lines',
+    labels: { ...LABELS, counter: 'Gusts' },
+    ariaLabel: 'Seven lines of Hebrew and Arabic words drifting in from the sea on the Mediterranean wind',
+    backdropAlt: 'A Jaffa sandstone arch framing the Mediterranean, with the old town, a lighthouse and a small sailboat beyond',
+  },
+  singapore: {
+    brand: 'Merlion',
+    brandSuffix: ' · Singapore',
+    eyebrow: 'Stir the water',
+    labels: { ...LABELS, counter: 'Ripples' },
+    ariaLabel: 'The Merlion’s stream of water as a curtain you can stir, carrying words in English, Chinese, Malay and Tamil',
+    backdropAlt: 'The Merlion on its stone base at Marina Bay, facing right, with Marina Bay Sands and the ArtScience Museum beyond',
+  },
 };
 
 /** Mounts the full-screen version of `place` into `host`. Resolves to the
@@ -55,7 +104,7 @@ export async function mountFull(host, place) {
   if (!host || !load) return null;
   try {
     const mod = await load();
-    return mod.mount(host, { ...FULL_OPTIONS, theme: themeNow(), assetBase: mod.assetBase });
+    return mod.mount(host, { ...FULL_OPTIONS, ...TEXT[place], theme: themeNow(), assetBase: mod.assetBase });
   } catch (err) {
     console.warn(`[scene:${place}] full-screen mount failed`, err);
     return null;
@@ -99,7 +148,7 @@ export default function useScene(hostRef, place) {
       }
       if (cancelled || !hostRef.current) return;
       try {
-        handle = mod.mount(host, { ...EMBED_OPTIONS, theme: themeNow(), assetBase: mod.assetBase });
+        handle = mod.mount(host, { ...EMBED_OPTIONS, ...TEXT[place], theme: themeNow(), assetBase: mod.assetBase });
         setState('mounted');
       } catch (err) {
         console.warn(`[scene:${place}] failed to mount`, err);

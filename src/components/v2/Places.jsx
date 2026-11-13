@@ -88,7 +88,6 @@ export default function Places({ stops }) {
                 <span className="v2-stop__expand" aria-hidden="true">{on ? 'Close ↑' : 'Open ↓'}</span>
               </button>
               <div className="v2-stop__text">
-                <p className="v2-eyebrow">{p.sub}</p>
                 <button
                   type="button"
                   id={`${p.id}-toggle`}

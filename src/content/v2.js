@@ -388,11 +388,15 @@ export const work = {
 
 export const fourPlaces = {
   title: 'Four places',
-  // one toggle label per stop; Singapore points up instead
+  // one line under each picture, the same shape four times: the length of
+  // the stay, then the one thing (2026-11-12; the city · employer · years
+  // eyebrow under the pictures was dropped the same day, the chapter's own
+  // eyebrow still carries it)
   folds: {
-    china: 'Two years at Baidu, four at SAP, and the LGMG story',
-    israel: 'Why Israel, and how I got the internship',
-    'united-states': 'Wesleyan, then the SAP Academy in San Ramon',
+    china: 'Six years. Baidu, then SAP.',
+    israel: 'Two years. A master\'s and an internship.',
+    singapore: 'Two years. Two agents in production.',
+    'united-states': 'Since 2026. Building on my own.',
   },
   singaporeUp: { label: 'The two agents are above', href: '#work' },
 };

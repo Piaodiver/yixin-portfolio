@@ -217,7 +217,7 @@ export const hotspots = {
   ],
   'united-states': [
     { id: 'sun', anchor: 'bridge', x: 0.775, y: 0.27, fixed: true,
-      text: 'Full disclosure: I live in Seattle now, about 800 miles north of this bridge. This is the postcard everyone recognizes. My window shows rain.' },
+      text: 'Full disclosure: I live in Seattle now, about 800 miles north of this bridge. This is just the postcard everyone recognizes. My window shows rain.' },
     { id: 'fog', anchor: 'bridge', x: 0.35, y: 0.30,
       text: 'Near the end of SAP Academy, a few of us drove an hour and a half to watch the sunset from the bridge. The fog was so thick we could not see the bridge, let alone the sunset. We stood by the road laughing, took the photo anyway, and sent it to the Academy group chat. It got more replies than any sunset would have.' },
     { id: 'boat', anchor: 'bridge', x: 0.615, y: 0.56, narrow: false,

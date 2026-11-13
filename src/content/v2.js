@@ -418,6 +418,7 @@ export const unitedStates = [
 // adoption atlas and the Kinetic Curtains line were dropped on 2026-11-10.
 export const built = [
   {
+    id: 'tco',
     title: 'LLM deployment TCO calculator',
     body: 'A cost model for a year of a Claude workload, and, more usefully, which architectural levers actually move the number.',
     href: 'https://github.com/Piaodiver/llm-tco-calculator',
@@ -427,6 +428,7 @@ export const built = [
   {
     // Tariff Engine: repository is private until its README is finished, so no
     // link yet, same treatment as MultiVerse. Added 2026-11-11 (step 24).
+    id: 'tariff',
     title: 'Tariff Engine',
     body: 'Estimates US import duties layer by layer, every dollar traced to its legal source. The LLM only classifies the product; the duty math is deterministic. In progress, 2026.',
     href: null,
@@ -437,6 +439,7 @@ export const built = [
     // no backend or implementation detail here. Split of work added 2026-11-11
     // from the owner's own account (step 25); source note in
     // +个人网站/drafts/multiverse-split.md.
+    id: 'multiverse',
     title: 'MultiVerse I: Journey to the West, as anyone in it',
     body: 'An AI interactive reader, built with Shane Zhang. Play Sun Wukong, or a demon who gets one line in the original. 90% reading, 10% changing fate. I design and build the front end and write the story logic, where the reader gets a choice and what it changes. Shane builds the backend. iOS, 2026.',
     href: null,

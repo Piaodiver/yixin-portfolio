@@ -122,7 +122,7 @@ export default function Page() {
           <h2 className="v2-h2">Building now<small className="v2-h2__sub">Seattle · since 2026</small></h2>
           <ul className="mt-6 divide-y divide-rule border-y border-rule">
             {built.map((b) => (
-              <li key={b.title} className="py-4">
+              <li key={b.title} id={b.id} className="py-4">
                 <p className="font-body text-[1rem] font-medium text-ink-900">
                   {b.href ? <a className="v2-link" href={b.href}>{b.title}</a> : b.title}
                 </p>

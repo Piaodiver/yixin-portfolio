@@ -533,7 +533,9 @@ body::before {
   flex: none;
 }
 .v2-nav a:hover { color: var(--ink-900); }
-/* two lines per entry on the column; the phone row keeps the place only */
+/* two lines per entry on the column; the phone row keeps the place only.
+   Step 36/37: the small words are links; the one being read goes dark. */
+.v2-nav__item { flex: none; }
 .v2-nav__label { display: block; }
 .v2-nav__sub {
   display: none;
@@ -542,25 +544,15 @@ body::before {
   letter-spacing: 0.02em; text-transform: none;
   color: var(--ink-300);
 }
+.v2-nav__sub a {
+  font: inherit; letter-spacing: inherit; text-transform: none;
+  color: inherit;
+  transition: color var(--v2-dur, 260ms) var(--v2-ease, ease);
+}
+.v2-nav__sub a:hover { color: var(--ink-900); }
+.v2-nav__sub a[data-on] { color: var(--ink-900); }
+.v2-nav__item[data-current] .v2-nav__sub { color: var(--ink-500); }
 @media (min-width: 1024px) { .v2-nav__sub { display: block; } }
-.v2-nav a[aria-current="true"] .v2-nav__sub { color: var(--ink-500); }
-/* reading progress: a hairline under the column that fills left to right */
-.v2-nav__progress {
-  display: none;
-  position: relative;
-  width: 36px; height: 2px;
-  margin-top: 6px;
-  background: var(--rule);
-  overflow: hidden;
-}
-.v2-nav__progress i {
-  position: absolute; inset: 0;
-  background: var(--accent);
-  transform-origin: left center;
-  transform: scaleX(0);
-  transition: transform 120ms linear;
-}
-@media (min-width: 1024px) { .v2-nav__progress { display: block; } }
 /* the name: back to top; sits apart from the section labels */
 .v2-nav__home { color: var(--ink-900); }
 /* on the phone row the name would push About off screen; the row is the
@@ -579,7 +571,7 @@ body::before {
     padding: 0; background: transparent; border: 0;
     overflow: visible; white-space: normal;
   }
-  .v2-nav a { white-space: nowrap; }
+  .v2-nav a, .v2-nav__item { white-space: nowrap; }
 }
 
 /* reveal (Reveal.jsx): visible by default. Only a block that started below

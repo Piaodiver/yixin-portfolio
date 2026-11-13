@@ -31,8 +31,7 @@ export default function End() {
   return (
     <Reveal as="section" id="end" className="v2-end border-t border-rule">
       <div className="v2-wrap">
-        <h2 className="v2-h2">Still here? Then write to me.</h2>
-        <p className="v2-person mt-3">A short note is enough. I reply to every one.</p>
+        <h2 className="v2-h2">Get in touch</h2>
         <p className="v2-end__mail mt-6">
           <a id="v2-email" className="v2-end__address" href={`mailto:${links.email}`}>{links.email}</a>
           <button type="button" className="v2-end__copy" onClick={copy} aria-live="polite">

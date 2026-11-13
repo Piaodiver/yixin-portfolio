@@ -934,3 +934,81 @@ body::before {
 .v2-stop__text .v2-stop__up { margin-top: 8px; }
 .v2-prose-wrap { max-width: 64ch; margin-inline: auto; padding-inline: 16px; }
 @media (min-width: 768px) { .v2-prose-wrap { padding-inline: 24px; } }
+
+/* step 34: hotspots in the scenes. The layer covers the band but takes no
+   pointer events itself; only the dots and an open card do, so the scene
+   keeps answering the cursor around them. The dot is the route-stop ring
+   (hero beacon, route map) so it reads as one grammar across the site. */
+.v2-hs { position: absolute; inset: 0; z-index: 3; pointer-events: none; }
+.v2-hs__spot, .v2-hs__at { position: absolute; width: 0; height: 0; }
+.v2-hs__at { z-index: 4; }
+.v2-hs__dot {
+  position: absolute; left: -14px; top: -14px; width: 28px; height: 28px;
+  padding: 0; border: 0; background: none; cursor: pointer; pointer-events: auto;
+  border-radius: 50%;
+}
+.v2-hs__dot > span {
+  position: absolute; left: 50%; top: 50%; width: 13px; height: 13px; margin: -6.5px 0 0 -6.5px;
+  border-radius: 50%; background: var(--paper); border: 1.5px solid var(--ink-900);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--paper) 70%, transparent);
+  transition: transform 0.2s, background-color 0.2s, border-color 0.2s;
+}
+.v2-hs__dot:hover > span, .v2-hs__spot[data-on] .v2-hs__dot > span { border-color: var(--accent); transform: scale(1.2); }
+.v2-hs__spot[data-on] .v2-hs__dot > span { background: var(--accent); }
+.v2-hs__dot:focus-visible { outline: 1px solid var(--accent); outline-offset: 2px; }
+.v2-hs__card {
+  position: absolute; z-index: 4; pointer-events: auto;
+  width: max-content; max-width: min(320px, calc(100vw - 48px));
+  padding: 12px 14px 12px;
+  background: color-mix(in srgb, var(--paper-raise) 94%, transparent);
+  border: 1px solid var(--rule);
+  box-shadow: 0 10px 28px rgba(27, 30, 25, 0.16);
+  animation: v2-hs-in 0.18s ease-out both;
+}
+.v2-hs__card[data-v="above"] { bottom: 16px; }
+.v2-hs__card[data-v="below"] { top: 16px; }
+.v2-hs__card[data-h="center"] { left: 50%; transform: translateX(-50%); }
+.v2-hs__card[data-h="left"] { left: -14px; }
+.v2-hs__card[data-h="right"] { right: -14px; }
+@keyframes v2-hs-in { from { opacity: 0; translate: 0 3px; } to { opacity: 1; translate: 0 0; } }
+.v2-hs__text {
+  margin: 0; font-family: Inter, system-ui, sans-serif;
+  font-size: 0.9rem; line-height: 1.55; color: var(--ink-900);
+}
+.v2-hs__go { padding: 0; border: 0; background: none; cursor: pointer; font: inherit; }
+.v2-hs__links { margin: 8px 0 0; font-family: Inter, system-ui, sans-serif; font-size: 0.82rem; font-weight: 500; display: flex; gap: 16px; }
+/* the guess: the step-32 pattern, compact */
+.v2-hs__opts { display: flex; gap: 6px; margin-top: 8px; }
+.v2-hs__opt {
+  display: inline-flex; align-items: center; gap: 7px;
+  padding: 5px 10px 5px 7px; border: 1px solid var(--rule); border-radius: 999px; background: none;
+  font-family: Inter, system-ui, sans-serif; font-size: 0.86rem; color: var(--ink-700); cursor: pointer;
+  transition: background 0.18s, color 0.18s, border-color 0.18s;
+}
+.v2-hs__ring { width: 12px; height: 12px; border-radius: 50%; border: 1.25px solid var(--ink-300); position: relative; transition: border-color 0.18s; }
+.v2-hs__ring::after { content: ''; position: absolute; inset: 2.5px; border-radius: 50%; background: var(--accent); transform: scale(0); transition: transform 0.2s cubic-bezier(0.3, 1.4, 0.5, 1); }
+.v2-hs__guess[data-state="open"] .v2-hs__opt:hover { background: var(--paper-sunk); color: var(--ink-900); border-color: var(--ink-300); }
+.v2-hs__guess[data-state="open"] .v2-hs__opt:hover .v2-hs__ring { border-color: var(--accent); }
+.v2-hs__opt:disabled { cursor: default; }
+.v2-hs__opt[data-mine] { color: var(--ink-900); border-color: var(--ink-900); }
+.v2-hs__opt[data-mine] .v2-hs__ring { border-color: var(--ink-900); }
+.v2-hs__opt[data-mine] .v2-hs__ring::after { transform: scale(1); background: var(--ink-900); }
+.v2-hs__opt[data-picked]:not([data-mine]) { color: var(--ink-400); text-decoration: line-through; text-decoration-color: var(--accent); }
+.v2-hs__opt[data-picked]:not([data-mine]) .v2-hs__ring { border-color: var(--accent); }
+.v2-hs__opt[data-picked]:not([data-mine]) .v2-hs__ring::after { transform: scale(1); }
+.v2-hs__guess[data-state="done"] .v2-hs__opt:not([data-mine]):not([data-picked]) { color: var(--ink-300); border-color: var(--ink-050); }
+.v2-hs__reveal { margin: 10px 0 0; font-family: Fraunces, Georgia, serif; font-size: 1rem; line-height: 1.45; color: var(--ink-900); }
+/* in the full-screen overlay the dots sit above the scene chrome */
+.scene-overlay .v2-hs { z-index: 25; }
+/* phone: the card is a strip along the bottom of the band or screen, not a
+   bubble at the dot; there is no room for a bubble on a 220px band */
+@media (max-width: 767px) {
+  .v2-hs__at { left: 12px !important; right: 12px; top: auto !important; bottom: 12px; width: auto; height: auto; }
+  .v2-hs__card { position: static; width: auto; max-width: none; transform: none; padding: 10px 12px; }
+  .v2-hs__text { font-size: 0.86rem; }
+  .scene-overlay .v2-hs__at { bottom: 72px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .v2-hs__card { animation: none; }
+  .v2-hs__dot > span, .v2-hs__ring, .v2-hs__ring::after, .v2-hs__opt { transition: none; }
+}

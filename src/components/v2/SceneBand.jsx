@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import useScene, { hasScene } from './useScene';
 import SceneOverlay from './SceneOverlay';
+import SceneHotspots from './SceneHotspots';
 import { placeById } from '../../content/v2';
 
 /**
@@ -111,6 +112,7 @@ export default function SceneBand({ place }) {
       )}
       {/* mount target — must stay an empty div with this id; the scene owns its children */}
       <div ref={hostRef} id={id} className="scene-band__host" data-place={place} />
+      <SceneHotspots hostRef={hostRef} place={place} />
       {hint === 'shown' ? (
         <span className="scene-band__hint" aria-hidden="true">
           <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">

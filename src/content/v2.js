@@ -172,6 +172,65 @@ export const places = [
 ];
 export const placeById = Object.fromEntries(places.map((p) => [p.id, p]));
 
+// Step 34: the hotspots in the four scenes (full screen, since step 39 the
+// small frames show posters only). Small hollow dots over the paintings; a card floats on the painting when one is hovered or tapped.
+// This is the one place on the site that speaks in a private voice; the
+// body stays the résumé. Every line is a fact from Yixin. Positions are
+// fractions of an anchor, so they hold at any band size and in full screen:
+//   temple   — the roof image (.temple img), China
+//   backdrop — the arch image (.backdrop.scene), Israel; right-anchored
+//   cover    — the Merlion backdrop (img.scene), cover-fit; the image rect is
+//              solved from its natural size and object-position
+//   bridge   — the Golden Gate canvas: x is a fraction of the box, y is
+//              measured from the deck (the scene's .fog element gives it)
+// `narrow: false` hides a dot when the scene is in its narrow composition
+// (under 720px), where that element is not drawn.
+export const hotspots = {
+  china: [
+    { id: 'finial', anchor: 'temple', x: 0.497, y: 0.045,
+      text: 'By area, Beijing is about twenty-two Singapores. Locals will give you directions. They are guessing too. Bring a map.',
+      links: [{ label: 'Singapore', place: 'singapore' }] },
+    { id: 'plaque', anchor: 'temple', x: 0.49, y: 0.40,
+      text: 'At the Baidu summit the app told everyone which group they were in. A director still came over to ask if he could switch. The app was fine. Nobody had decided yet.' },
+    { id: 'eave', anchor: 'temple', x: 0.955, y: 0.86,
+      text: 'SAP, 2019 to 2023, mostly on the road. By my second year I could find a client\'s office in any province and not my own desk in Beijing. I had to message a colleague.' },
+  ],
+  israel: [
+    { id: 'keystone', anchor: 'backdrop', x: 0.59, y: 0.17,
+      text: 'Here the week ends on Thursday and begins on Sunday. Every call with a partner abroad opened with a lesson on what day it was.' },
+    { id: 'minaret', anchor: 'backdrop', x: 0.776, y: 0.54,
+      text: 'Two years in the Middle East left one permanent side effect. I cannot pass a hummus, falafel, or kebab stand without stopping.' },
+    { id: 'boat', anchor: 'backdrop', x: 0.511, y: 0.73,
+      guess: {
+        question: 'About thirty cold messages to CEOs on LinkedIn. How many wrote back?',
+        options: ['1', '5', '15'],
+        answer: 1,
+        reveal: 'Five, maybe six. One of them became my internship at EyeSight.',
+      },
+      links: [{ label: 'Same boat, different ocean', place: 'united-states' }] },
+  ],
+  singapore: [
+    { id: 'mane', anchor: 'cover', x: 0.165, y: 0.12,
+      text: 'I have seen the Merlion more than twenty times and never once in daylight. On the equator you go out after sunset.' },
+    { id: 'sands', anchor: 'cover', x: 0.913, y: 0.617,
+      text: 'Wiz.AI, 2024. A proof of concept due in one week, in Bahasa Indonesia, for a client in Jakarta. Engineers in China, support in Jakarta, me in Singapore, and not my product line. When the presentation ended, the client stood up: “This is an amazing presentation.”' },
+    { id: 'wave', anchor: 'cover', x: 0.175, y: 0.69,
+      text: 'Beijing, where I grew up, would hold about twenty-two of this island.',
+      links: [{ label: 'Beijing', place: 'china' }] },
+  ],
+  'united-states': [
+    { id: 'sun', anchor: 'bridge', x: 0.775, y: 0.27, fixed: true,
+      text: 'Full disclosure: I live in Seattle now, about 800 miles north of this bridge. This is the postcard everyone recognizes. My window shows rain.' },
+    { id: 'fog', anchor: 'bridge', x: 0.35, y: 0.30,
+      text: 'Near the end of SAP Academy, a few of us drove an hour and a half to watch the sunset from the bridge. The fog was so thick we could not see the bridge, let alone the sunset. We stood by the road laughing, took the photo anyway, and sent it to the Academy group chat. It got more replies than any sunset would have.' },
+    { id: 'boat', anchor: 'bridge', x: 0.615, y: 0.56, narrow: false,
+      text: 'Same boat, different ocean. In Tel Aviv I wrote to strangers asking for an internship. In Seattle I build things first, then write.',
+      links: [{ label: 'The other boat', place: 'israel' }] },
+    { id: 'tower', anchor: 'bridge', x: 0.909, y: 0.35, narrow: false,
+      text: 'Wesleyan had late-night dining. Every exam week we left the library around midnight and went to eat. I reached my peak weight and, by my own assessment, my peak brilliance. Classmates who see me now still say: Yixin, you used to be so much rounder.' },
+  ],
+};
+
 // One line at the top of the China section, before Baidu and LGMG. Reworded
 // 2026-11-11: names the two departures so "came back" has somewhere to come back from.
 export const china = [

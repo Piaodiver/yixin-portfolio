@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { mountFull } from './useScene';
 import { places } from '../../content/v2';
+import SceneHotspots from './SceneHotspots';
 
 /**
  * SceneOverlay — the full-screen scenes, opened from a band. A fresh mount
@@ -65,6 +66,11 @@ export default function SceneOverlay({ place, onClose }) {
   return createPortal(
     <div className="scene-overlay" role="dialog" aria-modal="true" aria-label={`${current.label} scene`}>
       <div ref={hostRef} className="scene-overlay__host" data-place={current.id} />
+      <SceneHotspots
+        hostRef={hostRef}
+        place={current.id}
+        onGo={(id) => { const i = places.findIndex((p) => p.id === id); if (i >= 0) setIndex(i); }}
+      />
       <ol className="scene-overlay__dots" aria-hidden="true">
         {places.map((p, i) => <li key={p.id} data-on={i === index ? 'true' : undefined} />)}
       </ol>

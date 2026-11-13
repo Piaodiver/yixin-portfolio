@@ -1,0 +1,58 @@
+/* Motion tokens for the whole site (step 40). One curve, one duration, one
+   press scale; every new transition should reference these, and existing
+   ones move over as they are touched. Declared here for now and meant to
+   live at the top of v2.css once the step-34 work in that file lands. */
+:root {
+  --v2-ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --v2-dur: 260ms;
+  --v2-press: 0.97;
+}
+@media (prefers-reduced-motion: reduce) { :root { --v2-dur: 0ms; } }
+
+/* step 40: the architecture diagram as clickable boxes (ArchGraph.jsx).
+   The drawing keeps the page's 64ch column and scrolls sideways inside its
+   box on a phone. The card sits under it at every width (the fold clips
+   anything hung in the margin): number left, sentence right. */
+.v2-arch { display: grid; grid-template-columns: minmax(0, 1fr); gap: 12px; margin-top: 14px; align-items: start; }
+.v2-arch__scroll {
+  overflow-x: auto; padding: 16px;
+  background: var(--paper-sunk); border: 1px solid var(--rule); border-radius: 3px;
+}
+.v2-arch__svg { display: block; width: 100%; min-width: 560px; height: auto; }
+.v2-arch__node { cursor: pointer; outline: none; }
+.v2-arch__node rect {
+  fill: var(--paper-raise); stroke: var(--ink-100); stroke-width: 1;
+  transition: stroke var(--v2-dur) var(--v2-ease), fill var(--v2-dur) var(--v2-ease), opacity var(--v2-dur) var(--v2-ease);
+}
+.v2-arch__node text {
+  fill: var(--ink-900); font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 11.5px; transition: opacity var(--v2-dur) var(--v2-ease);
+}
+.v2-arch__node .v2-arch__title { font-weight: 500; }
+.v2-arch__node .v2-arch__small { fill: var(--ink-500); font-size: 10.5px; }
+.v2-arch__node:hover rect, .v2-arch__node:focus-visible rect { stroke: var(--ink-500); }
+.v2-arch__node[data-on] rect { stroke: var(--accent); stroke-width: 1.5; fill: #fff; }
+.v2-arch__node[data-dim] rect, .v2-arch__node[data-dim] text { opacity: 0.38; }
+.v2-arch__mark { fill: var(--accent); opacity: 0; transition: opacity var(--v2-dur) var(--v2-ease); }
+.v2-arch__node[data-on] .v2-arch__mark { opacity: 1; }
+.v2-arch__edge {
+  stroke: var(--ink-300); stroke-width: 1.2; fill: none;
+  transition: stroke var(--v2-dur) var(--v2-ease), stroke-width var(--v2-dur) var(--v2-ease), opacity var(--v2-dur) var(--v2-ease);
+}
+.v2-arch__edge[data-on] { stroke: var(--accent); stroke-width: 1.8; }
+.v2-arch__edge[data-dim] { opacity: 0.25; }
+
+.v2-arch__card { border-top: 1px solid var(--rule); padding-top: 10px; min-height: 92px; }
+.v2-arch__fact { display: grid; grid-template-columns: auto minmax(0, 1fr); column-gap: 18px; align-items: baseline; }
+.v2-arch__fact .v2-arch__back { grid-column: 2; }
+.v2-arch__hint, .v2-arch__back { margin: 0; font-family: Inter, system-ui, sans-serif; font-size: 0.86rem; color: var(--ink-300); font-style: italic; }
+.v2-arch__back { margin-top: 12px; font-style: normal; color: var(--ink-500); }
+.v2-arch__fact { animation: v2-arch-in var(--v2-dur) var(--v2-ease) both; }
+@keyframes v2-arch-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+.v2-arch__num {
+  margin: 0; min-width: 72px; font-family: Fraunces, Georgia, serif; font-weight: 400;
+  font-size: 2.6rem; line-height: 1; color: var(--ink-900); font-variation-settings: "opsz" 144;
+}
+.v2-arch__num small { display: block; font-family: Inter, system-ui, sans-serif; font-size: 0.78rem; color: var(--ink-500); margin-top: 6px; max-width: 12ch; line-height: 1.3; }
+.v2-arch__s { margin: 0; font-family: Inter, system-ui, sans-serif; font-size: 0.92rem; line-height: 1.55; color: var(--ink-700); }
+.v2-arch__back { margin-top: 8px; }

@@ -10,6 +10,7 @@ import End from './End';
 import Questions from './Questions';
 import Reading from './Reading';
 import { cases, built, israel, salesforce, china, baidu, unitedStates, work } from '../../content/v2';
+import { archGraphs } from '../../content/arch-graphs';
 
 /**
  * The page in two speeds (step 39, 2026-11-12): hero, then The work (the two
@@ -81,7 +82,7 @@ export default function Page() {
             <Prose paragraphs={[cases.nova.summary]} />
             <Fold id={cases.nova.id} label={cases.nova.foldLabel}>
               <Prose paragraphs={cases.nova.long} />
-              <CaseArchitecture arch={cases.nova.architecture} />
+              <CaseArchitecture arch={cases.nova.architecture} graph={archGraphs.nova} />
             </Fold>
           </div>
           <div className="mt-12">

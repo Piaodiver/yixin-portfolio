@@ -390,14 +390,14 @@ export const fourPlaces = {
   title: 'Four places',
   // one toggle label per stop; Singapore points up instead
   folds: {
-    china: 'Two years at Baidu, four at SAP, and LGMG',
+    china: 'Two years at Baidu, four at SAP, and the LGMG story',
     israel: 'Why Israel, and how I got the internship',
-    'united-states': 'Wesleyan, then a year in San Ramon',
+    'united-states': 'Wesleyan, then the SAP Academy in San Ramon',
   },
   singaporeUp: { label: 'The two agents are above', href: '#work' },
 };
 
-// United States, before Seattle: the degree and the Academy year. Facts and
+// United States, before Seattle: the degree and the Academy half-year. Facts and
 // memories from the owner (2026-11-10); draft in +个人网站/drafts/united-states.md.
 export const unitedStates = [
   {
@@ -409,7 +409,7 @@ export const unitedStates = [
   {
     eyebrow: 'SAP Academy for Presales · San Ramon, California · 2019–2020',
     paragraphs: [
-      'A year in the Bay Area with trainees from more than twenty countries, the only one from East Asia that year. The program ran from how to present, through the SAP stack and an ERP certification, to building demos, pitching to customers, and reading the people across the table. Before each assessed presentation most of us rehearsed until two or three in the morning. It left me more confident, and with two rules I still use: practice until it is good, and when it is not ready, go anyway. From there SAP sent me back to Beijing as a solution architect, on the LGMG program above.',
+      'Six months in the Bay Area with trainees from more than twenty countries, the only one from East Asia in that cohort. The program ran from how to present, through the SAP stack and an ERP certification, to building demos, pitching to customers, and reading the people across the table. Before each assessed presentation most of us rehearsed until two or three in the morning. It left me more confident, and with two rules I still use: practice until it is good, and when it is not ready, go anyway. From there SAP sent me back to Beijing as a solution architect, on the LGMG program above.',
     ],
   },
 ];

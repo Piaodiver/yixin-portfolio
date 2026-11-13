@@ -542,7 +542,7 @@ body::before {
   margin-top: 2px;
   font-size: 10.5px; font-weight: 400;
   letter-spacing: 0.02em; text-transform: none;
-  color: var(--ink-300);
+  color: var(--ink-400);
 }
 .v2-nav__sub a {
   font: inherit; letter-spacing: inherit; text-transform: none;

@@ -73,7 +73,7 @@ export default function Places({ stops }) {
                 className="v2-stop__frame"
                 aria-expanded={on}
                 aria-controls={`${p.id}-panel`}
-                aria-label={on ? `Close ${p.label}` : `Open ${p.label}`}
+                aria-label={on ? `Close ↑ ${p.label}` : `Open ↓ ${p.label}`}
                 onClick={() => toggle(p.id)}
               >
                 <img

@@ -1,6 +1,6 @@
 // v2 page content. Case text is copied verbatim from the owner's drafts
-// (+个人网站/drafts/case-*.md, v1 "after copy-edit" files). Anything in
-// square brackets is a placeholder the owner will replace.
+// (+个人网站/drafts/case-*.md, v1 "after copy-edit" files). Square brackets
+// are markdown links; {{word|note}} is an inline expansion (Place.jsx).
 
 export const links = {
   github: 'https://github.com/Piaodiver',
@@ -13,8 +13,8 @@ export const israel = [
   // a boss's remark); draft and choices in +个人网站/drafts/israel.md. The
   // Israel-Asia Center line was dropped; no superlatives, no private names.
   "At Wesleyan, newly abroad and often homesick, I took Vera Schwarcz's course on the Jewish experiences in China: Kaifeng under the Northern Song, Shanghai in the 1940s, two peoples who have each spent centuries living in other people's countries. I was studying diaspora while starting my own. Later my boss at a Beijing internship, who ran a Jewish community association there, mentioned a technology MBA at Tel Aviv University. I applied at twenty-two and got in.",
-  'The internship was at EyeSight Technologies, now [Cipia](https://cipia.com/), in Herzliya Pituach: computer vision that watches drivers for signs of fatigue. I handled marketing and international partnerships there, among them Continental AG and Kuang-Chi, the Shenzhen group that [put US$20 million into the company in 2016](https://www.globenewswire.com/news-release/2016/05/04/1228645/0/en/Chinese-Technology-Conglomerate-Kuang-Chi-to-Invest-20-Million-in-eyeSight-Technologies-a-Leader-in-Embedded-Computer-Vision.html).',
-  'I got the internship by writing to the CEO on LinkedIn when nothing said the company wanted an intern. I sent about 30 messages like that, about one in eight got a reply, and I asked each for a meeting.',
+  'In Israel I interned at EyeSight Technologies, later Cipia, in Herzliya Pituach: computer vision that watches drivers for signs of fatigue. I handled marketing and international partnerships there, among them Continental AG and Kuang-Chi, the Shenzhen group that [put US$20 million into the company in 2016](https://www.globenewswire.com/news-release/2016/05/04/1228645/0/en/Chinese-Technology-Conglomerate-Kuang-Chi-to-Invest-20-Million-in-eyeSight-Technologies-a-Leader-in-Embedded-Computer-Vision.html).',
+  'I got the internship by writing to the CEO on LinkedIn when nothing said the company wanted an intern. I sent about 30 messages like that, about one in six got a reply, and I asked each for a meeting.',
 ];
 
 // About, step 28 (2026-11-11): the reader who gets here has just read the
@@ -50,8 +50,8 @@ export const reading = {
       title: 'Seven Failure Points When Engineering a RAG System',
       who: 'Barnett et al., Deakin University, 2024',
       href: 'https://arxiv.org/abs/2401.05856',
-      what: 'The first catalogue of how RAG fails in practice, from three running systems.',
-      take: 'Failure point one is not a model failure. The system was asked something nothing in the corpus could answer, and it answered anyway, like a colleague who would rather say something than say "I don\'t know". On Wiz.AI we treated that as a design rule, not a bug: below the confidence bar, the agent sent people to the official site or a person. The other line of theirs I keep: you cannot validate one of these systems before it runs.',
+      what: 'The first catalog of how RAG fails in practice, from three running systems.',
+      take: 'Failure point one is not a model failure. The system was asked something nothing in the corpus could answer, and it answered anyway, like a colleague who would rather say something than say "I don\'t know". At Wiz.AI we treated that as a design rule, not a bug: below the confidence bar, the agent sent people to the official site or a person. The other line of theirs I keep: you cannot validate one of these systems before it runs.',
     },
     {
       id: 'garani-2026',
@@ -59,7 +59,7 @@ export const reading = {
       who: 'Garani, TrustNLP 2026',
       href: 'https://aclanthology.org/2026.trustnlp-main.27/',
       what: 'Thirty-three failure modes across seven stages, each graded by how much evidence stands behind it.',
-      take: 'The sentence I underlined: generation-stage symptoms usually have ingestion causes. That is my whole argument in one line. When an agent is wrong, I check the prompt, and then I check who last edited the document it read and whether a second copy disagrees. Most of the time the answer is in the second place. She is also honest about what the field does not know yet: none of the eight agentic failure modes has a dedicated study behind it. Worth saying out loud in a workshop.',
+      take: 'The sentence I underlined: generation-stage symptoms usually have ingestion causes. When an agent is wrong, I check the prompt, and then I check who last edited the document it read and whether a second copy disagrees. Most of the time the answer is in the second place. She is also honest about what the field does not know yet: none of the eight agentic failure modes has a dedicated study behind it. Worth saying out loud in a workshop.',
     },
     {
       id: 'salesforce-2026',
@@ -131,7 +131,7 @@ export const heroQuiz = {
       title: 'A writing-down problem.',
       text: 'The agent is the easy part. Before any model, someone has to write the answers down, and that is the real project.',
       links: [{ label: 'Read the Salesforce year', href: '#salesforce' }],
-      research: 'In the first published catalogue of RAG failures, missing content is failure point one.',
+      research: 'In the first published catalog of RAG failures, missing content is failure point one.',
       source: { label: 'Barnett et al., 2024', href: '#barnett-2024' },
     },
     {
@@ -143,7 +143,7 @@ export const heroQuiz = {
     },
     {
       title: 'A judgment problem.',
-      text: "The content is there and someone keeps it. What is missing is which rule applies to the person asking, and when the agent must hand over. That is where the first workshop usually ended, and it was the whole of NOVA's design.",
+      text: "The content is there and someone keeps it. What is missing is which rule applies to the person asking, and when the agent must hand over. That is where the first workshop usually ended, and it was most of NOVA's design.",
       links: [{ label: 'Read the three decisions', href: '#nova-full' }],
       research: "Salesforce's own guardrail guidance names topic scope and hand-off to a human as two separate boundaries.",
       source: { label: 'Salesforce, 2026', href: '#salesforce-2026' },
@@ -213,7 +213,7 @@ export const hotspots = {
     { id: 'mane', anchor: 'cover', x: 0.09, y: 0.18,
       text: 'I have seen the Merlion more than twenty times and never once in daylight. On the equator you go out after sunset.' },
     { id: 'sands', anchor: 'cover', x: 0.913, y: 0.617,
-      text: 'Wiz.AI, 2024. A proof of concept due in one week, in Bahasa Indonesia, for a client in Jakarta. Engineers in China, support in Jakarta, me in Singapore, and not my product line. When the presentation ended, the client stood up: “This is an amazing presentation.”' },
+      text: 'Wiz.AI, 2024. A proof of concept due in one week, in Bahasa Indonesia, for a client in Jakarta. Engineers in China, support in Jakarta, me in Singapore, and not my product line. When the presentation ended, the client stood up: "This is an amazing presentation."' },
   ],
   'united-states': [
     { id: 'sun', anchor: 'bridge', x: 0.775, y: 0.27, fixed: true,
@@ -257,8 +257,8 @@ export const cases = {
       "Malaysia's first university admissions agent. Over half of Nottingham Malaysia's applicants are international, and they ask about eligibility, fees and visas at night, Malaysian time. NOVA answers from the documents the admissions team already maintains, picks the rule that applies to the student in front of it, books a counselor or a campus tour, and hands over to a person when it is not sure. [Announced in December 2025](https://www.salesforce.com/ap/news/press-releases/2025/12/15/university-of-nottingham-malaysia-deploys-agentforce-to-create-a-seamless-experience-for-prospective-students/) on the website, WhatsApp, Facebook and WeChat. I was its technical architect.",
     foldLabel: 'The full story: how it is put together, and three decisions',
     long: [
-      "The applicants come from more than 70 countries, and in 2025 the university built NOVA, [the first admissions agent at a Malaysian university](https://www.nottingham.edu.my/NewsEvents/News/2025/University-of-Nottingham-Malaysia-Deploys-Agentforce-to-Create-a-Seamless-Experience-for-Prospective-Students.aspx). I was the Salesforce technical architect on the project, working alongside the implementation partner.",
-      "Eligibility needs two inputs. The student's side is structured: nationality, qualification system (A-Level, STPM, IB, {{Gaokao|Four qualification systems, and the requirement differs by each; that is why the student's side has to be structured before the conversation starts.}}), intended level and area of study, collected before the conversation starts and kept on their record in Salesforce. The requirements are documents, chunked and indexed in Data Cloud. The agent uses the student's attributes to pick the paragraph that applies, and says so when none does.",
+      "The applicants come from more than 70 countries, and in 2025 the university built NOVA, [the first admissions agent at a Malaysian university](https://www.nottingham.edu.my/NewsEvents/News/2025/University-of-Nottingham-Malaysia-Deploys-Agentforce-to-Create-a-Seamless-Experience-for-Prospective-Students.aspx). I worked alongside the implementation partner.",
+      "Eligibility needs two inputs. The student's side is structured: nationality, qualification system (A-Level, STPM, IB, {{Gaokao|China's national university entrance exam. Four qualification systems, and the requirement differs by each; that is why the student's side has to be structured before the conversation starts.}}), intended level and area of study, collected before the conversation starts and kept on their record in Salesforce. The requirements are documents, chunked and indexed in Data Cloud. The agent uses the student's attributes to pick the paragraph that applies, and says so when none does.",
       "The agent also acts. A student can book a counselor session or a campus tour in seconds, and a counselor stays reachable from inside the conversation.",
     ],
     // The architecture half. Facts: the owner's account (2026-11-11), the
@@ -283,7 +283,7 @@ export const cases = {
         '                              accommodation, 2+2 / 3+1',
       ],
       paragraphs: [
-        'Before the first message, the student fills in a short form: name, nationality, email, phone, the level they intend to study at and the area they are interested in. The form does three things. It is where the privacy notice sits. It gives the agent the inputs that decide which entry requirements apply, so it never has to ask for them mid-conversation. And it matches the person to a record, using an email address or phone number the form or the channel already has, so the enquiry and the person stay one record.',
+        'Before the first message, the student fills in a short form: name, nationality, email, phone, the level they intend to study at and the area they are interested in. The form does three things. It is where the privacy notice sits. It gives the agent the inputs that decide which entry requirements apply, so it never has to ask for them mid-conversation. And it matches the person to a record, using an email address or phone number the form or the channel already has, so the inquiry and the person stay one record.',
         'The knowledge itself is documents: entry requirements by nationality and qualification system, program requirements by discipline and level, international-student matters, fees and scholarships, accommodation, and the 2+2 and 3+1 routes between Malaysia and the UK. I chunked and indexed them in {{Data Cloud (now Data 360)|Renamed in October 2025, the same day Agentforce 360 shipped. The index I built was still called Data Cloud.}}, and deciding the cut, by discipline, by degree type or by delivery mode, was the part that took the longest.',
         'Three things bound what the agent does. Scope: each topic has a description and plain-language instructions saying what the agent may answer, and the admissions team can read and change them without a developer. Data: the agent runs as a named Salesforce user and sees only what that user may see, and prompts go to the model provider under {{zero data retention|The model provider keeps neither the prompt nor the answer once it has replied. Masking of personal data, by contrast, is off for agents, so the instruction never to ask for passport numbers is doing real work.}}. {{Hand-off|In Salesforce terms an Omni-Channel flow: the session goes to a queue or a skill, and a conversation gets one attempt at it.}}: I wrote four conditions with the admissions team. The question is outside the knowledge base, the agent is not confident in its answer, the topic is one the university decided a person should always handle, or the student asks. The agent is also instructed never to ask for passport numbers or other sensitive identifiers.',
       ],
@@ -297,24 +297,24 @@ export const cases = {
           constraint: 'Eligibility depends on who is asking (nationality, qualifications, level, area) and on rules that change every intake.',
           options: ['Let the model read the documents and judge', 'Put the rules in structured tables and compute with Flow', "Collect the student's side up front and use it to retrieve the right rule"],
           chose: "The third. The student's attributes are structured; the rules stay as documents the admissions team already maintains.",
-          change: 'The logs show the agent combining two documents to reach a verdict. Then the rules go into a table and a Flow.',
+          change: 'the logs show the agent combining two documents to reach a verdict. Then the rules go into a table and a Flow.',
         },
         {
           chosen: 1,
           constraint: 'The boundary has to move with admissions policy, and admissions, not IT, owns the policy.',
           options: ['A similarity threshold', 'Plain-language scope instructions', 'Hard-coded gates (Agent Script did not exist in 2025)'],
           chose: 'Plain-language instructions the admissions team can edit.',
-          change: 'The same instruction keeps being edited to close the same gap. Today, with Agent Script, the hard refusals (passport numbers, visa verdicts) would go into a deterministic block and only tone and scope would stay as prose.',
+          change: 'the same instruction keeps being edited to close the same gap. Today, with Agent Script, the hard refusals (passport numbers, visa verdicts) would go into a deterministic block and only tone and scope would stay as prose.',
         },
         {
           chosen: 0,
           constraint: 'The same applicant may arrive on the web, then on WhatsApp, then in the admissions system.',
           options: ['Ask for identity before the conversation', 'Resolve it afterwards with a Data Cloud ruleset on normalized email and phone', 'De-duplicate per channel'],
           chose: 'Ask before the conversation. Some people leave at the form. In return the agent has the grounding inputs before the first message.',
-          change: 'The agent moves to a channel without a form: voice, or an anonymous widget added to cut drop-off. Then identity has to be resolved after the fact, and that is the case for Data Cloud identity resolution.',
+          change: 'the agent moves to a channel without a form: voice, or an anonymous widget added to cut drop-off. Then identity has to be resolved after the fact, and that is the case for Data Cloud identity resolution.',
         },
       ],
-      // Held back from the page (the owner wants three, 2026-11-11); kept so they can be swapped in.
+      // Not in the quiz (the owner wants three, 2026-11-11); DecisionQuiz shows them under the tally.
       tally: {
         3: 'Three of three. We would have built the same thing. That is either reassuring or a reason to talk.',
         2: 'Two of three. Enough overlap to start, enough difference to be worth a call.',
@@ -348,7 +348,7 @@ export const cases = {
       "One set of orders across three continents for a Chinese machinery maker, 2022. I won the bid and stayed to go-live. SAP's global lighthouse case.",
     long: [
       '[LGMG](https://www.lgmglifts.com/) makes aerial work platforms and mining equipment in Shandong. By 2022 its output had passed US$1.4 billion (¥10 billion) for the first time, with subsidiaries in Europe, North America and Japan and a plan to earn half its revenue from exports. Each subsidiary had grown up with its own standards. A machine reaches its buyer through a dealer, on credit or a lease, shipped by a logistics provider, cleared through customs, then needs parts for a decade.',
-      'I won the bid and stayed as solution architect to go-live. The hardest part was not the software. Each subsidiary had its own material codes and its own way of booking a sale, so every requirements meeting was really an argument about whose definitions would become the group’s. We settled that first, as one master data hierarchy and one set of accounting rules, and built the portals on top of it. Credit checks moved to the moment an order is taken, not after.',
+      'I won the bid and stayed as solution architect to go-live. The hardest part was not the software. Each subsidiary had its own material codes and its own way of booking a sale, so every requirements meeting was really an argument about whose definitions would become the group's. We settled that first, as one master data hierarchy and one set of accounting rules, and built the portals on top of it. Credit checks moved to the moment an order is taken, not after.',
       'Phase one went live in Q1 2022 on SAP Commerce Cloud with S/4HANA Cloud Private Edition. [SAP later published the program](https://web.archive.org/web/20260315211141/https://www.sap.com/documents/2024/02/fc105f35-a87e-0010-bca6-c68f7e60039b.html): order processing 25% faster, and one master data hierarchy and one set of accounting rules across the group.',
     ],
   },
@@ -395,7 +395,7 @@ export const fourPlaces = {
   folds: {
     china: 'Six years. Baidu, then SAP.',
     israel: 'Two years. A master\'s and an internship.',
-    singapore: 'Two years. Two agents in production.',
+    singapore: 'Two years. Wiz.AI, then Salesforce.',
     'united-states': 'Since 2026. Building on my own.',
   },
   singaporeUp: { label: 'The two agents are above', href: '#work' },
@@ -413,7 +413,7 @@ export const unitedStates = [
   {
     eyebrow: 'SAP Academy for Presales · San Ramon, California · 2019–2020',
     paragraphs: [
-      'Six months in the Bay Area with trainees from more than twenty countries, the only one from East Asia in that cohort. The program ran from how to present, through the SAP stack and an ERP certification, to building demos, pitching to customers, and reading the people across the table. Before each assessed presentation most of us rehearsed until two or three in the morning. It left me more confident, and with two rules I still use: practice until it is good, and when it is not ready, go anyway. From there SAP sent me back to Beijing as a solution architect, on the LGMG program above.',
+      'Six months in the Bay Area with trainees from more than twenty countries, the only one from East Asia in that cohort. The program ran from how to present, through the SAP stack and an ERP certification, to building demos, pitching to customers, and reading the people across the table. Before each assessed presentation most of us rehearsed until two or three in the morning. It left me more confident, and with two rules I still use: practice until it is good, and when it is not ready, go anyway. From there SAP sent me back to Beijing as a solution architect, on the LGMG program, in the China chapter.',
     ],
   },
 ];

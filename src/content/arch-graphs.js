@@ -31,14 +31,14 @@ export const archGraphs = {
         title: 'the student',
         lines: ['a record in Sales Cloud', '(and Marketing Cloud),', 'matched on email / phone'],
         n: '1', unit: 'record per person',
-        s: 'Matched on an email address or phone number the form or the channel already has, so the enquiry and the person stay one record.',
+        s: 'Matched on an email address or phone number the form or the channel already has, so the inquiry and the person stay one record.',
       },
       {
         id: 'rules', x: 248, y: 226, w: 184, h: 150,
         title: 'the rules',
         lines: ['documents chunked into a', 'Data Cloud search index:', 'entry requirements, program', 'requirements, international', 'student matters, fees, visas,', 'accommodation, 2+2 / 3+1'],
         n: '4', unit: 'qualification systems',
-        s: 'A-Level, STPM, IB, Gaokao. The requirement differs by each, which is why the student’s side has to be structured before the conversation starts.',
+        s: 'A-Level, STPM, IB, Gaokao. The requirement differs by each, which is why the student's side has to be structured before the conversation starts.',
       },
       {
         id: 'actions', x: 468, y: 226, w: 184, h: 150,

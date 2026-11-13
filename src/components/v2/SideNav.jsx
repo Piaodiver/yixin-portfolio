@@ -12,15 +12,15 @@ const ITEMS = [
     { id: 'wizai', label: 'Wiz.AI', href: '#wizai' },
   ] },
   { id: 'places', label: 'Four places', sub: [
-    { id: 'china', label: 'Beijing', href: '#china-full' },
-    { id: 'israel', label: 'Tel Aviv', href: '#israel-full' },
+    { id: 'china', label: 'China', href: '#china-full' },
+    { id: 'israel', label: 'Israel', href: '#israel-full' },
     { id: 'singapore', label: 'Singapore', href: '#singapore-full' },
-    { id: 'united-states', label: 'Seattle', href: '#united-states-full' },
+    { id: 'united-states', label: 'United States', href: '#united-states-full' },
   ] },
   { id: 'building', label: 'Building now', sub: [
     { id: 'tco', label: 'TCO', href: '#tco' },
     { id: 'tariff', label: 'Tariff Engine', href: '#tariff' },
-    { id: 'multiverse', label: 'MultiVerse', href: '#multiverse' },
+    { id: 'multiverse', label: 'MultiVerse I', href: '#multiverse' },
   ] },
   // Questions and Reading are their own sections on the page but belong to
   // About in the column; End counts as About too so the column stays lit

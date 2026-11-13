@@ -187,12 +187,12 @@ export const placeById = Object.fromEntries(places.map((p) => [p.id, p]));
 // (under 720px), where that element is not drawn.
 export const hotspots = {
   china: [
-    { id: 'finial', anchor: 'temple', x: 0.497, y: 0.045,
+    { id: 'eave-top', anchor: 'temple', x: 0.19, y: 0.43,
       text: 'By area, Beijing is about twenty-two Singapores. Locals will give you directions. They are guessing too. Bring a map.',
       links: [{ label: 'Singapore', place: 'singapore' }] },
-    { id: 'plaque', anchor: 'temple', x: 0.49, y: 0.40,
+    { id: 'eave-mid', anchor: 'temple', x: 0.90, y: 0.66,
       text: 'At the Baidu summit the app told everyone which group they were in. A director still came over to ask if he could switch. The app was fine. Nobody had decided yet.' },
-    { id: 'eave', anchor: 'temple', x: 0.955, y: 0.86,
+    { id: 'eave-low', anchor: 'temple', x: 0.06, y: 0.85,
       text: 'SAP, 2019 to 2023, mostly on the road. By my second year I could find a client\'s office in any province and not my own desk in Beijing. I had to message a colleague.' },
   ],
   israel: [
@@ -210,13 +210,10 @@ export const hotspots = {
       links: [{ label: 'Same boat, different ocean', place: 'united-states' }] },
   ],
   singapore: [
-    { id: 'mane', anchor: 'cover', x: 0.165, y: 0.12,
+    { id: 'mane', anchor: 'cover', x: 0.09, y: 0.18,
       text: 'I have seen the Merlion more than twenty times and never once in daylight. On the equator you go out after sunset.' },
     { id: 'sands', anchor: 'cover', x: 0.913, y: 0.617,
       text: 'Wiz.AI, 2024. A proof of concept due in one week, in Bahasa Indonesia, for a client in Jakarta. Engineers in China, support in Jakarta, me in Singapore, and not my product line. When the presentation ended, the client stood up: “This is an amazing presentation.”' },
-    { id: 'wave', anchor: 'cover', x: 0.175, y: 0.69,
-      text: 'Beijing, where I grew up, would hold about twenty-two of this island.',
-      links: [{ label: 'Beijing', place: 'china' }] },
   ],
   'united-states': [
     { id: 'sun', anchor: 'bridge', x: 0.775, y: 0.27, fixed: true,
@@ -224,7 +221,7 @@ export const hotspots = {
     { id: 'fog', anchor: 'bridge', x: 0.35, y: 0.30,
       text: 'Near the end of SAP Academy, a few of us drove an hour and a half to watch the sunset from the bridge. The fog was so thick we could not see the bridge, let alone the sunset. We stood by the road laughing, took the photo anyway, and sent it to the Academy group chat. It got more replies than any sunset would have.' },
     { id: 'boat', anchor: 'bridge', x: 0.615, y: 0.56, narrow: false,
-      text: 'Same boat, different ocean. In Tel Aviv I wrote to strangers asking for an internship. In Seattle I build things first, then write.',
+      text: 'Same boat, different ocean. In Tel Aviv I wrote to strangers asking for an internship. In Seattle I am building on my own.',
       links: [{ label: 'The other boat', place: 'israel' }] },
     { id: 'tower', anchor: 'bridge', x: 0.909, y: 0.35, narrow: false,
       text: 'Wesleyan had late-night dining. Every exam week we left the library around midnight and went to eat. I reached my peak weight and, by my own assessment, my peak brilliance. Classmates who see me now still say: Yixin, you used to be so much rounder.' },

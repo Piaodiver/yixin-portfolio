@@ -55,7 +55,8 @@ export default function Page() {
       children: (
         <>
           <p className="v2-eyebrow">{singaporeChapter.eyebrow}</p>
-          <p className="v2-chapter__lead mt-3">{singaporeChapter.lead}</p>
+          <p className="v2-chapter__lead mt-3">{singaporeChapter.life}</p>
+          <p className="v2-chapter__lead">{singaporeChapter.lead}</p>
           <div className="v2-chapter__cards">
             {singaporeChapter.cards.map((c) => (
               <a key={c.caseId} className="v2-chapter__card" href={c.href}>

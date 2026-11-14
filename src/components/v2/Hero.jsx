@@ -7,7 +7,7 @@ import { Beacon, QuizPanel } from './HeroQuiz';
  * Hero — 2026-11-13, an About-style opening. A hiring team could not tell in
  * five seconds what Yixin does when the thesis was the headline, so the name
  * is the heading now and three short paragraphs follow: who, what, what I
- * want. The portrait (public/portrait.jpg, the flower photo) hangs in the
+ * want. The portrait (public/portrait-2026-11.jpg, the flower photo) hangs in the
  * left margin like an author's picture, 96px, above the name on the phone.
  *
  * The thesis did not go away: it is the line above the three cards, and the
@@ -21,7 +21,7 @@ export default function Hero() {
       <div className="v2-hero__grid">
         <img
           className="v2-hero__photo"
-          src={`${import.meta.env.BASE_URL}portrait.jpg`}
+          src={`${import.meta.env.BASE_URL}portrait-2026-11.jpg`}
           width="480"
           height="480"
           alt=""

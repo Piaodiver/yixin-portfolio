@@ -27,10 +27,12 @@ body::before {
   opacity: 0.035;
 }
 
-/* layout */
+/* layout. 2026-11-13: the column grew from 64ch (about 620px) to 880px so
+   the hero can carry a portrait and the three cards get room; paragraphs
+   keep their own 64ch measure, the width goes to pictures and cards. */
 .v2-wrap {
   width: 100%;
-  max-width: 64ch;
+  max-width: 880px;
   margin-inline: auto;
   padding-inline: 16px;
 }
@@ -44,13 +46,6 @@ body::before {
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--ink-500);
-}
-.v2-h1 {
-  font-family: Fraunces, Georgia, serif;
-  font-weight: 400;
-  font-size: clamp(1.75rem, 1.2rem + 2.4vw, 2.6rem);
-  line-height: 1.2;
-  color: var(--ink-900);
 }
 .v2-h2 {
   font-family: Fraunces, Georgia, serif;
@@ -67,31 +62,6 @@ body::before {
   font-size: 0.78rem; font-weight: 500;
   letter-spacing: 0.08em; text-transform: uppercase;
   color: var(--ink-500);
-}
-.v2-sub {
-  font-family: Fraunces, Georgia, serif;
-  font-size: 1.15rem;
-  line-height: 1.5;
-  color: var(--ink-700);
-}
-/* hanging sub-line: two threads, a slow sway. CSS placeholder; the real
-   pendulum physics (pointer-driven, damped) replaces this later. */
-.v2-hang { position: relative; padding-top: 14px; }
-.v2-hang::before,
-.v2-hang::after {
-  content: '';
-  position: absolute; top: 0;
-  width: 1px; height: 12px;
-  background: var(--ink-100);
-}
-.v2-hang::before { left: 12px; }
-.v2-hang::after  { left: 52%; }
-/* the swing is driven by usePendulum (pointer speed across it); at rest it
-   has no transform and nothing runs. */
-.v2-hang__swing {
-  display: inline-block;
-  transform-origin: top center;
-  will-change: transform;
 }
 
 .v2-prose p { margin: 0 0 1.1em; max-width: 64ch; color: var(--ink-900); }
@@ -156,11 +126,67 @@ body::before {
   .v2-decisions dd { margin-bottom: 8px; }
 }
 
-.v2-person {
+
+/* hero (Hero.jsx), 2026-11-13: the About-style opening. Phone: portrait,
+   name, three paragraphs, one column. From 768px the portrait hangs in a
+   120px margin column to the left of the text (边栏式). */
+.v2-hero__grid { display: grid; grid-template-columns: 1fr; gap: 20px; align-items: start; }
+@media (min-width: 768px) { .v2-hero__grid { grid-template-columns: 120px minmax(0, 1fr); gap: 32px; } }
+.v2-hero__photo {
+  display: block; width: 96px; height: 96px;
+  border-radius: 50%; object-fit: cover; object-position: 50% 30%;
+}
+@media (min-width: 768px) { .v2-hero__photo { margin-top: 10px; } }
+.v2-hero__text { min-width: 0; }
+.v2-hero__name {
+  font-family: Fraunces, Georgia, serif;
+  font-weight: 400;
+  font-size: clamp(2rem, 1.5rem + 2vw, 2.6rem);
+  line-height: 1.1;
+  color: var(--ink-900);
+}
+.v2-hero__who {
+  margin-top: 14px;
+  font-family: Inter, system-ui, sans-serif;
+  font-size: 1.02rem; line-height: 1.55; font-weight: 500;
+  color: var(--ink-900);
+  max-width: 60ch;
+}
+.v2-hero__where { display: block; margin-top: 2px; font-size: 0.92rem; font-weight: 400; color: var(--ink-500); }
+/* the one serif paragraph; the two short hairlines above it carried over
+   from the old sub-line */
+.v2-hero__what {
+  position: relative;
+  margin-top: 26px; padding-top: 16px;
+  font-family: Fraunces, Georgia, serif;
+  font-size: 1.12rem; line-height: 1.5;
+  color: var(--ink-700);
+  max-width: 60ch;
+}
+.v2-hero__what::before, .v2-hero__what::after { content: ''; position: absolute; top: 0; width: 1px; height: 12px; background: var(--rule); }
+.v2-hero__what::before { left: 4%; }
+.v2-hero__what::after { left: 52%; }
+.v2-hero__want {
+  margin-top: 18px;
   font-family: Inter, system-ui, sans-serif;
   font-size: 0.92rem; line-height: 1.6;
-  color: var(--ink-500);
+  color: var(--ink-700);
   max-width: 64ch;
+}
+.v2-hero__want strong { font-weight: 500; color: var(--accent); }
+.v2-hero__want a { color: var(--accent); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+.v2-hero__want a:hover { text-decoration-thickness: 2px; }
+/* the thesis above the three cards; the quiz panel opens under it */
+.v2-kicker { margin-top: 38px; padding-top: 18px; border-top: 1px solid var(--rule); }
+.v2-kicker__label { color: var(--accent); }
+.v2-kicker__line {
+  margin-top: 8px;
+  font-family: Fraunces, Georgia, serif;
+  font-weight: 400;
+  font-size: clamp(1.25rem, 1rem + 1vw, 1.45rem);
+  line-height: 1.3;
+  color: var(--ink-900);
+  max-width: 40ch;
 }
 
 /* links: accent, hairline underline */
@@ -172,28 +198,7 @@ body::before {
   text-decoration-color: color-mix(in srgb, var(--accent) 45%, transparent);
 }
 .v2-link:hover { text-decoration-color: var(--accent); }
-/* where things stand: ink, between the person line and the ask */
-.v2-now {
-  font-family: Inter, system-ui, sans-serif;
-  font-size: 0.92rem; line-height: 1.6;
-  color: var(--ink-700);
-  max-width: 64ch;
-}
 
-/* the ask line under the hero: accent, a little larger than .v2-person */
-.v2-ask {
-  font-family: Inter, system-ui, sans-serif;
-  font-size: 0.95rem; line-height: 1.6; font-weight: 500;
-  color: var(--accent);
-  max-width: 64ch;
-}
-.v2-ask a {
-  color: var(--accent);
-  text-decoration: underline;
-  text-decoration-thickness: 1px;
-  text-underline-offset: 3px;
-}
-.v2-ask a:hover { text-decoration-thickness: 2px; }
 
 /* the route map (RouteMap.jsx): four stops on one dashed line, under the ask */
 .v2-route {
@@ -312,7 +317,7 @@ body::before {
 @media (min-width: 768px) {
   .scene-band {
     width: min(100% - 48px, 1040px);
-    /* from 1024px the nav is a fixed column at the right edge (about 120px
+    /* from 1400px the nav is a fixed column at the right edge (about 120px
        plus its 28px margin, on both sides for symmetry); the band stays
        clear of it until the screen is wide enough for both */
     --scene-max: 1040px;
@@ -322,7 +327,7 @@ body::before {
     border: 1px solid var(--rule);
   }
 }
-@media (min-width: 1024px) {
+@media (min-width: 1400px) {
   .scene-band { width: min(100% - 340px, 1040px); }
 }
 .scene-band__label {
@@ -511,8 +516,8 @@ body::before {
   .scene-overlay__caption span:not(.scene-overlay__count) { display: none; }
 }
 
-/* section nav. Top row below 1024px (the 64ch column plus a side column
-   does not fit before that); fixed right-edge column from 1024px up. */
+/* section nav. Top row below 1400px (the 880px column plus the 210px side column
+   does not fit before that); fixed right-edge column from 1400px up. */
 .v2-nav {
   position: sticky; top: 0; z-index: 20;
   display: flex; gap: 14px;
@@ -552,19 +557,19 @@ body::before {
 .v2-nav__sub a:hover { color: var(--ink-900); }
 .v2-nav__sub a[data-on] { color: var(--ink-900); }
 .v2-nav__item[data-current] .v2-nav__sub { color: var(--ink-500); }
-@media (min-width: 1024px) { .v2-nav__sub { display: block; } }
+@media (min-width: 1400px) { .v2-nav__sub { display: block; } }
 /* the name: back to top; sits apart from the section labels */
 .v2-nav__home { color: var(--ink-900); }
 /* on the phone row the name would push About off screen; the row is the
    way back up anyway, so the name is desktop only */
-@media (max-width: 1023px) { .v2-nav__home { display: none; } }
-@media (min-width: 1024px) { .v2-nav__home { margin-bottom: 8px; } }
+@media (max-width: 1399px) { .v2-nav__home { display: none; } }
+@media (min-width: 1400px) { .v2-nav__home { margin-bottom: 8px; } }
 .v2-nav a[aria-current="true"] { color: var(--accent); }
 /* anchor jumps must clear the sticky row: sections and the case headings
    (#nova, #lgmg, #wizai) alike, so a Read link never lands under the nav */
-@media (max-width: 1023px) { main [id] { scroll-margin-top: 64px; } }
-@media (min-width: 1024px) { main [id] { scroll-margin-top: 24px; } }
-@media (min-width: 1024px) {
+@media (max-width: 1399px) { main [id] { scroll-margin-top: 64px; } }
+@media (min-width: 1400px) { main [id] { scroll-margin-top: 24px; } }
+@media (min-width: 1400px) {
   .v2-nav {
     position: fixed; top: 140px; right: 28px; left: auto;
     flex-direction: column; gap: 12px;
@@ -587,32 +592,7 @@ body::before {
    height on wide screens); stacked on the phone */
 .v2-about { padding-block: 56px 48px; }
 @media (min-width: 768px) { .v2-about { padding-block: 64px 64px; } }
-/* the eyebrow sits in a .v2-wrap: 64ch measured in the body font, not its own */
 .v2-about__eyebrow { margin-bottom: 20px; }
-/* the text column is the page's 64ch column; the photo sits above it on
-   narrow screens and hangs in the left margin once there is room for it */
-.v2-about__inner {
-  position: relative;
-  width: 100%; max-width: 64ch;
-  margin-inline: auto;
-  padding-inline: 16px;
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 24px;
-  align-items: start;
-}
-@media (min-width: 768px) { .v2-about__inner { padding-inline: 24px; } }
-@media (min-width: 1100px) {
-  .v2-about__photo { position: absolute; top: 0; right: calc(100% - 24px + 40px); }
-}
-.v2-about__photo {
-  display: block;
-  width: min(100%, 160px); height: auto;
-  max-width: 100%;
-  aspect-ratio: 4 / 5;
-  object-fit: cover;
-}
-.v2-about__text { min-width: 0; max-width: 64ch; }
 
 /* questions (C1): five open questions, hairlines between, provenance smaller */
 .v2-questions { list-style: none; margin: 12px 0 0; padding: 0; border-top: 1px solid var(--rule); }
@@ -887,7 +867,7 @@ body::before {
 .v2-work__line { margin-top: 14px; font-family: Fraunces, Georgia, serif; font-size: 1.1rem; line-height: 1.45; color: var(--ink-700); max-width: 48ch; }
 .v2-stops { display: grid; grid-template-columns: 1fr; gap: 28px 20px; width: min(100% - 32px, 1040px); margin-inline: auto; }
 @media (min-width: 768px) { .v2-stops { width: min(100% - 48px, 1040px); grid-template-columns: repeat(4, 1fr); gap: 24px 20px; } }
-@media (min-width: 1024px) { .v2-stops { width: min(100% - 340px, 1040px); } }
+@media (min-width: 1400px) { .v2-stops { width: min(100% - 340px, 1040px); } }
 .v2-stop { min-width: 0; }
 .v2-stop__frame {
   position: relative; display: block; width: 100%; aspect-ratio: 4 / 3; overflow: hidden;

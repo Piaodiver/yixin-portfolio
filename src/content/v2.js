@@ -73,21 +73,27 @@ export const reading = {
 };
 
 export const hero = {
+  // 2026-11-13: the hero is an About-style opening again: who, what, what I
+  // want, three short paragraphs under the name, a 96px portrait in the left
+  // margin (边栏式). The thesis line moved down to sit above the three cards,
+  // with the quiz beacon still on it. Copy and rulings: +个人网站/drafts/hero-about.md.
   name: 'Yixin Liu',
+  who: 'Solutions architect, enterprise AI. SAP, then Salesforce. Nine years.',
+  where: 'Beijing, Tel Aviv, Singapore. Seattle since 2026. Underwater when I can be.',
+  what: 'I take AI agents from the first customer workshop to production. My job in that first workshop is to get three questions settled with the client before anyone builds: what the agent may say, which system it reads from, and when it hands over to a human. Two are live with customers today; one was announced publicly by the client. Before agents, six years at Baidu and SAP on the systems agents now read from. One of those became SAP\'s global lighthouse case.',
+  // the ask opens the third paragraph, plainly, before the preferences
+  lookingLead: 'Looking for my next role: solutions architect, forward-deployed engineer, product manager, or similar, on a team putting AI in front of enterprise customers. Seattle first, elsewhere for the right one.',
+  lookingRest: ' I moved here from Singapore in mid-2026 and left a job I liked to do it. What I want from the job: a hard problem, people who want it solved, and a seat close enough to the users to know whether it is. ',
+  lookingCta: 'Write to me',
+  lookingTail: ' and I will send a resume.',
+  // the thesis, now the line above the three cards. Split for the quiz
+  // (step 33): the promise is underlined while the quiz is open.
+  kickerLabel: 'Three questions',
   headline: 'Most enterprise AI projects are content problems in disguise. I find out which kind you have.',
-  // The headline split for the quiz (step 33): the promise is underlined while the quiz is open.
   headlineBefore: 'Most enterprise AI projects are content problems in disguise. I find out ',
   headlinePromise: 'which kind you ',
   headlineLast: 'have', // kept on one line with the full stop and the beacon, so the dot never sits alone
   headlineAfter: '.',
-  subline: 'Over eight years of this. The technology kept changing. The problem did not.',
-  person: 'Seattle, by way of Beijing, Tel Aviv and Singapore. Underwater when I can be.',
-  // where things stand, and what the next role should be: was the first About paragraph
-  now: 'In mid-2026 I moved from Singapore to Seattle, left a job I liked to do it, and started building on my own. What I want from the next job: a hard problem, people who want it solved, and a seat close enough to the users to know whether it is.',
-  // the ask: one line, email link on 'Write to me'
-  looking: 'Looking for the next role. Seattle first, elsewhere for the right one.',
-  lookingCta: 'Write to me',
-  lookingTail: ' and I will send a resume.',
 };
 
 // Step 33: the headline's promise, kept. Three questions, one at a time, behind a
@@ -158,7 +164,7 @@ export const heroQuiz = {
 export const salesforce = {
   eyebrow: 'Salesforce, Singapore · Senior Technical Architect, AI & Data · 2025–2026',
   paragraphs: [
-    'I moved to Singapore in 2024, first to Wiz.AI and the next year to Salesforce, where the clients were spread across Southeast Asia: banks and other financial firms, universities, retailers, entertainment and cultural venues, manufacturers. They were at every stage: some wanted to understand the basics first and then a proof of concept, a few were ready for production. Whatever the stage, the first workshop usually ended on the same question: what the agent would be allowed to say. That depended on what the company had already written down, and who kept it current. The line at the top of this page is that answer, shortened. NOVA, below, is the one project from that year that was announced publicly.',
+    'I moved to Singapore in 2024, first to Wiz.AI and the next year to Salesforce, where the clients were spread across Southeast Asia: banks and other financial firms, universities, retailers, entertainment and cultural venues, manufacturers. They were at every stage: some wanted to understand the basics first and then a proof of concept, a few were ready for production. Whatever the stage, the first workshop usually ended on the same question: what the agent would be allowed to say. That depended on what the company had already written down, and who kept it current. The line above the three cards at the top of this page is that answer, shortened. NOVA, below, is the one project from that year that was announced publicly.',
   ],
 };
 

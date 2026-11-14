@@ -80,7 +80,7 @@ export const hero = {
   name: 'Yixin Liu',
   who: 'Solutions architect, enterprise AI. SAP, then Salesforce. Nine years.',
   where: 'Beijing, Tel Aviv, Singapore. Seattle since 2026. Underwater when I can be.',
-  what: 'I take AI agents from the first customer workshop to production. My job in that first workshop is to get three questions settled with the client before anyone builds: what the agent may say, which system it reads from, and when it hands over to a human. Two are live with customers today; one was announced publicly by the client. Before agents, six years at Baidu and SAP on the systems agents now read from. One of those became SAP\'s global lighthouse case.',
+  what: 'I take AI agents from the first customer workshop to production. My job in that first workshop is to get three questions settled with the client before anyone builds: what the agent may say, which system it reads from, and when it hands over to a human. Two are live with customers today; one was announced publicly by the client. Before agents, six years at Baidu and SAP on the systems agents now read from. SAP later published one of those as a customer story.',
   // the ask opens the third paragraph, plainly, before the preferences
   lookingLead: 'Looking for my next role: solutions architect, forward-deployed engineer, product manager, or similar, on a team putting AI in front of enterprise customers. Seattle first, elsewhere for the right one.',
   lookingRest: ' I moved here from Singapore in mid-2026 and left a job I liked to do it. What I want from the job: a hard problem, people who want it solved, and a seat close enough to the users to know whether it is. ',
@@ -351,11 +351,11 @@ export const cases = {
     year: '2022',
     section: 'china',
     card:
-      "One set of orders across three continents for a Chinese machinery maker, 2022. SAP was the last vendor into the bid. I had three weeks to write and present it. We won, and I stayed to go-live. SAP's global lighthouse case.",
+      "One set of orders across three continents for a Chinese machinery maker, 2022. SAP was the last vendor into the bid. I had three weeks to write and present it. We won, and I stayed to go-live. SAP later published it as a customer story.",
     long: [
       '[LGMG](https://www.lgmglifts.com/) makes aerial work platforms and mining equipment in Shandong. By 2022 its output had passed US$1.4 billion (¥10 billion) for the first time, with subsidiaries in Europe, North America and Japan and a plan to earn half its revenue from exports. Each subsidiary had grown up with its own standards. A machine reaches its buyer through a dealer, on credit or a lease, shipped by a logistics provider, cleared through customs, then needs parts for a decade.',
       'SAP was the last vendor invited into the bid. As presales I had three weeks to write the proposal and present it to LGMG, and we won. I stayed on as solution architect to go-live. The hardest part was not the software. Each subsidiary had its own material codes and its own way of booking a sale, so every requirements meeting was really an argument about whose definitions would become the group\'s. We settled that first, as one master data hierarchy and one set of accounting rules, and built the portals on top of it. Credit checks moved to the moment an order is taken, not after.',
-      'Phase one went live in Q1 2022 on SAP Commerce Cloud with S/4HANA Cloud Private Edition. [SAP later published the program](https://web.archive.org/web/20260315211141/https://www.sap.com/documents/2024/02/fc105f35-a87e-0010-bca6-c68f7e60039b.html): order processing 25% faster, and one master data hierarchy and one set of accounting rules across the group.',
+      'Phase one went live in Q1 2022 on SAP Commerce Cloud with S/4HANA Cloud Private Edition. [SAP later published the program](https://web.archive.org/web/20260315211141/https://www.sap.com/documents/2024/02/fc105f35-a87e-0010-bca6-c68f7e60039b.html): order processing 25% faster, shipment processing 20% faster, receivables management 30% faster, and one master data hierarchy and one set of accounting rules across the group.',
     ],
   },
   wizai: {
@@ -419,7 +419,7 @@ export const unitedStates = [
   {
     eyebrow: 'SAP Academy for Presales · San Ramon, California · 2019–2020',
     paragraphs: [
-      'Six months in the Bay Area with trainees from more than twenty countries, the only one from East Asia in that cohort. The program ran from how to present, through the SAP stack and an ERP certification, to building demos, pitching to customers, and reading the people across the table. Before each assessed presentation most of us rehearsed until two or three in the morning. It left me more confident, and with two rules I still use: practice until it is good, and when it is not ready, go anyway. From there SAP sent me back to Beijing as a solution architect, on the LGMG program, in the China chapter.',
+      'Six months in the Bay Area with trainees from more than twenty countries, the only one from East Asia in that cohort. The program ran from how to present, through the SAP stack and an ERP certification, to building demos, pitching to customers, and reading the people across the table. Before each assessed presentation most of us rehearsed until two or three in the morning. It left me more confident, and with two rules I still use: practice until it is good, and when it is not ready, go anyway. From there SAP sent me back to Beijing as a solution architect. Those four years, LGMG among them, are in the China chapter.',
     ],
   },
 ];

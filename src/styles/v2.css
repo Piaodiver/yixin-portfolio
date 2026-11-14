@@ -127,16 +127,20 @@ body::before {
 }
 
 
-/* hero (Hero.jsx), 2026-11-13: the About-style opening. Phone: portrait,
-   name, three paragraphs, one column. From 768px the portrait hangs in a
-   120px margin column to the left of the text (边栏式). */
-.v2-hero__grid { display: grid; grid-template-columns: 1fr; gap: 20px; align-items: start; }
-@media (min-width: 768px) { .v2-hero__grid { grid-template-columns: 120px minmax(0, 1fr); gap: 32px; } }
+/* hero (Hero.jsx), 2026-11-13: the About-style opening. One column:
+   portrait, name, three paragraphs. The text always starts on the same left
+   line as every section below. From 1120px the portrait leaves the column
+   and hangs in the page margin to the left of the name (边栏式); narrower
+   than that it sits above the name. */
+.v2-hero__grid { position: relative; display: grid; grid-template-columns: minmax(0, 1fr); gap: 20px; align-items: start; }
 .v2-hero__photo {
   display: block; width: 96px; height: 96px;
   border-radius: 50%; object-fit: cover; object-position: 50% 30%;
 }
-@media (min-width: 768px) { .v2-hero__photo { margin-top: 10px; } }
+@media (min-width: 1120px) {
+  .v2-hero__grid { gap: 0; }
+  .v2-hero__photo { position: absolute; left: -128px; top: 10px; }
+}
 .v2-hero__text { min-width: 0; }
 .v2-hero__name {
   font-family: Fraunces, Georgia, serif;
@@ -150,7 +154,7 @@ body::before {
   font-family: Inter, system-ui, sans-serif;
   font-size: 1.02rem; line-height: 1.55; font-weight: 500;
   color: var(--ink-900);
-  max-width: 60ch;
+  max-width: 64ch;
 }
 .v2-hero__where { display: block; margin-top: 2px; font-size: 0.92rem; font-weight: 400; color: var(--ink-500); }
 /* the one serif paragraph; the two short hairlines above it carried over
@@ -161,7 +165,7 @@ body::before {
   font-family: Fraunces, Georgia, serif;
   font-size: 1.12rem; line-height: 1.5;
   color: var(--ink-700);
-  max-width: 60ch;
+  max-width: 64ch;
 }
 .v2-hero__what::before, .v2-hero__what::after { content: ''; position: absolute; top: 0; width: 1px; height: 12px; background: var(--rule); }
 .v2-hero__what::before { left: 4%; }
